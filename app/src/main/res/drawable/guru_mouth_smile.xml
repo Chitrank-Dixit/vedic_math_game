@@ -1,0 +1,12 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="160dp"
+    android:viewportWidth="120"
+    android:viewportHeight="160">
+  <!-- Guru Mouth Smile Overlay -->
+  <path
+      android:strokeColor="#3E2723"
+      android:strokeWidth="2"
+      android:fillColor="#00000000"
+      android:pathData="M55,29 Q60,35 65,29" />
+</vector>

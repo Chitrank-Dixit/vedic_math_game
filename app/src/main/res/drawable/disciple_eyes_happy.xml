@@ -1,0 +1,12 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="140dp"
+    android:viewportWidth="100"
+    android:viewportHeight="140">
+  <!-- Disciple Eyes Happy Overlay (Star/Sparkle eyes) -->
+  <path
+      android:strokeColor="#006064"
+      android:strokeWidth="2"
+      android:fillColor="#00000000"
+      android:pathData="M40,20 Q45,14 50,20 M52,20 Q57,14 62,20" />
+</vector>

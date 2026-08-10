@@ -1,0 +1,16 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+  <!-- Victory Particle Burst FX Placeholder -->
+  <path
+      android:fillColor="#FFD54F"
+      android:pathData="M100,20 L104,36 L120,40 L104,44 L100,60 L96,44 L80,40 L96,36 Z" />
+  <path
+      android:fillColor="#00E5FF"
+      android:pathData="M40,100 L44,116 L60,120 L44,124 L40,140 L36,124 L20,120 L36,116 Z" />
+  <path
+      android:fillColor="#FF4081"
+      android:pathData="M150,120 L154,136 L170,140 L154,144 L150,160 L146,144 L130,140 L146,136 Z" />
+</vector>

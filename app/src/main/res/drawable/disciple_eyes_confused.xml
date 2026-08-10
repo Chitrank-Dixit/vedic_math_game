@@ -1,0 +1,14 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="140dp"
+    android:viewportWidth="100"
+    android:viewportHeight="140">
+  <!-- Disciple Eyes Confused Overlay -->
+  <path
+      android:strokeColor="#006064"
+      android:strokeWidth="2"
+      android:pathData="M40,14 L50,18 M62,14 L52,18" />
+  <path
+      android:fillColor="#006064"
+      android:pathData="M43,20 A3,3 0 1,1 49,20 A3,3 0 1,1 43,20 M55,20 A3,3 0 1,1 61,20 A3,3 0 1,1 55,20" />
+</vector>

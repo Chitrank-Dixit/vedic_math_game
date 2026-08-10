@@ -1,0 +1,10 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="160dp"
+    android:viewportWidth="120"
+    android:viewportHeight="160">
+  <!-- Guru Mouth Talking Overlay -->
+  <path
+      android:fillColor="#3E2723"
+      android:pathData="M56,29 A4,4 0 0,0 64,29 Z" />
+</vector>

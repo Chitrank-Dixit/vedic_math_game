@@ -1,0 +1,10 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="150dp"
+    android:height="150dp"
+    android:viewportWidth="150"
+    android:viewportHeight="150">
+  <!-- Soft Head/Hand Glow FX Placeholder -->
+  <path
+      android:fillColor="#33FFD54F"
+      android:pathData="M25,25 A50,50 0 1,1 125,125 A50,50 0 1,1 25,25" />
+</vector>

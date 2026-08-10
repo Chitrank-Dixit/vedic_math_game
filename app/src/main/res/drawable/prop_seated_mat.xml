@@ -1,0 +1,14 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="140dp"
+    android:height="40dp"
+    android:viewportWidth="140"
+    android:viewportHeight="40">
+  <!-- Prop Seated Mat Placeholder -->
+  <path
+      android:fillColor="#8D6E63"
+      android:pathData="M10,5 Q70,0 130,5 L140,35 Q70,40 0,35 Z" />
+  <path
+      android:strokeColor="#FFB300"
+      android:strokeWidth="2"
+      android:pathData="M15,10 Q70,5 125,10" />
+</vector>

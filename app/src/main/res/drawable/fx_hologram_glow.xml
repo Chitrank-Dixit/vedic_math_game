@@ -1,0 +1,10 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="320dp"
+    android:height="220dp"
+    android:viewportWidth="320"
+    android:viewportHeight="220">
+  <!-- Ambient Hologram Glow FX Placeholder -->
+  <path
+      android:fillColor="#2200E5FF"
+      android:pathData="M10,10 L310,10 L310,210 L10,210 Z" />
+</vector>

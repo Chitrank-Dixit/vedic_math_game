@@ -1,0 +1,16 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="260dp"
+    android:height="80dp"
+    android:viewportWidth="260"
+    android:viewportHeight="80">
+  <!-- Prop Floor Mandala Glow Circle Placeholder -->
+  <path
+      android:fillColor="#33FFB300"
+      android:strokeColor="#FFB300"
+      android:strokeWidth="2"
+      android:pathData="M10,40 A120,30 0 1,1 250,40 A120,30 0 1,1 10,40" />
+  <path
+      android:strokeColor="#00E5FF"
+      android:strokeWidth="1"
+      android:pathData="M40,40 A90,20 0 1,1 220,40 A90,20 0 1,1 40,40" />
+</vector>
