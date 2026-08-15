@@ -26,6 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ankh.sutrasaga.ui.components.NumericKeypad
+import com.ankh.sutrasaga.domain.models.AnswerFormat
 import com.ankh.sutrasaga.ui.viewmodel.GameUiState
 
 @Composable
@@ -35,6 +36,8 @@ fun BossBattleScreen(
     onDigitClick: (Char) -> Unit,
     onBackspaceClick: () -> Unit,
     onClearClick: () -> Unit,
+    onRemainderClick: () -> Unit,
+    onOrderedPairClick: () -> Unit,
     onSubmitClick: () -> Unit,
     onNextProblemClick: () -> Unit
 ) {
@@ -160,7 +163,13 @@ fun BossBattleScreen(
                 contentAlignment = Alignment.CenterStart
             ) {
                 Text(
-                    text = if (state.userInput.isEmpty()) "Enter answer..." else state.userInput,
+                    text = if (state.userInput.isEmpty()) {
+                        when (problem.answerFormat) {
+                            AnswerFormat.QUOTIENT_AND_REMAINDER -> "Enter quotient R remainder..."
+                            AnswerFormat.ORDERED_PAIR -> "Enter x, y..."
+                            AnswerFormat.INTEGER -> "Enter answer..."
+                        }
+                    } else state.userInput,
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
                     color = if (state.userInput.isEmpty()) Color.LightGray else Color.Black
@@ -208,6 +217,16 @@ fun BossBattleScreen(
                 onDigitClick = onDigitClick,
                 onBackspaceClick = onBackspaceClick,
                 onClearClick = onClearClick,
+                onSecondaryValueClick = when (problem.answerFormat) {
+                    AnswerFormat.QUOTIENT_AND_REMAINDER -> onRemainderClick
+                    AnswerFormat.ORDERED_PAIR -> onOrderedPairClick
+                    AnswerFormat.INTEGER -> null
+                },
+                secondaryValueLabel = when (problem.answerFormat) {
+                    AnswerFormat.QUOTIENT_AND_REMAINDER -> "ADD REMAINDER (R)"
+                    AnswerFormat.ORDERED_PAIR -> "ADD Y VALUE (,)"
+                    AnswerFormat.INTEGER -> ""
+                },
                 onSubmitClick = onSubmitClick,
                 enabled = !state.isAnswerSubmitted
             )

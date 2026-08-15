@@ -72,6 +72,8 @@ fun MainGameContent(viewModel: GameViewModel) {
                 onDigitClick = { digit -> viewModel.appendDigit(digit) },
                 onBackspaceClick = { viewModel.backspaceDigit() },
                 onClearClick = { viewModel.clearDigit() },
+                onRemainderClick = { viewModel.appendRemainderSeparator() },
+                onOrderedPairClick = { viewModel.appendOrderedPairSeparator() },
                 onSubmitClick = { viewModel.submitAnswer() },
                 onNextProblemClick = { viewModel.nextProblem() }
             )
@@ -83,6 +85,8 @@ fun MainGameContent(viewModel: GameViewModel) {
                 onDigitClick = { digit -> viewModel.appendDigit(digit) },
                 onBackspaceClick = { viewModel.backspaceDigit() },
                 onClearClick = { viewModel.clearDigit() },
+                onRemainderClick = { viewModel.appendRemainderSeparator() },
+                onOrderedPairClick = { viewModel.appendOrderedPairSeparator() },
                 onSubmitClick = { viewModel.submitAnswer() },
                 onNextProblemClick = { viewModel.nextProblem() }
             )

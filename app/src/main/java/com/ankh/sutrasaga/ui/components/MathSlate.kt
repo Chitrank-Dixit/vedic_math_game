@@ -50,6 +50,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ankh.sutrasaga.domain.models.AnswerFormat
+import com.ankh.sutrasaga.domain.models.DecompositionStep
 import com.ankh.sutrasaga.domain.models.SutraProblem
 
 @Composable
@@ -74,6 +76,8 @@ fun MathSlate(
     val prefixProduct = problem.prefixProduct.takeIf { it > 0 } ?: (prefix * incrementedPrefix)
     val suffix = problem.appendedSuffix.ifEmpty { "25" }
     val finalAnswer = problem.correctAnswer
+    val isEkadhikenaProblem = problem.sutraName == "Ekadhikena Purvena"
+    val currentDecompositionStep = problem.decompositionSteps.getOrNull(stepIndex - 1)
 
     Card(
         modifier = modifier
@@ -111,7 +115,16 @@ fun MathSlate(
                     .border(1.dp, Color(0xFF37474F), RoundedCornerShape(12.dp)),
                 contentAlignment = Alignment.Center
             ) {
-                when (stepIndex) {
+                if (!isEkadhikenaProblem) {
+                    GenericSutraStage(
+                        problem = problem,
+                        step = currentDecompositionStep,
+                        isInitialStage = stepIndex == 0,
+                        chalkWhite = chalkWhite,
+                        cyanAccent = cyanAccent,
+                        goldSuccess = goldSuccess
+                    )
+                } else when (stepIndex) {
                     0 -> {
                         // Step 0: Display initial problem (e.g. 65²)
                         Text(
@@ -265,6 +278,13 @@ fun MathSlate(
                         onClick = { onInteractiveStepAction?.invoke(stepIndex) },
                         colors = ButtonDefaults.buttonColors(containerColor = cyanAccent)
                     ) {
+                        if (!isEkadhikenaProblem) {
+                            Text(
+                                text = currentDecompositionStep?.let { "Reveal: ${it.label}" } ?: "Complete",
+                                color = Color.Black,
+                                fontWeight = FontWeight.Bold
+                            )
+                        } else {
                         Text(
                             text = when (stepIndex) {
                                 0 -> "1. Select Tens Digit"
@@ -276,10 +296,13 @@ fun MathSlate(
                             color = Color.Black,
                             fontWeight = FontWeight.Bold
                         )
+                        }
                     }
                 }
             } else {
-                val stepDesc = when (stepIndex) {
+                val stepDesc = if (!isEkadhikenaProblem) {
+                    currentDecompositionStep?.explanation ?: "Final Answer: $finalAnswer"
+                } else when (stepIndex) {
                     0 -> "Initial Problem: Calculate $operand²"
                     1 -> "Step 1: Extract prefix n = $prefix"
                     2 -> "Step 2: Apply Ekadhikena (+1) $\\rightarrow$ $prefix + 1 = $incrementedPrefix"
@@ -292,6 +315,73 @@ fun MathSlate(
                     style = MaterialTheme.typography.bodyMedium,
                     color = chalkWhite.copy(alpha = 0.9f),
                     textAlign = TextAlign.Center
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun GenericSutraStage(
+    problem: SutraProblem,
+    step: DecompositionStep?,
+    isInitialStage: Boolean,
+    chalkWhite: Color,
+    cyanAccent: Color,
+    goldSuccess: Color
+) {
+    val answerText = when (problem.answerFormat) {
+        AnswerFormat.QUOTIENT_AND_REMAINDER -> "Q=${problem.correctAnswer}, R=${problem.expectedRemainder}"
+        AnswerFormat.ORDERED_PAIR -> "x=${problem.correctAnswer}, y=${problem.expectedSecondaryAnswer}"
+        AnswerFormat.INTEGER -> problem.correctAnswer.toString()
+    }
+
+    Column(
+        modifier = Modifier.padding(horizontal = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        when {
+            isInitialStage -> Text(
+                text = problem.questionText,
+                fontSize = 28.sp,
+                fontWeight = FontWeight.Bold,
+                fontFamily = FontFamily.Monospace,
+                color = chalkWhite,
+                textAlign = TextAlign.Center
+            )
+            step != null -> {
+                Text(
+                    text = step.label,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = cyanAccent,
+                    textAlign = TextAlign.Center
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "${step.formulaDisplay} = ${step.stepResult}",
+                    fontSize = 25.sp,
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = FontFamily.Monospace,
+                    color = goldSuccess,
+                    textAlign = TextAlign.Center
+                )
+            }
+            else -> {
+                Text(
+                    text = "RESULT",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = goldSuccess
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = "Answer = $answerText",
+                    fontSize = 34.sp,
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = FontFamily.Monospace,
+                    color = goldSuccess
                 )
             }
         }

@@ -27,19 +27,32 @@ class GameFlowE2ETest {
         composeTestRule.onAllNodesWithText("Play").onFirst().performClick()
 
         // 3. Assert Story Beat Screen loads
-        composeTestRule.onNodeWithText("World 1: The Fateful Five").assertIsDisplayed()
+        composeTestRule.onNodeWithText("World 1: The Gurukul of Fives").assertIsDisplayed()
 
-        // 4. Skip Story Beat
-        composeTestRule.onNodeWithText("Skip").performClick()
+        // 4. Skip / Continue Story Beat
+        composeTestRule.onNodeWithText("Continue").performClick()
 
         // 5. Assert Tutorial Screen loads
         composeTestRule.onNodeWithText("Tutorial 1: Ekadhikena Purvena").assertIsDisplayed()
 
-        // 6. Skip Tutorial
-        composeTestRule.onNodeWithText("Skip").performClick()
+        // 6. Complete Tutorial
+        composeTestRule.onNodeWithText("Start Practice").performClick()
 
         // 7. Assert Practice Arena loads with keypad
         composeTestRule.onNodeWithText("PRACTICE ARENA").assertIsDisplayed()
         composeTestRule.onNodeWithText("SUBMIT").assertIsDisplayed()
+    }
+
+    @Test
+    fun testWorldSelectScreenDisplaysAllWorlds1To8() {
+        composeTestRule.onNodeWithText("Ankh: The Sutra Saga").assertIsDisplayed()
+        composeTestRule.onNodeWithText("World 1: Ekadhikena Purvena").assertIsDisplayed()
+        composeTestRule.onNodeWithText("World 2: Nikhilam Navatashcaramam").assertIsDisplayed()
+        composeTestRule.onNodeWithText("World 3: Ekanyunena Purvena").assertIsDisplayed()
+        composeTestRule.onNodeWithText("World 4: Yavadunam").assertIsDisplayed()
+        composeTestRule.onNodeWithText("World 5: Urdhva-Tiryagbhyam").assertIsDisplayed()
+        composeTestRule.onNodeWithText("World 6: Paravartya Yojayet").assertIsDisplayed()
+        composeTestRule.onNodeWithText("World 7: Anurupye Shunyamanyat").assertIsDisplayed()
+        composeTestRule.onNodeWithText("World 8: Sankalana-Vyavakalanabhyam").assertIsDisplayed()
     }
 }

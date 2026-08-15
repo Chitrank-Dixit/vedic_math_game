@@ -1,7 +1,7 @@
 package com.ankh.sutrasaga.data
 
+import com.ankh.sutrasaga.data.repository.GurukulContentRepository
 import com.ankh.sutrasaga.data.repository.SutraDialogueRepository
-import com.ankh.sutrasaga.domain.models.Speaker
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
@@ -35,7 +35,6 @@ class SutraDialogueRepositoryTest {
         assertEquals("Tutorial 1: Ekadhikena Purvena", script.title)
         assertTrue(script.panels.isNotEmpty())
 
-        // Verify worked example math values in script text
         val textConcat = script.panels.joinToString(" ") { it.text }
         assertTrue("Script must teach 65²", textConcat.contains("65²"))
         assertTrue("Script must contain 4225", textConcat.contains("4225"))
@@ -65,5 +64,23 @@ class SutraDialogueRepositoryTest {
         val textConcat = tutorial.panels.joinToString(" ") { it.text }
         assertTrue("World 3 tutorial must teach 743 × 999", textConcat.contains("743") && textConcat.contains("999"))
         assertTrue("World 3 tutorial must contain 742257", textConcat.contains("742257"))
+    }
+
+    @Test
+    fun testGurukulContentRepositoryWorlds1To6Integrity() {
+        for (w in 1..6) {
+            val story = GurukulContentRepository.getStoryScript(w)
+            assertEquals("Story script worldId mismatch", w, story.worldId)
+            assertTrue("Story beats for world $w must not be empty", story.beats.isNotEmpty())
+
+            val tutorial = GurukulContentRepository.getTutorialScript(w)
+            assertEquals("Tutorial script worldId mismatch", w, tutorial.worldId)
+            assertTrue("Tutorial beats for world $w must not be empty", tutorial.beats.isNotEmpty())
+
+            for (beat in story.beats + tutorial.beats) {
+                assertTrue("Guru text must not be blank", beat.guruText.isNotBlank())
+                assertTrue("Disciple text must not be blank", beat.discipleText.orEmpty().isNotBlank())
+            }
+        }
     }
 }

@@ -21,6 +21,8 @@ fun NumericKeypad(
     onDigitClick: (Char) -> Unit,
     onBackspaceClick: () -> Unit,
     onClearClick: () -> Unit,
+    onSecondaryValueClick: (() -> Unit)? = null,
+    secondaryValueLabel: String = "",
     onSubmitClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true
@@ -77,6 +79,16 @@ fun NumericKeypad(
                 enabled = enabled
             ) {
                 Text(text = "⌫", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+            }
+        }
+
+        if (onSecondaryValueClick != null) {
+            OutlinedButton(
+                onClick = onSecondaryValueClick,
+                modifier = buttonModifier,
+                enabled = enabled
+            ) {
+                Text(text = secondaryValueLabel, fontSize = 14.sp, fontWeight = FontWeight.Bold)
             }
         }
 

@@ -27,17 +27,16 @@ class GameViewModelTest {
         assertFalse(state.isWorld1Completed)
         assertFalse(state.isWorld2Completed)
         assertFalse(state.isWorld3Completed)
+        assertFalse(state.isWorld4Completed)
     }
 
     @Test
     fun testSelectWorldNavigation() {
-        viewModel.selectWorld(2)
-        assertEquals(2, viewModel.uiState.value.selectedWorldId)
-        assertEquals(GameScreen.STORY_BEAT, viewModel.uiState.value.currentScreen)
-
-        viewModel.selectWorld(3)
-        assertEquals(3, viewModel.uiState.value.selectedWorldId)
-        assertEquals(GameScreen.STORY_BEAT, viewModel.uiState.value.currentScreen)
+        for (w in 2..16) {
+            viewModel.selectWorld(w)
+            assertEquals(w, viewModel.uiState.value.selectedWorldId)
+            assertEquals(GameScreen.STORY_BEAT, viewModel.uiState.value.currentScreen)
+        }
     }
 
     @Test
@@ -48,16 +47,18 @@ class GameViewModelTest {
     }
 
     @Test
-    fun testStartPracticeArena() {
-        viewModel.selectWorld(1)
-        viewModel.startPractice()
+    fun testStartPracticeArenaWorld1To16() {
+        for (worldId in 1..16) {
+            viewModel.selectWorld(worldId)
+            viewModel.startPractice()
 
-        val state = viewModel.uiState.value
-        assertEquals(GameScreen.PRACTICE_ARENA, state.currentScreen)
-        assertEquals(5, state.problemList.size)
-        assertEquals(0, state.currentProblemIndex)
-        assertNotNull(state.currentProblem)
-        assertEquals(0, state.score)
+            val state = viewModel.uiState.value
+            assertEquals(GameScreen.PRACTICE_ARENA, state.currentScreen)
+            assertEquals(5, state.problemList.size)
+            assertEquals(0, state.currentProblemIndex)
+            assertNotNull("Problem for world $worldId must not be null", state.currentProblem)
+            assertEquals(0, state.score)
+        }
     }
 
     @Test
@@ -83,8 +84,8 @@ class GameViewModelTest {
         viewModel.selectWorld(1)
         viewModel.startPractice()
 
-        repeat(12) { viewModel.appendDigit('9') }
-        assertEquals("99999999", viewModel.uiState.value.userInput)
+        repeat(20) { viewModel.appendDigit('9') }
+        assertEquals("9999999999999999", viewModel.uiState.value.userInput)
     }
 
     @Test
@@ -101,7 +102,7 @@ class GameViewModelTest {
 
     @Test
     fun testSubmitCorrectAnswerAndScoreCalculation() {
-        viewModel.selectWorld(1)
+        viewModel.selectWorld(4)
         viewModel.startPractice()
 
         val currentProblem = viewModel.uiState.value.currentProblem!!
@@ -122,7 +123,7 @@ class GameViewModelTest {
 
     @Test
     fun testSubmitIncorrectAnswer() {
-        viewModel.selectWorld(1)
+        viewModel.selectWorld(5)
         viewModel.startPractice()
 
         viewModel.appendDigit('1')
@@ -136,8 +137,64 @@ class GameViewModelTest {
     }
 
     @Test
+    fun testDivisionRequiresQuotientAndRemainder() {
+        viewModel.selectWorld(6)
+        viewModel.startPractice()
+
+        val problem = viewModel.uiState.value.currentProblem!!
+        problem.correctAnswer.toString().forEach(viewModel::appendDigit)
+        viewModel.appendRemainderSeparator()
+        problem.expectedRemainder.toString().forEach(viewModel::appendDigit)
+        viewModel.submitAnswer()
+
+        val state = viewModel.uiState.value
+        assertEquals("${problem.correctAnswer} R ${problem.expectedRemainder}", state.userInput)
+        assertEquals(true, state.isAnswerCorrect)
+    }
+
+    @Test
+    fun testDivisionRejectsQuotientWithoutRemainder() {
+        viewModel.selectWorld(6)
+        viewModel.startPractice()
+
+        val problem = viewModel.uiState.value.currentProblem!!
+        problem.correctAnswer.toString().forEach(viewModel::appendDigit)
+        viewModel.submitAnswer()
+
+        assertEquals(false, viewModel.uiState.value.isAnswerCorrect)
+    }
+
+    @Test
+    fun testSimultaneousEquationsRequireAnOrderedPair() {
+        viewModel.selectWorld(7)
+        viewModel.startPractice()
+
+        val problem = viewModel.uiState.value.currentProblem!!
+        problem.correctAnswer.toString().forEach(viewModel::appendDigit)
+        viewModel.appendOrderedPairSeparator()
+        problem.expectedSecondaryAnswer.toString().forEach(viewModel::appendDigit)
+        viewModel.submitAnswer()
+
+        val state = viewModel.uiState.value
+        assertEquals("${problem.correctAnswer}, ${problem.expectedSecondaryAnswer}", state.userInput)
+        assertEquals(true, state.isAnswerCorrect)
+    }
+
+    @Test
+    fun testSimultaneousEquationsRejectAValueWithoutItsVariablePair() {
+        viewModel.selectWorld(7)
+        viewModel.startPractice()
+
+        val problem = viewModel.uiState.value.currentProblem!!
+        problem.correctAnswer.toString().forEach(viewModel::appendDigit)
+        viewModel.submitAnswer()
+
+        assertEquals(false, viewModel.uiState.value.isAnswerCorrect)
+    }
+
+    @Test
     fun testNextProblemStateReset() {
-        viewModel.selectWorld(1)
+        viewModel.selectWorld(6)
         viewModel.startPractice()
 
         viewModel.appendDigit('1')

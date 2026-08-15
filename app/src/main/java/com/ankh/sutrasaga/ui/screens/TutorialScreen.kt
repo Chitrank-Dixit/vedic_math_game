@@ -3,7 +3,6 @@ package com.ankh.sutrasaga.ui.screens
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.ankh.sutrasaga.data.repository.GurukulContentRepository
-import com.ankh.sutrasaga.engine.EkadhikenaPurvenaGenerator
 import com.ankh.sutrasaga.ui.components.GurukulSceneScreen
 
 @Composable
@@ -13,7 +12,7 @@ fun TutorialScreen(
     modifier: Modifier = Modifier
 ) {
     val script = GurukulContentRepository.getTutorialScript(worldId)
-    val canonicalExampleProblem = EkadhikenaPurvenaGenerator().generateSpecificProblem(65L)
+    val canonicalExampleProblem = canonicalOnboardingProblem(worldId)
 
     GurukulSceneScreen(
         script = script,

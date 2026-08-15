@@ -76,6 +76,18 @@ class NikhilamGenerator(
 
         val initialComplements = initialDigits.map { 9 - it.digitToInt() }.joinToString("")
         val lastComplement = 10 - lastDigit
+        val requiresCarryNormalization = lastDigit == 0
+        val combinedResultDisplay = correctAnswer.toString().padStart(numDigits, '0')
+        val combineFormula = if (requiresCarryNormalization) {
+            "$initialComplements || $lastComplement (normalize carry)"
+        } else {
+            "$initialComplements || $lastComplement"
+        }
+        val combineExplanation = if (requiresCarryNormalization) {
+            "The final complement is 10, so carry 1 into the initial complement and keep 0 in the units place: $combinedResultDisplay."
+        } else {
+            "Combine initial complement digits ($initialComplements) and last digit ($lastComplement) $\\rightarrow$ $correctAnswer."
+        }
 
         val steps = listOf(
             DecompositionStep(
@@ -102,9 +114,9 @@ class NikhilamGenerator(
             DecompositionStep(
                 stepNumber = 4,
                 label = "Combine Digits",
-                formulaDisplay = "$initialComplements || $lastComplement",
-                stepResult = "$correctAnswer",
-                explanation = "Combine initial complement digits ($initialComplements) and last digit ($lastComplement) $\\rightarrow$ $correctAnswer."
+                formulaDisplay = combineFormula,
+                stepResult = combinedResultDisplay,
+                explanation = combineExplanation
             )
         )
 

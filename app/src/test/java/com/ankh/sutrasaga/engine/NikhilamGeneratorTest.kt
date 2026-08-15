@@ -54,6 +54,20 @@ class NikhilamGeneratorTest {
     }
 
     @Test
+    fun testZeroEndingSubtrahendExplainsCarryNormalization() {
+        val twoDigitProblem = generator.generateSpecificProblem(10L)
+        val fourDigitProblem = generator.generateSpecificProblem(9990L)
+
+        assertEquals(90L, twoDigitProblem.correctAnswer)
+        assertEquals("8 || 10 (normalize carry)", twoDigitProblem.decompositionSteps[3].formulaDisplay)
+        assertEquals("90", twoDigitProblem.decompositionSteps[3].stepResult)
+
+        assertEquals(10L, fourDigitProblem.correctAnswer)
+        assertEquals("000 || 10 (normalize carry)", fourDigitProblem.decompositionSteps[3].formulaDisplay)
+        assertEquals("0010", fourDigitProblem.decompositionSteps[3].stepResult)
+    }
+
+    @Test
     fun testTier1GeneratedProblemsMathematicalCorrectness() {
         // Generate 15 problems for Tier 1
         val problems = generator.generateProblemSet(15, DifficultyTier.TIER_1_EASY)

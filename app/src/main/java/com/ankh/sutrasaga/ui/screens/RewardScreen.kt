@@ -25,11 +25,42 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ankh.sutrasaga.ui.viewmodel.GameUiState
 
+internal data class WorldCompletionContent(
+    val title: String,
+    val masteryMessage: String,
+    val badgeLabel: String
+)
+
+internal fun worldCompletionContent(worldId: Int): WorldCompletionContent = when (worldId) {
+    1 -> WorldCompletionContent(
+        title = "WORLD 1 COMPLETE!",
+        masteryMessage = "You have mastered Ekadhikena Purvena!",
+        badgeLabel = "[PLACEHOLDER BADGE: Master of Fives]"
+    )
+    2 -> WorldCompletionContent(
+        title = "WORLD 2 COMPLETE!",
+        masteryMessage = "You have mastered Nikhilam Navatashcaramam Dashatah!",
+        badgeLabel = "[PLACEHOLDER BADGE: Master of Complements]"
+    )
+    3 -> WorldCompletionContent(
+        title = "WORLD 3 COMPLETE!",
+        masteryMessage = "You have mastered Ekanyunena Purvena!",
+        badgeLabel = "[PLACEHOLDER BADGE: Master of Nines]"
+    )
+    else -> WorldCompletionContent(
+        title = "WORLD $worldId COMPLETE!",
+        masteryMessage = "You have completed this world!",
+        badgeLabel = "[PLACEHOLDER BADGE: World $worldId Master]"
+    )
+}
+
 @Composable
 fun RewardScreen(
     state: GameUiState,
     onReturnHomeClick: () -> Unit
 ) {
+    val completionContent = worldCompletionContent(state.selectedWorldId)
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -42,14 +73,14 @@ fun RewardScreen(
             Spacer(modifier = Modifier.height(24.dp))
 
             Text(
-                text = "WORLD 1 COMPLETE!",
+                text = completionContent.title,
                 fontSize = 26.sp,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary
             )
 
             Text(
-                text = "You have mastered Ekadhikena Purvena!",
+                text = completionContent.masteryMessage,
                 fontSize = 15.sp,
                 color = Color.Gray,
                 modifier = Modifier.padding(top = 4.dp)
@@ -71,7 +102,7 @@ fun RewardScreen(
                         fontSize = 54.sp
                     )
                     Text(
-                        text = "[PLACEHOLDER BADGE: Master of Fives]",
+                        text = completionContent.badgeLabel,
                         fontWeight = FontWeight.Bold,
                         color = Color(0xFF5D4037)
                     )

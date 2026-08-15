@@ -6,7 +6,6 @@ import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -92,40 +91,17 @@ fun GurukulSceneScreen(
         color = Color(0xFF1F140E)
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
-            // 1. Full-Screen Background Layer
-            // TODO: replace with final art — bg_gurukul_scene.png
+            // 1. Full-Screen Morning Gurukul Scene Background
+            // Contains Master Purva (Left), Disciple (Right), Morning Sunbeams, Banyan Tree & Temple
+            // TODO: replace with final art — bg_gurukul_scene.jpg
             Image(
                 painter = painterResource(id = R.drawable.bg_gurukul_scene),
-                contentDescription = "Gurukul Scene Background",
+                contentDescription = "Gurukul Morning Scene Background",
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
             )
 
-            // 2. Temple Structure Prop in Background
-            // TODO: replace with final art — prop_temple_structure.png
-            Image(
-                painter = painterResource(id = R.drawable.prop_temple_structure),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(240.dp)
-                    .align(Alignment.TopCenter)
-                    .alpha(0.3f),
-                contentScale = ContentScale.Fit
-            )
-
-            // 3. Ground Level Floor Mandala
-            // TODO: replace with final art — prop_floor_mandala.png
-            Image(
-                painter = painterResource(id = R.drawable.prop_floor_mandala),
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxWidth(0.9f)
-                    .height(90.dp)
-                    .align(Alignment.Center),
-                contentScale = ContentScale.Fit
-            )
-
-            // 4. Main Scene Column Layout
+            // 2. Main Scene Column Layout
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -149,7 +125,7 @@ fun GurukulSceneScreen(
                             Text(
                                 text = script.subtitle,
                                 style = MaterialTheme.typography.bodySmall,
-                                color = Color(0xFFD7CCC8)
+                                color = Color.White
                             )
                         }
 
@@ -183,57 +159,33 @@ fun GurukulSceneScreen(
                     )
                 }
 
-                // Center Stage Area: Seated Full-Body Characters & Framed MathSlate Prop
+                // Center Stage Area: Holographic Scroll Frame & Embedded MathSlate
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f),
                     contentAlignment = Alignment.Center
                 ) {
-                    // Full-Body Guru Character (Left) Seated on Mat
-                    Column(
-                        modifier = Modifier
-                            .align(Alignment.CenterStart)
-                            .padding(start = 4.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        // TODO: replace with final art — guru_base_pose.png / guru_mouth_talking.png
-                        LayeredCharacter(
-                            basePoseResId = currentBeat.guruPose.drawableResId,
-                            overlayResId = currentBeat.guruMouth.drawableResId,
-                            modifier = Modifier.size(110.dp, 140.dp),
-                            contentDescription = "Guru Master Purva"
-                        )
-                        // TODO: replace with final art — prop_seated_mat.png
-                        Image(
-                            painter = painterResource(id = R.drawable.prop_seated_mat),
-                            contentDescription = null,
-                            modifier = Modifier.size(110.dp, 28.dp),
-                            contentScale = ContentScale.Fit
-                        )
-                    }
-
-                    // Framed Holographic Slate Prop & MathSlate Component (Center)
                     Box(
                         modifier = Modifier
-                            .fillMaxWidth(0.68f)
+                            .fillMaxWidth(0.72f)
                             .align(Alignment.Center),
                         contentAlignment = Alignment.Center
                     ) {
                         // Ambient Slate Hologram Glow FX
-                        // TODO: replace with final art — fx_hologram_glow.png
+                        // TODO: replace with final art — fx_hologram_glow.xml
                         Image(
                             painter = painterResource(id = R.drawable.fx_hologram_glow),
                             contentDescription = null,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(220.dp)
+                                .height(230.dp)
                                 .alpha(hologramAlpha.value),
                             contentScale = ContentScale.FillBounds
                         )
 
                         // Slate Frame Prop Container
-                        // TODO: replace with final art — prop_holographic_slate.png
+                        // TODO: replace with final art — prop_holographic_slate.jpg
                         Image(
                             painter = painterResource(id = R.drawable.prop_holographic_slate),
                             contentDescription = null,
@@ -241,7 +193,7 @@ fun GurukulSceneScreen(
                             contentScale = ContentScale.FillBounds
                         )
 
-                        // Embedded MathSlate
+                        // Embedded Animated MathSlate
                         MathSlate(
                             problem = problem,
                             stepIndex = currentBeat.slateStepIndex,
@@ -250,43 +202,19 @@ fun GurukulSceneScreen(
                         )
                     }
 
-                    // Full-Body Disciple Character (Right) Seated on Mat
-                    Column(
-                        modifier = Modifier
-                            .align(Alignment.CenterEnd)
-                            .padding(end = 4.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        // TODO: replace with final art — disciple_neutral.png / disciple_eyes_neutral.png
-                        LayeredCharacter(
-                            basePoseResId = currentBeat.discipleState.drawableResId,
-                            overlayResId = currentBeat.discipleEyes.drawableResId,
-                            modifier = Modifier.size(90.dp, 120.dp),
-                            contentDescription = "Calcu-Ghost Disciple"
-                        )
-                        // TODO: replace with final art — prop_seated_mat.png
-                        Image(
-                            painter = painterResource(id = R.drawable.prop_seated_mat),
-                            contentDescription = null,
-                            modifier = Modifier.size(95.dp, 24.dp),
-                            contentScale = ContentScale.Fit
-                        )
-                    }
-
                     // Victory Particle Burst FX (Triggered on Final Step)
-                    // TODO: replace with final art — fx_particles.png
                     GurukulParticleEffect(
                         trigger = currentBeat.slateStepIndex == 5,
                         modifier = Modifier.fillMaxSize()
                     )
                 }
 
-                // Anchored Dialogue Caption Box & Actions
+                // Anchored Dialogue Caption Box
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Card(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp),
-                        colors = CardDefaults.cardColors(containerColor = Color(0xFF3E2723)),
+                        colors = CardDefaults.cardColors(containerColor = Color(0xDD3E2723)),
                         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
                     ) {
                         Column(modifier = Modifier.padding(14.dp)) {
@@ -337,7 +265,7 @@ fun GurukulSceneScreen(
                         Text(
                             text = "Tap anywhere to advance",
                             fontSize = 12.sp,
-                            color = Color(0xFFB0BEC5)
+                            color = Color(0xFFEEEEEE)
                         )
 
                         if (currentBeatIndex == totalBeats - 1) {

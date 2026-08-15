@@ -89,21 +89,131 @@ fun WorldSelectScreen(
             item {
                 WorldCard(
                     title = "World 4: Yavadunam",
-                    subtitle = "Deficiency Squaring",
-                    isUnlocked = false,
-                    isCompleted = false,
-                    bestScore = 0,
-                    onClick = {}
+                    subtitle = "Squaring near a base (Deficiency Squaring)",
+                    isUnlocked = true,
+                    isCompleted = state.isWorld4Completed,
+                    bestScore = state.world4BestScore,
+                    onClick = { onWorldClick(4) }
                 )
             }
             item {
                 WorldCard(
                     title = "World 5: Urdhva-Tiryagbhyam",
-                    subtitle = "Vertically and Crosswise",
-                    isUnlocked = false,
-                    isCompleted = false,
-                    bestScore = 0,
-                    onClick = {}
+                    subtitle = "Vertically and Crosswise (MVP Finale)",
+                    isUnlocked = true,
+                    isCompleted = state.isWorld5Completed,
+                    bestScore = state.world5BestScore,
+                    onClick = { onWorldClick(5) }
+                )
+            }
+            item {
+                WorldCard(
+                    title = "World 6: Paravartya Yojayet",
+                    subtitle = "Transpose and Apply Division (Post-MVP)",
+                    isUnlocked = true,
+                    isCompleted = state.isWorld6Completed,
+                    bestScore = state.world6BestScore,
+                    onClick = { onWorldClick(6) }
+                )
+            }
+            item {
+                WorldCard(
+                    title = "World 7: Anurupye Shunyamanyat",
+                    subtitle = "Simultaneous Linear Equations (Post-MVP)",
+                    isUnlocked = true,
+                    isCompleted = state.isWorld7Completed,
+                    bestScore = state.world7BestScore,
+                    onClick = { onWorldClick(7) }
+                )
+            }
+            item {
+                WorldCard(
+                    title = "World 8: Sankalana-Vyavakalanabhyam",
+                    subtitle = "Swapped Simultaneous Equations (Post-MVP)",
+                    isUnlocked = true,
+                    isCompleted = state.isWorld8Completed,
+                    bestScore = state.world8BestScore,
+                    onClick = { onWorldClick(8) }
+                )
+            }
+            item {
+                WorldCard(
+                    title = "World 9: Shunyam Samyasamuccaye",
+                    subtitle = "Common Sum Factor Equations (Post-MVP)",
+                    isUnlocked = true,
+                    isCompleted = state.isWorld9Completed,
+                    bestScore = state.world9BestScore,
+                    onClick = { onWorldClick(9) }
+                )
+            }
+            item {
+                WorldCard(
+                    title = "World 10: Puranapuranabhyam",
+                    subtitle = "Completing the Square Quadratic Equations (Post-MVP)",
+                    isUnlocked = true,
+                    isCompleted = state.isWorld10Completed,
+                    bestScore = state.world10BestScore,
+                    onClick = { onWorldClick(10) }
+                )
+            }
+            item {
+                WorldCard(
+                    title = "World 11: Vyashtisamashtih",
+                    subtitle = "Symmetric Products Around an Average (Post-MVP)",
+                    isUnlocked = true,
+                    isCompleted = state.isWorld11Completed,
+                    bestScore = state.world11BestScore,
+                    onClick = { onWorldClick(11) }
+                )
+            }
+            item {
+                WorldCard(
+                    title = "World 12: Shesanyankena Charamena",
+                    subtitle = "Recurring Decimal Expansions via Remainder Cycles (Post-MVP)",
+                    isUnlocked = true,
+                    isCompleted = state.isWorld12Completed,
+                    bestScore = state.world12BestScore,
+                    onClick = { onWorldClick(12) }
+                )
+            }
+            item {
+                WorldCard(
+                    title = "World 13: Sopantyadvayamantyam",
+                    subtitle = "Multiplication by 12–19 via Ultimate & Penultimate Digits (Post-MVP)",
+                    isUnlocked = true,
+                    isCompleted = state.isWorld13Completed,
+                    bestScore = state.world13BestScore,
+                    onClick = { onWorldClick(13) }
+                )
+            }
+            item {
+                WorldCard(
+                    title = "World 14: Gunitasamuccayah",
+                    subtitle = "Polynomial Factorization Verification via Coefficient Sums (Post-MVP)",
+                    isUnlocked = true,
+                    isCompleted = state.isWorld14Completed,
+                    bestScore = state.world14BestScore,
+                    onClick = { onWorldClick(14) }
+                )
+            }
+            item {
+                WorldCard(
+                    title = "World 15: Gunakasamuccayah",
+                    subtitle = "Monic Quadratic Factorization by Factor Pairs (Post-MVP)",
+                    isUnlocked = true,
+                    isCompleted = state.isWorld15Completed,
+                    bestScore = state.world15BestScore,
+                    onClick = { onWorldClick(15) }
+                )
+            }
+            item {
+                WorldCard(
+                    title = "World 16: Chalana-Kalanabhyam",
+                    subtitle = "Derivative-Discriminant Root Relation (Campaign Finale)",
+                    isUnlocked = true,
+                    isCompleted = state.isWorld16Completed,
+                    bestScore = state.world16BestScore,
+                    onClick = { onWorldClick(16) }
                 )
             }
         }

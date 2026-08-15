@@ -5,6 +5,12 @@ enum class DifficultyTier {
     TIER_2_HARD
 }
 
+enum class AnswerFormat {
+    INTEGER,
+    QUOTIENT_AND_REMAINDER,
+    ORDERED_PAIR
+}
+
 data class DecompositionStep(
     val stepNumber: Int,
     val label: String,
@@ -25,5 +31,8 @@ data class SutraProblem(
     val appendedSuffix: String = "25",
     val decompositionSteps: List<DecompositionStep>,
     val distractors: List<Long>,
-    val difficultyTier: DifficultyTier
+    val difficultyTier: DifficultyTier,
+    val answerFormat: AnswerFormat = AnswerFormat.INTEGER,
+    val expectedRemainder: Long? = null,
+    val expectedSecondaryAnswer: Long? = null
 )
