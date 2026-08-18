@@ -9,6 +9,7 @@ import com.ankh.sutrasaga.ui.components.GurukulSceneScreen
 fun TutorialScreen(
     worldId: Int,
     onComplete: () -> Unit,
+    onBackClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val script = GurukulContentRepository.getTutorialScript(worldId)
@@ -18,6 +19,7 @@ fun TutorialScreen(
         script = script,
         problem = canonicalExampleProblem,
         onComplete = onComplete,
+        onBack = onBackClick,
         modifier = modifier
     )
 }

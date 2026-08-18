@@ -57,6 +57,7 @@ fun GurukulSceneScreen(
     script: GurukulScript,
     problem: SutraProblem,
     onComplete: () -> Unit,
+    onBack: (() -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
     var currentBeatIndex by remember(script) { mutableIntStateOf(0) }
@@ -115,6 +116,16 @@ fun GurukulSceneScreen(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
+                        if (onBack != null) {
+                            Button(
+                                onClick = onBack,
+                                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF3E2723)),
+                                modifier = Modifier.padding(end = 8.dp)
+                            ) {
+                                Text("← Worlds", color = Color(0xFFFFD700), fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                            }
+                        }
+
                         Column(modifier = Modifier.weight(1f)) {
                             Text(
                                 text = script.title,

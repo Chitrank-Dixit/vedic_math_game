@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -32,6 +33,7 @@ import com.ankh.sutrasaga.ui.viewmodel.GameUiState
 @Composable
 fun PracticeArenaScreen(
     state: GameUiState,
+    onBackClick: () -> Unit,
     onRevealStepClick: () -> Unit,
     onDigitClick: (Char) -> Unit,
     onBackspaceClick: () -> Unit,
@@ -59,6 +61,13 @@ fun PracticeArenaScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                Button(
+                    onClick = onBackClick,
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF3E2723))
+                ) {
+                    Text("← Worlds", color = Color(0xFFFFB300), fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                }
+
                 Text(
                     text = "PRACTICE ARENA (${state.currentProblemIndex + 1}/${state.totalProblemsInMode})",
                     fontSize = 14.sp,
@@ -67,7 +76,7 @@ fun PracticeArenaScreen(
                 )
                 Text(
                     text = "SCORE: ${state.score}",
-                    fontSize = 16.sp,
+                    fontSize = 15.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color(0xFF00E5FF)
                 )

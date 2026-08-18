@@ -10,12 +10,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,7 +32,9 @@ import com.ankh.sutrasaga.ui.viewmodel.GameUiState
 @Composable
 fun WorldSelectScreen(
     state: GameUiState,
-    onWorldClick: (Int) -> Unit
+    onWorldClick: (Int) -> Unit,
+    onTreasuryClick: () -> Unit = {},
+    onCodexClick: () -> Unit = {}
 ) {
     Column(
         modifier = Modifier
@@ -43,14 +48,62 @@ fun WorldSelectScreen(
             fontSize = 28.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.padding(top = 16.dp, bottom = 8.dp)
+            modifier = Modifier.padding(top = 16.dp, bottom = 4.dp)
         )
         Text(
             text = "Select a World to Begin",
-            fontSize = 16.sp,
+            fontSize = 15.sp,
             color = Color.Gray,
-            modifier = Modifier.padding(bottom = 16.dp)
+            modifier = Modifier.padding(bottom = 12.dp)
         )
+
+        // Upa-Sutra Treasury & Codex Hub Entry Point
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 14.dp),
+            shape = RoundedCornerShape(12.dp),
+            colors = CardDefaults.cardColors(containerColor = Color(0xFF1E293B)),
+            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        ) {
+            Row(
+                modifier = Modifier
+                    .padding(12.dp)
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = "🏛️ Upa-Sutra Treasury",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xFFFFD700)
+                    )
+                    Text(
+                        text = "13 Ancient Sub-Sutras & Side Quests",
+                        fontSize = 12.sp,
+                        color = Color(0xFF94A3B8)
+                    )
+                }
+
+                Row {
+                    OutlinedButton(
+                        onClick = onCodexClick,
+                        colors = ButtonDefaults.outlinedButtonColors(contentColor = Color(0xFF38BDF8))
+                    ) {
+                        Text("📜 Codex", fontSize = 12.sp)
+                    }
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Button(
+                        onClick = onTreasuryClick,
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4F46E5))
+                    ) {
+                        Text("Treasury", fontSize = 12.sp, color = Color.White)
+                    }
+                }
+            }
+        }
 
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(12.dp),

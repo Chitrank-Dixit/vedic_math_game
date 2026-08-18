@@ -17,6 +17,7 @@ import com.ankh.sutrasaga.ui.components.GurukulSceneScreen
 fun StoryBeatScreen(
     worldId: Int,
     onContinueClick: () -> Unit,
+    onBackClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val script = GurukulContentRepository.getStoryScript(worldId)
@@ -26,6 +27,7 @@ fun StoryBeatScreen(
         script = script,
         problem = exampleProblem,
         onComplete = onContinueClick,
+        onBack = onBackClick,
         modifier = modifier
     )
 }

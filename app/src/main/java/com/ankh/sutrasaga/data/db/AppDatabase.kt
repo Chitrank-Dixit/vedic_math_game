@@ -30,7 +30,15 @@ interface UserProgressDao {
     suspend fun saveProgress(progress: UserProgressEntity)
 }
 
-@Database(entities = [UserProgressEntity::class], version = 1, exportSchema = false)
+@Database(
+    entities = [
+        UserProgressEntity::class,
+        UpaSutraProgressEntity::class
+    ],
+    version = 2,
+    exportSchema = false
+)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userProgressDao(): UserProgressDao
+    abstract fun upaSutraProgressDao(): UpaSutraProgressDao
 }

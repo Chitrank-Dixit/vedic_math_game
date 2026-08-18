@@ -9,6 +9,9 @@ import com.ankh.sutrasaga.data.repository.GameRepository
 import com.ankh.sutrasaga.domain.models.AnswerFormat
 import com.ankh.sutrasaga.domain.models.DifficultyTier
 import com.ankh.sutrasaga.domain.models.SutraProblem
+import com.ankh.sutrasaga.domain.models.UpaSutraCompletionState
+import com.ankh.sutrasaga.domain.models.UpaSutraId
+import com.ankh.sutrasaga.domain.models.UpaSutraProgress
 import com.ankh.sutrasaga.engine.AnurupyeShunyamanyatGenerator
 import com.ankh.sutrasaga.engine.ChalanaKalanabhyamGenerator
 import com.ankh.sutrasaga.engine.EkadhikenaPurvenaGenerator
@@ -23,9 +26,19 @@ import com.ankh.sutrasaga.engine.ShesanyankenaCharamenaGenerator
 import com.ankh.sutrasaga.engine.ShunyamSamyasamuccayeGenerator
 import com.ankh.sutrasaga.engine.SopantyadvayamantyamGenerator
 import com.ankh.sutrasaga.engine.SutraProblemGenerator
+import com.ankh.sutrasaga.engine.UpaSutraGenerator
 import com.ankh.sutrasaga.engine.UrdhvaTiryagbhyamGenerator
 import com.ankh.sutrasaga.engine.VyashtisamashtihGenerator
 import com.ankh.sutrasaga.engine.YavadunamGenerator
+import com.ankh.sutrasaga.engine.upasutras.AdyamadyenantyamantyenaGenerator
+import com.ankh.sutrasaga.engine.upasutras.AntyayordashakepiGenerator
+import com.ankh.sutrasaga.engine.upasutras.AnurupyenaGenerator
+import com.ankh.sutrasaga.engine.upasutras.KevalaihSaptakamGunyatGenerator
+import com.ankh.sutrasaga.engine.upasutras.LopanasthapanabhyamGenerator
+import com.ankh.sutrasaga.engine.upasutras.SisyateSesasamjnahGenerator
+import com.ankh.sutrasaga.engine.upasutras.VestanamGenerator
+import com.ankh.sutrasaga.engine.upasutras.VilokanamGenerator
+import com.ankh.sutrasaga.engine.upasutras.YavadunamRemixGenerator
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -37,6 +50,17 @@ enum class GameScreen {
     TUTORIAL,
     PRACTICE_ARENA,
     BOSS_BATTLE,
+    REWARD,
+    UPA_SUTRA_TREASURY,
+    UPA_SUTRA_CODEX,
+    UPA_SUTRA_QUEST
+}
+
+enum class UpaSutraQuestStage {
+    STORY_BEAT,
+    GUIDED_EXAMPLE,
+    PRACTICE,
+    CHALLENGE,
     REWARD
 }
 
@@ -84,7 +108,13 @@ data class GameUiState(
     val score: Int = 0,
     val isAnswerSubmitted: Boolean = false,
     val isAnswerCorrect: Boolean? = null,
-    val feedbackMessage: String = ""
+    val feedbackMessage: String = "",
+    // Upa-Sutra Treasury state
+    val selectedUpaSutraId: UpaSutraId? = null,
+    val questStage: UpaSutraQuestStage = UpaSutraQuestStage.STORY_BEAT,
+    val upaSutraProgressMap: Map<UpaSutraId, UpaSutraProgress> = emptyMap(),
+    val questPracticeCorrectCount: Int = 0,
+    val questChallengeCorrectCount: Int = 0
 )
 
 class GameViewModel : ViewModel() {
@@ -106,6 +136,17 @@ class GameViewModel : ViewModel() {
     private val gunakasamuccayahGenerator = GunakasamuccayahGenerator()
     private val chalanaKalanabhyamGenerator = ChalanaKalanabhyamGenerator()
 
+    // Upa-Sutra Generators
+    private val antyayordashakepiGenerator = AntyayordashakepiGenerator()
+    private val anurupyenaGenerator = AnurupyenaGenerator()
+    private val yavadunamRemixGenerator = YavadunamRemixGenerator()
+    private val adyamadyaGenerator = AdyamadyenantyamantyenaGenerator()
+    private val vestanamGenerator = VestanamGenerator()
+    private val sisyateGenerator = SisyateSesasamjnahGenerator()
+    private val kevalaihGenerator = KevalaihSaptakamGunyatGenerator()
+    private val lopanaGenerator = LopanasthapanabhyamGenerator()
+    private val vilokanamGenerator = VilokanamGenerator()
+
     private var repository: GameRepository? = null
 
     private val _uiState = MutableStateFlow(GameUiState())
@@ -117,8 +158,8 @@ class GameViewModel : ViewModel() {
                 context.applicationContext,
                 AppDatabase::class.java,
                 "ankh_game_db"
-            ).build()
-            repository = GameRepository(db.userProgressDao())
+            ).fallbackToDestructiveMigration().build()
+            repository = GameRepository(db.userProgressDao(), db.upaSutraProgressDao())
             observeProgress()
         }
     }
@@ -179,6 +220,15 @@ class GameViewModel : ViewModel() {
                 )
             }
         }
+
+        viewModelScope.launch {
+            repository?.getAllUpaSutraProgress()?.collect { progressList ->
+                val progressMap = progressList.associateBy { it.id }
+                _uiState.value = _uiState.value.copy(
+                    upaSutraProgressMap = progressMap
+                )
+            }
+        }
     }
 
     private fun getGeneratorForWorld(worldId: Int): SutraProblemGenerator {
@@ -203,12 +253,130 @@ class GameViewModel : ViewModel() {
         }
     }
 
+    private fun getGeneratorForUpaSutra(id: UpaSutraId): UpaSutraGenerator {
+        return when (id) {
+            UpaSutraId.ANTYAYORDASHAKEPI -> antyayordashakepiGenerator
+            UpaSutraId.ANURUPYENA -> anurupyenaGenerator
+            UpaSutraId.YAVADUNAM_TAVADUNIKRTYA_VARGANCHA_YOJAYET -> yavadunamRemixGenerator
+            UpaSutraId.ADYAMADYENANTYAMANTYENA -> adyamadyaGenerator
+            UpaSutraId.VESHTANAM -> vestanamGenerator
+            UpaSutraId.SHISYATE_SHESAMAJNA -> sisyateGenerator
+            UpaSutraId.KEVALAIHSAPTAKAM_GUNYAT -> kevalaihGenerator
+            UpaSutraId.LOPANA_STHAPANABHYAM -> lopanaGenerator
+            UpaSutraId.VILOKANAM -> vilokanamGenerator
+            else -> antyayordashakepiGenerator
+        }
+    }
+
     fun selectWorld(worldId: Int) {
         if (worldId in 1..16) {
             _uiState.value = _uiState.value.copy(
                 selectedWorldId = worldId,
                 currentScreen = GameScreen.STORY_BEAT
             )
+        }
+    }
+
+    fun openTreasury() {
+        _uiState.value = _uiState.value.copy(
+            currentScreen = GameScreen.UPA_SUTRA_TREASURY
+        )
+    }
+
+    fun openCodex() {
+        _uiState.value = _uiState.value.copy(
+            currentScreen = GameScreen.UPA_SUTRA_CODEX
+        )
+    }
+
+    fun startUpaSutraQuest(id: UpaSutraId) {
+        _uiState.value = _uiState.value.copy(
+            selectedUpaSutraId = id,
+            questStage = UpaSutraQuestStage.STORY_BEAT,
+            currentScreen = GameScreen.UPA_SUTRA_QUEST,
+            score = 0,
+            questPracticeCorrectCount = 0,
+            questChallengeCorrectCount = 0
+        )
+    }
+
+    fun advanceQuestStage() {
+        val currentStage = _uiState.value.questStage
+        val upaSutraId = _uiState.value.selectedUpaSutraId ?: UpaSutraId.ANTYAYORDASHAKEPI
+        val generator = getGeneratorForUpaSutra(upaSutraId)
+
+        when (currentStage) {
+            UpaSutraQuestStage.STORY_BEAT -> {
+                _uiState.value = _uiState.value.copy(
+                    questStage = UpaSutraQuestStage.GUIDED_EXAMPLE
+                )
+            }
+            UpaSutraQuestStage.GUIDED_EXAMPLE -> {
+                val practiceProblems = generator.generateQuestPracticeSet()
+                _uiState.value = _uiState.value.copy(
+                    questStage = UpaSutraQuestStage.PRACTICE,
+                    problemList = practiceProblems,
+                    currentProblemIndex = 0,
+                    totalProblemsInMode = practiceProblems.size,
+                    currentProblem = practiceProblems.firstOrNull(),
+                    revealedStepsCount = 0,
+                    userInput = "",
+                    isAnswerSubmitted = false,
+                    isAnswerCorrect = null,
+                    feedbackMessage = "",
+                    questPracticeCorrectCount = 0
+                )
+            }
+            UpaSutraQuestStage.PRACTICE -> {
+                val challengeProblems = generator.generateQuestChallengeSet()
+                _uiState.value = _uiState.value.copy(
+                    questStage = UpaSutraQuestStage.CHALLENGE,
+                    problemList = challengeProblems,
+                    currentProblemIndex = 0,
+                    totalProblemsInMode = challengeProblems.size,
+                    currentProblem = challengeProblems.firstOrNull(),
+                    revealedStepsCount = 0,
+                    userInput = "",
+                    isAnswerSubmitted = false,
+                    isAnswerCorrect = null,
+                    feedbackMessage = "",
+                    questChallengeCorrectCount = 0
+                )
+            }
+            UpaSutraQuestStage.CHALLENGE -> {
+                completeQuest(upaSutraId)
+            }
+            UpaSutraQuestStage.REWARD -> {
+                openTreasury()
+            }
+        }
+    }
+
+    private fun completeQuest(upaSutraId: UpaSutraId) {
+        val practiceCount = _uiState.value.questPracticeCorrectCount
+        val challengeCount = _uiState.value.questChallengeCorrectCount
+        val newState = if (challengeCount >= 2) {
+            UpaSutraCompletionState.MASTERED
+        } else {
+            UpaSutraCompletionState.PRACTICED
+        }
+
+        _uiState.value = _uiState.value.copy(
+            questStage = UpaSutraQuestStage.REWARD
+        )
+
+        repository?.let { repo ->
+            viewModelScope.launch {
+                repo.saveUpaSutraProgress(
+                    UpaSutraProgress(
+                        id = upaSutraId,
+                        state = newState,
+                        practiceCorrectCount = practiceCount,
+                        challengeCorrectCount = challengeCount,
+                        lastAttemptTimestamp = System.currentTimeMillis()
+                    )
+                )
+            }
         }
     }
 
@@ -348,11 +516,21 @@ class GameViewModel : ViewModel() {
             AnswerFormat.INTEGER -> "${problem.correctAnswer}"
         }
 
+        val newPracticeCount = if (state.currentScreen == GameScreen.UPA_SUTRA_QUEST && state.questStage == UpaSutraQuestStage.PRACTICE && isCorrect) {
+            state.questPracticeCorrectCount + 1
+        } else state.questPracticeCorrectCount
+
+        val newChallengeCount = if (state.currentScreen == GameScreen.UPA_SUTRA_QUEST && state.questStage == UpaSutraQuestStage.CHALLENGE && isCorrect) {
+            state.questChallengeCorrectCount + 1
+        } else state.questChallengeCorrectCount
+
         _uiState.value = state.copy(
             isAnswerSubmitted = true,
             isAnswerCorrect = isCorrect,
             score = state.score + addedPoints,
-            feedbackMessage = if (isCorrect) "CORRECT! +$addedPoints points" else "INCORRECT! Correct answer was $expectedDisplay"
+            feedbackMessage = if (isCorrect) "CORRECT! +$addedPoints points" else "INCORRECT! Correct answer was $expectedDisplay",
+            questPracticeCorrectCount = newPracticeCount,
+            questChallengeCorrectCount = newChallengeCount
         )
     }
 
@@ -377,6 +555,8 @@ class GameViewModel : ViewModel() {
                 startBossBattle()
             } else if (state.currentScreen == GameScreen.BOSS_BATTLE) {
                 completeCurrentWorld()
+            } else if (state.currentScreen == GameScreen.UPA_SUTRA_QUEST) {
+                advanceQuestStage()
             }
         }
     }
@@ -387,8 +567,10 @@ class GameViewModel : ViewModel() {
         _uiState.value = _uiState.value.copy(
             currentScreen = GameScreen.REWARD
         )
-        viewModelScope.launch {
-            repository?.saveWorldCompletion(worldId, finalScore)
+        repository?.let { repo ->
+            viewModelScope.launch {
+                repo.saveWorldCompletion(worldId, finalScore)
+            }
         }
     }
 
