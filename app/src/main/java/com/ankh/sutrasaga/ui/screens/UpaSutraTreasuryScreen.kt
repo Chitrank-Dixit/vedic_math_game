@@ -1,6 +1,7 @@
 package com.ankh.sutrasaga.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,24 +10,33 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ankh.sutrasaga.domain.models.UpaSutraCompletionState
@@ -34,6 +44,16 @@ import com.ankh.sutrasaga.domain.models.UpaSutraDefinition
 import com.ankh.sutrasaga.domain.models.UpaSutraId
 import com.ankh.sutrasaga.domain.models.UpaSutraProgress
 import com.ankh.sutrasaga.domain.models.UpaSutraRegistry
+import com.ankh.sutrasaga.ui.theme.CosmicBackground
+import com.ankh.sutrasaga.ui.theme.CyberCyan
+import com.ankh.sutrasaga.ui.theme.CyberCyanLight
+import com.ankh.sutrasaga.ui.theme.HologramBorderBrush
+import com.ankh.sutrasaga.ui.theme.SuccessEmerald
+import com.ankh.sutrasaga.ui.theme.TextLightSecondary
+import com.ankh.sutrasaga.ui.theme.TextMuted
+import com.ankh.sutrasaga.ui.theme.TextWhitePrimary
+import com.ankh.sutrasaga.ui.theme.VedicGold
+import com.ankh.sutrasaga.ui.theme.VedicGoldLight
 import com.ankh.sutrasaga.ui.viewmodel.GameUiState
 
 @Composable
@@ -46,48 +66,80 @@ fun UpaSutraTreasuryScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF0F172A))
-            .padding(16.dp),
+            .background(CosmicBackground)
+            .statusBarsPadding()
+            .navigationBarsPadding()
+            .padding(horizontal = 16.dp, vertical = 8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // Top Navigation Action Bar
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 8.dp, bottom = 12.dp),
+                .padding(top = 4.dp, bottom = 8.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            OutlinedButton(
+            Button(
                 onClick = onBackClick,
-                colors = ButtonDefaults.outlinedButtonColors(contentColor = Color(0xFF94A3B8))
+                shape = RoundedCornerShape(12.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1E293B)),
+                border = ButtonDefaults.outlinedButtonBorder.copy(
+                    brush = Brush.horizontalGradient(listOf(VedicGold, VedicGoldLight)),
+                    width = 1.dp
+                ),
+                contentPadding = ButtonDefaults.TextButtonContentPadding
             ) {
-                Text("← World Select")
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = "Back",
+                    tint = VedicGold,
+                    modifier = Modifier.size(16.dp)
+                )
+                Spacer(modifier = Modifier.width(4.dp))
+                Text("Worlds", color = VedicGold, fontSize = 12.sp, fontWeight = FontWeight.Bold)
             }
-
-            Text(
-                text = "🏛️ Upa-Sutra Treasury",
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFFFFD700)
-            )
 
             Button(
                 onClick = onCodexClick,
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4F46E5))
+                shape = RoundedCornerShape(12.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4338CA)),
+                border = ButtonDefaults.outlinedButtonBorder.copy(
+                    brush = Brush.horizontalGradient(listOf(CyberCyan, CyberCyanLight)),
+                    width = 1.dp
+                ),
+                contentPadding = ButtonDefaults.TextButtonContentPadding
             ) {
-                Text("📜 Codex", color = Color.White)
+                Text("📜 Codex ➔", color = TextWhitePrimary, fontSize = 12.sp, fontWeight = FontWeight.Bold)
             }
         }
 
-        Text(
-            text = "Master the 13 sacred sub-sutras to unlock ancient computational secrets.",
-            fontSize = 14.sp,
-            color = Color(0xFF94A3B8),
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
+        // Title and Subtitle Banner
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 12.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = "🏛️ Upa-Sutra Treasury",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.ExtraBold,
+                letterSpacing = 0.5.sp,
+                color = VedicGoldLight
+            )
+            Spacer(modifier = Modifier.height(2.dp))
+            Text(
+                text = "Master the 13 sacred sub-sutras to unlock ancient computational secrets.",
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Medium,
+                color = TextLightSecondary,
+                textAlign = TextAlign.Center
+            )
+        }
 
         LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(12.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
             modifier = Modifier.fillMaxWidth()
         ) {
             items(UpaSutraRegistry.entries) { definition ->
@@ -143,21 +195,24 @@ private fun UpaSutraCard(
 
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
-            containerColor = when (completionState) {
-                UpaSutraCompletionState.MASTERED -> Color(0xFF1E293B)
-                UpaSutraCompletionState.PRACTICED -> Color(0xFF1E293B)
-                UpaSutraCompletionState.AVAILABLE -> Color(0xFF1E293B)
-                UpaSutraCompletionState.LEARNING -> Color(0xFF1E293B)
-                UpaSutraCompletionState.LOCKED -> Color(0xFF161E2E)
-            }
+            containerColor = if (isUnlocked) Color(0xF01E293B) else Color(0x800F172A)
+        ),
+        border = CardDefaults.outlinedCardBorder().copy(
+            brush = when (completionState) {
+                UpaSutraCompletionState.MASTERED -> Brush.horizontalGradient(listOf(SuccessEmerald, Color(0xFF34D399)))
+                UpaSutraCompletionState.PRACTICED -> Brush.horizontalGradient(listOf(CyberCyan, CyberCyanLight))
+                UpaSutraCompletionState.AVAILABLE, UpaSutraCompletionState.LEARNING -> Brush.horizontalGradient(listOf(Color(0x66FFB300), Color(0x3338BDF8)))
+                UpaSutraCompletionState.LOCKED -> Brush.horizontalGradient(listOf(Color(0x20FFFFFF), Color(0x10FFFFFF)))
+            },
+            width = 1.dp
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = if (isUnlocked) 4.dp else 0.dp)
     ) {
         Row(
             modifier = Modifier
-                .padding(16.dp)
+                .padding(14.dp)
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
@@ -166,93 +221,116 @@ private fun UpaSutraCard(
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
                         text = definition.displayName,
-                        fontSize = 17.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = if (isUnlocked) Color.White else Color(0xFF64748B)
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.ExtraBold,
+                        color = if (isUnlocked) TextWhitePrimary else TextMuted
                     )
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(6.dp))
                     Text(
                         text = definition.sanskritName,
-                        fontSize = 13.sp,
-                        color = if (isUnlocked) Color(0xFFFFD700) else Color(0xFF475569)
+                        fontSize = 12.sp,
+                        color = if (isUnlocked) VedicGoldLight else TextMuted
                     )
                 }
 
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(2.dp))
 
                 Text(
                     text = "\"${definition.meaning}\"",
-                    fontSize = 13.sp,
-                    color = if (isUnlocked) Color(0xFF94A3B8) else Color(0xFF475569)
+                    fontSize = 12.sp,
+                    color = TextLightSecondary
                 )
 
                 Spacer(modifier = Modifier.height(6.dp))
 
                 when (completionState) {
                     UpaSutraCompletionState.MASTERED -> {
-                        Text(
-                            text = "👑 MASTERED | Badge Earned",
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFF10B981)
-                        )
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Box(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(6.dp))
+                                    .background(Color(0x3310B981))
+                                    .padding(horizontal = 6.dp, vertical = 2.dp)
+                            ) {
+                                Text(
+                                    text = "👑 MASTERED",
+                                    fontSize = 10.sp,
+                                    fontWeight = FontWeight.ExtraBold,
+                                    color = SuccessEmerald,
+                                    letterSpacing = 0.5.sp
+                                )
+                            }
+                        }
                     }
                     UpaSutraCompletionState.PRACTICED -> {
-                        Text(
-                            text = "✓ PRACTICED | Ready for Challenge",
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFF38BDF8)
-                        )
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Box(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(6.dp))
+                                    .background(Color(0x3300E5FF))
+                                    .padding(horizontal = 6.dp, vertical = 2.dp)
+                            ) {
+                                Text(
+                                    text = "✓ PRACTICED",
+                                    fontSize = 10.sp,
+                                    fontWeight = FontWeight.ExtraBold,
+                                    color = CyberCyanLight,
+                                    letterSpacing = 0.5.sp
+                                )
+                            }
+                        }
                     }
                     UpaSutraCompletionState.AVAILABLE, UpaSutraCompletionState.LEARNING -> {
                         Text(
-                            text = "✦ AVAILABLE (Attached to World ${definition.parentWorldId})",
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFFFBBF24)
+                            text = "✦ Unlocked from World ${definition.parentWorldId}",
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            color = VedicGoldLight
                         )
                     }
                     UpaSutraCompletionState.LOCKED -> {
                         Text(
                             text = "🔒 Unlocks after World ${definition.unlockAfterWorldId}",
-                            fontSize = 12.sp,
-                            color = Color(0xFF64748B)
+                            fontSize = 11.sp,
+                            color = TextMuted
                         )
                     }
                 }
             }
 
-            Spacer(modifier = Modifier.width(12.dp))
+            Spacer(modifier = Modifier.width(8.dp))
 
             if (isUnlocked) {
                 Button(
                     onClick = onClick,
+                    shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = when (completionState) {
-                            UpaSutraCompletionState.MASTERED -> Color(0xFF059669)
-                            UpaSutraCompletionState.PRACTICED -> Color(0xFF0284C7)
-                            else -> Color(0xFF4F46E5)
+                            UpaSutraCompletionState.MASTERED -> Color(0xFF065F46)
+                            UpaSutraCompletionState.PRACTICED -> Color(0xFF0369A1)
+                            else -> Color(0xFF4338CA)
                         }
-                    )
+                    ),
+                    contentPadding = ButtonDefaults.TextButtonContentPadding
                 ) {
                     Text(
                         text = when (completionState) {
                             UpaSutraCompletionState.MASTERED -> "Replay"
                             UpaSutraCompletionState.PRACTICED -> "Challenge"
-                            else -> "Start Quest"
+                            else -> "Quest"
                         },
-                        fontSize = 13.sp,
-                        color = Color.White
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = TextWhitePrimary
                     )
                 }
             } else {
                 Box(
                     modifier = Modifier
-                        .background(Color(0xFF334155), RoundedCornerShape(6.dp))
+                        .background(Color(0xFF334155), RoundedCornerShape(8.dp))
                         .padding(horizontal = 10.dp, vertical = 6.dp)
                 ) {
-                    Text("LOCKED", color = Color(0xFF94A3B8), fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                    Text("LOCKED", color = TextMuted, fontSize = 11.sp, fontWeight = FontWeight.Bold)
                 }
             }
         }

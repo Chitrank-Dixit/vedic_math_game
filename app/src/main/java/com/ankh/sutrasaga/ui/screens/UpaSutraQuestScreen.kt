@@ -10,8 +10,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -129,6 +131,8 @@ private fun ComingSoonScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFF0F172A))
+            .statusBarsPadding()
+            .navigationBarsPadding()
             .padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -216,6 +220,8 @@ private fun QuestStoryBeatStage(
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFF0F172A))
+            .statusBarsPadding()
+            .navigationBarsPadding()
             .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
@@ -288,6 +294,8 @@ private fun QuestGuidedExampleStage(
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFF0F172A))
+            .statusBarsPadding()
+            .navigationBarsPadding()
             .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
@@ -1050,6 +1058,8 @@ private fun QuestPracticeStage(
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFF0F172A))
+            .statusBarsPadding()
+            .navigationBarsPadding()
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
@@ -1196,6 +1206,8 @@ private fun QuestChallengeStage(
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFF0F172A))
+            .statusBarsPadding()
+            .navigationBarsPadding()
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
@@ -1311,6 +1323,8 @@ private fun QuestRewardStage(
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFF0F172A))
+            .statusBarsPadding()
+            .navigationBarsPadding()
             .padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center

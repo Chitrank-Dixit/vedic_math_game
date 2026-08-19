@@ -44,6 +44,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -53,6 +54,13 @@ import androidx.compose.ui.unit.sp
 import com.ankh.sutrasaga.domain.models.AnswerFormat
 import com.ankh.sutrasaga.domain.models.DecompositionStep
 import com.ankh.sutrasaga.domain.models.SutraProblem
+import com.ankh.sutrasaga.ui.theme.CyberCyan
+import com.ankh.sutrasaga.ui.theme.CyberCyanLight
+import com.ankh.sutrasaga.ui.theme.HologramBorderBrush
+import com.ankh.sutrasaga.ui.theme.TextLightSecondary
+import com.ankh.sutrasaga.ui.theme.TextWhitePrimary
+import com.ankh.sutrasaga.ui.theme.VedicGold
+import com.ankh.sutrasaga.ui.theme.VedicGoldLight
 
 @Composable
 fun MathSlate(
@@ -62,12 +70,10 @@ fun MathSlate(
     onInteractiveStepAction: ((Int) -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
-    val slateBg = Color(0xFF1B262C) // Chalkboard charcoal
-    val frameBorder = Color(0xFF8D6E63) // Wooden frame
-    val chalkWhite = Color(0xFFECEFF1)
-    val amberHighlight = Color(0xFFFFB300)
-    val cyanAccent = Color(0xFF00E5FF)
-    val goldSuccess = Color(0xFFFFD54F)
+    val chalkWhite = TextWhitePrimary
+    val amberHighlight = VedicGold
+    val cyanAccent = CyberCyanLight
+    val goldSuccess = VedicGoldLight
 
     // Dynamic problem parameters
     val operand = problem.operand
@@ -82,37 +88,57 @@ fun MathSlate(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(8.dp),
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = slateBg),
-        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+            .padding(4.dp),
+        shape = RoundedCornerShape(20.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xF20F172A)),
+        border = CardDefaults.outlinedCardBorder().copy(
+            brush = HologramBorderBrush,
+            width = 1.5.dp
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 10.dp)
     ) {
         Column(
             modifier = Modifier
-                .border(6.dp, frameBorder, RoundedCornerShape(16.dp))
-                .padding(20.dp)
+                .padding(16.dp)
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            // Slate Header Label
-            Text(
-                text = "❖ VEDIC MATH SLATE ❖",
-                style = MaterialTheme.typography.labelMedium,
-                letterSpacing = 2.sp,
-                color = cyanAccent,
-                fontWeight = FontWeight.Bold
-            )
+            // Slate Header Label with glowing ornament
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = "✦",
+                    color = CyberCyanLight,
+                    fontSize = 12.sp
+                )
+                Spacer(modifier = Modifier.width(6.dp))
+                Text(
+                    text = "VEDIC MATH SLATE",
+                    style = MaterialTheme.typography.labelMedium,
+                    letterSpacing = 2.sp,
+                    color = CyberCyanLight,
+                    fontWeight = FontWeight.ExtraBold
+                )
+                Spacer(modifier = Modifier.width(6.dp))
+                Text(
+                    text = "✦",
+                    color = CyberCyanLight,
+                    fontSize = 12.sp
+                )
+            }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(12.dp))
 
             // Animated Math Stage Box
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(140.dp)
-                    .background(Color(0xFF0F171E), RoundedCornerShape(12.dp))
-                    .border(1.dp, Color(0xFF37474F), RoundedCornerShape(12.dp)),
+                    .height(135.dp)
+                    .background(Color(0xD90B1120), RoundedCornerShape(14.dp))
+                    .border(1.dp, Color(0x3338BDF8), RoundedCornerShape(14.dp)),
                 contentAlignment = Alignment.Center
             ) {
                 if (!isEkadhikenaProblem) {
@@ -130,7 +156,7 @@ fun MathSlate(
                         Text(
                             text = "$operand² = ?",
                             fontSize = 36.sp,
-                            fontWeight = FontWeight.Bold,
+                            fontWeight = FontWeight.ExtraBold,
                             fontFamily = FontFamily.Monospace,
                             color = chalkWhite
                         )
@@ -144,25 +170,25 @@ fun MathSlate(
                             Text(
                                 text = "Prefix n = ",
                                 fontSize = 22.sp,
-                                color = chalkWhite.copy(alpha = 0.8f)
+                                color = TextLightSecondary
                             )
                             val scaleAnim by animateFloatAsState(
-                                targetValue = 1.3f,
+                                targetValue = 1.25f,
                                 animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy),
                                 label = "scalePrefix"
                             )
                             Text(
                                 text = "$prefix",
                                 fontSize = 38.sp,
-                                fontWeight = FontWeight.Bold,
+                                fontWeight = FontWeight.ExtraBold,
                                 color = amberHighlight,
                                 modifier = Modifier.scale(scaleAnim)
                             )
                             Text(
-                                text = " (digit 5 dimmed)",
-                                fontSize = 16.sp,
-                                color = chalkWhite.copy(alpha = 0.4f),
-                                modifier = Modifier.padding(start = 8.dp)
+                                text = " (dim 5)",
+                                fontSize = 15.sp,
+                                color = TextLightSecondary.copy(alpha = 0.6f),
+                                modifier = Modifier.padding(start = 6.dp)
                             )
                         }
                     }
@@ -171,22 +197,23 @@ fun MathSlate(
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Box(
                                 modifier = Modifier
-                                    .clip(CircleShape)
-                                    .background(amberHighlight)
+                                    .clip(RoundedCornerShape(8.dp))
+                                    .background(Color(0x33FFB300))
+                                    .border(1.dp, Color(0x66FFB300), RoundedCornerShape(8.dp))
                                     .padding(horizontal = 10.dp, vertical = 2.dp)
                             ) {
                                 Text(
                                     text = "Ekadhikena: +1",
                                     fontSize = 12.sp,
                                     fontWeight = FontWeight.Bold,
-                                    color = Color.Black
+                                    color = VedicGoldLight
                                 )
                             }
-                            Spacer(modifier = Modifier.height(8.dp))
+                            Spacer(modifier = Modifier.height(6.dp))
                             Text(
                                 text = "$prefix × ($prefix + 1) = $prefix × $incrementedPrefix",
-                                fontSize = 30.sp,
-                                fontWeight = FontWeight.Bold,
+                                fontSize = 28.sp,
+                                fontWeight = FontWeight.ExtraBold,
                                 fontFamily = FontFamily.Monospace,
                                 color = goldSuccess
                             )
@@ -197,14 +224,15 @@ fun MathSlate(
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text(
                                 text = "Multiply Prefixes",
-                                fontSize = 14.sp,
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.SemiBold,
                                 color = cyanAccent
                             )
                             Spacer(modifier = Modifier.height(4.dp))
                             Text(
                                 text = "$prefix × $incrementedPrefix = $prefixProduct",
-                                fontSize = 34.sp,
-                                fontWeight = FontWeight.Bold,
+                                fontSize = 32.sp,
+                                fontWeight = FontWeight.ExtraBold,
                                 fontFamily = FontFamily.Monospace,
                                 color = goldSuccess
                             )
@@ -218,15 +246,15 @@ fun MathSlate(
                         ) {
                             Text(
                                 text = "$prefixProduct",
-                                fontSize = 34.sp,
-                                fontWeight = FontWeight.Bold,
+                                fontSize = 32.sp,
+                                fontWeight = FontWeight.ExtraBold,
                                 fontFamily = FontFamily.Monospace,
                                 color = goldSuccess
                             )
                             Text(
                                 text = " || ",
-                                fontSize = 28.sp,
-                                color = chalkWhite.copy(alpha = 0.5f)
+                                fontSize = 26.sp,
+                                color = TextLightSecondary.copy(alpha = 0.5f)
                             )
                             val suffixScale by animateFloatAsState(
                                 targetValue = 1.2f,
@@ -235,8 +263,8 @@ fun MathSlate(
                             )
                             Text(
                                 text = suffix,
-                                fontSize = 34.sp,
-                                fontWeight = FontWeight.Bold,
+                                fontSize = 32.sp,
+                                fontWeight = FontWeight.ExtraBold,
                                 fontFamily = FontFamily.Monospace,
                                 color = amberHighlight,
                                 modifier = Modifier.scale(suffixScale)
@@ -247,16 +275,17 @@ fun MathSlate(
                         // Step 5+: Final Result & Victory Flourish
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text(
-                                text = "★ RESULT ★",
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = goldSuccess
+                                text = "★ FINAL RESULT ★",
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.ExtraBold,
+                                letterSpacing = 1.sp,
+                                color = cyanAccent
                             )
                             Spacer(modifier = Modifier.height(4.dp))
                             Text(
                                 text = "$operand² = $finalAnswer",
-                                fontSize = 38.sp,
-                                fontWeight = FontWeight.Bold,
+                                fontSize = 34.sp,
+                                fontWeight = FontWeight.ExtraBold,
                                 fontFamily = FontFamily.Monospace,
                                 color = goldSuccess
                             )
@@ -271,31 +300,35 @@ fun MathSlate(
             if (interactiveMode) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly,
+                    horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Button(
                         onClick = { onInteractiveStepAction?.invoke(stepIndex) },
-                        colors = ButtonDefaults.buttonColors(containerColor = cyanAccent)
+                        shape = RoundedCornerShape(12.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF0284C7)),
+                        elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp)
                     ) {
                         if (!isEkadhikenaProblem) {
                             Text(
-                                text = currentDecompositionStep?.let { "Reveal: ${it.label}" } ?: "Complete",
-                                color = Color.Black,
-                                fontWeight = FontWeight.Bold
+                                text = currentDecompositionStep?.let { "🔍 Reveal: ${it.label}" } ?: "✓ Complete",
+                                color = TextWhitePrimary,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 13.sp
                             )
                         } else {
-                        Text(
-                            text = when (stepIndex) {
-                                0 -> "1. Select Tens Digit"
-                                1 -> "2. Increment (+1)"
-                                2 -> "3. Multiply Prefixes"
-                                3 -> "4. Append $suffix"
-                                else -> "✓ Complete"
-                            },
-                            color = Color.Black,
-                            fontWeight = FontWeight.Bold
-                        )
+                            Text(
+                                text = when (stepIndex) {
+                                    0 -> "🔍 1. Select Tens Digit"
+                                    1 -> "🔍 2. Increment (+1)"
+                                    2 -> "🔍 3. Multiply Prefixes"
+                                    3 -> "🔍 4. Append $suffix"
+                                    else -> "✓ Step Complete"
+                                },
+                                color = TextWhitePrimary,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 13.sp
+                            )
                         }
                     }
                 }
@@ -305,15 +338,15 @@ fun MathSlate(
                 } else when (stepIndex) {
                     0 -> "Initial Problem: Calculate $operand²"
                     1 -> "Step 1: Extract prefix n = $prefix"
-                    2 -> "Step 2: Apply Ekadhikena (+1) $\\rightarrow$ $prefix + 1 = $incrementedPrefix"
+                    2 -> "Step 2: Apply Ekadhikena (+1) ⟶ $prefix + 1 = $incrementedPrefix"
                     3 -> "Step 3: Multiply prefix: $prefix × $incrementedPrefix = $prefixProduct"
-                    4 -> "Step 4: Append suffix $suffix $\\rightarrow$ $prefixProduct || $suffix"
+                    4 -> "Step 4: Append suffix $suffix ⟶ $prefixProduct || $suffix"
                     else -> "Final Answer: $finalAnswer"
                 }
                 Text(
                     text = stepDesc,
                     style = MaterialTheme.typography.bodyMedium,
-                    color = chalkWhite.copy(alpha = 0.9f),
+                    color = TextLightSecondary,
                     textAlign = TextAlign.Center
                 )
             }
@@ -344,8 +377,8 @@ private fun GenericSutraStage(
         when {
             isInitialStage -> Text(
                 text = problem.questionText,
-                fontSize = 28.sp,
-                fontWeight = FontWeight.Bold,
+                fontSize = 26.sp,
+                fontWeight = FontWeight.ExtraBold,
                 fontFamily = FontFamily.Monospace,
                 color = chalkWhite,
                 textAlign = TextAlign.Center
@@ -353,16 +386,16 @@ private fun GenericSutraStage(
             step != null -> {
                 Text(
                     text = step.label,
-                    fontSize = 14.sp,
+                    fontSize = 13.sp,
                     fontWeight = FontWeight.Bold,
                     color = cyanAccent,
                     textAlign = TextAlign.Center
                 )
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(6.dp))
                 Text(
                     text = "${step.formulaDisplay} = ${step.stepResult}",
-                    fontSize = 25.sp,
-                    fontWeight = FontWeight.Bold,
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.ExtraBold,
                     fontFamily = FontFamily.Monospace,
                     color = goldSuccess,
                     textAlign = TextAlign.Center
@@ -370,16 +403,17 @@ private fun GenericSutraStage(
             }
             else -> {
                 Text(
-                    text = "RESULT",
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = goldSuccess
+                    text = "★ FINAL RESULT ★",
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    letterSpacing = 1.sp,
+                    color = cyanAccent
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = "Answer = $answerText",
-                    fontSize = 34.sp,
-                    fontWeight = FontWeight.Bold,
+                    fontSize = 30.sp,
+                    fontWeight = FontWeight.ExtraBold,
                     fontFamily = FontFamily.Monospace,
                     color = goldSuccess
                 )

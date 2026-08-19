@@ -1,6 +1,7 @@
 package com.ankh.sutrasaga.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,24 +10,42 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ankh.sutrasaga.ui.theme.CosmicBackground
+import com.ankh.sutrasaga.ui.theme.CyberCyan
+import com.ankh.sutrasaga.ui.theme.CyberCyanLight
+import com.ankh.sutrasaga.ui.theme.HologramBorderBrush
+import com.ankh.sutrasaga.ui.theme.SuccessEmerald
+import com.ankh.sutrasaga.ui.theme.TextLightSecondary
+import com.ankh.sutrasaga.ui.theme.TextMuted
+import com.ankh.sutrasaga.ui.theme.TextWhitePrimary
+import com.ankh.sutrasaga.ui.theme.VedicGold
+import com.ankh.sutrasaga.ui.theme.VedicGoldLight
 import com.ankh.sutrasaga.ui.viewmodel.GameUiState
 
 @Composable
@@ -39,36 +58,51 @@ fun WorldSelectScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF0F4F8))
-            .padding(16.dp),
+            .background(CosmicBackground)
+            .statusBarsPadding()
+            .navigationBarsPadding()
+            .padding(horizontal = 16.dp, vertical = 8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = "Ankh: The Sutra Saga",
-            fontSize = 28.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.padding(top = 16.dp, bottom = 4.dp)
-        )
-        Text(
-            text = "Select a World to Begin",
-            fontSize = 15.sp,
-            color = Color.Gray,
-            modifier = Modifier.padding(bottom = 12.dp)
-        )
+        // App Header Banner
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp, bottom = 12.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = "Ankh: The Sutra Saga",
+                fontSize = 28.sp,
+                fontWeight = FontWeight.ExtraBold,
+                letterSpacing = 0.5.sp,
+                color = VedicGoldLight
+            )
+            Spacer(modifier = Modifier.height(2.dp))
+            Text(
+                text = "Select a World to Begin the Ancient Journey",
+                fontSize = 13.sp,
+                fontWeight = FontWeight.Medium,
+                color = TextLightSecondary
+            )
+        }
 
-        // Upa-Sutra Treasury & Codex Hub Entry Point
+        // Upa-Sutra Treasury & Codex Hub Entry Point Card
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 14.dp),
-            shape = RoundedCornerShape(12.dp),
-            colors = CardDefaults.cardColors(containerColor = Color(0xFF1E293B)),
-            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+                .padding(bottom = 12.dp),
+            shape = RoundedCornerShape(18.dp),
+            colors = CardDefaults.cardColors(containerColor = Color(0xF21E293B)),
+            border = CardDefaults.outlinedCardBorder().copy(
+                brush = HologramBorderBrush,
+                width = 1.5.dp
+            ),
+            elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
         ) {
             Row(
                 modifier = Modifier
-                    .padding(12.dp)
+                    .padding(14.dp)
                     .fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
@@ -77,36 +111,43 @@ fun WorldSelectScreen(
                     Text(
                         text = "🏛️ Upa-Sutra Treasury",
                         fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color(0xFFFFD700)
+                        fontWeight = FontWeight.ExtraBold,
+                        color = VedicGoldLight
                     )
                     Text(
                         text = "13 Ancient Sub-Sutras & Side Quests",
                         fontSize = 12.sp,
-                        color = Color(0xFF94A3B8)
+                        color = TextLightSecondary
                     )
                 }
 
-                Row {
+                Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                     OutlinedButton(
                         onClick = onCodexClick,
-                        colors = ButtonDefaults.outlinedButtonColors(contentColor = Color(0xFF38BDF8))
+                        shape = RoundedCornerShape(12.dp),
+                        colors = ButtonDefaults.outlinedButtonColors(contentColor = CyberCyanLight),
+                        border = ButtonDefaults.outlinedButtonBorder.copy(
+                            brush = Brush.horizontalGradient(listOf(CyberCyan, CyberCyanLight)),
+                            width = 1.dp
+                        ),
+                        contentPadding = ButtonDefaults.TextButtonContentPadding
                     ) {
-                        Text("📜 Codex", fontSize = 12.sp)
+                        Text("📜 Codex", fontSize = 12.sp, fontWeight = FontWeight.Bold)
                     }
-                    Spacer(modifier = Modifier.width(8.dp))
                     Button(
                         onClick = onTreasuryClick,
-                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4F46E5))
+                        shape = RoundedCornerShape(12.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4338CA)),
+                        contentPadding = ButtonDefaults.TextButtonContentPadding
                     ) {
-                        Text("Treasury", fontSize = 12.sp, color = Color.White)
+                        Text("Treasury ➔", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = TextWhitePrimary)
                     }
                 }
             }
         }
 
         LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(12.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
             modifier = Modifier.fillMaxWidth()
         ) {
             item {
@@ -152,7 +193,7 @@ fun WorldSelectScreen(
             item {
                 WorldCard(
                     title = "World 5: Urdhva-Tiryagbhyam",
-                    subtitle = "Vertically and Crosswise (MVP Finale)",
+                    subtitle = "Vertically and Crosswise (2x2 Multiplication)",
                     isUnlocked = true,
                     isCompleted = state.isWorld5Completed,
                     bestScore = state.world5BestScore,
@@ -162,7 +203,7 @@ fun WorldSelectScreen(
             item {
                 WorldCard(
                     title = "World 6: Paravartya Yojayet",
-                    subtitle = "Transpose and Apply Division (Post-MVP)",
+                    subtitle = "Transpose and Apply (Synthetic Polynomial Division)",
                     isUnlocked = true,
                     isCompleted = state.isWorld6Completed,
                     bestScore = state.world6BestScore,
@@ -172,7 +213,7 @@ fun WorldSelectScreen(
             item {
                 WorldCard(
                     title = "World 7: Anurupye Shunyamanyat",
-                    subtitle = "Simultaneous Linear Equations (Post-MVP)",
+                    subtitle = "If one is in ratio, the other is zero (Ratio Systems)",
                     isUnlocked = true,
                     isCompleted = state.isWorld7Completed,
                     bestScore = state.world7BestScore,
@@ -182,7 +223,7 @@ fun WorldSelectScreen(
             item {
                 WorldCard(
                     title = "World 8: Sankalana-Vyavakalanabhyam",
-                    subtitle = "Swapped Simultaneous Equations (Post-MVP)",
+                    subtitle = "By Addition and Subtraction (Simultaneous 2-Var Systems)",
                     isUnlocked = true,
                     isCompleted = state.isWorld8Completed,
                     bestScore = state.world8BestScore,
@@ -191,8 +232,8 @@ fun WorldSelectScreen(
             }
             item {
                 WorldCard(
-                    title = "World 9: Shunyam Samyasamuccaye",
-                    subtitle = "Common Sum Factor Equations (Post-MVP)",
+                    title = "World 9: Puranapuranabhyam",
+                    subtitle = "By the Completion or Non-Completion (Completing the Square)",
                     isUnlocked = true,
                     isCompleted = state.isWorld9Completed,
                     bestScore = state.world9BestScore,
@@ -201,8 +242,8 @@ fun WorldSelectScreen(
             }
             item {
                 WorldCard(
-                    title = "World 10: Puranapuranabhyam",
-                    subtitle = "Completing the Square Quadratic Equations (Post-MVP)",
+                    title = "World 10: Calana-Kalanabhyam",
+                    subtitle = "Sequential Difference & Factoring Quadratics",
                     isUnlocked = true,
                     isCompleted = state.isWorld10Completed,
                     bestScore = state.world10BestScore,
@@ -211,8 +252,8 @@ fun WorldSelectScreen(
             }
             item {
                 WorldCard(
-                    title = "World 11: Vyashtisamashtih",
-                    subtitle = "Symmetric Products Around an Average (Post-MVP)",
+                    title = "World 11: Yavadunam Tavadunam",
+                    subtitle = "Multi-Digit Deficiency Squaring & Base Cubing",
                     isUnlocked = true,
                     isCompleted = state.isWorld11Completed,
                     bestScore = state.world11BestScore,
@@ -221,8 +262,8 @@ fun WorldSelectScreen(
             }
             item {
                 WorldCard(
-                    title = "World 12: Shesanyankena Charamena",
-                    subtitle = "Recurring Decimal Expansions via Remainder Cycles (Post-MVP)",
+                    title = "World 12: Vyashtisamashtih",
+                    subtitle = "Part and Whole: Average & Weighted Sum Decomposition",
                     isUnlocked = true,
                     isCompleted = state.isWorld12Completed,
                     bestScore = state.world12BestScore,
@@ -231,8 +272,8 @@ fun WorldSelectScreen(
             }
             item {
                 WorldCard(
-                    title = "World 13: Sopantyadvayamantyam",
-                    subtitle = "Multiplication by 12–19 via Ultimate & Penultimate Digits (Post-MVP)",
+                    title = "World 13: Sheshanyankena Charamena",
+                    subtitle = "The Remainders by the Last Digit (Single-Line Division)",
                     isUnlocked = true,
                     isCompleted = state.isWorld13Completed,
                     bestScore = state.world13BestScore,
@@ -241,8 +282,8 @@ fun WorldSelectScreen(
             }
             item {
                 WorldCard(
-                    title = "World 14: Gunitasamuccayah",
-                    subtitle = "Polynomial Factorization Verification via Coefficient Sums (Post-MVP)",
+                    title = "World 14: Sopantyadvayamantyam",
+                    subtitle = "The Ultimate and Twice the Penultimate (3-Var Determinants)",
                     isUnlocked = true,
                     isCompleted = state.isWorld14Completed,
                     bestScore = state.world14BestScore,
@@ -251,8 +292,8 @@ fun WorldSelectScreen(
             }
             item {
                 WorldCard(
-                    title = "World 15: Gunakasamuccayah",
-                    subtitle = "Monic Quadratic Factorization by Factor Pairs (Post-MVP)",
+                    title = "World 15: Ekanyunena Charamena",
+                    subtitle = "One Less Than the Previous for Repeating Decimals (1/19, 1/29)",
                     isUnlocked = true,
                     isCompleted = state.isWorld15Completed,
                     bestScore = state.world15BestScore,
@@ -261,8 +302,8 @@ fun WorldSelectScreen(
             }
             item {
                 WorldCard(
-                    title = "World 16: Chalana-Kalanabhyam",
-                    subtitle = "Derivative-Discriminant Root Relation (Campaign Finale)",
+                    title = "World 16: Gunitasamuccayah",
+                    subtitle = "The Product of the Sum is the Sum of the Products (Factor Check)",
                     isUnlocked = true,
                     isCompleted = state.isWorld16Completed,
                     bestScore = state.world16BestScore,
@@ -284,15 +325,25 @@ private fun WorldCard(
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
-            containerColor = if (isUnlocked) Color.White else Color(0xFFE0E0E0)
+            containerColor = if (isUnlocked) Color(0xF01E293B) else Color(0x800F172A)
+        ),
+        border = CardDefaults.outlinedCardBorder().copy(
+            brush = if (isCompleted) {
+                Brush.horizontalGradient(listOf(SuccessEmerald, Color(0xFF34D399)))
+            } else if (isUnlocked) {
+                Brush.horizontalGradient(listOf(Color(0x4038BDF8), Color(0x20FFB300)))
+            } else {
+                Brush.horizontalGradient(listOf(Color(0x20FFFFFF), Color(0x10FFFFFF)))
+            },
+            width = 1.dp
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = if (isUnlocked) 4.dp else 0.dp)
     ) {
         Row(
             modifier = Modifier
-                .padding(16.dp)
+                .padding(14.dp)
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
@@ -300,37 +351,69 @@ private fun WorldCard(
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = title,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = if (isUnlocked) Color.Black else Color.Gray
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    color = if (isUnlocked) TextWhitePrimary else TextMuted
                 )
+                Spacer(modifier = Modifier.height(2.dp))
                 Text(
                     text = subtitle,
-                    fontSize = 14.sp,
-                    color = Color.Gray
+                    fontSize = 12.sp,
+                    color = TextLightSecondary
                 )
                 if (isCompleted) {
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text(
-                        text = "✓ COMPLETED | Best Score: $bestScore",
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color(0xFF2E7D32)
-                    )
+                    Spacer(modifier = Modifier.height(6.dp))
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Box(
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(6.dp))
+                                .background(Color(0x3310B981))
+                                .padding(horizontal = 6.dp, vertical = 2.dp)
+                        ) {
+                            Text(
+                                text = "✓ MASTERED",
+                                fontSize = 10.sp,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = SuccessEmerald,
+                                letterSpacing = 0.5.sp
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "Best: $bestScore pts",
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            color = VedicGoldLight
+                        )
+                    }
                 }
             }
 
+            Spacer(modifier = Modifier.width(8.dp))
+
             if (isUnlocked) {
-                Button(onClick = onClick) {
-                    Text(if (isCompleted) "Replay" else "Play")
+                Button(
+                    onClick = onClick,
+                    shape = RoundedCornerShape(12.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = if (isCompleted) Color(0xFF334155) else VedicGold
+                    ),
+                    contentPadding = ButtonDefaults.TextButtonContentPadding
+                ) {
+                    Text(
+                        text = if (isCompleted) "Replay" else "Play",
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = if (isCompleted) TextWhitePrimary else Color(0xFF0F172A)
+                    )
                 }
             } else {
                 Box(
                     modifier = Modifier
-                        .background(Color.Gray, RoundedCornerShape(4.dp))
-                        .padding(horizontal = 8.dp, vertical = 4.dp)
+                        .background(Color(0xFF334155), RoundedCornerShape(8.dp))
+                        .padding(horizontal = 10.dp, vertical = 6.dp)
                 ) {
-                    Text("LOCKED", color = Color.White, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                    Text("LOCKED", color = TextMuted, fontSize = 11.sp, fontWeight = FontWeight.Bold)
                 }
             }
         }
