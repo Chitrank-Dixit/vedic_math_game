@@ -35,12 +35,12 @@ import kotlin.math.sin
 @Composable
 fun VedicCornerBorder(
     modifier: Modifier = Modifier,
-    cornerLength: Dp = 16.dp,
-    strokeWidth: Dp = 1.2.dp,
+    cornerLength: Dp = 14.dp,
+    strokeWidth: Dp = 1.dp,
     color: Color? = null
 ) {
     val colors = VedicTheme.colors
-    val resolvedColor = color ?: colors.secondaryGold.copy(alpha = 0.45f)
+    val resolvedColor = color ?: colors.secondaryGold.copy(alpha = if (colors.isDark) 0.18f else 0.30f)
 
     Canvas(modifier = modifier.fillMaxSize()) {
         val w = size.width

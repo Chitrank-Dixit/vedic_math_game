@@ -113,11 +113,11 @@ fun VedicSutraCard(
                 Brush.horizontalGradient(listOf(colors.statusSuccess, Color(0xFF86EFAC)))
             } else {
                 Brush.horizontalGradient(
-                    if (colors.isDark) listOf(Color(0x40FFD700), Color(0x2038BDF8), Color(0x40FFD700))
+                    if (colors.isDark) listOf(colors.borderSubtle, Color(0x20F59E0B), colors.borderSubtle)
                     else listOf(Color(0x33D4AF37), Color(0x20E65100), Color(0x33D4AF37))
                 )
             },
-            width = 1.2.dp
+            width = 1.dp
         )
     ) {
         Column(

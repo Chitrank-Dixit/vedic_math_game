@@ -259,7 +259,7 @@ fun HomeScreen(
                         .background(colors.surfaceCard)
                         .border(
                             1.dp,
-                            Brush.horizontalGradient(listOf(colors.secondaryGold, Color(0xFFFBBF24))),
+                            if (colors.isDark) colors.secondaryGold.copy(alpha = 0.35f) else colors.borderSubtle,
                             RoundedCornerShape(radii.pill)
                         )
                         .padding(horizontal = 12.dp, vertical = 6.dp),

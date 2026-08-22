@@ -44,7 +44,7 @@ class VedicThemeTest {
         assertEquals(Color(0xFFFFD700), colors.secondaryGold)
         assertEquals(Color(0xFFF8FAFC), colors.textPrimary)
         assertEquals(Color(0xFF94A3B8), colors.textSecondary)
-        assertEquals(Color(0x40FFD700), colors.borderSubtle)
+        assertEquals(Color(0x2BD4AF37), colors.borderSubtle)
         assertEquals(Color(0xFF4ADE80), colors.statusSuccess)
         assertEquals(Color(0xFFEF4444), colors.statusError)
         assertTrue(colors.isDark)
