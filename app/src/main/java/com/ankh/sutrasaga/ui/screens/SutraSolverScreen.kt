@@ -132,10 +132,19 @@ fun SutraSolverScreen(
     // Error shake animation
     val shakeOffset = remember { Animatable(0f) }
 
-    val currentArrowPattern = when (activeStepIndex) {
-        0 -> YantraArrowPattern.VERTICAL_RIGHT
-        1 -> YantraArrowPattern.CROSSWISE
-        2 -> YantraArrowPattern.VERTICAL_LEFT
+    androidx.compose.runtime.LaunchedEffect(lesson.id) {
+        activeStepIndex = 0
+        userInput = ""
+        isCompleted = false
+        showCompletionDialog = false
+        isBlueprintOpen = false
+    }
+
+    val currentArrowPattern = when {
+        lesson.id == "urdhva" && activeStepIndex == 0 -> YantraArrowPattern.VERTICAL_RIGHT
+        lesson.id == "urdhva" && activeStepIndex == 1 -> YantraArrowPattern.CROSSWISE
+        lesson.id == "urdhva" && activeStepIndex == 2 -> YantraArrowPattern.VERTICAL_LEFT
+        activeStepIndex % 2 == 1 -> YantraArrowPattern.CROSSWISE
         else -> YantraArrowPattern.NONE
     }
 

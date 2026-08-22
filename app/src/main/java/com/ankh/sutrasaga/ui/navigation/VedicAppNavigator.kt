@@ -70,6 +70,7 @@ fun VedicAppNavigator(
                 HomeScreen(
                     streakDays = currentStreak,
                     onSelectSutra = { module: SutraModule ->
+                        selectedLesson = com.ankh.sutrasaga.ui.screens.SutraLessonsRepository.getLessonForModule(module)
                         currentRoute = VedicAppRoute.SUTRA_SOLVER
                     },
                     onStartPracticeArena = {

@@ -48,12 +48,28 @@ class Phase3ScreensTest {
     }
 
     @Test
-    fun testVedicAppRouteEnum() {
-        assertEquals(5, VedicAppRoute.entries.size)
-        assertNotNull(VedicAppRoute.HOME)
-        assertNotNull(VedicAppRoute.SUTRA_SOLVER)
-        assertNotNull(VedicAppRoute.PRACTICE_ARENA)
-        assertNotNull(VedicAppRoute.UPA_SUTRA_TREASURY)
-        assertNotNull(VedicAppRoute.UPA_SUTRA_CODEX)
+    fun testAll16SutraLessonsAreDistinctAndComplete() {
+        val modules = SampleSutraModules
+        assertEquals(16, modules.size)
+
+        val retrievedLessons = modules.map { module ->
+            val lesson = com.ankh.sutrasaga.ui.screens.SutraLessonsRepository.getLessonForModule(module)
+            assertEquals(module.id, lesson.id)
+            assertTrue(lesson.sanskritTitle.isNotEmpty())
+            assertTrue(lesson.englishTitle.isNotEmpty())
+            assertTrue(lesson.shloka.isNotEmpty())
+            assertTrue(lesson.shortcutRule.isNotEmpty())
+            assertTrue(lesson.primaryEquation.isNotEmpty())
+            assertTrue(lesson.targetAnswer.isNotEmpty())
+            assertTrue("Lesson ${lesson.id} must have decomposition steps", lesson.steps.isNotEmpty())
+            lesson
+        }
+
+        // Assert all 16 lessons have unique equations and titles
+        val uniqueLessonIds = retrievedLessons.map { it.id }.toSet()
+        assertEquals(16, uniqueLessonIds.size)
+
+        val uniqueEquations = retrievedLessons.map { it.primaryEquation }.toSet()
+        assertEquals(16, uniqueEquations.size)
     }
 }
