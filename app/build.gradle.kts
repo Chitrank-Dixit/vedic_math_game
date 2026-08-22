@@ -14,7 +14,7 @@ android {
         minSdk = 24
         targetSdk = 34
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -22,31 +22,63 @@ android {
         }
     }
 
+    signingConfigs {
+        create("release") {
+            val keystorePath = project.findProperty("KEYSTORE_PATH")?.toString() ?: System.getenv("KEYSTORE_PATH")
+            if (keystorePath != null && file(keystorePath).exists()) {
+                storeFile = file(keystorePath)
+                storePassword = project.findProperty("KEYSTORE_PASSWORD")?.toString() ?: System.getenv("KEYSTORE_PASSWORD") ?: ""
+                keyAlias = project.findProperty("KEY_ALIAS")?.toString() ?: System.getenv("KEY_ALIAS") ?: ""
+                keyPassword = project.findProperty("KEY_PASSWORD")?.toString() ?: System.getenv("KEY_PASSWORD") ?: ""
+            }
+        }
+    }
+
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            // Use release signing config if keystore is configured, otherwise fallback to debug signing for local test bundles
+            val hasReleaseKeystore = (project.findProperty("KEYSTORE_PATH")?.toString() ?: System.getenv("KEYSTORE_PATH")) != null
+            if (hasReleaseKeystore) {
+                signingConfig = signingConfigs.getByName("release")
+            }
+        }
+        debug {
+            isMinifyEnabled = false
+            isDebuggable = true
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
     buildFeatures {
         compose = true
     }
+
     testOptions {
         unitTests {
             isIncludeAndroidResources = true
         }
     }
+
     packaging {
         resources {
-            excludes += "/META-INDEX/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+    }
+
+    lint {
+        abortOnError = true
+        checkReleaseBuilds = true
+        warningsAsErrors = false
     }
 }
 
@@ -65,6 +97,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.navigation:navigation-compose:2.7.7")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
 
@@ -73,7 +106,7 @@ dependencies {
     implementation("androidx.room:room-ktx:2.6.1")
     ksp("androidx.room:room-compiler:2.6.1")
 
-    // Animation Dependencies
+    // Animation Engine
     implementation("com.airbnb.android:lottie-compose:6.4.0")
 
     // Unit & Local Testing
@@ -86,7 +119,6 @@ dependencies {
     testImplementation("org.robolectric:robolectric:4.11.1")
     testImplementation(platform("androidx.compose:compose-bom:2024.02.00"))
     testImplementation("androidx.compose.ui:ui-test-junit4")
-    testImplementation("androidx.compose.ui:ui-test-manifest")
 
     // Android Instrumentation & UI Testing
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
