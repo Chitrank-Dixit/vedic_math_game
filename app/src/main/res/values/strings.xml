@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Branding -->
+    <string name="app_name">Ankh: The Sutra Saga</string>
+    <string name="app_subtitle">Sacred Geometry &amp; Mental Math Engine</string>
+    <string name="sutra_streak_label">%1$d Day Sutra Streak</string>
+
+    <!-- Theme Switcher -->
+    <string name="theme_cosmic_midnight">Cosmic Midnight</string>
+    <string name="theme_bhojpatra_parchment">Bhojpatra Parchment</string>
+    <string name="theme_toggle_desc">Switch theme between Light and Dark mode</string>
+
+    <!-- Home Screen & Navigation -->
+    <string name="speed_practice_arena_title">SPEED PRACTICE ARENA</string>
+    <string name="speed_practice_arena_subtitle">Test calculation speed with timed mental drills</string>
+    <string name="start_practice_desc">Start timed speed practice arena</string>
+    <string name="upa_sutra_treasury_title">Upa-Sutra Treasury &amp; Codex</string>
+    <string name="upa_sutra_treasury_subtitle">13 Ancient Sub-Sutras, Quests &amp; Worked Rules</string>
+    <string name="explore_cta">Explore →</string>
+    <string name="category_multiplication">Multiplication Shortcuts</string>
+    <string name="category_squaring">Squaring &amp; Cubing</string>
+    <string name="category_division">Division &amp; Reciprocals</string>
+    <string name="category_algebra">Algebra &amp; Equations</string>
+
+    <!-- Sutra Solver Workspace -->
+    <string name="btn_home">← Home</string>
+    <string name="btn_formula_blueprint">📜 Formula Blueprint ▼</string>
+    <string name="btn_hide_blueprint">Hide Blueprint ✕</string>
+    <string name="submit_answer_cta">SUBMIT ANSWER ⚡</string>
+    <string name="numpad_clear_desc">Clear input digits</string>
+    <string name="numpad_backspace_desc">Backspace single digit</string>
+    <string name="lesson_complete_title">Lesson Mastered!</string>
+    <string name="lesson_complete_desc">You have unlocked the sacred mental math shortcut.</string>
+    <string name="claim_mastery_cta">Claim Mastery</string>
+
+    <!-- Speed Practice Arena -->
+    <string name="btn_exit">← Exit</string>
+    <string name="pts_counter">%1$d PTS</string>
+    <string name="speed_counter">%1$.1f ops/min</string>
+    <string name="tap_digits_placeholder">Tap digits…</string>
+    <string name="time_up_title">Time is Up!</string>
+    <string name="time_up_summary">Challenge Complete! Score: %1$d | Speed: %2$.1f ops/min</string>
+    <string name="continue_cta">Continue</string>
+
+    <!-- Upa-Sutra Treasury & Codex -->
+    <string name="btn_worlds">← Worlds</string>
+    <string name="btn_codex">📜 Codex →</string>
+    <string name="btn_treasury">← Treasury</string>
+    <string name="treasury_header">🏛️ Upa-Sutra Treasury</string>
+    <string name="treasury_desc">Master the 13 sacred sub-sutras to unlock ancient computational secrets.</string>
+    <string name="codex_header">📜 The Upa-Sutra Codex</string>
+    <string name="codex_desc">Ancient reference scrolls and verified worked examples for all 13 sub-sutras.</string>
+    <string name="status_locked">LOCKED</string>
+    <string name="status_mastered">MASTERED</string>
+    <string name="status_unlocked">UNLOCKED</string>
+    <string name="canonical_worked_example">CANONICAL WORKED EXAMPLE</string>
+
+    <!-- Accessibility Descriptions -->
+    <string name="acc_app_logo">Ankh Sutra Saga Logo Emblem</string>
+    <string name="acc_progress_ring">Sutra Mastery Progress: %1$d percent</string>
+    <string name="acc_numpad_key">Numpad digit %1$d</string>
+    <string name="acc_mandala_timer">Mandala countdown timer: %1$d seconds remaining</string>
+</resources>
