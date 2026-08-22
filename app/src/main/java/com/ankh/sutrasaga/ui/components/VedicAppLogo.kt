@@ -25,6 +25,9 @@ import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
 
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
+
 /**
  * VedicAppLogo — Scalable Vector Brand Emblem
  *
@@ -46,6 +49,7 @@ fun VedicAppLogo(
     Box(
         modifier = modifier
             .size(size)
+            .semantics { contentDescription = "Ankh Sutra Saga Logo Emblem" }
             .then(
                 if (showBackground) {
                     Modifier

@@ -14,12 +14,15 @@ class Phase3ScreensTest {
     @Test
     fun testSampleSutraModulesCategorization() {
         val modules = SampleSutraModules
-        assertTrue(modules.isNotEmpty())
+        assertEquals(16, modules.size)
 
         val categories = modules.groupBy { it.category }
+        assertEquals(5, categories.keys.size)
         assertTrue(categories.containsKey("Multiplication Shortcuts"))
         assertTrue(categories.containsKey("Squaring & Cubing"))
         assertTrue(categories.containsKey("Division & Reciprocals"))
+        assertTrue(categories.containsKey("Algebra & Linear Systems"))
+        assertTrue(categories.containsKey("Factorization & Verification"))
 
         val urdhva = modules.first { it.id == "urdhva" }
         assertEquals("ऊर्ध्व तिर्यग्भ्याम्", urdhva.sanskritTitle)

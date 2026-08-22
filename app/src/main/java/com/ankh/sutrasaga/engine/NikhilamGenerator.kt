@@ -7,6 +7,15 @@ import java.util.UUID
 import kotlin.math.pow
 import kotlin.random.Random
 
+/**
+ * NikhilamGenerator — "All from 9 and the Last from 10" (निखिलं नवतश्चरमं दशतः)
+ *
+ * Mathematical Shortcut Rule:
+ * For subtracting any number from a base power of 10 (e.g. 1000 - 364):
+ * - Subtract all leading digits from 9: (9 - 3 = 6), (9 - 6 = 3)
+ * - Subtract the final non-zero digit from 10: (10 - 4 = 6)
+ * - Result: 636
+ */
 class NikhilamGenerator(
     private val random: Random = Random.Default
 ) : SutraProblemGenerator {

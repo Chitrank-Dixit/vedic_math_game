@@ -103,8 +103,8 @@ val SampleSutraModules = listOf(
     ),
     SutraModule(
         id = "anurupyena_square",
-        sanskritTitle = "आनुरूप्येण",
-        englishTitle = "Proportionately (Working Sub-Base Squaring)",
+        sanskritTitle = "आनुरूप्येण शून्यमन्यत्",
+        englishTitle = "Proportionately (Working Sub-Base Squaring & Ratios)",
         category = "Squaring & Cubing",
         estMinutes = 6,
         progress = 0.0f,
@@ -117,7 +117,7 @@ val SampleSutraModules = listOf(
         category = "Squaring & Cubing",
         estMinutes = 8,
         progress = 0.0f,
-        worldNumber = 9
+        worldNumber = 10
     ),
 
     // 3. Division & Reciprocals
@@ -131,13 +131,80 @@ val SampleSutraModules = listOf(
         worldNumber = 6
     ),
     SutraModule(
+        id = "shesanyankena",
+        sanskritTitle = "शेषाण्यङ्केन चरमेण",
+        englishTitle = "The Remainders by the Last Digit (Decimal Expansions)",
+        category = "Division & Reciprocals",
+        estMinutes = 7,
+        progress = 0.0f,
+        worldNumber = 12
+    ),
+    SutraModule(
         id = "chalana",
         sanskritTitle = "चलनकलनाभ्याम्",
         englishTitle = "Differential Calculus & Residue Operations",
         category = "Division & Reciprocals",
         estMinutes = 10,
         progress = 0.0f,
-        worldNumber = 10
+        worldNumber = 16
+    ),
+
+    // 4. Algebra & Linear Systems
+    SutraModule(
+        id = "sankalana",
+        sanskritTitle = "संकलनव्यवकलनाभ्याम्",
+        englishTitle = "By Addition and by Subtraction (Simultaneous Equations)",
+        category = "Algebra & Linear Systems",
+        estMinutes = 8,
+        progress = 0.0f,
+        worldNumber = 8
+    ),
+    SutraModule(
+        id = "shunyam",
+        sanskritTitle = "शून्यं साम्यसमुच्चये",
+        englishTitle = "When the Collection is Equal, it is Zero",
+        category = "Algebra & Linear Systems",
+        estMinutes = 7,
+        progress = 0.0f,
+        worldNumber = 9
+    ),
+    SutraModule(
+        id = "sopantyadvayamantyam",
+        sanskritTitle = "सोपान्त्यद्वयमन्त्यम्",
+        englishTitle = "The Ultimate and Twice the Penultimate",
+        category = "Algebra & Linear Systems",
+        estMinutes = 6,
+        progress = 0.0f,
+        worldNumber = 13
+    ),
+
+    // 5. Factorization & Verification
+    SutraModule(
+        id = "vyashtisamashtih",
+        sanskritTitle = "व्यष्टिसमष्टिः",
+        englishTitle = "Specific and General (Biquadratic Factorization)",
+        category = "Factorization & Verification",
+        estMinutes = 8,
+        progress = 0.0f,
+        worldNumber = 11
+    ),
+    SutraModule(
+        id = "gunitasamuccayah",
+        sanskritTitle = "गुणितसमुच्चयः",
+        englishTitle = "Product of the Sum is the Sum of the Products",
+        category = "Factorization & Verification",
+        estMinutes = 7,
+        progress = 0.0f,
+        worldNumber = 14
+    ),
+    SutraModule(
+        id = "gunakasamuccayah",
+        sanskritTitle = "गुणकसमुच्चयः",
+        englishTitle = "The Factor of the Sum is the Sum of the Factors",
+        category = "Factorization & Verification",
+        estMinutes = 7,
+        progress = 0.0f,
+        worldNumber = 15
     )
 )
 

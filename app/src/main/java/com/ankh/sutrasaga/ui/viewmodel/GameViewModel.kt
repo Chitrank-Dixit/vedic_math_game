@@ -434,6 +434,9 @@ class GameViewModel : ViewModel() {
 
     fun appendDigit(char: Char) {
         if (_uiState.value.isAnswerSubmitted) return
+        // Only accept valid digits '0'..'9' or leading minus sign '-'
+        if (!char.isDigit() && char != '-') return
+        if (char == '-' && _uiState.value.userInput.isNotEmpty()) return
         if (_uiState.value.userInput.length < 16) {
             _uiState.value = _uiState.value.copy(
                 userInput = _uiState.value.userInput + char
