@@ -272,7 +272,7 @@ fun VedicThemeSwitcher(
     val themeState = LocalVedicThemeState.current
     val colors = VedicTheme.colors
 
-    Row(
+    Box(
         modifier = modifier
             .clip(RoundedCornerShape(VedicTheme.radii.pill))
             .background(colors.surfaceCard)
@@ -284,14 +284,12 @@ fun VedicThemeSwitcher(
                 onClickLabel = "Toggle theme mode",
                 onClick = { themeState.toggleTheme() }
             )
-            .padding(horizontal = 12.dp, vertical = 6.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center
+            .padding(horizontal = 10.dp, vertical = 6.dp),
+        contentAlignment = Alignment.Center
     ) {
         Text(
-            text = if (colors.isDark) "🌙 Cosmic Midnight" else "📜 Bhojpatra Parchment",
-            fontSize = 12.sp,
-            fontWeight = FontWeight.Bold,
+            text = if (colors.isDark) "🌙" else "☀️",
+            fontSize = 15.sp,
             color = colors.textPrimary
         )
     }
