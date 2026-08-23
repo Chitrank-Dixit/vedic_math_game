@@ -116,7 +116,8 @@ val SampleUrdhvaLesson = SutraLesson(
 fun SutraSolverScreen(
     lesson: SutraLesson = SampleUrdhvaLesson,
     onBackClick: () -> Unit,
-    onLessonComplete: () -> Unit
+    onLessonComplete: () -> Unit,
+    onReplayTutorial: (() -> Unit)? = null
 ) {
     val colors = VedicTheme.colors
     val typography = VedicTheme.typography
@@ -227,20 +228,42 @@ fun SutraSolverScreen(
                     Text("Home", color = colors.primarySaffron, fontSize = 12.sp, fontWeight = FontWeight.Bold)
                 }
 
-                // Collapsible Formula Blueprint Button
-                OutlinedButton(
-                    onClick = { isBlueprintOpen = !isBlueprintOpen },
-                    shape = RoundedCornerShape(radii.button),
-                    colors = ButtonDefaults.outlinedButtonColors(
-                        contentColor = if (colors.isDark) colors.secondaryGold else colors.primarySaffron
-                    ),
-                    contentPadding = ButtonDefaults.TextButtonContentPadding
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
-                        text = if (isBlueprintOpen) "Hide Blueprint ✕" else "📜 Formula Blueprint ▾",
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.Bold
-                    )
+                    if (onReplayTutorial != null) {
+                        OutlinedButton(
+                            onClick = onReplayTutorial,
+                            shape = RoundedCornerShape(radii.button),
+                            colors = ButtonDefaults.outlinedButtonColors(
+                                contentColor = if (colors.isDark) colors.secondaryGold else colors.primarySaffron
+                            ),
+                            contentPadding = ButtonDefaults.TextButtonContentPadding
+                        ) {
+                            Text(
+                                text = "👑 Guru",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                    }
+
+                    // Collapsible Formula Blueprint Button
+                    OutlinedButton(
+                        onClick = { isBlueprintOpen = !isBlueprintOpen },
+                        shape = RoundedCornerShape(radii.button),
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            contentColor = if (colors.isDark) colors.secondaryGold else colors.primarySaffron
+                        ),
+                        contentPadding = ButtonDefaults.TextButtonContentPadding
+                    ) {
+                        Text(
+                            text = if (isBlueprintOpen) "Hide ✕" else "📜 Blueprint ▾",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
                 }
             }
 

@@ -8,10 +8,16 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import com.ankh.sutrasaga.domain.models.GurukulScript
+import com.ankh.sutrasaga.domain.models.SutraProblem
 import com.ankh.sutrasaga.domain.models.UpaSutraId
+import com.ankh.sutrasaga.ui.components.GurukulSceneScreen
+import com.ankh.sutrasaga.ui.screens.GurukulScriptsRepository
 import com.ankh.sutrasaga.ui.screens.HomeScreen
+import com.ankh.sutrasaga.ui.screens.SampleSutraModules
 import com.ankh.sutrasaga.ui.screens.SampleUrdhvaLesson
 import com.ankh.sutrasaga.ui.screens.SutraLesson
+import com.ankh.sutrasaga.ui.screens.SutraLessonsRepository
 import com.ankh.sutrasaga.ui.screens.SutraModule
 import com.ankh.sutrasaga.ui.screens.SutraSolverScreen
 import com.ankh.sutrasaga.ui.screens.UpaSutraCodexScreen
@@ -21,6 +27,7 @@ import com.ankh.sutrasaga.ui.viewmodel.GameUiState
 
 enum class VedicAppRoute {
     HOME,
+    GURUKUL_TUTORIAL,
     SUTRA_SOLVER,
     PRACTICE_ARENA,
     UPA_SUTRA_TREASURY,
@@ -30,7 +37,7 @@ enum class VedicAppRoute {
 /**
  * VedicAppNavigator — Top-Level Navigation Engine & State Coordinator
  * Handles:
- * 1. HomeScreen -> Select Sutra -> SutraSolverScreen
+ * 1. HomeScreen -> Select Sutra -> GurukulSceneScreen (Guru-Shishya Tutorial) -> SutraSolverScreen
  * 2. HomeScreen -> Quick Start -> PracticeArenaScreen
  * 3. HomeScreen -> Treasury -> UpaSutraTreasuryScreen -> Codex
  * 4. Back navigation across all sub-screens
@@ -44,12 +51,15 @@ fun VedicAppNavigator(
     var currentRoute by remember { mutableStateOf(initialRoute) }
     var currentStreak by remember { mutableIntStateOf(7) }
     var selectedLesson by remember { mutableStateOf<SutraLesson>(SampleUrdhvaLesson) }
+    var selectedScript by remember { mutableStateOf<GurukulScript>(GurukulScriptsRepository.allScripts.values.first()) }
+    var selectedProblem by remember { mutableStateOf<SutraProblem>(GurukulScriptsRepository.getProblemForModule(SampleSutraModules.first())) }
 
     // System Back Navigation handling
     when (currentRoute) {
         VedicAppRoute.HOME -> {
             // Default system back
         }
+        VedicAppRoute.GURUKUL_TUTORIAL,
         VedicAppRoute.SUTRA_SOLVER,
         VedicAppRoute.PRACTICE_ARENA,
         VedicAppRoute.UPA_SUTRA_TREASURY -> {
@@ -70,14 +80,29 @@ fun VedicAppNavigator(
                 HomeScreen(
                     streakDays = currentStreak,
                     onSelectSutra = { module: SutraModule ->
-                        selectedLesson = com.ankh.sutrasaga.ui.screens.SutraLessonsRepository.getLessonForModule(module)
-                        currentRoute = VedicAppRoute.SUTRA_SOLVER
+                        selectedLesson = SutraLessonsRepository.getLessonForModule(module)
+                        selectedScript = GurukulScriptsRepository.getScriptForModule(module)
+                        selectedProblem = GurukulScriptsRepository.getProblemForModule(module)
+                        currentRoute = VedicAppRoute.GURUKUL_TUTORIAL
                     },
                     onStartPracticeArena = {
                         currentRoute = VedicAppRoute.PRACTICE_ARENA
                     },
                     onOpenTreasury = {
                         currentRoute = VedicAppRoute.UPA_SUTRA_TREASURY
+                    }
+                )
+            }
+
+            VedicAppRoute.GURUKUL_TUTORIAL -> {
+                GurukulSceneScreen(
+                    script = selectedScript,
+                    problem = selectedProblem,
+                    onComplete = {
+                        currentRoute = VedicAppRoute.SUTRA_SOLVER
+                    },
+                    onBack = {
+                        currentRoute = VedicAppRoute.HOME
                     }
                 )
             }
@@ -91,6 +116,9 @@ fun VedicAppNavigator(
                     onLessonComplete = {
                         currentStreak++
                         currentRoute = VedicAppRoute.HOME
+                    },
+                    onReplayTutorial = {
+                        currentRoute = VedicAppRoute.GURUKUL_TUTORIAL
                     }
                 )
             }
