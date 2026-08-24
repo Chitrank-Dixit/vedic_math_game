@@ -379,7 +379,7 @@ fun GurukulSceneScreen(
                                             .padding(horizontal = 8.dp, vertical = 3.dp)
                                     ) {
                                         Text(
-                                            text = "👻 ANKH",
+                                            text = "🙏 SHISHYA",
                                             fontWeight = FontWeight.ExtraBold,
                                             color = CyberCyanLight,
                                             fontSize = 11.sp,

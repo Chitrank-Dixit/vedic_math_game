@@ -233,7 +233,7 @@ fun GurukulAvatarStage(
                     Crossfade(targetState = beat.discipleState.drawableResId, label = "DisciplePoseCrossfade") { resId ->
                         Image(
                             painter = painterResource(id = resId),
-                            contentDescription = "Disciple Ankh",
+                            contentDescription = "Disciple Shishya",
                             modifier = Modifier.fillMaxSize(),
                             contentScale = ContentScale.Crop
                         )
@@ -260,7 +260,7 @@ fun GurukulAvatarStage(
                     .padding(horizontal = 6.dp, vertical = 2.dp)
             ) {
                 Text(
-                    text = "👻 ANKH",
+                    text = "🙏 SHISHYA",
                     fontWeight = FontWeight.Bold,
                     color = if (isDiscipleSpeaking) CyberCyanLight else Color(0xFF94A3B8),
                     fontSize = 10.sp

@@ -194,7 +194,7 @@ object GurukulScriptsRepository {
                     slateStepIndex = 2
                 ),
                 GurukulDialogueBeat(
-                    guruText = "You see clearly, Ankh. Harness this deficiency rule in your trials!",
+                    guruText = "You see clearly, Shishya. Harness this deficiency rule in your trials!",
                     discipleText = "Guide me forward, Guru-ji!",
                     guruPose = GuruPose.BASE,
                     guruMouth = GuruMouth.SMILE,
@@ -725,7 +725,7 @@ object GurukulScriptsRepository {
                     slateStepIndex = 1
                 ),
                 GurukulDialogueBeat(
-                    guruText = "You have traversed all 16 realms of Vedic Mathematics, Ankh. Step forward and claim the title of Sutra Master!",
+                    guruText = "You have traversed all 16 realms of Vedic Mathematics, Shishya. Step forward and claim the title of Sutra Master!",
                     discipleText = "Thank you, Guru-ji! Let us complete the final challenge!",
                     guruPose = GuruPose.TALKING,
                     guruMouth = GuruMouth.TALKING,
