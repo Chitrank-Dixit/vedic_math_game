@@ -32,9 +32,11 @@ import com.ankh.sutrasaga.engine.VyashtisamashtihGenerator
 import com.ankh.sutrasaga.engine.YavadunamGenerator
 import com.ankh.sutrasaga.engine.upasutras.AdyamadyenantyamantyenaGenerator
 import com.ankh.sutrasaga.engine.upasutras.AntyayordashakepiGenerator
+import com.ankh.sutrasaga.engine.upasutras.AntyayerevaGenerator
 import com.ankh.sutrasaga.engine.upasutras.AnurupyenaGenerator
 import com.ankh.sutrasaga.engine.upasutras.KevalaihSaptakamGunyatGenerator
 import com.ankh.sutrasaga.engine.upasutras.LopanasthapanabhyamGenerator
+import com.ankh.sutrasaga.engine.upasutras.SamuccayagunitahGenerator
 import com.ankh.sutrasaga.engine.upasutras.SisyateSesasamjnahGenerator
 import com.ankh.sutrasaga.engine.upasutras.VestanamGenerator
 import com.ankh.sutrasaga.engine.upasutras.VilokanamGenerator
@@ -138,6 +140,8 @@ class GameViewModel : ViewModel() {
 
     // Upa-Sutra Generators
     private val antyayordashakepiGenerator = AntyayordashakepiGenerator()
+    private val antyayerevaGenerator = AntyayerevaGenerator()
+    private val samuccayagunitahGenerator = SamuccayagunitahGenerator()
     private val anurupyenaGenerator = AnurupyenaGenerator()
     private val yavadunamRemixGenerator = YavadunamRemixGenerator()
     private val adyamadyaGenerator = AdyamadyenantyamantyenaGenerator()
@@ -256,15 +260,18 @@ class GameViewModel : ViewModel() {
     private fun getGeneratorForUpaSutra(id: UpaSutraId): UpaSutraGenerator {
         return when (id) {
             UpaSutraId.ANTYAYORDASHAKEPI -> antyayordashakepiGenerator
+            UpaSutraId.ANTYAYEREVA -> antyayerevaGenerator
+            UpaSutraId.SAMUCCAYAGUNITAH -> samuccayagunitahGenerator
             UpaSutraId.ANURUPYENA -> anurupyenaGenerator
-            UpaSutraId.YAVADUNAM_TAVADUNIKRTYA_VARGANCHA_YOJAYET -> yavadunamRemixGenerator
+            UpaSutraId.YAVADUNAM_TAVADUNIKRTYA_VARGANCHA_YOJAYET,
+            UpaSutraId.YAVADUNAM_TAVADUNAM -> yavadunamRemixGenerator
             UpaSutraId.ADYAMADYENANTYAMANTYENA -> adyamadyaGenerator
             UpaSutraId.VESHTANAM -> vestanamGenerator
             UpaSutraId.SHISYATE_SHESAMAJNA -> sisyateGenerator
             UpaSutraId.KEVALAIHSAPTAKAM_GUNYAT -> kevalaihGenerator
             UpaSutraId.LOPANA_STHAPANABHYAM -> lopanaGenerator
             UpaSutraId.VILOKANAM -> vilokanamGenerator
-            else -> antyayordashakepiGenerator
+            UpaSutraId.GUNITASAMUCCAYAH_SAMUCCAYAGUNITAH -> samuccayagunitahGenerator
         }
     }
 
