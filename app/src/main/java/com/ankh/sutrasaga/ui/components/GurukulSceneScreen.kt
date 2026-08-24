@@ -307,8 +307,16 @@ fun GurukulSceneScreen(
                     )
                 }
 
-                // Bottom Dialogue Caption Box
+                // Bottom Dialogue Caption Box & Character Avatar Stage
                 Column(modifier = Modifier.fillMaxWidth()) {
+                    // Animated Guru & Disciple Character Presentation Stage
+                    GurukulAvatarStage(
+                        beat = currentBeat,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
                     Card(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(20.dp),
