@@ -7,6 +7,7 @@ import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import com.ankh.sutrasaga.ui.components.GuruGuidanceBanner
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -328,7 +329,21 @@ fun SutraSolverScreen(
             )
         }
 
-        // 4. Input Area: Embedded MentalMathNumpad Pinned to Bottom Thumb Zone
+        // 4. Pedagogical Scaffolding: Character Guidance Banner
+        val currentStep = lesson.steps.getOrNull(activeStepIndex)
+        val guidanceHint = when {
+            isCompleted -> "👑 Mastery achieved! You solved ${lesson.primaryEquation} = ${lesson.targetAnswer}."
+            currentStep != null -> "Step ${activeStepIndex + 1}: ${currentStep.explanation}"
+            else -> "Apply ${lesson.shortcutRule}"
+        }
+
+        GuruGuidanceBanner(
+            hintText = guidanceHint,
+            isEncouragement = isCompleted,
+            modifier = Modifier.padding(bottom = 6.dp)
+        )
+
+        // 5. Input Area: Embedded MentalMathNumpad Pinned to Bottom Thumb Zone
         MentalMathNumpad(
             onDigitClick = { handleDigit(it) },
             onBackspaceClick = { handleBackspace() },
@@ -338,7 +353,7 @@ fun SutraSolverScreen(
         )
     }
 
-    // 5. Completion Modal Dialog
+    // 6. Completion Modal Dialog
     if (showCompletionDialog) {
         Dialog(onDismissRequest = { showCompletionDialog = false }) {
             Card(

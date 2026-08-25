@@ -2,6 +2,7 @@ package com.ankh.sutrasaga.ui.components
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
@@ -21,8 +22,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -37,9 +41,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ankh.sutrasaga.domain.models.DiscipleEyes
-import com.ankh.sutrasaga.domain.models.DiscipleState
-import com.ankh.sutrasaga.domain.models.GuruMouth
+import com.ankh.sutrasaga.R
 import com.ankh.sutrasaga.domain.models.GuruPose
 import com.ankh.sutrasaga.domain.models.GurukulDialogueBeat
 import com.ankh.sutrasaga.ui.theme.CyberCyan
@@ -48,17 +50,19 @@ import com.ankh.sutrasaga.ui.theme.VedicGold
 import com.ankh.sutrasaga.ui.theme.VedicGoldLight
 
 /**
- * GurukulAvatarStage — Animated character presentation stage for Guru & Disciple (Ankh).
+ * GurukulAvatarStage — Animated character presentation stage for Guru & Disciple (Shishya).
  *
  * Features:
  * 1. Procedural breathing and floating bob animations for life-like presence.
- * 2. Active speaker aura glow indicators (Gold for Guru, Cyan for Ankh).
- * 3. Dynamic layered pose & facial expression switching (mouths, eyes).
- * 4. Prepared interface contract for future 3D glTF avatar drop-in via Google Filament / Sceneview.
+ * 2. Active speaker aura glow indicators (Gold for Guru, Cyan for Shishya).
+ * 3. Procedural speech-to-viseme mouth shape oscillation for dynamic lip-syncing.
+ * 4. Dynamic layered pose & facial expression switching (mouths, eyes).
+ * 5. Prepared interface contract for future 3D glTF avatar drop-in via Google Filament / Sceneview.
  */
 @Composable
 fun GurukulAvatarStage(
     beat: GurukulDialogueBeat,
+    isThinking: Boolean = false,
     modifier: Modifier = Modifier
 ) {
     val infiniteTransition = rememberInfiniteTransition(label = "AvatarBreathingTransition")
@@ -66,7 +70,7 @@ fun GurukulAvatarStage(
     // Guru breathing elevation animation
     val guruBreathOffset by infiniteTransition.animateFloat(
         initialValue = 0f,
-        targetValue = -5f,
+        targetValue = if (isThinking) -2f else -5f,
         animationSpec = infiniteRepeatable(
             animation = tween(2200, easing = FastOutSlowInEasing),
             repeatMode = RepeatMode.Reverse
@@ -96,8 +100,26 @@ fun GurukulAvatarStage(
         label = "AuraPulse"
     )
 
-    val isGuruSpeaking = beat.guruText.isNotBlank()
-    val isDiscipleSpeaking = !beat.discipleText.isNullOrBlank()
+    // Procedural viseme lip-sync cycle during active speech
+    val visemeCycle by infiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 1f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(220, easing = LinearEasing),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "VisemeLipSync"
+    )
+
+    val isGuruSpeaking = beat.guruText.isNotBlank() && !isThinking
+    val isDiscipleSpeaking = !beat.discipleText.isNullOrBlank() && !isThinking
+
+    // Determine dynamic mouth drawable for Guru
+    val activeGuruMouthRes = if (isGuruSpeaking && visemeCycle > 0.45f) {
+        beat.guruMouth.drawableResId
+    } else {
+        R.drawable.guru_mouth_neutral
+    }
 
     Row(
         modifier = modifier
@@ -151,9 +173,9 @@ fun GurukulAvatarStage(
                         )
                     }
 
-                    // Mouth Overlay
+                    // Dynamic Procedural Viseme Mouth Overlay
                     Image(
-                        painter = painterResource(id = beat.guruMouth.drawableResId),
+                        painter = painterResource(id = activeGuruMouthRes),
                         contentDescription = null,
                         modifier = Modifier.fillMaxSize(),
                         contentScale = ContentScale.Crop
@@ -194,7 +216,7 @@ fun GurukulAvatarStage(
             )
         }
 
-        // --- Right Avatar: Disciple (Ankh) ---
+        // --- Right Avatar: Disciple (Shishya) ---
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.weight(1f)
@@ -266,6 +288,72 @@ fun GurukulAvatarStage(
                     fontSize = 10.sp
                 )
             }
+        }
+    }
+}
+
+/**
+ * GuruGuidanceBanner — Non-punitive, supportive character feedback pill for active problem solving.
+ *
+ * Implements psychological safety & Peak-End habit formation:
+ * - Employs supportive character hints instead of jarring error buzzers.
+ * - Displays active sub-step scaffolding and cheerful reinforcement.
+ */
+@Composable
+fun GuruGuidanceBanner(
+    hintText: String,
+    isEncouragement: Boolean = false,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 4.dp, vertical = 2.dp),
+        shape = RoundedCornerShape(14.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = if (isEncouragement) Color(0xF0064E3B) else Color(0xF00F172A)
+        ),
+        border = CardDefaults.outlinedCardBorder().copy(
+            brush = Brush.horizontalGradient(
+                if (isEncouragement) listOf(Color(0xFF34D399), Color(0xFF10B981))
+                else listOf(Color(0x80FFB300), Color(0x4038BDF8))
+            ),
+            width = 1.dp
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 12.dp, vertical = 8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(32.dp)
+                    .clip(CircleShape)
+                    .background(Color(0x33FFB300))
+                    .border(1.dp, VedicGold, CircleShape),
+                contentAlignment = Alignment.Center
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.guru_base_pose),
+                    contentDescription = "Guru Guide",
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop
+                )
+            }
+
+            Spacer(modifier = Modifier.width(10.dp))
+
+            Text(
+                text = hintText,
+                color = if (isEncouragement) Color(0xFFD1FAE5) else Color(0xFFF1F5F9),
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Medium,
+                lineHeight = 16.sp,
+                modifier = Modifier.weight(1f)
+            )
         }
     }
 }
