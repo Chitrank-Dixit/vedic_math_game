@@ -96,6 +96,7 @@ fun VedicAppNavigator(
 
             VedicAppRoute.GURUKUL_TUTORIAL -> {
                 GurukulSceneScreen(
+                    worldId = selectedScript.worldId,
                     script = selectedScript,
                     problem = selectedProblem,
                     onComplete = {
