@@ -2,7 +2,6 @@ package com.ankh.sutrasaga.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
-import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -11,7 +10,6 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.scaleIn
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -29,11 +27,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -47,15 +43,12 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -69,27 +62,28 @@ import androidx.compose.ui.unit.sp
 import com.ankh.sutrasaga.R
 import com.ankh.sutrasaga.data.repository.RiveDialogueRepository
 import com.ankh.sutrasaga.domain.models.GurukulScript
-import com.ankh.sutrasaga.domain.models.RiveDialogueNode
 import com.ankh.sutrasaga.domain.models.RiveEmotion
 import com.ankh.sutrasaga.domain.models.RiveSpeaker
 import com.ankh.sutrasaga.domain.models.RiveSutraDialogueTree
 import com.ankh.sutrasaga.domain.models.SutraProblem
-import com.ankh.sutrasaga.ui.theme.CyberCyan
+import com.ankh.sutrasaga.domain.validation.VedicMathValidator
+import com.ankh.sutrasaga.engine.rive.RiveDialogueController
 import com.ankh.sutrasaga.ui.theme.CyberCyanLight
 import com.ankh.sutrasaga.ui.theme.TextLightSecondary
 import com.ankh.sutrasaga.ui.theme.TextMuted
 import com.ankh.sutrasaga.ui.theme.TextWhitePrimary
 import com.ankh.sutrasaga.ui.theme.VedicGold
 import com.ankh.sutrasaga.ui.theme.VedicGoldLight
+import com.ankh.sutrasaga.ui.util.MathFormatter
 
 /**
  * GurukulSceneScreen — Duolingo-style interactive pre-quiz tutorial scene for Vedic Mathematics.
  *
  * Implements:
- * 1. 4-Node dynamic Guru-Shishya dialogue tree (The Hook -> Sutra Reveal -> Spark of Insight -> Active Handshake).
- * 2. Clean mathematical overlay slate with token highlights.
- * 3. Interactive tap handshake on step 4 to verify understanding before starting the quiz.
- * 4. Rich background artwork without overlapping character badge clutter.
+ * 1. Clean decoupling via RiveDialogueController and RiveAdapter.
+ * 2. 4-Node dynamic Guru-Shishya dialogue tree (The Hook -> Sutra Reveal -> Spark of Insight -> Active Handshake).
+ * 3. Clean mathematical overlay slate with token highlights.
+ * 4. Interactive tap handshake on step 4 with retry and corrective feedback.
  */
 @Composable
 fun GurukulSceneScreen(
@@ -117,22 +111,23 @@ fun GurukulSceneScreen(
         return
     }
 
-    var currentNodeIndex by remember(activeTree) { mutableIntStateOf(0) }
-    val totalNodes = activeTree.dialogueNodes.size
-    val currentNode: RiveDialogueNode = activeTree.dialogueNodes.getOrElse(currentNodeIndex) { activeTree.dialogueNodes.last() }
+    val controller = remember(activeTree) { RiveDialogueController(activeTree) }
+
+    val currentNodeIndex by controller.currentNodeIndex.collectAsState()
+    val currentNode by controller.currentNode.collectAsState()
+    val isCompleted by controller.isCompleted.collectAsState()
+    val handshakeError by controller.handshakeError.collectAsState()
+    val particleTriggered by controller.riveAdapter.particleTriggered.collectAsState()
+
+    LaunchedEffect(isCompleted) {
+        if (isCompleted) {
+            onComplete()
+        }
+    }
+
+    val totalNodes = controller.totalNodes
 
     val infiniteTransition = rememberInfiniteTransition(label = "GurukulSceneTransition")
-
-    // Ambient Hologram Glow Pulsing Animation
-    val hologramAlpha by infiniteTransition.animateFloat(
-        initialValue = 0.5f,
-        targetValue = 0.95f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 1800, easing = FastOutSlowInEasing),
-            repeatMode = RepeatMode.Reverse
-        ),
-        label = "HologramGlow"
-    )
 
     // Hint Tap Pulsing Animation
     val tapPromptAlpha by infiniteTransition.animateFloat(
@@ -153,11 +148,7 @@ fun GurukulSceneScreen(
             .fillMaxSize()
             .clickable {
                 if (!isHandshakeStep) {
-                    if (currentNodeIndex < totalNodes - 1) {
-                        currentNodeIndex++
-                    } else {
-                        onComplete()
-                    }
+                    controller.advanceNode()
                 }
             },
         color = Color(0xFF0B1120)
@@ -250,20 +241,21 @@ fun GurukulSceneScreen(
                             Column(
                                 modifier = Modifier
                                     .weight(1f)
-                                    .padding(horizontal = 4.dp)
+                                    .padding(horizontal = 6.dp)
                             ) {
                                 Text(
                                     text = activeTree.sutraName,
-                                    style = MaterialTheme.typography.titleMedium,
+                                    style = MaterialTheme.typography.titleMedium.copy(fontSize = 15.sp),
                                     fontWeight = FontWeight.ExtraBold,
                                     color = VedicGoldLight,
                                     maxLines = 1
                                 )
                                 Text(
                                     text = "World ${activeTree.worldNumber} · ${activeTree.englishMeaning}",
-                                    style = MaterialTheme.typography.bodySmall,
+                                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp, lineHeight = 14.sp),
                                     color = TextLightSecondary,
-                                    maxLines = 1
+                                    maxLines = 2,
+                                    softWrap = true
                                 )
                             }
 
@@ -272,7 +264,7 @@ fun GurukulSceneScreen(
                                 horizontalArrangement = Arrangement.spacedBy(4.dp)
                             ) {
                                 IconButton(
-                                    onClick = { currentNodeIndex = 0 },
+                                    onClick = { controller.restart() },
                                     modifier = Modifier.size(36.dp)
                                 ) {
                                     Icon(
@@ -283,7 +275,7 @@ fun GurukulSceneScreen(
                                     )
                                 }
                                 Button(
-                                    onClick = onComplete,
+                                    onClick = { controller.skip() },
                                     shape = RoundedCornerShape(12.dp),
                                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1E293B)),
                                     contentPadding = ButtonDefaults.TextButtonContentPadding
@@ -360,9 +352,10 @@ fun GurukulSceneScreen(
 
                             Spacer(modifier = Modifier.height(14.dp))
 
-                            // Dynamic Math Overlay Expression
+                            // Dynamic Clean Math Expression
+                            val cleanExpression = MathFormatter.format(currentNode.mathOverlay.expression)
                             Crossfade(
-                                targetState = currentNode.mathOverlay.expression,
+                                targetState = cleanExpression,
                                 label = "MathOverlayExpressionCrossfade"
                             ) { expression ->
                                 Text(
@@ -370,20 +363,21 @@ fun GurukulSceneScreen(
                                     color = VedicGoldLight,
                                     fontSize = 24.sp,
                                     fontWeight = FontWeight.Bold,
-                                    fontFamily = FontFamily.Monospace,
+                                    fontFamily = FontFamily.Default,
                                     textAlign = TextAlign.Center,
                                     modifier = Modifier.padding(horizontal = 8.dp)
                                 )
                             }
 
-                            // Highlighted Tokens
+                            // Highlighted Tokens (Cleanly Formatted)
                             if (currentNode.mathOverlay.highlightTokens.isNotEmpty()) {
                                 Spacer(modifier = Modifier.height(12.dp))
                                 Row(
                                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
-                                    currentNode.mathOverlay.highlightTokens.forEach { token ->
+                                    currentNode.mathOverlay.highlightTokens.forEach { rawToken ->
+                                        val cleanToken = MathFormatter.format(rawToken)
                                         Box(
                                             modifier = Modifier
                                                 .clip(RoundedCornerShape(8.dp))
@@ -392,7 +386,7 @@ fun GurukulSceneScreen(
                                                 .padding(horizontal = 8.dp, vertical = 4.dp)
                                         ) {
                                             Text(
-                                                text = token,
+                                                text = cleanToken,
                                                 color = VedicGoldLight,
                                                 fontSize = 13.sp,
                                                 fontWeight = FontWeight.SemiBold
@@ -406,7 +400,7 @@ fun GurukulSceneScreen(
 
                     // Victory particle FX on eureka/handshake node
                     GurukulParticleEffect(
-                        trigger = currentNodeIndex >= totalNodes - 2,
+                        trigger = particleTriggered,
                         modifier = Modifier.fillMaxSize()
                     )
                 }
@@ -502,6 +496,19 @@ fun GurukulSceneScreen(
                                 )
                             }
 
+                            // Corrective feedback error banner (if any)
+                            AnimatedVisibility(visible = handshakeError != null, enter = fadeIn(), exit = fadeOut()) {
+                                handshakeError?.let { err ->
+                                    Spacer(modifier = Modifier.height(8.dp))
+                                    Text(
+                                        text = "⚠️ $err",
+                                        color = Color(0xFFFBBF24),
+                                        fontSize = 12.sp,
+                                        fontWeight = FontWeight.SemiBold
+                                    )
+                                }
+                            }
+
                             // Interactive Handshake Tap Section (Node 4)
                             if (isHandshakeStep) {
                                 Spacer(modifier = Modifier.height(14.dp))
@@ -531,8 +538,12 @@ fun GurukulSceneScreen(
 
                                         Spacer(modifier = Modifier.width(8.dp))
 
+                                        val expectedAnswer = currentNode.interactiveHandshake.expectedAnswer
+                                            ?: VedicMathValidator.inferExpectedAnswer(currentNode.interactiveHandshake)
+                                            ?: "5"
+
                                         Button(
-                                            onClick = onComplete,
+                                            onClick = { controller.submitHandshake(expectedAnswer) },
                                             shape = RoundedCornerShape(12.dp),
                                             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF10B981))
                                         ) {
@@ -600,20 +611,10 @@ private fun LegacyGurukulSceneScreen(
     onBack: (() -> Unit)?,
     modifier: Modifier = Modifier
 ) {
-    var currentBeatIndex by remember(script) { mutableIntStateOf(0) }
-    val totalBeats = script.beats.size
-    val currentBeat = script.beats.getOrElse(currentBeatIndex) { script.beats.last() }
-
     Surface(
         modifier = modifier
             .fillMaxSize()
-            .clickable {
-                if (currentBeatIndex < totalBeats - 1) {
-                    currentBeatIndex++
-                } else {
-                    onComplete()
-                }
-            },
+            .clickable { onComplete() },
         color = Color(0xFF0B1120)
     ) {
         Column(
@@ -630,20 +631,13 @@ private fun LegacyGurukulSceneScreen(
                 color = VedicGoldLight
             )
 
-            MathSlate(
-                problem = problem,
-                stepIndex = currentBeat.slateStepIndex,
-                interactiveMode = false,
-                modifier = Modifier.fillMaxWidth()
-            )
-
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(containerColor = Color(0xF20F172A))
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(
-                        text = currentBeat.guruText,
+                        text = "Practice lesson for ${script.title}",
                         color = TextWhitePrimary,
                         fontSize = 14.sp
                     )

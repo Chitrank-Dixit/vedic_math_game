@@ -16,8 +16,8 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "95^2 = \\text{?}",
-          "highlight_tokens": ["95", "2"]
+          "expression": "95² = ?",
+          "highlight_tokens": ["95", "²"]
         },
         "audio_cues": {
           "ssml_text": "<speak><prosody pitch='+2st'>Calculating 95 squared in under two seconds is impossible, Guru-ji!</prosody></speak>",
@@ -40,8 +40,8 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(9 \\times 10) \\; | \\; (5^2)",
-          "highlight_tokens": ["9 \\times 10", "5^2"]
+          "expression": "(9 × 10) | (5²)",
+          "highlight_tokens": ["9 × 10 = 90", "5² = 25"]
         },
         "audio_cues": {
           "ssml_text": "<speak><prosody rate='95%'>Observe closely! By Ekadhikena Purvena—one more than 9 is 10. Simply multiply 9 times 10!</prosody></speak>",
@@ -64,7 +64,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "95^2 = 9025",
+          "expression": "95² = 9025",
           "highlight_tokens": ["90", "25"]
         },
         "audio_cues": {
@@ -88,7 +88,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "45^2 = (4 \\times [\\;?\\;]) \\; | \\; 25 = 2025",
+          "expression": "45² = (4 × [ ? ]) | 25 = 2025",
           "highlight_tokens": ["?", "2025"]
         },
         "audio_cues": {
@@ -120,7 +120,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "96 \\times 92 = \\text{?}",
+          "expression": "96 × 92 = ?",
           "highlight_tokens": ["96", "92"]
         },
         "audio_cues": {
@@ -144,8 +144,8 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(96 - 8) \\; | \\; (-4 \\times -8)",
-          "highlight_tokens": ["96 - 8", "-4 \\times -8"]
+          "expression": "(96 - 8) | (-4 × -8)",
+          "highlight_tokens": ["96 - 8 = 88", "-4 × -8 = 32"]
         },
         "audio_cues": {
           "ssml_text": "<speak>Anchor to Base 100! Their deficiencies are minus 4 and minus 8. Cross-subtract: 96 minus 8 is 88!</speak>",
@@ -168,7 +168,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "96 \\times 92 = 8832",
+          "expression": "96 × 92 = 8832",
           "highlight_tokens": ["88", "32"]
         },
         "audio_cues": {
@@ -192,7 +192,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "98 \\times 97 = 95 \\; | \\; [\\;?\\;] = 9506",
+          "expression": "98 × 97 = 95 | [ ? ] = 9506",
           "highlight_tokens": ["?", "9506"]
         },
         "audio_cues": {
@@ -224,7 +224,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "23 \\times 12 = \\text{?}",
+          "expression": "23 × 12 = ?",
           "highlight_tokens": ["23", "12"]
         },
         "audio_cues": {
@@ -248,8 +248,8 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(2 \\times 1) \\; | \\; (2 \\times 2 + 3 \\times 1) \\; | \\; (3 \\times 2)",
-          "highlight_tokens": ["2 \\times 1", "2 \\times 2 + 3 \\times 1", "3 \\times 2"]
+          "expression": "(2×1) | (2×2 + 3×1) | (3×2)",
+          "highlight_tokens": ["2×1 = 2", "Cross = 7", "3×2 = 6"]
         },
         "audio_cues": {
           "ssml_text": "<speak>We cast three spatial rays: Right Vertical, Crosswise, and Left Vertical!</speak>",
@@ -272,7 +272,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "23 \\times 12 = 276",
+          "expression": "23 × 12 = 276",
           "highlight_tokens": ["2", "7", "6"]
         },
         "audio_cues": {
@@ -296,7 +296,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "31 \\times 21 = 6 \\; | \\; [\\;?\\;] \\; | \\; 1 = 651",
+          "expression": "31 × 21 = 6 | [ ? ] | 1 = 651",
           "highlight_tokens": ["?", "651"]
         },
         "audio_cues": {
@@ -328,8 +328,8 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "\\frac{x^2 + 7x + 12}{x + 3} = \\text{?}",
-          "highlight_tokens": ["x^2 + 7x + 12", "x + 3"]
+          "expression": "(x² + 7x + 12) ÷ (x + 3) = ?",
+          "highlight_tokens": ["x² + 7x + 12", "x + 3"]
         },
         "audio_cues": {
           "ssml_text": "<speak>Dividing polynomials like x squared plus 7x plus 12 divided by x plus 3 seems tedious!</speak>",
@@ -352,7 +352,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "\\text{Root: } -3 \\implies 1 \\; | \\; (7 - 3) = 4 \\; | \\; (12 - 12) = 0",
+          "expression": "Root: -3 ⟹ 1 | (7 - 3) = 4 | (12 - 12) = 0",
           "highlight_tokens": ["-3", "4", "0"]
         },
         "audio_cues": {
@@ -376,7 +376,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "Q = x + 4, \\quad R = 0",
+          "expression": "Quotient = x + 4, Remainder = 0",
           "highlight_tokens": ["x + 4"]
         },
         "audio_cues": {
@@ -400,7 +400,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "3x = -12 \\implies x = -[\\;?\\;]",
+          "expression": "3x = -12 ⟹ x = -[ ? ]",
           "highlight_tokens": ["?", "-4"]
         },
         "audio_cues": {
@@ -433,7 +433,7 @@
         },
         "math_overlay": {
           "expression": "(x + 2) + (x + 3) = (x + 1) + (x + 4)",
-          "highlight_tokens": ["(x + 2) + (x + 3)", "(x + 1) + (x + 4)"]
+          "highlight_tokens": ["LHS: 2 + 3 = 5", "RHS: 1 + 4 = 5"]
         },
         "audio_cues": {
           "ssml_text": "<speak>Solving this equation looks like a multi-step algebraic expansion.</speak>",
@@ -456,7 +456,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "S_L = 2 + 3 = 5, \\quad S_R = 1 + 4 = 5",
+          "expression": "SL = 5, SR = 5 ⟹ Sums Match!",
           "highlight_tokens": ["5"]
         },
         "audio_cues": {
@@ -504,7 +504,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x = [\\;?\\;]",
+          "expression": "x = [ ? ]",
           "highlight_tokens": ["?"]
         },
         "audio_cues": {
@@ -536,8 +536,8 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "\\begin{cases} 2x + 3y = 6 \\\\ 4x + 9y = 12 \\end{cases}",
-          "highlight_tokens": ["2x/4x = 6/12 = 1/2"]
+          "expression": "2x + 3y = 6,  4x + 9y = 12",
+          "highlight_tokens": ["2/4 = 6/12 = 1/2"]
         },
         "audio_cues": {
           "ssml_text": "<speak>For simultaneous equations, standard elimination takes multiple steps!</speak>",
@@ -560,7 +560,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "\\frac{a_1}{a_2} = \\frac{c_1}{c_2} = \\frac{1}{2} \\implies y = 0",
+          "expression": "Ratio x = Ratio Constant = 1/2 ⟹ y = 0",
           "highlight_tokens": ["y = 0"]
         },
         "audio_cues": {
@@ -584,7 +584,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "2x = 6 \\implies x = 3, \\quad y = 0",
+          "expression": "2x = 6 ⟹ x = 3, y = 0",
           "highlight_tokens": ["3", "0"]
         },
         "audio_cues": {
@@ -608,7 +608,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x = [\\;?\\;]",
+          "expression": "x = [ ? ]",
           "highlight_tokens": ["?"]
         },
         "audio_cues": {
@@ -640,7 +640,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "\\begin{cases} 45x - 23y = 113 \\\\ 23x - 45y = 91 \\end{cases}",
+          "expression": "45x - 23y = 113,  23x - 45y = 91",
           "highlight_tokens": ["45x", "-23y"]
         },
         "audio_cues": {
@@ -664,7 +664,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x - y = 3, \\quad x + y = 1",
+          "expression": "Add: x - y = 3,  Sub: x + y = 1",
           "highlight_tokens": ["x - y = 3", "x + y = 1"]
         },
         "audio_cues": {
@@ -688,7 +688,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x = 2, \\quad y = -1",
+          "expression": "2x = 4 ⟹ x = 2, y = -1",
           "highlight_tokens": ["2", "-1"]
         },
         "audio_cues": {
@@ -712,7 +712,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x = [\\;?\\;]",
+          "expression": "x = [ ? ]",
           "highlight_tokens": ["?"]
         },
         "audio_cues": {
@@ -744,8 +744,8 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x^2 + 6x = 16",
-          "highlight_tokens": ["x^2 + 6x"]
+          "expression": "x² + 6x = 16",
+          "highlight_tokens": ["x² + 6x"]
         },
         "audio_cues": {
           "ssml_text": "<speak>Factoring quadratic expressions by trial and error is tricky.</speak>",
@@ -768,8 +768,8 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(x + 3)^2 = 16 + 9 = 25",
-          "highlight_tokens": ["(x + 3)^2", "25"]
+          "expression": "(x + 3)² = 16 + 9 = 25",
+          "highlight_tokens": ["(x + 3)²", "25"]
         },
         "audio_cues": {
           "ssml_text": "<speak>Complete the square! Add 9 to both sides: x plus 3 squared equals 25!</speak>",
@@ -792,7 +792,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x + 3 = 5 \\implies x = 2",
+          "expression": "x + 3 = 5 ⟹ x = 2",
           "highlight_tokens": ["2"]
         },
         "audio_cues": {
@@ -816,7 +816,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "\\sqrt{25} = [\\;?\\;]",
+          "expression": "√25 = [ ? ]",
           "highlight_tokens": ["?"]
         },
         "audio_cues": {
@@ -826,7 +826,7 @@
         "interactive_handshake": {
           "requires_user_tap": true,
           "target_element_id": "numpad_key_5",
-          "prompt_text": "Tap 5 for sqrt(25) = 5!"
+          "prompt_text": "Tap 5 for √25 = 5!"
         }
       }
     ]
@@ -848,8 +848,8 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "f(x) = 2x^2 - 8x + 5",
-          "highlight_tokens": ["2x^2 - 8x"]
+          "expression": "f(x) = 2x² - 8x + 5",
+          "highlight_tokens": ["2x² - 8x"]
         },
         "audio_cues": {
           "ssml_text": "<speak>Finding the vertex turning point of quadratics usually takes full formulas!</speak>",
@@ -896,7 +896,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x_{\\text{extrema}} = 2",
+          "expression": "x(turning) = 2",
           "highlight_tokens": ["2"]
         },
         "audio_cues": {
@@ -920,7 +920,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x = [\\;?\\;]",
+          "expression": "x = [ ? ]",
           "highlight_tokens": ["?"]
         },
         "audio_cues": {
@@ -952,7 +952,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "94^2 = \\text{?}",
+          "expression": "94² = ?",
           "highlight_tokens": ["94"]
         },
         "audio_cues": {
@@ -976,8 +976,8 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(94 - 6) \\; | \\; (6^2) = 8836",
-          "highlight_tokens": ["94 - 6", "6^2"]
+          "expression": "(94 - 6) | (6²) = 8836",
+          "highlight_tokens": ["94 - 6 = 88", "6² = 36"]
         },
         "audio_cues": {
           "ssml_text": "<speak>Deficiency from 100 is 6. Lessen 94 by 6 to get 88, and square 6 to get 36!</speak>",
@@ -1000,7 +1000,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "94^2 = 8836",
+          "expression": "94² = 8836",
           "highlight_tokens": ["8836"]
         },
         "audio_cues": {
@@ -1024,7 +1024,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "97^2 = 94 \\; | \\; 0[\\;?\\;] = 9409",
+          "expression": "97² = 94 | 0[ ? ] = 9409",
           "highlight_tokens": ["?", "9409"]
         },
         "audio_cues": {
@@ -1056,8 +1056,8 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x^4 - 10x^2 + 9 = \\text{?}",
-          "highlight_tokens": ["x^4", "x^2"]
+          "expression": "x⁴ - 10x² + 9 = ?",
+          "highlight_tokens": ["x⁴", "x²"]
         },
         "audio_cues": {
           "ssml_text": "<speak>Factoring biquadratics like x to the fourth minus 10x squared plus 9 feels overwhelming.</speak>",
@@ -1080,8 +1080,8 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(x^2 - 1)(x^2 - 9) = (x-1)(x+1)(x-3)(x+3)",
-          "highlight_tokens": ["(x^2 - 1)", "(x^2 - 9)"]
+          "expression": "(x² - 1)(x² - 9) = (x-1)(x+1)(x-3)(x+3)",
+          "highlight_tokens": ["x² - 1", "x² - 9"]
         },
         "audio_cues": {
           "ssml_text": "<speak>Break the whole into parts! Substitute u equals x squared to factor easily!</speak>",
@@ -1104,8 +1104,8 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x \\in \\{1, -1, 3, -3\\}",
-          "highlight_tokens": ["1", "3"]
+          "expression": "x ∈ {1, -1, 3, -3}",
+          "highlight_tokens": ["±1", "±3"]
         },
         "audio_cues": {
           "ssml_text": "<speak>The roots are plus-or-minus 1 and plus-or-minus 3!</speak>",
@@ -1128,7 +1128,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x = \\sqrt{9} = [\\;?\\;]",
+          "expression": "x = √9 = [ ? ]",
           "highlight_tokens": ["?"]
         },
         "audio_cues": {
@@ -1138,7 +1138,7 @@
         "interactive_handshake": {
           "requires_user_tap": true,
           "target_element_id": "numpad_key_3",
-          "prompt_text": "Tap 3 for sqrt(9) = 3!"
+          "prompt_text": "Tap 3 for √9 = 3!"
         }
       }
     ]
@@ -1160,7 +1160,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "\\frac{1}{7} = 0.\\overline{142857}",
+          "expression": "1/7 = 0.142857...",
           "highlight_tokens": ["1/7"]
         },
         "audio_cues": {
@@ -1184,7 +1184,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "\\text{Remainders: } 3 \\to 2 \\to 6 \\to 4 \\to 5 \\to 1",
+          "expression": "Remainders: 3 → 2 → 6 → 4 → 5 → 1",
           "highlight_tokens": ["3", "2", "6", "4", "5", "1"]
         },
         "audio_cues": {
@@ -1208,7 +1208,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "\\frac{1}{7} = 0.142857...",
+          "expression": "1/7 = 0.142857...",
           "highlight_tokens": ["142857"]
         },
         "audio_cues": {
@@ -1232,7 +1232,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "10 \\pmod 7 = [\\;?\\;]",
+          "expression": "10 mod 7 = [ ? ]",
           "highlight_tokens": ["?"]
         },
         "audio_cues": {
@@ -1264,7 +1264,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "\\frac{1}{x+2} + \\frac{1}{x+3} = \\frac{1}{x+1} + \\frac{1}{x+4}",
+          "expression": "1/(x+2) + 1/(x+3) = 1/(x+1) + 1/(x+4)",
           "highlight_tokens": ["x+2", "x+3", "x+1", "x+4"]
         },
         "audio_cues": {
@@ -1288,7 +1288,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "2x + 5 = 0 \\implies x = -\\frac{5}{2} = -2.5",
+          "expression": "2x + 5 = 0 ⟹ x = -5/2 = -2.5",
           "highlight_tokens": ["2x + 5 = 0"]
         },
         "audio_cues": {
@@ -1336,7 +1336,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x = -[\\;?\\;]",
+          "expression": "x = -[ ? ]",
           "highlight_tokens": ["?"]
         },
         "audio_cues": {
@@ -1368,7 +1368,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "46 \\times 99 = \\text{?}",
+          "expression": "46 × 99 = ?",
           "highlight_tokens": ["46", "99"]
         },
         "audio_cues": {
@@ -1392,8 +1392,8 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(46 - 1) \\; | \\; (99 - 45) = 4554",
-          "highlight_tokens": ["46 - 1", "99 - 45"]
+          "expression": "(46 - 1) | (99 - 45) = 4554",
+          "highlight_tokens": ["46 - 1 = 45", "99 - 45 = 54"]
         },
         "audio_cues": {
           "ssml_text": "<speak>Reduce 46 by one to get 45. Then subtract 45 from 99 to get 54!</speak>",
@@ -1416,7 +1416,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "46 \\times 99 = 4554",
+          "expression": "46 × 99 = 4554",
           "highlight_tokens": ["4554"]
         },
         "audio_cues": {
@@ -1440,7 +1440,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "73 - 1 = 7[\\;?\\;]",
+          "expression": "73 - 1 = 7[ ? ]",
           "highlight_tokens": ["?"]
         },
         "audio_cues": {
@@ -1472,8 +1472,8 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(x + 2)(x + 3) \\stackrel{?}{=} x^2 + 5x + 6",
-          "highlight_tokens": ["(x+2)(x+3)", "x^2 + 5x + 6"]
+          "expression": "(x + 2)(x + 3) ≟ x² + 5x + 6",
+          "highlight_tokens": ["(x+2)(x+3)", "x² + 5x + 6"]
         },
         "audio_cues": {
           "ssml_text": "<speak>How do I verify polynomial factor expansions without recalculating every term?</speak>",
@@ -1496,7 +1496,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "S_c(\\text{factors}) = 3 \\times 4 = 12 = S_c(\\text{product}) = 1 + 5 + 6",
+          "expression": "Sc(factors) = 3 × 4 = 12 = Sc(product) = 1 + 5 + 6",
           "highlight_tokens": ["12"]
         },
         "audio_cues": {
@@ -1520,7 +1520,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "12 = 12 \\implies \\text{Verified Valid}",
+          "expression": "12 = 12 ⟹ Verified Valid",
           "highlight_tokens": ["Verified Valid"]
         },
         "audio_cues": {
@@ -1544,7 +1544,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "S_c = 2 \\times 3 = [\\;?\\;]",
+          "expression": "Sc = 2 × 3 = [ ? ]",
           "highlight_tokens": ["?"]
         },
         "audio_cues": {
@@ -1576,8 +1576,8 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "2x^2 + 5x + 2 = \\text{?}",
-          "highlight_tokens": ["2x^2 + 5x + 2"]
+          "expression": "2x² + 5x + 2 = ?",
+          "highlight_tokens": ["2x² + 5x + 2"]
         },
         "audio_cues": {
           "ssml_text": "<speak>Factorizing 2x squared plus 5x plus 2 requires checking multiple product pairs.</speak>",
@@ -1600,7 +1600,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(2x + 1)(x + 2) \\implies (3)(3) = 9",
+          "expression": "(2x + 1)(x + 2) ⟹ (3)(3) = 9",
           "highlight_tokens": ["(2x + 1)(x + 2)", "9"]
         },
         "audio_cues": {
@@ -1624,7 +1624,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "2x^2 + 5x + 2 = (2x + 1)(x + 2)",
+          "expression": "2x² + 5x + 2 = (2x + 1)(x + 2)",
           "highlight_tokens": ["(2x + 1)(x + 2)"]
         },
         "audio_cues": {
@@ -1648,7 +1648,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "S_c = [\\;?\\;]",
+          "expression": "Sc = [ ? ]",
           "highlight_tokens": ["?"]
         },
         "audio_cues": {

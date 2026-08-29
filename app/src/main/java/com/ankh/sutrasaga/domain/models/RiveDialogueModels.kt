@@ -36,7 +36,8 @@ data class AudioCues(
 data class InteractiveHandshake(
     val requiresUserTap: Boolean = false,
     val targetElementId: String? = null,
-    val promptText: String? = null
+    val promptText: String? = null,
+    val expectedAnswer: String? = null
 )
 
 data class RiveDialogueNode(
@@ -55,4 +56,10 @@ data class RiveSutraDialogueTree(
     val englishMeaning: String,
     val worldNumber: Int,
     val dialogueNodes: List<RiveDialogueNode>
+)
+
+data class DialogueValidationResult(
+    val isValid: Boolean,
+    val errors: List<String> = emptyList(),
+    val warnings: List<String> = emptyList()
 )

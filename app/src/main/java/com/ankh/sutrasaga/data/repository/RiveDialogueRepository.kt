@@ -9,11 +9,13 @@ import com.ankh.sutrasaga.domain.models.RiveDialogueNode
 import com.ankh.sutrasaga.domain.models.RiveEmotion
 import com.ankh.sutrasaga.domain.models.RiveSpeaker
 import com.ankh.sutrasaga.domain.models.RiveSutraDialogueTree
+import com.ankh.sutrasaga.domain.validation.RiveDialogueValidator
+import com.ankh.sutrasaga.domain.validation.VedicMathValidator
 import org.json.JSONArray
 import org.json.JSONObject
 
 /**
- * Repository responsible for loading and querying the 16 Canonical Vedic Math Rive Dialogue Trees.
+ * Repository responsible for loading, validating, and querying the Canonical Vedic Math Rive Dialogue Trees.
  */
 class RiveDialogueRepository(private val context: Context? = null) {
 
@@ -42,9 +44,10 @@ class RiveDialogueRepository(private val context: Context? = null) {
 
         for (i in 0 until jsonArray.length()) {
             val obj = jsonArray.getJSONObject(i)
-            val tree = parseTree(obj)
-            trees.add(tree)
-            cachedTrees[tree.worldNumber] = tree
+            val rawTree = parseTree(obj)
+            val normalizedTree = RiveDialogueValidator.normalize(rawTree)
+            trees.add(normalizedTree)
+            cachedTrees[normalizedTree.worldNumber] = normalizedTree
         }
         return trees
     }
@@ -105,11 +108,21 @@ class RiveDialogueRepository(private val context: Context? = null) {
             val requiresTap = handshakeObj.getBoolean("requires_user_tap")
             val targetElementId = if (handshakeObj.isNull("target_element_id")) null else handshakeObj.getString("target_element_id")
             val promptText = if (handshakeObj.isNull("prompt_text")) null else handshakeObj.getString("prompt_text")
-            val interactiveHandshake = InteractiveHandshake(
+            val explicitExpected = if (handshakeObj.has("expected_answer") && !handshakeObj.isNull("expected_answer")) {
+                handshakeObj.getString("expected_answer")
+            } else {
+                null
+            }
+
+            val provisionalHandshake = InteractiveHandshake(
                 requiresUserTap = requiresTap,
                 targetElementId = targetElementId,
-                promptText = promptText
+                promptText = promptText,
+                expectedAnswer = explicitExpected
             )
+            val resolvedExpected = explicitExpected ?: VedicMathValidator.inferExpectedAnswer(provisionalHandshake)
+
+            val interactiveHandshake = provisionalHandshake.copy(expectedAnswer = resolvedExpected)
 
             nodes.add(
                 RiveDialogueNode(
@@ -134,10 +147,57 @@ class RiveDialogueRepository(private val context: Context? = null) {
     }
 
     fun getDialogueForWorld(worldNumber: Int): RiveSutraDialogueTree? {
-        return cachedTrees[worldNumber]
+        return cachedTrees[worldNumber] ?: createDefaultFallbackTree(worldNumber)
     }
 
     fun getAllDialogues(): List<RiveSutraDialogueTree> {
         return cachedTrees.values.toList()
+    }
+
+    private fun createDefaultFallbackTree(worldNumber: Int): RiveSutraDialogueTree {
+        return RiveSutraDialogueTree(
+            sutraId = "sutra_$worldNumber",
+            sutraName = "Vedic Sutra $worldNumber",
+            englishMeaning = "Ancient Mental Calculation Technique",
+            worldNumber = worldNumber,
+            dialogueNodes = listOf(
+                RiveDialogueNode(
+                    nodeId = 1,
+                    speaker = RiveSpeaker.SHISHYA,
+                    text = "How do we solve this calculation swiftly, Guru-ji?",
+                    riveState = RiveCharacterState(RiveSpeaker.SHISHYA, "shishya_curious", RiveEmotion.THINKING, true),
+                    mathOverlay = MathOverlay("Formula $worldNumber = ?", listOf("?")),
+                    audioCues = AudioCues("<speak>How do we solve this swiftly?</speak>", "sfx_question_curiosity"),
+                    interactiveHandshake = InteractiveHandshake(false, null, null)
+                ),
+                RiveDialogueNode(
+                    nodeId = 2,
+                    speaker = RiveSpeaker.GURU,
+                    text = "Observe the sutra pattern! Mental mathematics unlocks the solution in seconds.",
+                    riveState = RiveCharacterState(RiveSpeaker.GURU, "guru_explain", RiveEmotion.HAPPY, true),
+                    mathOverlay = MathOverlay("Pattern $worldNumber ⟹ Insight", listOf("Insight")),
+                    audioCues = AudioCues("<speak>Observe the sutra pattern!</speak>", "sfx_sutra_reveal_chime"),
+                    interactiveHandshake = InteractiveHandshake(false, null, null)
+                ),
+                RiveDialogueNode(
+                    nodeId = 3,
+                    speaker = RiveSpeaker.SHISHYA,
+                    text = "Aha! The method makes the complex calculation simple!",
+                    riveState = RiveCharacterState(RiveSpeaker.SHISHYA, "shishya_aha", RiveEmotion.SURPRISED, true),
+                    mathOverlay = MathOverlay("Result = Verified", listOf("Verified")),
+                    audioCues = AudioCues("<speak>The method makes the calculation simple!</speak>", "sfx_eureka_spark"),
+                    interactiveHandshake = InteractiveHandshake(false, null, null)
+                ),
+                RiveDialogueNode(
+                    nodeId = 4,
+                    speaker = RiveSpeaker.GURU,
+                    text = "Now prove your understanding: tap to enter the trial arena!",
+                    riveState = RiveCharacterState(RiveSpeaker.GURU, "guru_magic_fx", RiveEmotion.HAPPY, true),
+                    mathOverlay = MathOverlay("Ready for Arena ⚡", listOf("Arena")),
+                    audioCues = AudioCues("<speak>Tap to enter the trial arena!</speak>", "sfx_interactive_pulse"),
+                    interactiveHandshake = InteractiveHandshake(true, "numpad_key_1", "Tap to begin the quiz!", "1")
+                )
+            )
+        )
     }
 }
