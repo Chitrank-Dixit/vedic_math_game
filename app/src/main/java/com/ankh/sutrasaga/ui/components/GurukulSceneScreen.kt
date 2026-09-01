@@ -1,15 +1,11 @@
 package com.ankh.sutrasaga.ui.components
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -27,7 +23,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Refresh
@@ -37,7 +35,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -45,16 +42,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -62,28 +59,16 @@ import androidx.compose.ui.unit.sp
 import com.ankh.sutrasaga.R
 import com.ankh.sutrasaga.data.repository.RiveDialogueRepository
 import com.ankh.sutrasaga.domain.models.GurukulScript
-import com.ankh.sutrasaga.domain.models.RiveEmotion
-import com.ankh.sutrasaga.domain.models.RiveSpeaker
+import com.ankh.sutrasaga.domain.models.RiveDialogueNode
 import com.ankh.sutrasaga.domain.models.RiveSutraDialogueTree
 import com.ankh.sutrasaga.domain.models.SutraProblem
 import com.ankh.sutrasaga.domain.validation.VedicMathValidator
 import com.ankh.sutrasaga.engine.rive.RiveDialogueController
-import com.ankh.sutrasaga.ui.theme.CyberCyanLight
-import com.ankh.sutrasaga.ui.theme.TextLightSecondary
-import com.ankh.sutrasaga.ui.theme.TextMuted
-import com.ankh.sutrasaga.ui.theme.TextWhitePrimary
-import com.ankh.sutrasaga.ui.theme.VedicGold
-import com.ankh.sutrasaga.ui.theme.VedicGoldLight
-import com.ankh.sutrasaga.ui.util.MathFormatter
+import com.ankh.sutrasaga.ui.theme.VedicParchmentTokens
 
 /**
- * GurukulSceneScreen — Duolingo-style interactive pre-quiz tutorial scene for Vedic Mathematics.
- *
- * Implements:
- * 1. Clean decoupling via RiveDialogueController and RiveAdapter.
- * 2. 4-Node dynamic Guru-Shishya dialogue tree (The Hook -> Sutra Reveal -> Spark of Insight -> Active Handshake).
- * 3. Clean mathematical overlay slate with token highlights.
- * 4. Interactive tap handshake on step 4 with retry and corrective feedback.
+ * GurukulSceneScreen — Redesigned Indian parchment educational scene for Vedic Mathematics.
+ * Inspired by modern character-driven learning apps (Duolingo) and the approved visual design.
  */
 @Composable
 fun GurukulSceneScreen(
@@ -116,20 +101,12 @@ fun GurukulSceneScreen(
     val currentNodeIndex by controller.currentNodeIndex.collectAsState()
     val currentNode by controller.currentNode.collectAsState()
     val isCompleted by controller.isCompleted.collectAsState()
-    val handshakeError by controller.handshakeError.collectAsState()
-    val particleTriggered by controller.riveAdapter.particleTriggered.collectAsState()
-
-    LaunchedEffect(isCompleted) {
-        if (isCompleted) {
-            onComplete()
-        }
-    }
+    var isHandshakeSuccessful by remember { mutableStateOf(false) }
 
     val totalNodes = controller.totalNodes
+    val isHandshakeStep = currentNode.interactiveHandshake.requiresUserTap
 
-    val infiniteTransition = rememberInfiniteTransition(label = "GurukulSceneTransition")
-
-    // Hint Tap Pulsing Animation
+    val infiniteTransition = rememberInfiniteTransition(label = "GurukulParchmentTransition")
     val tapPromptAlpha by infiniteTransition.animateFloat(
         initialValue = 0.5f,
         targetValue = 1f,
@@ -137,11 +114,8 @@ fun GurukulSceneScreen(
             animation = tween(durationMillis = 1000, easing = FastOutSlowInEasing),
             repeatMode = RepeatMode.Reverse
         ),
-        label = "TapPrompt"
+        label = "TapPromptAlpha"
     )
-
-    val isGuru = currentNode.speaker == RiveSpeaker.GURU
-    val isHandshakeStep = currentNode.interactiveHandshake.requiresUserTap
 
     Surface(
         modifier = modifier
@@ -151,31 +125,15 @@ fun GurukulSceneScreen(
                     controller.advanceNode()
                 }
             },
-        color = Color(0xFF0B1120)
+        color = VedicParchmentTokens.ParchmentBase
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
-            // 1. Full-Screen Gurukul Background Artwork
+            // 1. Full-Screen Indian Manuscript Parchment Background
             Image(
-                painter = painterResource(id = R.drawable.bg_gurukul_scene),
-                contentDescription = "Gurukul Scene Background",
+                painter = painterResource(id = R.drawable.bg_parchment_manuscript),
+                contentDescription = "Indian Learning Manuscript Parchment",
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
-            )
-
-            // Dark vignette overlay for readable contrast
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(
-                        Brush.verticalGradient(
-                            listOf(
-                                Color(0xCC0B1120),
-                                Color(0x660B1120),
-                                Color(0x550B1120),
-                                Color(0xE60B1120)
-                            )
-                        )
-                    )
             )
 
             // 2. Main Scene Layout
@@ -184,26 +142,27 @@ fun GurukulSceneScreen(
                     .fillMaxSize()
                     .statusBarsPadding()
                     .navigationBarsPadding()
-                    .padding(horizontal = 16.dp, vertical = 10.dp),
+                    .padding(horizontal = 14.dp, vertical = 8.dp)
+                    .verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 // Top Header Card
                 Card(
                     modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(18.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color(0xEA0F172A)),
+                    shape = RoundedCornerShape(16.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = VedicParchmentTokens.ParchmentCardBg
+                    ),
                     border = CardDefaults.outlinedCardBorder().copy(
-                        brush = Brush.horizontalGradient(
-                            listOf(Color(0x80FFB300), Color(0x4038BDF8), Color(0x80FFB300))
-                        ),
+                        brush = androidx.compose.ui.graphics.SolidColor(Color(0xFFE2D6C3)),
                         width = 1.dp
                     ),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
                 ) {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(12.dp)
+                            .padding(horizontal = 12.dp, vertical = 8.dp)
                     ) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
@@ -213,25 +172,27 @@ fun GurukulSceneScreen(
                             if (onBack != null) {
                                 Button(
                                     onClick = onBack,
-                                    shape = RoundedCornerShape(12.dp),
-                                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1E293B)),
+                                    shape = RoundedCornerShape(10.dp),
+                                    colors = ButtonDefaults.buttonColors(
+                                        containerColor = Color(0xFFF3E8D6)
+                                    ),
                                     border = CardDefaults.outlinedCardBorder().copy(
-                                        brush = Brush.horizontalGradient(listOf(VedicGold, VedicGoldLight)),
+                                        brush = androidx.compose.ui.graphics.SolidColor(Color(0xFFD4C3A3)),
                                         width = 1.dp
                                     ),
                                     contentPadding = ButtonDefaults.TextButtonContentPadding,
-                                    modifier = Modifier.padding(end = 8.dp)
+                                    modifier = Modifier.padding(end = 6.dp)
                                 ) {
                                     Icon(
                                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                        contentDescription = "Back",
-                                        tint = VedicGold,
-                                        modifier = Modifier.size(16.dp)
+                                        contentDescription = "Back to Worlds",
+                                        tint = VedicParchmentTokens.InkDark,
+                                        modifier = Modifier.size(15.dp)
                                     )
                                     Spacer(modifier = Modifier.width(4.dp))
                                     Text(
                                         text = "Worlds",
-                                        color = VedicGold,
+                                        color = VedicParchmentTokens.InkDark,
                                         fontSize = 12.sp,
                                         fontWeight = FontWeight.Bold
                                     )
@@ -241,20 +202,23 @@ fun GurukulSceneScreen(
                             Column(
                                 modifier = Modifier
                                     .weight(1f)
-                                    .padding(horizontal = 6.dp)
+                                    .padding(horizontal = 6.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally
                             ) {
                                 Text(
                                     text = activeTree.sutraName,
                                     style = MaterialTheme.typography.titleMedium.copy(fontSize = 15.sp),
                                     fontWeight = FontWeight.ExtraBold,
-                                    color = VedicGoldLight,
-                                    maxLines = 1
+                                    color = VedicParchmentTokens.InkDark,
+                                    maxLines = 1,
+                                    textAlign = TextAlign.Center
                                 )
                                 Text(
-                                    text = "World ${activeTree.worldNumber} · ${activeTree.englishMeaning}",
-                                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp, lineHeight = 14.sp),
-                                    color = TextLightSecondary,
+                                    text = "World ${activeTree.worldNumber} • ${activeTree.englishMeaning}",
+                                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp, lineHeight = 13.sp),
+                                    color = VedicParchmentTokens.InkLight,
                                     maxLines = 2,
+                                    textAlign = TextAlign.Center,
                                     softWrap = true
                                 )
                             }
@@ -264,334 +228,105 @@ fun GurukulSceneScreen(
                                 horizontalArrangement = Arrangement.spacedBy(4.dp)
                             ) {
                                 IconButton(
-                                    onClick = { controller.restart() },
-                                    modifier = Modifier.size(36.dp)
+                                    onClick = {
+                                        isHandshakeSuccessful = false
+                                        controller.restart()
+                                    },
+                                    modifier = Modifier.size(32.dp)
                                 ) {
                                     Icon(
                                         imageVector = Icons.Default.Refresh,
                                         contentDescription = "Restart Scene",
-                                        tint = TextMuted,
-                                        modifier = Modifier.size(20.dp)
+                                        tint = VedicParchmentTokens.InkMuted,
+                                        modifier = Modifier.size(18.dp)
                                     )
                                 }
                                 Button(
-                                    onClick = { controller.skip() },
-                                    shape = RoundedCornerShape(12.dp),
-                                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1E293B)),
+                                    onClick = { onComplete() },
+                                    shape = RoundedCornerShape(10.dp),
+                                    colors = ButtonDefaults.buttonColors(
+                                        containerColor = Color(0xFFF3E8D6)
+                                    ),
+                                    border = CardDefaults.outlinedCardBorder().copy(
+                                        brush = androidx.compose.ui.graphics.SolidColor(Color(0xFFD4C3A3)),
+                                        width = 1.dp
+                                    ),
                                     contentPadding = ButtonDefaults.TextButtonContentPadding
                                 ) {
                                     Text(
                                         text = "Skip ⏭",
-                                        color = TextWhitePrimary,
-                                        fontSize = 12.sp,
-                                        fontWeight = FontWeight.SemiBold
+                                        color = VedicParchmentTokens.InkDark,
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.Bold
                                     )
                                 }
                             }
                         }
 
-                        Spacer(modifier = Modifier.height(8.dp))
+                        Spacer(modifier = Modifier.height(6.dp))
 
-                        LinearProgressIndicator(
-                            progress = { (currentNodeIndex + 1).toFloat() / totalNodes.toFloat() },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(4.dp)
-                                .clip(RoundedCornerShape(2.dp)),
-                            color = VedicGold,
-                            trackColor = Color(0xFF334155)
+                        // 4-Step Milestone Progress Bar
+                        ParchmentStepMilestones(
+                            currentStepIndex = currentNodeIndex,
+                            totalSteps = totalNodes
                         )
                     }
                 }
 
-                // Center Stage: Holographic Math Slate Card
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f)
-                        .padding(vertical = 12.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Card(
-                        modifier = Modifier
-                            .fillMaxWidth(0.95f),
-                        shape = RoundedCornerShape(22.dp),
-                        colors = CardDefaults.cardColors(containerColor = Color(0xF00A0F1D)),
-                        border = CardDefaults.outlinedCardBorder().copy(
-                            brush = Brush.radialGradient(
-                                listOf(
-                                    Color(0xFF38BDF8),
-                                    Color(0xFF0284C7),
-                                    Color(0xFF0F172A)
-                                )
-                            ),
-                            width = 1.5.dp
-                        ),
-                        elevation = CardDefaults.cardElevation(defaultElevation = 10.dp)
-                    ) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(20.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.Center
-                        ) {
-                            // Slate Header Tag
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.Center
-                            ) {
-                                Text(
-                                    text = "✦ VEDIC MATH SLATE ✦",
-                                    color = CyberCyanLight,
-                                    fontSize = 12.sp,
-                                    fontWeight = FontWeight.ExtraBold,
-                                    letterSpacing = 1.sp
-                                )
-                            }
+                Spacer(modifier = Modifier.height(10.dp))
 
-                            Spacer(modifier = Modifier.height(14.dp))
+                // Wooden Mathematical Slate Demonstration
+                WoodenMathSlate(
+                    expression = currentNode.mathOverlay.expression,
+                    highlightTokens = currentNode.mathOverlay.highlightTokens
+                )
 
-                            // Dynamic Clean Math Expression
-                            val cleanExpression = MathFormatter.format(currentNode.mathOverlay.expression)
-                            Crossfade(
-                                targetState = cleanExpression,
-                                label = "MathOverlayExpressionCrossfade"
-                            ) { expression ->
-                                Text(
-                                    text = expression,
-                                    color = VedicGoldLight,
-                                    fontSize = 24.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    fontFamily = FontFamily.Default,
-                                    textAlign = TextAlign.Center,
-                                    modifier = Modifier.padding(horizontal = 8.dp)
-                                )
-                            }
+                Spacer(modifier = Modifier.height(12.dp))
 
-                            // Highlighted Tokens (Cleanly Formatted)
-                            if (currentNode.mathOverlay.highlightTokens.isNotEmpty()) {
-                                Spacer(modifier = Modifier.height(12.dp))
-                                Row(
-                                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    currentNode.mathOverlay.highlightTokens.forEach { rawToken ->
-                                        val cleanToken = MathFormatter.format(rawToken)
-                                        Box(
-                                            modifier = Modifier
-                                                .clip(RoundedCornerShape(8.dp))
-                                                .background(Color(0x33FFB300))
-                                                .border(1.dp, VedicGold.copy(alpha = 0.7f), RoundedCornerShape(8.dp))
-                                                .padding(horizontal = 8.dp, vertical = 4.dp)
-                                        ) {
-                                            Text(
-                                                text = cleanToken,
-                                                color = VedicGoldLight,
-                                                fontSize = 13.sp,
-                                                fontWeight = FontWeight.SemiBold
-                                            )
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                // Character Stage (Shishya on Left, Speech Bubble Center, Guru on Right)
+                GurukulCharacterStage(
+                    currentNode = currentNode,
+                    isHandshakeSuccessful = isHandshakeSuccessful
+                )
 
-                    // Victory particle FX on eureka/handshake node
-                    GurukulParticleEffect(
-                        trigger = particleTriggered,
-                        modifier = Modifier.fillMaxSize()
+                Spacer(modifier = Modifier.height(12.dp))
+
+                // Bottom Handshake Mini-Game ("Let's try it!") or Tap Prompt
+                if (isHandshakeStep) {
+                    val expectedAnswer = currentNode.interactiveHandshake.expectedAnswer
+                        ?: VedicMathValidator.inferExpectedAnswer(currentNode.interactiveHandshake)
+
+                    InteractiveHandshakeTileGroup(
+                        handshake = currentNode.interactiveHandshake,
+                        expectedAnswer = expectedAnswer,
+                        onAnswerSelected = { userAnswer ->
+                            val success = controller.submitHandshake(userAnswer)
+                            isHandshakeSuccessful = success
+                            success
+                        },
+                        onContinueClick = { onComplete() }
                     )
-                }
-
-                // Bottom Section: Dialogue Speech Card & Interactive Handshake
-                Column(modifier = Modifier.fillMaxWidth()) {
-                    Card(
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(20.dp),
-                        colors = CardDefaults.cardColors(
-                            containerColor = if (isGuru) Color(0xF2131C31) else Color(0xF20F243A)
-                        ),
-                        border = CardDefaults.outlinedCardBorder().copy(
-                            brush = Brush.horizontalGradient(
-                                if (isGuru) listOf(Color(0xFFFFB300), Color(0x66FFB300))
-                                else listOf(Color(0xFF00E5FF), Color(0x6600E5FF))
-                            ),
-                            width = 1.5.dp
-                        ),
-                        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
-                    ) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp)
-                        ) {
-                            // Speaker Badge & Emotion Row
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Box(
-                                    modifier = Modifier
-                                        .clip(RoundedCornerShape(8.dp))
-                                        .background(if (isGuru) Color(0x4DFFB300) else Color(0x4D00E5FF))
-                                        .border(
-                                            1.dp,
-                                            if (isGuru) VedicGoldLight else CyberCyanLight,
-                                            RoundedCornerShape(8.dp)
-                                        )
-                                        .padding(horizontal = 10.dp, vertical = 4.dp)
-                                ) {
-                                    Text(
-                                        text = if (isGuru) "👑 GURU" else "🙏 SHISHYA",
-                                        fontWeight = FontWeight.ExtraBold,
-                                        color = if (isGuru) VedicGoldLight else CyberCyanLight,
-                                        fontSize = 12.sp,
-                                        letterSpacing = 0.5.sp
-                                    )
-                                }
-
-                                // Emotion & Audio Cue Pill
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.spacedBy(6.dp)
-                                ) {
-                                    val emotionLabel = when (currentNode.riveState.emotion) {
-                                        RiveEmotion.HAPPY -> "✨ Joy"
-                                        RiveEmotion.THINKING -> "🤔 Ponder"
-                                        RiveEmotion.SURPRISED -> "💡 Eureka"
-                                        RiveEmotion.NEUTRAL -> "🧘 Calm"
-                                    }
-                                    Box(
-                                        modifier = Modifier
-                                            .clip(RoundedCornerShape(6.dp))
-                                            .background(Color(0x33334155))
-                                            .padding(horizontal = 6.dp, vertical = 2.dp)
-                                    ) {
-                                        Text(
-                                            text = emotionLabel,
-                                            color = Color(0xFF94A3B8),
-                                            fontSize = 10.sp
-                                        )
-                                    }
-                                    Text(
-                                        text = "🔊",
-                                        fontSize = 11.sp
-                                    )
-                                }
-                            }
-
-                            Spacer(modifier = Modifier.height(10.dp))
-
-                            // Dialogue Text
-                            Crossfade(targetState = currentNode.text, label = "DialogueTextCrossfade") { text ->
-                                Text(
-                                    text = text,
-                                    color = TextWhitePrimary,
-                                    fontSize = 15.sp,
-                                    lineHeight = 22.sp,
-                                    fontWeight = FontWeight.Normal
-                                )
-                            }
-
-                            // Corrective feedback error banner (if any)
-                            AnimatedVisibility(visible = handshakeError != null, enter = fadeIn(), exit = fadeOut()) {
-                                handshakeError?.let { err ->
-                                    Spacer(modifier = Modifier.height(8.dp))
-                                    Text(
-                                        text = "⚠️ $err",
-                                        color = Color(0xFFFBBF24),
-                                        fontSize = 12.sp,
-                                        fontWeight = FontWeight.SemiBold
-                                    )
-                                }
-                            }
-
-                            // Interactive Handshake Tap Section (Node 4)
-                            if (isHandshakeStep) {
-                                Spacer(modifier = Modifier.height(14.dp))
-                                Card(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    shape = RoundedCornerShape(14.dp),
-                                    colors = CardDefaults.cardColors(containerColor = Color(0xFF0F172A)),
-                                    border = CardDefaults.outlinedCardBorder().copy(
-                                        brush = Brush.horizontalGradient(listOf(Color(0xFF34D399), Color(0xFF10B981))),
-                                        width = 1.dp
-                                    )
-                                ) {
-                                    Row(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(12.dp),
-                                        horizontalArrangement = Arrangement.SpaceBetween,
-                                        verticalAlignment = Alignment.CenterVertically
-                                    ) {
-                                        Text(
-                                            text = "👉 ${currentNode.interactiveHandshake.promptText ?: "Tap to proceed"}",
-                                            color = Color(0xFFD1FAE5),
-                                            fontSize = 12.sp,
-                                            fontWeight = FontWeight.SemiBold,
-                                            modifier = Modifier.weight(1f)
-                                        )
-
-                                        Spacer(modifier = Modifier.width(8.dp))
-
-                                        val expectedAnswer = currentNode.interactiveHandshake.expectedAnswer
-                                            ?: VedicMathValidator.inferExpectedAnswer(currentNode.interactiveHandshake)
-                                            ?: "5"
-
-                                        Button(
-                                            onClick = { controller.submitHandshake(expectedAnswer) },
-                                            shape = RoundedCornerShape(12.dp),
-                                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF10B981))
-                                        ) {
-                                            Text(
-                                                text = "Begin ⚡",
-                                                color = Color(0xFF064E3B),
-                                                fontWeight = FontWeight.Bold,
-                                                fontSize = 12.sp
-                                            )
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    Spacer(modifier = Modifier.height(10.dp))
-
-                    // Bottom Navigation Indicator Row
+                } else {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 4.dp),
+                            .padding(vertical = 8.dp, horizontal = 4.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        if (!isHandshakeStep) {
-                            Text(
-                                text = "Tap anywhere to continue ▹",
-                                fontSize = 12.sp,
-                                fontWeight = FontWeight.Medium,
-                                color = VedicGoldLight.copy(alpha = tapPromptAlpha),
-                                letterSpacing = 0.5.sp
-                            )
-                        } else {
-                            Text(
-                                text = "Complete the interactive handshake above 👆",
-                                fontSize = 12.sp,
-                                fontWeight = FontWeight.Medium,
-                                color = Color(0xFF34D399).copy(alpha = tapPromptAlpha),
-                                letterSpacing = 0.5.sp
-                            )
-                        }
+                        Text(
+                            text = "Tap anywhere to continue ▹",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            color = VedicParchmentTokens.SaffronDark.copy(alpha = tapPromptAlpha),
+                            letterSpacing = 0.5.sp
+                        )
 
                         Text(
-                            text = "Node ${currentNodeIndex + 1} of $totalNodes",
+                            text = "Step ${currentNodeIndex + 1} of $totalNodes",
                             fontSize = 11.sp,
-                            color = Color(0xFF64748B)
+                            fontWeight = FontWeight.Medium,
+                            color = VedicParchmentTokens.InkMuted
                         )
                     }
                 }
@@ -601,7 +336,7 @@ fun GurukulSceneScreen(
 }
 
 /**
- * Fallback Legacy Gurukul Scene Composable if assets cannot be resolved.
+ * Fallback Legacy Gurukul Scene Composable.
  */
 @Composable
 private fun LegacyGurukulSceneScreen(
@@ -615,7 +350,7 @@ private fun LegacyGurukulSceneScreen(
         modifier = modifier
             .fillMaxSize()
             .clickable { onComplete() },
-        color = Color(0xFF0B1120)
+        color = VedicParchmentTokens.ParchmentBase
     ) {
         Column(
             modifier = Modifier
@@ -628,17 +363,17 @@ private fun LegacyGurukulSceneScreen(
             Text(
                 text = script.title,
                 style = MaterialTheme.typography.titleLarge,
-                color = VedicGoldLight
+                color = VedicParchmentTokens.InkDark
             )
 
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(containerColor = Color(0xF20F172A))
+                colors = CardDefaults.cardColors(containerColor = VedicParchmentTokens.ParchmentCardBg)
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(
                         text = "Practice lesson for ${script.title}",
-                        color = TextWhitePrimary,
+                        color = VedicParchmentTokens.InkDark,
                         fontSize = 14.sp
                     )
                 }

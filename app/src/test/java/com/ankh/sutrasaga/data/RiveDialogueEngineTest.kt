@@ -16,6 +16,7 @@ import com.ankh.sutrasaga.engine.rive.DefaultRiveAdapter
 import com.ankh.sutrasaga.engine.rive.RiveDialogueController
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
@@ -63,6 +64,13 @@ class RiveDialogueEngineTest {
                 assertTrue(
                     "Animation '${node.riveState.animation}' must be allowed for ${node.riveState.character}",
                     RiveAnimationConfig.isValidAnimation(node.riveState.character, node.riveState.animation)
+                )
+
+                // STRICT: Guru must never wink in any dialogue tree
+                assertNotEquals(
+                    "Guru animations must never contain wink",
+                    "guru_wink",
+                    node.riveState.animation
                 )
             }
 
@@ -179,6 +187,17 @@ class RiveDialogueEngineTest {
         val invalidShishyaAnim = "shishya_teleport"
         val sanitizedShishya = RiveAnimationConfig.sanitizeAnimation(RiveSpeaker.SHISHYA, invalidShishyaAnim)
         assertEquals("Invalid shishya animation must fallback to shishya_idle", "shishya_idle", sanitizedShishya)
+    }
+
+    @Test
+    fun testGuruApprovalStateNeverTriggersWink() {
+        // Assert that guru_wink is never considered valid
+        assertFalse("guru_wink is strictly disallowed", RiveAnimationConfig.isValidAnimation(RiveSpeaker.GURU, "guru_wink"))
+        assertEquals("guru_wink must fallback to guru_idle", "guru_idle", RiveAnimationConfig.sanitizeAnimation(RiveSpeaker.GURU, "guru_wink"))
+
+        // Assert valid approval states
+        assertTrue(RiveAnimationConfig.isValidAnimation(RiveSpeaker.GURU, "guru_nod"))
+        assertTrue(RiveAnimationConfig.isValidAnimation(RiveSpeaker.GURU, "guru_bless"))
     }
 
     @Test
