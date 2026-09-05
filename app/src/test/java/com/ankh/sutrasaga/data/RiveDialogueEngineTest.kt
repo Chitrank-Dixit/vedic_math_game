@@ -14,6 +14,8 @@ import com.ankh.sutrasaga.domain.validation.RiveDialogueValidator
 import com.ankh.sutrasaga.domain.validation.VedicMathValidator
 import com.ankh.sutrasaga.engine.rive.DefaultRiveAdapter
 import com.ankh.sutrasaga.engine.rive.RiveDialogueController
+import android.content.Context
+import androidx.test.core.app.ApplicationProvider
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotEquals
@@ -30,11 +32,23 @@ class RiveDialogueEngineTest {
 
     @Test
     fun testAll16VedicSutraDialoguesArePresentAndValid() {
-        val jsonFile = File("src/main/assets/dialogue/rive_sutra_dialogues.json")
-        assertTrue("Asset file must exist", jsonFile.exists())
+        val context: Context = ApplicationProvider.getApplicationContext()
+        val jsonContent = try {
+            context.assets.open("dialogue/rive_sutra_dialogues.json").bufferedReader().use { it.readText() }
+        } catch (e: Exception) {
+            val candidateFiles = listOf(
+                File("src/main/assets/dialogue/rive_sutra_dialogues.json"),
+                File("app/src/main/assets/dialogue/rive_sutra_dialogues.json"),
+                File(System.getProperty("user.dir"), "app/src/main/assets/dialogue/rive_sutra_dialogues.json"),
+                File(System.getProperty("user.dir"), "src/main/assets/dialogue/rive_sutra_dialogues.json")
+            )
+            val jsonFile = candidateFiles.firstOrNull { it.exists() }
+            assertNotNull("Asset file rive_sutra_dialogues.json must exist in assets", jsonFile)
+            jsonFile!!.readText()
+        }
 
         val repository = RiveDialogueRepository()
-        val trees = repository.parseJson(jsonFile.readText())
+        val trees = repository.parseJson(jsonContent)
 
         assertEquals("Must contain all 16 Primary Vedic Sutras", 16, trees.size)
 
