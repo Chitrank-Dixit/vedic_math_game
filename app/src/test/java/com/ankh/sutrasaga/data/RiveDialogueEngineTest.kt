@@ -321,4 +321,126 @@ class RiveDialogueEngineTest {
         assertEquals("shishya_celebrate", adapter.shishyaAnimation.value)
         assertTrue("Celebration particle must be triggered", adapter.particleTriggered.value)
     }
+
+    @Test
+    fun testHandshakeValidationFailClosedInvariant() {
+        // TEST 1 — Missing expected answer
+        val missingExpectedHandshake = InteractiveHandshake(
+            requiresUserTap = true,
+            targetElementId = null,
+            promptText = null,
+            expectedAnswer = null
+        )
+        assertFalse(
+            "TEST 1: Missing expected answer must fail validation",
+            VedicMathValidator.evaluateHandshake(missingExpectedHandshake, "5")
+        )
+
+        // TEST 2 — Unresolvable expected answer
+        val unresolvableHandshake = InteractiveHandshake(
+            requiresUserTap = true,
+            targetElementId = null,
+            promptText = null,
+            expectedAnswer = null
+        )
+        assertNull(
+            "Expected answer must be null when unresolvable",
+            VedicMathValidator.inferExpectedAnswer(unresolvableHandshake)
+        )
+        assertFalse(
+            "TEST 2: Unresolvable expected answer must fail validation",
+            VedicMathValidator.evaluateHandshake(unresolvableHandshake, "5")
+        )
+
+        // TEST 3 — Wrong answer
+        val handshake = InteractiveHandshake(
+            requiresUserTap = true,
+            targetElementId = "numpad_key_5",
+            promptText = "Tap 5 to begin!",
+            expectedAnswer = "5"
+        )
+        assertFalse(
+            "TEST 3: Wrong user answer must fail validation",
+            VedicMathValidator.evaluateHandshake(handshake, "4")
+        )
+
+        // TEST 4 — Correct answer
+        assertTrue(
+            "TEST 4: Correct user answer must pass validation",
+            VedicMathValidator.evaluateHandshake(handshake, "5")
+        )
+
+        // Additional edge case tests: Blank/whitespace expected answer & empty user answer
+        val blankExpectedHandshake = InteractiveHandshake(
+            requiresUserTap = true,
+            expectedAnswer = "   "
+        )
+        assertFalse(
+            "Blank expected answer must fail validation",
+            VedicMathValidator.evaluateHandshake(blankExpectedHandshake, "5")
+        )
+
+        val emptyUserAnswerHandshake = InteractiveHandshake(
+            requiresUserTap = true,
+            expectedAnswer = "5"
+        )
+        assertFalse(
+            "Empty user answer must fail validation",
+            VedicMathValidator.evaluateHandshake(emptyUserAnswerHandshake, "")
+        )
+        assertFalse(
+            "Whitespace-only user answer must fail validation",
+            VedicMathValidator.evaluateHandshake(emptyUserAnswerHandshake, "   ")
+        )
+    }
+
+    @Test
+    fun testDialogueControllerWithUnavailableExpectedAnswerFailsClosed() {
+        // TEST 5 — Missing expected answer must never complete the dialogue
+        val treeWithUnresolvableHandshake = RiveSutraDialogueTree(
+            sutraId = "test_unresolvable",
+            sutraName = "Test Unresolvable",
+            englishMeaning = "Test Meaning",
+            worldNumber = 1,
+            dialogueNodes = listOf(
+                RiveDialogueNode(
+                    nodeId = 1,
+                    speaker = RiveSpeaker.SHISHYA,
+                    text = "Intro node",
+                    riveState = RiveCharacterState(RiveSpeaker.SHISHYA, "shishya_curious", RiveEmotion.THINKING, true),
+                    mathOverlay = MathOverlay("1+1=2", listOf("1")),
+                    audioCues = AudioCues("<speak>intro</speak>", "sfx"),
+                    interactiveHandshake = InteractiveHandshake(false, null, null)
+                ),
+                RiveDialogueNode(
+                    nodeId = 2,
+                    speaker = RiveSpeaker.GURU,
+                    text = "Handshake with missing expected answer",
+                    riveState = RiveCharacterState(RiveSpeaker.GURU, "guru_magic_fx", RiveEmotion.HAPPY, true),
+                    mathOverlay = MathOverlay("1+1=2", listOf("2")),
+                    audioCues = AudioCues("<speak>handshake</speak>", "sfx"),
+                    interactiveHandshake = InteractiveHandshake(
+                        requiresUserTap = true,
+                        targetElementId = null,
+                        promptText = null,
+                        expectedAnswer = null
+                    )
+                )
+            )
+        )
+
+        val adapter = DefaultRiveAdapter()
+        val controller = RiveDialogueController(treeWithUnresolvableHandshake, adapter)
+
+        // Advance to handshake node
+        assertTrue(controller.advanceNode())
+        assertEquals(1, controller.currentNodeIndex.value)
+
+        // Attempt submitHandshake with arbitrary answer "5"
+        val submitResult = controller.submitHandshake("5")
+        assertFalse("submitHandshake must return false when expected answer is unavailable", submitResult)
+        assertFalse("Dialogue must NOT complete when expected answer is unavailable", controller.isCompleted.value)
+        assertNotNull("Handshake error message must be set on failure", controller.handshakeError.value)
+        assertEquals("shishya_puzzled", adapter.shishyaAnimation.value)
+    }
 }

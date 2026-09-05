@@ -72,14 +72,15 @@ object VedicMathValidator {
 
     /**
      * Validates a student's answer against the interactive handshake requirements.
+     * Enforces fail-closed validation invariant: UNKNOWN EXPECTED ANSWER ≠ SUCCESS.
      */
     fun evaluateHandshake(handshake: InteractiveHandshake, userAnswer: String): Boolean {
-        if (!handshake.requiresUserTap) return true
+        val expected = inferExpectedAnswer(handshake) ?: return false
+        if (expected.isBlank()) return false
 
-        val expected = inferExpectedAnswer(handshake) ?: return true
         val normalizedUser = userAnswer.trim()
         val normalizedExpected = expected.trim()
 
-        return normalizedUser.equals(normalizedExpected, ignoreCase = true)
+        return normalizedUser.isNotBlank() && normalizedUser.equals(normalizedExpected, ignoreCase = true)
     }
 }
