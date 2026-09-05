@@ -45,37 +45,12 @@ object VedicMathValidator {
     }
 
     /**
-     * Extracts or infers the expected answer for an interactive handshake.
-     */
-    fun inferExpectedAnswer(handshake: InteractiveHandshake): String? {
-        if (!handshake.expectedAnswer.isNullOrBlank()) {
-            return handshake.expectedAnswer.trim()
-        }
-
-        // Infer from targetElementId e.g. "numpad_key_5" -> "5"
-        val elementId = handshake.targetElementId
-        if (elementId != null && elementId.startsWith("numpad_key_")) {
-            return elementId.removePrefix("numpad_key_").trim()
-        }
-
-        // Infer from prompt text e.g. "Tap 5 to compute 4 × 5 = 20!" -> "5"
-        val prompt = handshake.promptText
-        if (prompt != null) {
-            val tapMatch = Regex("""(?:Tap|enter|choose)\s+(\w+)""", RegexOption.IGNORE_CASE).find(prompt)
-            if (tapMatch != null) {
-                return tapMatch.groupValues[1].trim()
-            }
-        }
-
-        return null
-    }
-
-    /**
      * Validates a student's answer against the interactive handshake requirements.
-     * Enforces fail-closed validation invariant: UNKNOWN EXPECTED ANSWER ≠ SUCCESS.
+     * Enforces that mathematical truth is solely determined by the authoritative [InteractiveHandshake.expectedAnswer].
+     * Fail-closed invariant: UNKNOWN / MISSING / BLANK EXPECTED ANSWER = FAILURE.
      */
     fun evaluateHandshake(handshake: InteractiveHandshake, userAnswer: String): Boolean {
-        val expected = inferExpectedAnswer(handshake) ?: return false
+        val expected = handshake.expectedAnswer ?: return false
         if (expected.isBlank()) return false
 
         val normalizedUser = userAnswer.trim()

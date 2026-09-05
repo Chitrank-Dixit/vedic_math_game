@@ -98,7 +98,8 @@
         "interactive_handshake": {
           "requires_user_tap": true,
           "target_element_id": "numpad_key_5",
-          "prompt_text": "Tap 5 to compute 4 × 5 = 20!"
+          "prompt_text": "Tap 5 to compute 4 × 5 = 20!",
+          "expected_answer": "5"
         }
       }
     ]
@@ -202,7 +203,8 @@
         "interactive_handshake": {
           "requires_user_tap": true,
           "target_element_id": "numpad_key_6",
-          "prompt_text": "Tap 6 for the two-digit suffix 06!"
+          "prompt_text": "Tap 6 for the two-digit suffix 06!",
+          "expected_answer": "6"
         }
       }
     ]
@@ -306,7 +308,8 @@
         "interactive_handshake": {
           "requires_user_tap": true,
           "target_element_id": "numpad_key_5",
-          "prompt_text": "Tap 5 for 3 + 2 = 5!"
+          "prompt_text": "Tap 5 for 3 + 2 = 5!",
+          "expected_answer": "5"
         }
       }
     ]
@@ -410,7 +413,8 @@
         "interactive_handshake": {
           "requires_user_tap": true,
           "target_element_id": "numpad_key_4",
-          "prompt_text": "Tap 4 for magnitude |-4| = 4!"
+          "prompt_text": "Tap 4 for magnitude |-4| = 4!",
+          "expected_answer": "4"
         }
       }
     ]
@@ -514,7 +518,8 @@
         "interactive_handshake": {
           "requires_user_tap": true,
           "target_element_id": "numpad_key_0",
-          "prompt_text": "Tap 0 to confirm x = 0!"
+          "prompt_text": "Tap 0 to confirm x = 0!",
+          "expected_answer": "0"
         }
       }
     ]
@@ -618,7 +623,8 @@
         "interactive_handshake": {
           "requires_user_tap": true,
           "target_element_id": "numpad_key_3",
-          "prompt_text": "Tap 3 to complete x = 3!"
+          "prompt_text": "Tap 3 to complete x = 3!",
+          "expected_answer": "3"
         }
       }
     ]
@@ -722,7 +728,8 @@
         "interactive_handshake": {
           "requires_user_tap": true,
           "target_element_id": "numpad_key_2",
-          "prompt_text": "Tap 2 for x = 2!"
+          "prompt_text": "Tap 2 for x = 2!",
+          "expected_answer": "2"
         }
       }
     ]
@@ -826,7 +833,8 @@
         "interactive_handshake": {
           "requires_user_tap": true,
           "target_element_id": "numpad_key_5",
-          "prompt_text": "Tap 5 for √25 = 5!"
+          "prompt_text": "Tap 5 for √25 = 5!",
+          "expected_answer": "5"
         }
       }
     ]
@@ -930,7 +938,8 @@
         "interactive_handshake": {
           "requires_user_tap": true,
           "target_element_id": "numpad_key_2",
-          "prompt_text": "Tap 2 for x = 2!"
+          "prompt_text": "Tap 2 for x = 2!",
+          "expected_answer": "2"
         }
       }
     ]
@@ -1034,7 +1043,8 @@
         "interactive_handshake": {
           "requires_user_tap": true,
           "target_element_id": "numpad_key_9",
-          "prompt_text": "Tap 9 for 3² = 09!"
+          "prompt_text": "Tap 9 for 3² = 09!",
+          "expected_answer": "9"
         }
       }
     ]
@@ -1138,7 +1148,8 @@
         "interactive_handshake": {
           "requires_user_tap": true,
           "target_element_id": "numpad_key_3",
-          "prompt_text": "Tap 3 for √9 = 3!"
+          "prompt_text": "Tap 3 for √9 = 3!",
+          "expected_answer": "3"
         }
       }
     ]
@@ -1242,7 +1253,8 @@
         "interactive_handshake": {
           "requires_user_tap": true,
           "target_element_id": "numpad_key_3",
-          "prompt_text": "Tap 3 for remainder 3!"
+          "prompt_text": "Tap 3 for remainder 3!",
+          "expected_answer": "3"
         }
       }
     ]
@@ -1346,7 +1358,8 @@
         "interactive_handshake": {
           "requires_user_tap": true,
           "target_element_id": "numpad_key_3",
-          "prompt_text": "Tap 3 for |-3| = 3!"
+          "prompt_text": "Tap 3 for |-3| = 3!",
+          "expected_answer": "3"
         }
       }
     ]
@@ -1450,7 +1463,8 @@
         "interactive_handshake": {
           "requires_user_tap": true,
           "target_element_id": "numpad_key_2",
-          "prompt_text": "Tap 2 for 73 - 1 = 72!"
+          "prompt_text": "Tap 2 for 73 - 1 = 72!",
+          "expected_answer": "2"
         }
       }
     ]
@@ -1554,7 +1568,8 @@
         "interactive_handshake": {
           "requires_user_tap": true,
           "target_element_id": "numpad_key_6",
-          "prompt_text": "Tap 6 for 2 × 3 = 6!"
+          "prompt_text": "Tap 6 for 2 × 3 = 6!",
+          "expected_answer": "6"
         }
       }
     ]
@@ -1658,7 +1673,8 @@
         "interactive_handshake": {
           "requires_user_tap": true,
           "target_element_id": "numpad_key_9",
-          "prompt_text": "Tap 9 to enter World 16 Arena!"
+          "prompt_text": "Tap 9 to enter World 16 Arena!",
+          "expected_answer": "9"
         }
       }
     ]

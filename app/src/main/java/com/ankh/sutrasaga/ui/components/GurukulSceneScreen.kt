@@ -62,7 +62,6 @@ import com.ankh.sutrasaga.domain.models.GurukulScript
 import com.ankh.sutrasaga.domain.models.RiveDialogueNode
 import com.ankh.sutrasaga.domain.models.RiveSutraDialogueTree
 import com.ankh.sutrasaga.domain.models.SutraProblem
-import com.ankh.sutrasaga.domain.validation.VedicMathValidator
 import com.ankh.sutrasaga.engine.rive.RiveDialogueController
 import com.ankh.sutrasaga.ui.theme.VedicParchmentTokens
 
@@ -294,7 +293,6 @@ fun GurukulSceneScreen(
                 // Bottom Handshake Mini-Game ("Let's try it!") or Tap Prompt
                 if (isHandshakeStep) {
                     val expectedAnswer = currentNode.interactiveHandshake.expectedAnswer
-                        ?: VedicMathValidator.inferExpectedAnswer(currentNode.interactiveHandshake)
 
                     InteractiveHandshakeTileGroup(
                         handshake = currentNode.interactiveHandshake,

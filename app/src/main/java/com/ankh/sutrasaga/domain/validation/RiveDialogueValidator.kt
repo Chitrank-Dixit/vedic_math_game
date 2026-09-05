@@ -79,12 +79,18 @@ object RiveDialogueValidator {
                 if (handshake.promptText.isNullOrBlank()) {
                     errors.add("Node ${node.nodeId}: requires_user_tap is true but prompt_text is null/blank.")
                 }
+                if (handshake.expectedAnswer.isNullOrBlank()) {
+                    errors.add("Node ${node.nodeId}: requires_user_tap is true but expected_answer is null/blank.")
+                }
             } else {
                 if (handshake.targetElementId != null) {
                     warnings.add("Node ${node.nodeId}: requires_user_tap is false but target_element_id is set to '${handshake.targetElementId}'.")
                 }
                 if (handshake.promptText != null) {
                     warnings.add("Node ${node.nodeId}: requires_user_tap is false but prompt_text is set to '${handshake.promptText}'.")
+                }
+                if (handshake.expectedAnswer != null) {
+                    warnings.add("Node ${node.nodeId}: requires_user_tap is false but expected_answer is set to '${handshake.expectedAnswer}'.")
                 }
             }
         }

@@ -10,7 +10,6 @@ import com.ankh.sutrasaga.domain.models.RiveEmotion
 import com.ankh.sutrasaga.domain.models.RiveSpeaker
 import com.ankh.sutrasaga.domain.models.RiveSutraDialogueTree
 import com.ankh.sutrasaga.domain.validation.RiveDialogueValidator
-import com.ankh.sutrasaga.domain.validation.VedicMathValidator
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -114,15 +113,12 @@ class RiveDialogueRepository(private val context: Context? = null) {
                 null
             }
 
-            val provisionalHandshake = InteractiveHandshake(
+            val interactiveHandshake = InteractiveHandshake(
                 requiresUserTap = requiresTap,
                 targetElementId = targetElementId,
                 promptText = promptText,
                 expectedAnswer = explicitExpected
             )
-            val resolvedExpected = explicitExpected ?: VedicMathValidator.inferExpectedAnswer(provisionalHandshake)
-
-            val interactiveHandshake = provisionalHandshake.copy(expectedAnswer = resolvedExpected)
 
             nodes.add(
                 RiveDialogueNode(
