@@ -375,112 +375,106 @@ class RiveDialogueEngineTest {
 
     @Test
     fun testHandshakeValidationAuthoritativeAnswerRules() {
-        // TEST 1 — Explicit expected answer = "5", user answer = "5" -> PASS
-        val validHandshake = InteractiveHandshake(
+        // Case A: expectedAnswer = "5", targetElementId = "numpad_key_5", userAnswer = "5" -> true
+        val caseA = InteractiveHandshake(
             requiresUserTap = true,
             targetElementId = "numpad_key_5",
             promptText = "Tap 5 to compute 4 × 5 = 20!",
             expectedAnswer = "5"
         )
         assertTrue(
-            "TEST 1: Explicit expected answer '5' with user answer '5' must pass validation",
-            VedicMathValidator.evaluateHandshake(validHandshake, "5")
+            "Case A: expectedAnswer='5', targetElementId='numpad_key_5', userAnswer='5' -> true",
+            VedicMathValidator.evaluateHandshake(caseA, "5")
         )
 
-        // TEST 2 — Explicit expected answer = "5", user answer = "7" -> FAIL
-        assertFalse(
-            "TEST 2: Explicit expected answer '5' with wrong user answer '7' must fail validation",
-            VedicMathValidator.evaluateHandshake(validHandshake, "7")
-        )
-
-        // TEST 3 — Expected answer missing (null) -> FAIL
-        val missingExpectedHandshake = InteractiveHandshake(
+        // Case B: expectedAnswer = "5", targetElementId = "numpad_key_7", userAnswer = "5" -> true
+        // (Proves targetElementId is NOT authoritative)
+        val caseB = InteractiveHandshake(
             requiresUserTap = true,
-            targetElementId = "numpad_key_5",
-            promptText = "Tap 5 to proceed!",
-            expectedAnswer = null
-        )
-        assertFalse(
-            "TEST 3: Missing (null) expected answer must fail validation",
-            VedicMathValidator.evaluateHandshake(missingExpectedHandshake, "5")
-        )
-
-        // TEST 4 — Expected answer blank -> FAIL
-        val blankExpectedHandshake = InteractiveHandshake(
-            requiresUserTap = true,
-            targetElementId = "numpad_key_5",
-            promptText = "Tap 5 to proceed!",
-            expectedAnswer = "   "
-        )
-        assertFalse(
-            "TEST 4: Blank expected answer must fail validation",
-            VedicMathValidator.evaluateHandshake(blankExpectedHandshake, "5")
-        )
-
-        // TEST 5 — Expected answer = "5", targetElementId = "numpad_key_5" -> PASS
-        assertTrue(
-            "TEST 5: Expected answer '5' matching element id must pass validation",
-            VedicMathValidator.evaluateHandshake(validHandshake, "5")
-        )
-
-        // TEST 6 — Expected answer = "5", targetElementId = "numpad_key_7" -> STILL PASS
-        // (Changing targetElementId must NOT change the authoritative expected answer)
-        val mismatchedTargetIdHandshake = InteractiveHandshake(
-            requiresUserTap = true,
-            targetElementId = "numpad_key_7", // target element says 7
-            promptText = "Tap key to compute",
-            expectedAnswer = "5" // authoritative math answer is 5
+            targetElementId = "numpad_key_7",
+            promptText = "Tap 5 to compute 4 × 5 = 20!",
+            expectedAnswer = "5"
         )
         assertTrue(
-            "TEST 6: Changing targetElementId must NOT change the expected answer (5 must still pass)",
-            VedicMathValidator.evaluateHandshake(mismatchedTargetIdHandshake, "5")
+            "Case B: expectedAnswer='5', targetElementId='numpad_key_7', userAnswer='5' -> true",
+            VedicMathValidator.evaluateHandshake(caseB, "5")
         )
         assertFalse(
-            "TEST 6: Changing targetElementId must NOT make 7 pass when expectedAnswer is 5",
-            VedicMathValidator.evaluateHandshake(mismatchedTargetIdHandshake, "7")
+            "Case B: targetElementId='numpad_key_7' must NOT make userAnswer='7' pass when expectedAnswer='5'",
+            VedicMathValidator.evaluateHandshake(caseB, "7")
         )
 
-        // TEST 7 — Expected answer = "5", Prompt changed -> STILL validates against "5"
-        // (Changing prompt wording must NOT change the authoritative expected answer)
-        val alteredPromptHandshake = InteractiveHandshake(
+        // Case C: expectedAnswer = "5", promptText = "Tap 7 for something else", userAnswer = "5" -> true
+        // (Proves prompt text is NOT authoritative)
+        val caseC = InteractiveHandshake(
             requiresUserTap = true,
             targetElementId = "numpad_key_5",
-            promptText = "Tap 9 for 3² = 09!", // deceptive prompt text
-            expectedAnswer = "5" // authoritative math answer is 5
+            promptText = "Tap 7 for something else",
+            expectedAnswer = "5"
         )
         assertTrue(
-            "TEST 7: Changing prompt wording must NOT change expected answer (5 must still pass)",
-            VedicMathValidator.evaluateHandshake(alteredPromptHandshake, "5")
+            "Case C: expectedAnswer='5', promptText='Tap 7...', userAnswer='5' -> true",
+            VedicMathValidator.evaluateHandshake(caseC, "5")
         )
         assertFalse(
-            "TEST 7: Prompt text mentioning 9 must NOT make 9 pass when expectedAnswer is 5",
-            VedicMathValidator.evaluateHandshake(alteredPromptHandshake, "9")
+            "Case C: promptText mentioning 7 must NOT make userAnswer='7' pass when expectedAnswer='5'",
+            VedicMathValidator.evaluateHandshake(caseC, "7")
         )
 
-        // TEST 8 — No expected answer + targetElementId = "numpad_key_5" -> FAIL
-        // (targetElementId alone without expectedAnswer cannot validate or infer an answer)
-        val targetIdOnlyHandshake = InteractiveHandshake(
+        // Case D: expectedAnswer = null, targetElementId = "numpad_key_5", userAnswer = "5" -> false
+        // (Proves targetElementId cannot provide a fallback)
+        val caseD = InteractiveHandshake(
             requiresUserTap = true,
             targetElementId = "numpad_key_5",
             promptText = null,
             expectedAnswer = null
         )
         assertFalse(
-            "TEST 8: targetElementId without expectedAnswer must fail validation (no inference)",
-            VedicMathValidator.evaluateHandshake(targetIdOnlyHandshake, "5")
+            "Case D: expectedAnswer=null, targetElementId='numpad_key_5', userAnswer='5' -> false",
+            VedicMathValidator.evaluateHandshake(caseD, "5")
         )
 
-        // TEST 9 — No expected answer + prompt = "Tap 5 to begin" -> FAIL
-        // (promptText alone without expectedAnswer cannot validate or infer an answer)
-        val promptOnlyHandshake = InteractiveHandshake(
+        // Case E: expectedAnswer = null, promptText = "Tap 5...", userAnswer = "5" -> false
+        // (Proves prompt text cannot provide a fallback)
+        val caseE = InteractiveHandshake(
             requiresUserTap = true,
             targetElementId = null,
             promptText = "Tap 5 to begin!",
             expectedAnswer = null
         )
         assertFalse(
-            "TEST 9: promptText without expectedAnswer must fail validation (no inference)",
-            VedicMathValidator.evaluateHandshake(promptOnlyHandshake, "5")
+            "Case E: expectedAnswer=null, promptText='Tap 5...', userAnswer='5' -> false",
+            VedicMathValidator.evaluateHandshake(caseE, "5")
+        )
+
+        // Case F: expectedAnswer = "5", userAnswer = "7" -> false
+        val caseF = InteractiveHandshake(
+            requiresUserTap = true,
+            expectedAnswer = "5"
+        )
+        assertFalse(
+            "Case F: expectedAnswer='5', userAnswer='7' -> false",
+            VedicMathValidator.evaluateHandshake(caseF, "7")
+        )
+
+        // Case G: expectedAnswer = "5", userAnswer = "5" -> true
+        val caseG = InteractiveHandshake(
+            requiresUserTap = true,
+            expectedAnswer = "5"
+        )
+        assertTrue(
+            "Case G: expectedAnswer='5', userAnswer='5' -> true",
+            VedicMathValidator.evaluateHandshake(caseG, "5")
+        )
+
+        // Case H: expectedAnswer = blank -> false
+        val caseH = InteractiveHandshake(
+            requiresUserTap = true,
+            expectedAnswer = "   "
+        )
+        assertFalse(
+            "Case H: expectedAnswer='   ' (blank) -> false",
+            VedicMathValidator.evaluateHandshake(caseH, "5")
         )
 
         // Additional edge case tests: empty and whitespace user answers
