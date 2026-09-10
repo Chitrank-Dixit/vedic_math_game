@@ -44,6 +44,30 @@ fun MainGameContent(viewModel: GameViewModel) {
         uiState = uiState,
         onStartQuest = { questId ->
             viewModel.startUpaSutraQuest(questId)
+        },
+        onAdvanceQuestStage = {
+            viewModel.advanceQuestStage()
+        },
+        onAppendDigit = { char ->
+            viewModel.appendDigit(char)
+        },
+        onBackspaceDigit = {
+            viewModel.backspaceDigit()
+        },
+        onClearDigit = {
+            viewModel.clearDigit()
+        },
+        onSubmitAnswer = {
+            viewModel.submitAnswer()
+        },
+        onNextProblem = {
+            viewModel.nextProblem()
+        },
+        onRevealStep = {
+            viewModel.revealNextStep()
+        },
+        onReturnToTreasury = {
+            viewModel.openTreasury()
         }
     )
 }

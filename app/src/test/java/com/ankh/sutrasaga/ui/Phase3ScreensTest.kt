@@ -72,4 +72,18 @@ class Phase3ScreensTest {
         val uniqueEquations = retrievedLessons.map { it.primaryEquation }.toSet()
         assertEquals(16, uniqueEquations.size)
     }
+
+    @Test
+    fun testVedicAppRouteDefinitions() {
+        val expectedRoutes = setOf(
+            VedicAppRoute.HOME,
+            VedicAppRoute.GURUKUL_TUTORIAL,
+            VedicAppRoute.SUTRA_SOLVER,
+            VedicAppRoute.PRACTICE_ARENA,
+            VedicAppRoute.UPA_SUTRA_TREASURY,
+            VedicAppRoute.UPA_SUTRA_CODEX,
+            VedicAppRoute.UPA_SUTRA_QUEST
+        )
+        assertEquals(expectedRoutes, VedicAppRoute.values().toSet())
+    }
 }

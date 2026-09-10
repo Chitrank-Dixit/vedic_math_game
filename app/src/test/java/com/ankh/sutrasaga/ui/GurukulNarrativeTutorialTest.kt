@@ -67,5 +67,6 @@ class GurukulNarrativeTutorialTest {
         assertTrue(routes.contains(VedicAppRoute.PRACTICE_ARENA))
         assertTrue(routes.contains(VedicAppRoute.UPA_SUTRA_TREASURY))
         assertTrue(routes.contains(VedicAppRoute.UPA_SUTRA_CODEX))
+        assertTrue(routes.contains(VedicAppRoute.UPA_SUTRA_QUEST))
     }
 }

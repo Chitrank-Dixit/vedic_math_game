@@ -3,6 +3,7 @@ package com.ankh.sutrasaga.ui.navigation
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.Crossfade
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -21,8 +22,10 @@ import com.ankh.sutrasaga.ui.screens.SutraLessonsRepository
 import com.ankh.sutrasaga.ui.screens.SutraModule
 import com.ankh.sutrasaga.ui.screens.SutraSolverScreen
 import com.ankh.sutrasaga.ui.screens.UpaSutraCodexScreen
+import com.ankh.sutrasaga.ui.screens.UpaSutraQuestScreen
 import com.ankh.sutrasaga.ui.screens.UpaSutraTreasuryScreen
 import com.ankh.sutrasaga.ui.screens.VedicPracticeArenaScreen
+import com.ankh.sutrasaga.ui.viewmodel.GameScreen
 import com.ankh.sutrasaga.ui.viewmodel.GameUiState
 
 enum class VedicAppRoute {
@@ -31,7 +34,8 @@ enum class VedicAppRoute {
     SUTRA_SOLVER,
     PRACTICE_ARENA,
     UPA_SUTRA_TREASURY,
-    UPA_SUTRA_CODEX
+    UPA_SUTRA_CODEX,
+    UPA_SUTRA_QUEST
 }
 
 /**
@@ -39,20 +43,45 @@ enum class VedicAppRoute {
  * Handles:
  * 1. HomeScreen -> Select Sutra -> GurukulSceneScreen (Guru-Shishya Tutorial) -> SutraSolverScreen
  * 2. HomeScreen -> Quick Start -> PracticeArenaScreen
- * 3. HomeScreen -> Treasury -> UpaSutraTreasuryScreen -> Codex
+ * 3. HomeScreen -> Treasury -> UpaSutraTreasuryScreen -> Codex / UpaSutraQuestScreen
  * 4. Back navigation across all sub-screens
  */
 @Composable
 fun VedicAppNavigator(
     initialRoute: VedicAppRoute = VedicAppRoute.HOME,
     uiState: GameUiState? = null,
-    onStartQuest: (UpaSutraId) -> Unit = {}
+    onStartQuest: (UpaSutraId) -> Unit = {},
+    onAdvanceQuestStage: () -> Unit = {},
+    onAppendDigit: (Char) -> Unit = {},
+    onBackspaceDigit: () -> Unit = {},
+    onClearDigit: () -> Unit = {},
+    onSubmitAnswer: () -> Unit = {},
+    onNextProblem: () -> Unit = {},
+    onRevealStep: () -> Unit = {},
+    onReturnToTreasury: () -> Unit = {}
 ) {
     var currentRoute by remember { mutableStateOf(initialRoute) }
     var currentStreak by remember { mutableIntStateOf(7) }
     var selectedLesson by remember { mutableStateOf<SutraLesson>(SampleUrdhvaLesson) }
     var selectedScript by remember { mutableStateOf<GurukulScript>(GurukulScriptsRepository.allScripts.values.first()) }
     var selectedProblem by remember { mutableStateOf<SutraProblem>(GurukulScriptsRepository.getProblemForModule(SampleSutraModules.first())) }
+
+    // Sync currentRoute with external uiState changes (e.g. quest start or completion)
+    LaunchedEffect(uiState?.currentScreen) {
+        when (uiState?.currentScreen) {
+            GameScreen.UPA_SUTRA_QUEST -> {
+                if (currentRoute != VedicAppRoute.UPA_SUTRA_QUEST) {
+                    currentRoute = VedicAppRoute.UPA_SUTRA_QUEST
+                }
+            }
+            GameScreen.UPA_SUTRA_TREASURY -> {
+                if (currentRoute == VedicAppRoute.UPA_SUTRA_QUEST) {
+                    currentRoute = VedicAppRoute.UPA_SUTRA_TREASURY
+                }
+            }
+            else -> {}
+        }
+    }
 
     // System Back Navigation handling
     when (currentRoute) {
@@ -67,8 +96,10 @@ fun VedicAppNavigator(
                 currentRoute = VedicAppRoute.HOME
             }
         }
-        VedicAppRoute.UPA_SUTRA_CODEX -> {
+        VedicAppRoute.UPA_SUTRA_CODEX,
+        VedicAppRoute.UPA_SUTRA_QUEST -> {
             BackHandler {
+                onReturnToTreasury()
                 currentRoute = VedicAppRoute.UPA_SUTRA_TREASURY
             }
         }
@@ -140,6 +171,7 @@ fun VedicAppNavigator(
                     state = uiState ?: GameUiState(),
                     onQuestClick = { questId: UpaSutraId ->
                         onStartQuest(questId)
+                        currentRoute = VedicAppRoute.UPA_SUTRA_QUEST
                     },
                     onCodexClick = {
                         currentRoute = VedicAppRoute.UPA_SUTRA_CODEX
@@ -154,6 +186,23 @@ fun VedicAppNavigator(
                 UpaSutraCodexScreen(
                     state = uiState ?: GameUiState(),
                     onBackClick = {
+                        currentRoute = VedicAppRoute.UPA_SUTRA_TREASURY
+                    }
+                )
+            }
+
+            VedicAppRoute.UPA_SUTRA_QUEST -> {
+                UpaSutraQuestScreen(
+                    state = uiState ?: GameUiState(),
+                    onContinueClick = onAdvanceQuestStage,
+                    onDigitClick = onAppendDigit,
+                    onBackspaceClick = onBackspaceDigit,
+                    onClearClick = onClearDigit,
+                    onSubmitClick = onSubmitAnswer,
+                    onNextProblemClick = onNextProblem,
+                    onRevealStepClick = onRevealStep,
+                    onReturnToTreasuryClick = {
+                        onReturnToTreasury()
                         currentRoute = VedicAppRoute.UPA_SUTRA_TREASURY
                     }
                 )
