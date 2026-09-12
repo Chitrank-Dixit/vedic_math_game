@@ -111,6 +111,56 @@ val SampleUrdhvaLesson = SutraLesson(
 )
 
 /**
+ * Validates whether the student's input matches the expected answer for the current
+ * solver step or the overall lesson target answer.
+ *
+ * Rules:
+ * 1. Blank or empty input is always rejected (fail-closed).
+ * 2. On the final step, matches if userInput equals lesson.targetAnswer (exact or numeric).
+ * 3. Matches if userInput equals the current step's stepResult (exact or numeric).
+ * 4. Matches if userInput matches any numeric token in stepResult (e.g. "12" or "2" for "12 (write 2, carry 1)").
+ */
+fun validateSolverStep(
+    lesson: SutraLesson,
+    stepIndex: Int,
+    userInput: String
+): Boolean {
+    val trimmedInput = userInput.trim()
+    if (trimmedInput.isEmpty()) return false
+
+    val isFinalStep = stepIndex >= lesson.steps.size - 1
+    val currentStep = lesson.steps.getOrNull(stepIndex)
+
+    // 1. Check final target answer if on the final step
+    if (isFinalStep) {
+        val target = lesson.targetAnswer.trim()
+        if (trimmedInput.equals(target, ignoreCase = true)) return true
+        val targetInt = target.toIntOrNull()
+        val inputInt = trimmedInput.toIntOrNull()
+        if (targetInt != null && inputInt != null && targetInt == inputInt) return true
+    }
+
+    // 2. Check current step result
+    if (currentStep != null) {
+        val stepRes = currentStep.stepResult.trim()
+        if (trimmedInput.equals(stepRes, ignoreCase = true)) return true
+
+        val stepInt = stepRes.toIntOrNull()
+        val inputInt = trimmedInput.toIntOrNull()
+        if (stepInt != null && inputInt != null && stepInt == inputInt) return true
+
+        // 3. Check extracted numeric tokens from stepResult (e.g. "12 (write 2, carry 1)" -> ["12", "2", "1"])
+        val numericTokens = Regex("[0-9]+").findAll(stepRes).map { it.value }.toList()
+        if (numericTokens.contains(trimmedInput)) return true
+
+        // Also check integer equivalence for numeric tokens (e.g. "04" vs "4")
+        if (inputInt != null && numericTokens.any { it.toIntOrNull() == inputInt }) return true
+    }
+
+    return false
+}
+
+/**
  * Screen 02: SutraSolverScreen — Interactive Step-by-Step Learning Workspace
  */
 @Composable
@@ -170,7 +220,7 @@ fun SutraSolverScreen(
     fun handleSubmit() {
         if (isCompleted) return
 
-        if (userInput == lesson.targetAnswer || userInput.isNotEmpty()) {
+        if (validateSolverStep(lesson, activeStepIndex, userInput)) {
             if (activeStepIndex + 1 < lesson.steps.size) {
                 activeStepIndex++
                 userInput = ""

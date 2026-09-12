@@ -4,10 +4,14 @@ import com.ankh.sutrasaga.ui.navigation.VedicAppRoute
 import com.ankh.sutrasaga.ui.screens.SampleArenaProblems
 import com.ankh.sutrasaga.ui.screens.SampleSutraModules
 import com.ankh.sutrasaga.ui.screens.SampleUrdhvaLesson
+import com.ankh.sutrasaga.ui.screens.SutraLessonsRepository
+import com.ankh.sutrasaga.ui.screens.validateSolverStep
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
+
 
 class Phase3ScreensTest {
 
@@ -86,4 +90,62 @@ class Phase3ScreensTest {
         )
         assertEquals(expectedRoutes, VedicAppRoute.values().toSet())
     }
+
+    @Test
+    fun testValidateSolverStepRejectsIncorrectAndEmptySubmissions() {
+        val lesson = SampleUrdhvaLesson // primaryEquation = "23 × 14", targetAnswer = "322"
+        // Steps:
+        // 0: "3 × 4" -> stepResult = "12 (write 2, carry 1)"
+        // 1: "2(4) + 3(1) + 1" -> stepResult = "12 (write 2, carry 1)"
+        // 2: "2(1) + 1" -> stepResult = "3"
+
+        // Empty / blank input must always be rejected
+        assertFalse("Blank input must be rejected", validateSolverStep(lesson, 0, ""))
+        assertFalse("Whitespace input must be rejected", validateSolverStep(lesson, 0, "   "))
+
+        // Step 0
+        assertTrue("Step 0 accepts 12", validateSolverStep(lesson, 0, "12"))
+        assertTrue("Step 0 accepts units digit 2", validateSolverStep(lesson, 0, "2"))
+        assertFalse("Step 0 rejects arbitrary digit 9", validateSolverStep(lesson, 0, "9"))
+        assertFalse("Step 0 rejects final target answer 322", validateSolverStep(lesson, 0, "322"))
+
+        // Step 1
+        assertTrue("Step 1 accepts 12", validateSolverStep(lesson, 1, "12"))
+        assertTrue("Step 1 accepts units digit 2", validateSolverStep(lesson, 1, "2"))
+        assertFalse("Step 1 rejects arbitrary digit 5", validateSolverStep(lesson, 1, "5"))
+        assertFalse("Step 1 rejects wrong answer 42", validateSolverStep(lesson, 1, "42"))
+
+        // Step 2 (Final step)
+        assertTrue("Final step accepts step result 3", validateSolverStep(lesson, 2, "3"))
+        assertTrue("Final step accepts full targetAnswer 322", validateSolverStep(lesson, 2, "322"))
+        assertFalse("Final step rejects arbitrary single digit 7", validateSolverStep(lesson, 2, "7"))
+        assertFalse("Final step rejects wrong number 999", validateSolverStep(lesson, 2, "999"))
+    }
+
+    @Test
+    fun testValidateSolverStepWithAll16Lessons() {
+        for ((_, lesson) in SutraLessonsRepository.allLessons) {
+            val finalIndex = lesson.steps.size - 1
+
+            // Blank input must fail on every step
+            for (i in lesson.steps.indices) {
+                assertFalse("Lesson ${lesson.id} step $i must reject blank", validateSolverStep(lesson, i, ""))
+                assertFalse("Lesson ${lesson.id} step $i must reject arbitrary wrong answer 99999", validateSolverStep(lesson, i, "99999"))
+            }
+
+            // Final step must accept targetAnswer
+            assertTrue(
+                "Lesson ${lesson.id} final step must accept targetAnswer '${lesson.targetAnswer}'",
+                validateSolverStep(lesson, finalIndex, lesson.targetAnswer)
+            )
+
+            // Final step must reject an incorrect answer
+            val wrongTarget = if (lesson.targetAnswer == "0") "9" else "0"
+            assertFalse(
+                "Lesson ${lesson.id} final step must reject wrong answer '$wrongTarget'",
+                validateSolverStep(lesson, finalIndex, wrongTarget)
+            )
+        }
+    }
 }
+
