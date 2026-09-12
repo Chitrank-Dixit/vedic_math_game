@@ -14,6 +14,7 @@ import com.ankh.sutrasaga.domain.validation.RiveDialogueValidator
 import com.ankh.sutrasaga.domain.validation.VedicMathValidator
 import com.ankh.sutrasaga.engine.rive.DefaultRiveAdapter
 import com.ankh.sutrasaga.engine.rive.RiveDialogueController
+import com.ankh.sutrasaga.ui.components.generateHandshakeChoices
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import org.junit.Assert.assertEquals
@@ -95,6 +96,12 @@ class RiveDialogueEngineTest {
             assertNotNull("Final node must specify prompt text", finalNode.interactiveHandshake.promptText)
             assertNotNull("Final node must specify authoritative expected answer", finalNode.interactiveHandshake.expectedAnswer)
             assertTrue("Authoritative expected answer must not be blank", finalNode.interactiveHandshake.expectedAnswer!!.isNotBlank())
+
+            val choices = generateHandshakeChoices(finalNode.interactiveHandshake.expectedAnswer)
+            assertTrue(
+                "Generated choices $choices must contain expected answer '${finalNode.interactiveHandshake.expectedAnswer}' for world ${tree.worldNumber}",
+                choices.contains(finalNode.interactiveHandshake.expectedAnswer)
+            )
 
             val validationResult = RiveDialogueValidator.validate(tree)
             assertTrue("Every production dialogue tree must be valid: ${validationResult.errors}", validationResult.isValid)
@@ -541,4 +548,31 @@ class RiveDialogueEngineTest {
         assertNotNull("Handshake error message must be set on failure", controller.handshakeError.value)
         assertEquals("shishya_puzzled", adapter.shishyaAnimation.value)
     }
+
+    @Test
+    fun testGenerateHandshakeChoicesIncludesZeroAndNegatives() {
+        // Zero target (e.g. World 5 Śūnyaṁ Sāmyasamuccaye)
+        val zeroChoices = generateHandshakeChoices("0")
+        assertTrue("Choices for 0 must contain '0'", zeroChoices.contains("0"))
+        assertEquals(listOf("-2", "-1", "0", "1", "2"), zeroChoices)
+
+        // Negative target
+        val negChoices = generateHandshakeChoices("-4")
+        assertTrue("Choices for -4 must contain '-4'", negChoices.contains("-4"))
+        assertEquals(listOf("-6", "-5", "-4", "-3", "-2"), negChoices)
+
+        // Positive target
+        val posChoices = generateHandshakeChoices("5")
+        assertTrue("Choices for 5 must contain '5'", posChoices.contains("5"))
+        assertEquals(listOf("3", "4", "5", "6", "7"), posChoices)
+
+        // Null / blank fallbacks
+        val nullChoices = generateHandshakeChoices(null)
+        assertEquals(listOf("0", "1", "2", "3", "4"), nullChoices)
+
+        // Non-numeric custom text fallback
+        val textChoices = generateHandshakeChoices("X")
+        assertEquals(listOf("X"), textChoices)
+    }
 }
+

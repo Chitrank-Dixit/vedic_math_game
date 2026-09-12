@@ -41,6 +41,22 @@ import com.ankh.sutrasaga.domain.models.InteractiveHandshake
 import com.ankh.sutrasaga.ui.theme.VedicParchmentTokens
 
 /**
+ * Generates dynamic selectable choices around the expected answer, ensuring
+ * that the target answer (including zero and negative values) is always included.
+ */
+fun generateHandshakeChoices(expectedAnswer: String?): List<String> {
+    val targetNum = expectedAnswer?.toIntOrNull()
+    return if (targetNum != null) {
+        val start = targetNum - 2
+        (start..(start + 4)).map { it.toString() }
+    } else if (!expectedAnswer.isNullOrBlank()) {
+        listOf(expectedAnswer)
+    } else {
+        listOf("0", "1", "2", "3", "4")
+    }
+}
+
+/**
  * Interactive Handshake ("Let's try it!") Mini-Game component.
  * Allows the student to select from dynamic number tiles, providing immediate visual feedback
  * and allowing retries without restarting the lesson.
@@ -58,14 +74,8 @@ fun InteractiveHandshakeTileGroup(
     var feedbackMessage by remember { mutableStateOf<String?>(null) }
 
     // Generate dynamic selectable choices around the expected answer
-    val targetNum = expectedAnswer?.toIntOrNull()
     val options = remember(expectedAnswer) {
-        if (targetNum != null) {
-            val start = (targetNum - 2).coerceAtLeast(1)
-            (start..(start + 4)).map { it.toString() }
-        } else {
-            listOf("1", "2", "3", "4", "5")
-        }
+        generateHandshakeChoices(expectedAnswer)
     }
 
     Card(
