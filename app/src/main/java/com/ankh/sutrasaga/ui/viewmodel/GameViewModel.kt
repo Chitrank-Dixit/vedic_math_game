@@ -571,17 +571,43 @@ class GameViewModel : ViewModel() {
         }
     }
 
+    fun completeWorld(worldId: Int, score: Int = 100) {
+        if (worldId in 1..16) {
+            val currentState = _uiState.value
+            _uiState.value = when (worldId) {
+                1 -> currentState.copy(isWorld1Completed = true, world1BestScore = maxOf(currentState.world1BestScore, score))
+                2 -> currentState.copy(isWorld2Completed = true, world2BestScore = maxOf(currentState.world2BestScore, score))
+                3 -> currentState.copy(isWorld3Completed = true, world3BestScore = maxOf(currentState.world3BestScore, score))
+                4 -> currentState.copy(isWorld4Completed = true, world4BestScore = maxOf(currentState.world4BestScore, score))
+                5 -> currentState.copy(isWorld5Completed = true, world5BestScore = maxOf(currentState.world5BestScore, score))
+                6 -> currentState.copy(isWorld6Completed = true, world6BestScore = maxOf(currentState.world6BestScore, score))
+                7 -> currentState.copy(isWorld7Completed = true, world7BestScore = maxOf(currentState.world7BestScore, score))
+                8 -> currentState.copy(isWorld8Completed = true, world8BestScore = maxOf(currentState.world8BestScore, score))
+                9 -> currentState.copy(isWorld9Completed = true, world9BestScore = maxOf(currentState.world9BestScore, score))
+                10 -> currentState.copy(isWorld10Completed = true, world10BestScore = maxOf(currentState.world10BestScore, score))
+                11 -> currentState.copy(isWorld11Completed = true, world11BestScore = maxOf(currentState.world11BestScore, score))
+                12 -> currentState.copy(isWorld12Completed = true, world12BestScore = maxOf(currentState.world12BestScore, score))
+                13 -> currentState.copy(isWorld13Completed = true, world13BestScore = maxOf(currentState.world13BestScore, score))
+                14 -> currentState.copy(isWorld14Completed = true, world14BestScore = maxOf(currentState.world14BestScore, score))
+                15 -> currentState.copy(isWorld15Completed = true, world15BestScore = maxOf(currentState.world15BestScore, score))
+                16 -> currentState.copy(isWorld16Completed = true, world16BestScore = maxOf(currentState.world16BestScore, score))
+                else -> currentState
+            }
+            repository?.let { repo ->
+                viewModelScope.launch {
+                    repo.saveWorldCompletion(worldId, score)
+                }
+            }
+        }
+    }
+
     private fun completeCurrentWorld() {
         val worldId = _uiState.value.selectedWorldId
         val finalScore = _uiState.value.score
         _uiState.value = _uiState.value.copy(
             currentScreen = GameScreen.REWARD
         )
-        repository?.let { repo ->
-            viewModelScope.launch {
-                repo.saveWorldCompletion(worldId, finalScore)
-            }
-        }
+        completeWorld(worldId, finalScore)
     }
 
     fun returnToWorldSelect() {

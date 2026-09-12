@@ -42,9 +42,13 @@ fun MainGameContent(viewModel: GameViewModel) {
 
     VedicAppNavigator(
         uiState = uiState,
+        onCompleteLesson = { worldId ->
+            viewModel.completeWorld(worldId)
+        },
         onStartQuest = { questId ->
             viewModel.startUpaSutraQuest(questId)
         },
+
         onAdvanceQuestStage = {
             viewModel.advanceQuestStage()
         },

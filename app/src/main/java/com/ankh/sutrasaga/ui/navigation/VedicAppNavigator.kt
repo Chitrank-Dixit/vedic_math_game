@@ -50,6 +50,7 @@ enum class VedicAppRoute {
 fun VedicAppNavigator(
     initialRoute: VedicAppRoute = VedicAppRoute.HOME,
     uiState: GameUiState? = null,
+    onCompleteLesson: (worldId: Int) -> Unit = {},
     onStartQuest: (UpaSutraId) -> Unit = {},
     onAdvanceQuestStage: () -> Unit = {},
     onAppendDigit: (Char) -> Unit = {},
@@ -60,6 +61,7 @@ fun VedicAppNavigator(
     onRevealStep: () -> Unit = {},
     onReturnToTreasury: () -> Unit = {}
 ) {
+
     var currentRoute by remember { mutableStateOf(initialRoute) }
     var currentStreak by remember { mutableIntStateOf(7) }
     var selectedLesson by remember { mutableStateOf<SutraLesson>(SampleUrdhvaLesson) }
@@ -146,6 +148,8 @@ fun VedicAppNavigator(
                         currentRoute = VedicAppRoute.HOME
                     },
                     onLessonComplete = {
+                        val worldId = selectedScript.worldId
+                        onCompleteLesson(worldId)
                         currentStreak++
                         currentRoute = VedicAppRoute.HOME
                     },
@@ -154,6 +158,7 @@ fun VedicAppNavigator(
                     }
                 )
             }
+
 
             VedicAppRoute.PRACTICE_ARENA -> {
                 VedicPracticeArenaScreen(
