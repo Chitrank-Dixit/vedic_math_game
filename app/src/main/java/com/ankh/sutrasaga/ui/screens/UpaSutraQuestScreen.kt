@@ -56,12 +56,16 @@ fun UpaSutraQuestScreen(
     val isImplemented = upaSutraId == UpaSutraId.ANTYAYORDASHAKEPI ||
             upaSutraId == UpaSutraId.ANURUPYENA ||
             upaSutraId == UpaSutraId.YAVADUNAM_TAVADUNIKRTYA_VARGANCHA_YOJAYET ||
+            upaSutraId == UpaSutraId.YAVADUNAM_TAVADUNAM ||
             upaSutraId == UpaSutraId.ADYAMADYENANTYAMANTYENA ||
             upaSutraId == UpaSutraId.VESHTANAM ||
             upaSutraId == UpaSutraId.SHISYATE_SHESAMAJNA ||
             upaSutraId == UpaSutraId.KEVALAIHSAPTAKAM_GUNYAT ||
             upaSutraId == UpaSutraId.LOPANA_STHAPANABHYAM ||
-            upaSutraId == UpaSutraId.VILOKANAM
+            upaSutraId == UpaSutraId.VILOKANAM ||
+            upaSutraId == UpaSutraId.ANTYAYEREVA ||
+            upaSutraId == UpaSutraId.SAMUCCAYAGUNITAH ||
+            upaSutraId == UpaSutraId.GUNITASAMUCCAYAH_SAMUCCAYAGUNITAH
 
     // For Upa-Sutras that are not yet implemented (coming soon placeholder)
     if (!isImplemented) {
@@ -213,8 +217,16 @@ private fun QuestStoryBeatStage(
         UpaSutraId.ANTYAYORDASHAKEPI -> {
             "Guru: \"Welcome, seeker! You have proven your skills in the main worlds. Now learn the sub-sutra Antyayordashake'pi: when multiplying two numbers sharing the same tens digit whose units digits sum to 10, multiply the tens by one more (Ekadhika) and the units digits together!\"\n\nDisciple: \"Matching tens, units summing to 10! The answer forms in two mental strokes!\""
         }
+        UpaSutraId.ANTYAYEREVA -> {
+            "Guru: \"When two rational expressions stand in balance, do not rush to cross-multiply long polynomials — look at the end terms! If the constant term ratio on both sides matches, the variable term vanishes into zero!\"\n\nDisciple: \"For (x + 2)/(x + 3) = (x + 4)/(x + 6), the ratio 2/3 equals 4/6! The constant ratios match, so immediately x = 0!\""
+        }
+        UpaSutraId.SAMUCCAYAGUNITAH,
+        UpaSutraId.GUNITASAMUCCAYAH_SAMUCCAYAGUNITAH -> {
+            "Guru: \"A true master verifies algebraic expansions in a heartbeat by summing the coefficients! The product of the sum of the coefficients of the factors must equal the sum of the coefficients of the expanded polynomial!\"\n\nDisciple: \"To verify (2x + 3)(x + 4) = 2x² + 11x + 12, we evaluate at x=1: (2 + 3) × (1 + 4) = 5 × 5 = 25! And 2 + 11 + 12 = 25! Both sums match perfectly!\""
+        }
         else -> "Guru: \"Let us explore the wisdom of ${definition.displayName}.\""
     }
+
 
     Column(
         modifier = Modifier
@@ -945,6 +957,157 @@ private fun QuestGuidedExampleStage(
 
                             Text(
                                 text = "Combined Result: 22 || 08 = 2208",
+                                fontSize = 20.sp,
+                                fontWeight = FontWeight.Bold,
+                                fontFamily = FontFamily.Monospace,
+                                color = Color(0xFFFFD700)
+                            )
+                        }
+                    }
+                }
+                UpaSutraId.ANTYAYEREVA -> {
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(containerColor = Color(0xFF1E293B))
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(20.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(
+                                text = "(x + 2)/(x + 3) = (x + 4)/(x + 6)",
+                                fontSize = 20.sp,
+                                fontWeight = FontWeight.Bold,
+                                fontFamily = FontFamily.Monospace,
+                                color = Color.White
+                            )
+
+                            Spacer(modifier = Modifier.height(16.dp))
+
+                            Text(
+                                text = "Step 1: Check Constant Terms (LHS)",
+                                fontSize = 15.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color(0xFF38BDF8)
+                            )
+                            Text(
+                                text = "Numerator a = 2, Denominator b = 3 ⟹ Ratio = 2/3",
+                                fontSize = 14.sp,
+                                fontFamily = FontFamily.Monospace,
+                                color = Color(0xFF94A3B8)
+                            )
+
+                            Spacer(modifier = Modifier.height(12.dp))
+
+                            Text(
+                                text = "Step 2: Check Constant Terms (RHS)",
+                                fontSize = 15.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color(0xFF38BDF8)
+                            )
+                            Text(
+                                text = "Numerator c = 4, Denominator d = 6 ⟹ Ratio = 4/6 = 2/3",
+                                fontSize = 14.sp,
+                                fontFamily = FontFamily.Monospace,
+                                color = Color(0xFF94A3B8)
+                            )
+
+                            Spacer(modifier = Modifier.height(12.dp))
+
+                            Text(
+                                text = "Step 3: Constant Ratios Match",
+                                fontSize = 15.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color(0xFF38BDF8)
+                            )
+                            Text(
+                                text = "a/b = c/d (2/3 = 4/6) ⟹ Antyayoreva applies!",
+                                fontSize = 15.sp,
+                                fontFamily = FontFamily.Monospace,
+                                color = Color(0xFF34D399)
+                            )
+
+                            Spacer(modifier = Modifier.height(16.dp))
+
+                            Text(
+                                text = "Instant Root: x = 0",
+                                fontSize = 24.sp,
+                                fontWeight = FontWeight.Bold,
+                                fontFamily = FontFamily.Monospace,
+                                color = Color(0xFFFFD700)
+                            )
+                        }
+                    }
+                }
+                UpaSutraId.SAMUCCAYAGUNITAH,
+                UpaSutraId.GUNITASAMUCCAYAH_SAMUCCAYAGUNITAH -> {
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(containerColor = Color(0xFF1E293B))
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(20.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(
+                                text = "(2x + 3)(x + 4) = 2x² + 11x + 12",
+                                fontSize = 20.sp,
+                                fontWeight = FontWeight.Bold,
+                                fontFamily = FontFamily.Monospace,
+                                color = Color.White
+                            )
+
+                            Spacer(modifier = Modifier.height(16.dp))
+
+                            Text(
+                                text = "Step 1: Sum Factor 1 Coefficients (x = 1)",
+                                fontSize = 15.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color(0xFF38BDF8)
+                            )
+                            Text(
+                                text = "2 + 3 = 5",
+                                fontSize = 16.sp,
+                                fontFamily = FontFamily.Monospace,
+                                color = Color(0xFF94A3B8)
+                            )
+
+                            Spacer(modifier = Modifier.height(12.dp))
+
+                            Text(
+                                text = "Step 2: Sum Factor 2 Coefficients (x = 1)",
+                                fontSize = 15.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color(0xFF38BDF8)
+                            )
+                            Text(
+                                text = "1 + 4 = 5",
+                                fontSize = 16.sp,
+                                fontFamily = FontFamily.Monospace,
+                                color = Color(0xFF94A3B8)
+                            )
+
+                            Spacer(modifier = Modifier.height(12.dp))
+
+                            Text(
+                                text = "Step 3: Product of Factor Sums",
+                                fontSize = 15.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color(0xFF38BDF8)
+                            )
+                            Text(
+                                text = "Sc(LHS) = 5 × 5 = 25",
+                                fontSize = 18.sp,
+                                fontFamily = FontFamily.Monospace,
+                                color = Color(0xFF34D399)
+                            )
+
+                            Spacer(modifier = Modifier.height(16.dp))
+
+                            Text(
+                                text = "RHS Sum: 2 + 11 + 12 = 25 ✓",
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
                                 fontFamily = FontFamily.Monospace,

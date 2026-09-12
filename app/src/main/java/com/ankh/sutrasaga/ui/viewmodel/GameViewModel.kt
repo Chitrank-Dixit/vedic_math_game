@@ -32,9 +32,11 @@ import com.ankh.sutrasaga.engine.VyashtisamashtihGenerator
 import com.ankh.sutrasaga.engine.YavadunamGenerator
 import com.ankh.sutrasaga.engine.upasutras.AdyamadyenantyamantyenaGenerator
 import com.ankh.sutrasaga.engine.upasutras.AntyayordashakepiGenerator
+import com.ankh.sutrasaga.engine.upasutras.AntyayerevaGenerator
 import com.ankh.sutrasaga.engine.upasutras.AnurupyenaGenerator
 import com.ankh.sutrasaga.engine.upasutras.KevalaihSaptakamGunyatGenerator
 import com.ankh.sutrasaga.engine.upasutras.LopanasthapanabhyamGenerator
+import com.ankh.sutrasaga.engine.upasutras.SamuccayagunitahGenerator
 import com.ankh.sutrasaga.engine.upasutras.SisyateSesasamjnahGenerator
 import com.ankh.sutrasaga.engine.upasutras.VestanamGenerator
 import com.ankh.sutrasaga.engine.upasutras.VilokanamGenerator
@@ -138,6 +140,8 @@ class GameViewModel : ViewModel() {
 
     // Upa-Sutra Generators
     private val antyayordashakepiGenerator = AntyayordashakepiGenerator()
+    private val antyayerevaGenerator = AntyayerevaGenerator()
+    private val samuccayagunitahGenerator = SamuccayagunitahGenerator()
     private val anurupyenaGenerator = AnurupyenaGenerator()
     private val yavadunamRemixGenerator = YavadunamRemixGenerator()
     private val adyamadyaGenerator = AdyamadyenantyamantyenaGenerator()
@@ -256,15 +260,18 @@ class GameViewModel : ViewModel() {
     private fun getGeneratorForUpaSutra(id: UpaSutraId): UpaSutraGenerator {
         return when (id) {
             UpaSutraId.ANTYAYORDASHAKEPI -> antyayordashakepiGenerator
+            UpaSutraId.ANTYAYEREVA -> antyayerevaGenerator
+            UpaSutraId.SAMUCCAYAGUNITAH -> samuccayagunitahGenerator
             UpaSutraId.ANURUPYENA -> anurupyenaGenerator
-            UpaSutraId.YAVADUNAM_TAVADUNIKRTYA_VARGANCHA_YOJAYET -> yavadunamRemixGenerator
+            UpaSutraId.YAVADUNAM_TAVADUNIKRTYA_VARGANCHA_YOJAYET,
+            UpaSutraId.YAVADUNAM_TAVADUNAM -> yavadunamRemixGenerator
             UpaSutraId.ADYAMADYENANTYAMANTYENA -> adyamadyaGenerator
             UpaSutraId.VESHTANAM -> vestanamGenerator
             UpaSutraId.SHISYATE_SHESAMAJNA -> sisyateGenerator
             UpaSutraId.KEVALAIHSAPTAKAM_GUNYAT -> kevalaihGenerator
             UpaSutraId.LOPANA_STHAPANABHYAM -> lopanaGenerator
             UpaSutraId.VILOKANAM -> vilokanamGenerator
-            else -> antyayordashakepiGenerator
+            UpaSutraId.GUNITASAMUCCAYAH_SAMUCCAYAGUNITAH -> samuccayagunitahGenerator
         }
     }
 
@@ -434,6 +441,9 @@ class GameViewModel : ViewModel() {
 
     fun appendDigit(char: Char) {
         if (_uiState.value.isAnswerSubmitted) return
+        // Only accept valid digits '0'..'9' or leading minus sign '-'
+        if (!char.isDigit() && char != '-') return
+        if (char == '-' && _uiState.value.userInput.isNotEmpty()) return
         if (_uiState.value.userInput.length < 16) {
             _uiState.value = _uiState.value.copy(
                 userInput = _uiState.value.userInput + char
@@ -561,17 +571,43 @@ class GameViewModel : ViewModel() {
         }
     }
 
+    fun completeWorld(worldId: Int, score: Int = 100) {
+        if (worldId in 1..16) {
+            val currentState = _uiState.value
+            _uiState.value = when (worldId) {
+                1 -> currentState.copy(isWorld1Completed = true, world1BestScore = maxOf(currentState.world1BestScore, score))
+                2 -> currentState.copy(isWorld2Completed = true, world2BestScore = maxOf(currentState.world2BestScore, score))
+                3 -> currentState.copy(isWorld3Completed = true, world3BestScore = maxOf(currentState.world3BestScore, score))
+                4 -> currentState.copy(isWorld4Completed = true, world4BestScore = maxOf(currentState.world4BestScore, score))
+                5 -> currentState.copy(isWorld5Completed = true, world5BestScore = maxOf(currentState.world5BestScore, score))
+                6 -> currentState.copy(isWorld6Completed = true, world6BestScore = maxOf(currentState.world6BestScore, score))
+                7 -> currentState.copy(isWorld7Completed = true, world7BestScore = maxOf(currentState.world7BestScore, score))
+                8 -> currentState.copy(isWorld8Completed = true, world8BestScore = maxOf(currentState.world8BestScore, score))
+                9 -> currentState.copy(isWorld9Completed = true, world9BestScore = maxOf(currentState.world9BestScore, score))
+                10 -> currentState.copy(isWorld10Completed = true, world10BestScore = maxOf(currentState.world10BestScore, score))
+                11 -> currentState.copy(isWorld11Completed = true, world11BestScore = maxOf(currentState.world11BestScore, score))
+                12 -> currentState.copy(isWorld12Completed = true, world12BestScore = maxOf(currentState.world12BestScore, score))
+                13 -> currentState.copy(isWorld13Completed = true, world13BestScore = maxOf(currentState.world13BestScore, score))
+                14 -> currentState.copy(isWorld14Completed = true, world14BestScore = maxOf(currentState.world14BestScore, score))
+                15 -> currentState.copy(isWorld15Completed = true, world15BestScore = maxOf(currentState.world15BestScore, score))
+                16 -> currentState.copy(isWorld16Completed = true, world16BestScore = maxOf(currentState.world16BestScore, score))
+                else -> currentState
+            }
+            repository?.let { repo ->
+                viewModelScope.launch {
+                    repo.saveWorldCompletion(worldId, score)
+                }
+            }
+        }
+    }
+
     private fun completeCurrentWorld() {
         val worldId = _uiState.value.selectedWorldId
         val finalScore = _uiState.value.score
         _uiState.value = _uiState.value.copy(
             currentScreen = GameScreen.REWARD
         )
-        repository?.let { repo ->
-            viewModelScope.launch {
-                repo.saveWorldCompletion(worldId, finalScore)
-            }
-        }
+        completeWorld(worldId, finalScore)
     }
 
     fun returnToWorldSelect() {
