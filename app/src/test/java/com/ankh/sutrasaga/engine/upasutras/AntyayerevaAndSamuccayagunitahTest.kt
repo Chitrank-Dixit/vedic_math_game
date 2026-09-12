@@ -35,6 +35,14 @@ class AntyayerevaAndSamuccayagunitahTest {
             assertEquals(0L, it.correctAnswer)
             assertTrue(it.decompositionSteps.isNotEmpty())
         }
+
+        // Verify across 200 random generations that a != b (no identity equations)
+        for (i in 0 until 100) {
+            val easy = generator.generateProblem(DifficultyTier.TIER_1_EASY)
+            org.junit.Assert.assertNotEquals("TIER_1_EASY: a must not equal b", easy.prefixPart, easy.incrementedPrefix)
+            val hard = generator.generateProblem(DifficultyTier.TIER_2_HARD)
+            org.junit.Assert.assertNotEquals("TIER_2_HARD: a must not equal b", hard.prefixPart, hard.incrementedPrefix)
+        }
     }
 
     @Test

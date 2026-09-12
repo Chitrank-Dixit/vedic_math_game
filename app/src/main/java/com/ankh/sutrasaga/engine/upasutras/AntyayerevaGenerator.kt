@@ -31,13 +31,19 @@ class AntyayerevaGenerator : UpaSutraGenerator {
         val (a, b, multiplier) = when (difficultyTier) {
             DifficultyTier.TIER_1_EASY -> {
                 val aVal = random.nextLong(1, 6)
-                val bVal = random.nextLong(1, 6)
+                var bVal = random.nextLong(1, 6)
+                while (bVal == aVal) {
+                    bVal = random.nextLong(1, 6)
+                }
                 val mVal = random.nextLong(2, 4)
                 Triple(aVal, bVal, mVal)
             }
             DifficultyTier.TIER_2_HARD -> {
                 val aVal = random.nextLong(3, 12)
-                val bVal = random.nextLong(3, 12)
+                var bVal = random.nextLong(3, 12)
+                while (bVal == aVal) {
+                    bVal = random.nextLong(3, 12)
+                }
                 val mVal = random.nextLong(3, 6)
                 Triple(aVal, bVal, mVal)
             }
