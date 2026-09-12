@@ -652,5 +652,88 @@ class GameViewModelTest {
         assertTrue(state.isWorld16Completed)
         assertEquals(116, state.world16BestScore)
     }
+
+    @Test
+    fun testAntyayerevaQuestLifecycle() {
+        viewModel.startUpaSutraQuest(UpaSutraId.ANTYAYEREVA)
+        var state = viewModel.uiState.value
+        assertEquals(GameScreen.UPA_SUTRA_QUEST, state.currentScreen)
+        assertEquals(UpaSutraId.ANTYAYEREVA, state.selectedUpaSutraId)
+        assertEquals(UpaSutraQuestStage.STORY_BEAT, state.questStage)
+
+        // Advance to Guided Example
+        viewModel.advanceQuestStage()
+        state = viewModel.uiState.value
+        assertEquals(UpaSutraQuestStage.GUIDED_EXAMPLE, state.questStage)
+
+        // Advance to Practice
+        viewModel.advanceQuestStage()
+        state = viewModel.uiState.value
+        assertEquals(UpaSutraQuestStage.PRACTICE, state.questStage)
+        assertEquals(5, state.problemList.size)
+        assertNotNull(state.currentProblem)
+
+        // Submit correct answer for first practice problem (always 0)
+        val prob = state.currentProblem!!
+        prob.correctAnswer.toString().forEach(viewModel::appendDigit)
+        viewModel.submitAnswer()
+        state = viewModel.uiState.value
+        assertTrue(state.isAnswerSubmitted)
+        assertEquals(true, state.isAnswerCorrect)
+        assertEquals(1, state.questPracticeCorrectCount)
+
+        // Advance to Challenge
+        viewModel.advanceQuestStage()
+        state = viewModel.uiState.value
+        assertEquals(UpaSutraQuestStage.CHALLENGE, state.questStage)
+        assertEquals(3, state.problemList.size)
+
+        // Advance to Reward
+        viewModel.advanceQuestStage()
+        state = viewModel.uiState.value
+        assertEquals(UpaSutraQuestStage.REWARD, state.questStage)
+    }
+
+    @Test
+    fun testSamuccayagunitahQuestLifecycle() {
+        viewModel.startUpaSutraQuest(UpaSutraId.SAMUCCAYAGUNITAH)
+        var state = viewModel.uiState.value
+        assertEquals(GameScreen.UPA_SUTRA_QUEST, state.currentScreen)
+        assertEquals(UpaSutraId.SAMUCCAYAGUNITAH, state.selectedUpaSutraId)
+        assertEquals(UpaSutraQuestStage.STORY_BEAT, state.questStage)
+
+        // Advance to Guided Example
+        viewModel.advanceQuestStage()
+        state = viewModel.uiState.value
+        assertEquals(UpaSutraQuestStage.GUIDED_EXAMPLE, state.questStage)
+
+        // Advance to Practice
+        viewModel.advanceQuestStage()
+        state = viewModel.uiState.value
+        assertEquals(UpaSutraQuestStage.PRACTICE, state.questStage)
+        assertEquals(5, state.problemList.size)
+        assertNotNull(state.currentProblem)
+
+        // Submit correct answer for first practice problem
+        val prob = state.currentProblem!!
+        prob.correctAnswer.toString().forEach(viewModel::appendDigit)
+        viewModel.submitAnswer()
+        state = viewModel.uiState.value
+        assertTrue(state.isAnswerSubmitted)
+        assertEquals(true, state.isAnswerCorrect)
+        assertEquals(1, state.questPracticeCorrectCount)
+
+        // Advance to Challenge
+        viewModel.advanceQuestStage()
+        state = viewModel.uiState.value
+        assertEquals(UpaSutraQuestStage.CHALLENGE, state.questStage)
+        assertEquals(3, state.problemList.size)
+
+        // Advance to Reward
+        viewModel.advanceQuestStage()
+        state = viewModel.uiState.value
+        assertEquals(UpaSutraQuestStage.REWARD, state.questStage)
+    }
 }
+
 
