@@ -300,6 +300,12 @@ fun VedicPracticeArenaScreen(
                     score += 100
                     inputBuffer = ""
                     currentProblemIdx++
+                } else {
+                    scope.launch {
+                        shakeOffset.animateTo(8f, tween(40))
+                        shakeOffset.animateTo(-8f, tween(40))
+                        shakeOffset.animateTo(0f, tween(40))
+                    }
                 }
             },
             enabled = !isFinished

@@ -2,9 +2,41 @@ package com.ankh.sutrasaga.ui
 
 import com.ankh.sutrasaga.ui.screens.canonicalOnboardingProblem
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class WorldOnboardingProblemTest {
+
+    @Test
+    fun testAllSixteenWorldsHaveDedicatedCanonicalOnboardingProblems() {
+        val expectedSutraNames = listOf(
+            1 to "Ekadhikena Purvena",
+            2 to "Nikhilam Navatashcaramam Dashatah",
+            3 to "Ekanyunena Purvena",
+            4 to "Yavadunam",
+            5 to "Urdhva-Tiryagbhyam",
+            6 to "Paravartya Yojayet",
+            7 to "Anurupye Shunyamanyat",
+            8 to "Sankalana-Vyavakalanabhyam",
+            9 to "Shunyam Samyasamuccaye",
+            10 to "Puranapuranabhyam",
+            11 to "Vyashtisamashtih",
+            12 to "Shesanyankena Charamena",
+            13 to "Sopantyadvayamantyam",
+            14 to "Gunitasamuccayah",
+            15 to "Gunakasamuccayah",
+            16 to "Chalana-Kalanabhyam"
+        )
+
+        for ((worldId, expectedName) in expectedSutraNames) {
+            val problem = canonicalOnboardingProblem(worldId)
+            assertNotNull("Problem for World $worldId must not be null", problem)
+            assertEquals("World $worldId sutraName mismatch", expectedName, problem.sutraName)
+            assertTrue("World $worldId questionText must not be blank", problem.questionText.isNotBlank())
+            assertTrue("World $worldId decompositionSteps must not be empty", problem.decompositionSteps.isNotEmpty())
+        }
+    }
 
     @Test
     fun worldsFourThroughSevenUseTheirOwnCanonicalProblems() {

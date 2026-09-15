@@ -211,6 +211,9 @@ private fun QuestStoryBeatStage(
         UpaSutraId.YAVADUNAM_TAVADUNIKRTYA_VARGANCHA_YOJAYET -> {
             "Guru: \"You've already tamed the deficiency once in my grove — now let's see if you can handle it when the deficiency itself grows too big for its space! Twelve squared is too big for its own room — so it knocks on the neighbor's door and hands over the extra hundred.\"\n\nDisciple: \"88² has deficiency 12, giving 12² = 144! The 44 stays in the 2-digit room, and the +1 carries over to 76 to make 7744!\""
         }
+        UpaSutraId.YAVADUNAM_TAVADUNAM -> {
+            "Guru: \"Cubing near a base with Yavadunam Tavadunam follows a 3-part symmetry: (Base + 3d) || 3d² || d³! Lessen or increase by the deviation, establish the square part, and crown with the cube!\"\n\nDisciple: \"For 104³, deviation is +4: (100 + 12) || 3(16) || 64 = 112 || 48 || 64 = 1124864! Mental cubing in seconds!\""
+        }
         UpaSutraId.ANURUPYENA -> {
             "Guru: \"Welcome, seeker! In World 2 you measured distance from 100 with Nikhilam. But what if numbers cluster near 50 or 200? Fifty is halfway to a hundred — so whatever cross-add we find, we split right down the middle too!\"\n\nDisciple: \"A sub-base camp! We measure deviations from 50, cross-add, halve the left side, and multiply the deviations!\""
         }
@@ -1109,6 +1112,81 @@ private fun QuestGuidedExampleStage(
                             Text(
                                 text = "RHS Sum: 2 + 11 + 12 = 25 ✓",
                                 fontSize = 20.sp,
+                                fontWeight = FontWeight.Bold,
+                                fontFamily = FontFamily.Monospace,
+                                color = Color(0xFFFFD700)
+                            )
+                        }
+                    }
+                }
+                UpaSutraId.YAVADUNAM_TAVADUNAM -> {
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(containerColor = Color(0xFF1E293B))
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(20.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(
+                                text = "104³ (Base 100, Deviation +4)",
+                                fontSize = 22.sp,
+                                fontWeight = FontWeight.Bold,
+                                fontFamily = FontFamily.Monospace,
+                                color = Color.White
+                            )
+
+                            Spacer(modifier = Modifier.height(16.dp))
+
+                            Text(
+                                text = "Step 1: Left Part (100 + 3 × d)",
+                                fontSize = 15.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color(0xFF38BDF8)
+                            )
+                            Text(
+                                text = "100 + 3(4) = 112",
+                                fontSize = 16.sp,
+                                fontFamily = FontFamily.Monospace,
+                                color = Color(0xFF94A3B8)
+                            )
+
+                            Spacer(modifier = Modifier.height(12.dp))
+
+                            Text(
+                                text = "Step 2: Middle Part (3 × d²)",
+                                fontSize = 15.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color(0xFF38BDF8)
+                            )
+                            Text(
+                                text = "3 × (4²) = 3 × 16 = 48",
+                                fontSize = 16.sp,
+                                fontFamily = FontFamily.Monospace,
+                                color = Color(0xFF34D399)
+                            )
+
+                            Spacer(modifier = Modifier.height(12.dp))
+
+                            Text(
+                                text = "Step 3: Right Part (d³)",
+                                fontSize = 15.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color(0xFF38BDF8)
+                            )
+                            Text(
+                                text = "4³ = 64",
+                                fontSize = 16.sp,
+                                fontFamily = FontFamily.Monospace,
+                                color = Color(0xFF34D399)
+                            )
+
+                            Spacer(modifier = Modifier.height(16.dp))
+
+                            Text(
+                                text = "Combined Result: 112 || 48 || 64 = 1124864",
+                                fontSize = 18.sp,
                                 fontWeight = FontWeight.Bold,
                                 fontFamily = FontFamily.Monospace,
                                 color = Color(0xFFFFD700)
