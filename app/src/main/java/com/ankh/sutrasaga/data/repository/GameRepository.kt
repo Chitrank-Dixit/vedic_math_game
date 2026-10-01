@@ -1,5 +1,6 @@
 package com.ankh.sutrasaga.data.repository
 
+import android.util.Log
 import com.ankh.sutrasaga.data.db.UpaSutraProgressDao
 import com.ankh.sutrasaga.data.db.UpaSutraProgressEntity
 import com.ankh.sutrasaga.data.db.UserProgressDao
@@ -14,24 +15,36 @@ class GameRepository(
     private val userDao: UserProgressDao,
     private val upaDao: UpaSutraProgressDao? = null
 ) {
+    companion object {
+        private const val TAG = "GameRepository"
+    }
 
     fun getAllProgress(): Flow<List<UserProgressEntity>> = userDao.getAllProgress()
 
     suspend fun getProgressForWorld(worldId: Int): UserProgressEntity? {
-        return userDao.getProgressForWorld(worldId)
+        return try {
+            userDao.getProgressForWorld(worldId)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error fetching progress for world $worldId", e)
+            null
+        }
     }
 
     suspend fun saveWorldCompletion(worldId: Int, score: Int) {
-        val existing = userDao.getProgressForWorld(worldId)
-        val bestScore = if (existing != null) maxOf(existing.bestScore, score) else score
-        userDao.saveProgress(
-            UserProgressEntity(
-                worldId = worldId,
-                isUnlocked = true,
-                isCompleted = true,
-                bestScore = bestScore
+        try {
+            val existing = userDao.getProgressForWorld(worldId)
+            val bestScore = if (existing != null) maxOf(existing.bestScore, score) else score
+            userDao.saveProgress(
+                UserProgressEntity(
+                    worldId = worldId,
+                    isUnlocked = true,
+                    isCompleted = true,
+                    bestScore = bestScore
+                )
             )
-        )
+        } catch (e: Exception) {
+            Log.e(TAG, "Error saving world completion for world $worldId", e)
+        }
     }
 
     fun getAllUpaSutraProgress(): Flow<List<UpaSutraProgress>> {
@@ -47,7 +60,11 @@ class GameRepository(
                         challengeCorrectCount = entity.challengeCorrectCount,
                         lastAttemptTimestamp = entity.lastAttemptTimestamp
                     )
+                } catch (e: IllegalArgumentException) {
+                    Log.w(TAG, "Unknown UpaSutraId or state in entity: ${entity.upaSutraId}, state=${entity.state}", e)
+                    null
                 } catch (e: Exception) {
+                    Log.e(TAG, "Unexpected error converting entity: $entity", e)
                     null
                 }
             }
@@ -64,20 +81,28 @@ class GameRepository(
                 challengeCorrectCount = entity.challengeCorrectCount,
                 lastAttemptTimestamp = entity.lastAttemptTimestamp
             )
+        } catch (e: IllegalArgumentException) {
+            Log.w(TAG, "Invalid UpaSutraProgress record for $id", e)
+            null
         } catch (e: Exception) {
+            Log.e(TAG, "Error fetching UpaSutraProgress for $id", e)
             null
         }
     }
 
     suspend fun saveUpaSutraProgress(progress: UpaSutraProgress) {
-        upaDao?.saveProgress(
-            UpaSutraProgressEntity(
-                upaSutraId = progress.id.name,
-                state = progress.state.name,
-                practiceCorrectCount = progress.practiceCorrectCount,
-                challengeCorrectCount = progress.challengeCorrectCount,
-                lastAttemptTimestamp = progress.lastAttemptTimestamp
+        try {
+            upaDao?.saveProgress(
+                UpaSutraProgressEntity(
+                    upaSutraId = progress.id.name,
+                    state = progress.state.name,
+                    practiceCorrectCount = progress.practiceCorrectCount,
+                    challengeCorrectCount = progress.challengeCorrectCount,
+                    lastAttemptTimestamp = progress.lastAttemptTimestamp
+                )
             )
-        )
+        } catch (e: Exception) {
+            Log.e(TAG, "Error saving UpaSutraProgress for ${progress.id}", e)
+        }
     }
 }

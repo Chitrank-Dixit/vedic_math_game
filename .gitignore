@@ -22,3 +22,12 @@ captures/
 # OS generated files
 .DS_Store
 Thumbs.db
+
+# Signing keys and credentials (NEVER commit to version control)
+*.jks
+*.keystore
+*.key
+key.properties
+google-services.json
+secrets.properties
+credentials.json

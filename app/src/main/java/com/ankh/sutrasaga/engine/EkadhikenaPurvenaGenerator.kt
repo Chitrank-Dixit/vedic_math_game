@@ -6,6 +6,18 @@ import com.ankh.sutrasaga.domain.models.SutraProblem
 import java.util.UUID
 import kotlin.random.Random
 
+/**
+ * EkadhikenaPurvenaGenerator — "By One More than the Previous One" (एकाधिकेन पूर्वेण)
+ *
+ * Mathematical Shortcut Rule:
+ * For squaring any integer ending in 5: (10a + 5)² = 100 · a(a + 1) + 25
+ * - Left Part: Multiply the prefix `a` by its consecutive integer `(a + 1)`
+ * - Right Part: Append constant `25` (5² = 25)
+ *
+ * Examples:
+ * - 65² → (6 × 7) | 25 = 4225
+ * - 115² → (11 × 12) | 25 = 13225
+ */
 class EkadhikenaPurvenaGenerator(
     private val random: Random = Random.Default
 ) : SutraProblemGenerator {

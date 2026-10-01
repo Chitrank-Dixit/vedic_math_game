@@ -1,0 +1,82 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "name": "Vedic Mathematics Design System",
+  "version": "1.0.0",
+  "color": {
+    "light": {
+      "backgroundPrimary": { "value": "#FDFBF7", "type": "color" },
+      "surfaceCard": { "value": "#FFFFFF", "type": "color" },
+      "primarySaffron": { "value": "#E65100", "type": "color" },
+      "secondaryGold": { "value": "#D4AF37", "type": "color" },
+      "textPrimary": { "value": "#212121", "type": "color" },
+      "textSecondary": { "value": "#616161", "type": "color" },
+      "borderSubtle": { "value": "rgba(212, 175, 55, 0.2)", "type": "color" },
+      "statusSuccess": { "value": "#2E7D32", "type": "color" },
+      "statusError": { "value": "#C62828", "type": "color" },
+      "shadowAmbient": { "value": "0px 4px 12px rgba(0, 0, 0, 0.05)", "type": "shadow" }
+    },
+    "dark": {
+      "backgroundPrimary": { "value": "#0F172A", "type": "color" },
+      "surfaceCard": { "value": "#1E293B", "type": "color" },
+      "primarySaffron": { "value": "#FF9800", "type": "color" },
+      "secondaryGold": { "value": "#FFD700", "type": "color" },
+      "textPrimary": { "value": "#F8FAFC", "type": "color" },
+      "textSecondary": { "value": "#94A3B8", "type": "color" },
+      "borderSubtle": { "value": "rgba(255, 215, 0, 0.25)", "type": "color" },
+      "statusSuccess": { "value": "#4ADE80", "type": "color" },
+      "statusError": { "value": "#EF4444", "type": "color" },
+      "shadowAmbient": { "value": "0px 4px 16px rgba(0, 0, 0, 0.4)", "type": "shadow" },
+      "glowSubtle": { "value": "0px 0px 12px rgba(255, 215, 0, 0.08)", "type": "shadow" }
+    }
+  },
+  "typography": {
+    "classicalSerif": {
+      "fontFamily": { "value": "'Cinzel', 'Rozha One', 'Noto Serif Devanagari', serif", "type": "fontFamily" },
+      "h1": {
+        "fontSize": { "value": "28px", "type": "dimension" },
+        "fontWeight": { "value": "700", "type": "fontWeight" },
+        "lineHeight": { "value": "34px", "type": "dimension" }
+      },
+      "h2": {
+        "fontSize": { "value": "22px", "type": "dimension" },
+        "fontWeight": { "value": "600", "type": "fontWeight" },
+        "lineHeight": { "value": "28px", "type": "dimension" }
+      },
+      "subtitle": {
+        "fontSize": { "value": "14px", "type": "dimension" },
+        "fontStyle": { "value": "italic", "type": "fontStyle" },
+        "lineHeight": { "value": "20px", "type": "dimension" }
+      }
+    },
+    "tabularMonospace": {
+      "fontFamily": { "value": "'JetBrains Mono', 'Inter', monospace", "type": "fontFamily" },
+      "fontFeatureSettings": { "value": "'tnum' on", "type": "fontFeatureSettings" },
+      "mathDisplay": {
+        "fontSize": { "value": "36px", "type": "dimension" },
+        "fontWeight": { "value": "700", "type": "fontWeight" },
+        "letterSpacing": { "value": "1px", "type": "dimension" }
+      },
+      "mathStep": {
+        "fontSize": { "value": "20px", "type": "dimension" },
+        "fontWeight": { "value": "500", "type": "fontWeight" }
+      },
+      "bodyText": {
+        "fontSize": { "value": "16px", "type": "dimension" },
+        "fontWeight": { "value": "400", "type": "fontWeight" },
+        "lineHeight": { "value": "24px", "type": "dimension" }
+      }
+    }
+  },
+  "spacing": {
+    "xs": { "value": "4px", "type": "dimension" },
+    "sm": { "value": "8px", "type": "dimension" },
+    "md": { "value": "16px", "type": "dimension" },
+    "lg": { "value": "24px", "type": "dimension" },
+    "xl": { "value": "32px", "type": "dimension" }
+  },
+  "borderRadius": {
+    "card": { "value": "12px", "type": "dimension" },
+    "button": { "value": "8px", "type": "dimension" },
+    "pill": { "value": "999px", "type": "dimension" }
+  }
+}
