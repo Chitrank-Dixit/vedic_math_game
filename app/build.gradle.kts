@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace = "com.ankh.sutrasaga"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.ankh.sutrasaga"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0.0"
 
