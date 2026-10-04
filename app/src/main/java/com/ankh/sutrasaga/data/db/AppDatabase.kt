@@ -33,12 +33,15 @@ interface UserProgressDao {
 @Database(
     entities = [
         UserProgressEntity::class,
-        UpaSutraProgressEntity::class
+        UpaSutraProgressEntity::class,
+        PracticeStreakEntity::class
     ],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userProgressDao(): UserProgressDao
     abstract fun upaSutraProgressDao(): UpaSutraProgressDao
+    abstract fun practiceStreakDao(): PracticeStreakDao
 }
+

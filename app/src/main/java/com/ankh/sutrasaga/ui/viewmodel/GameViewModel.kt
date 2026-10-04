@@ -41,6 +41,17 @@ import com.ankh.sutrasaga.engine.upasutras.SisyateSesasamjnahGenerator
 import com.ankh.sutrasaga.engine.upasutras.VestanamGenerator
 import com.ankh.sutrasaga.engine.upasutras.VilokanamGenerator
 import com.ankh.sutrasaga.engine.upasutras.YavadunamRemixGenerator
+import com.ankh.sutrasaga.domain.models.GurukulScript
+import com.ankh.sutrasaga.domain.streak.PracticeDate
+import com.ankh.sutrasaga.domain.streak.StreakCalculator
+import com.ankh.sutrasaga.domain.streak.SystemPracticeDateProvider
+import com.ankh.sutrasaga.ui.navigation.VedicAppRoute
+import com.ankh.sutrasaga.ui.screens.CanonicalSutraModules
+import com.ankh.sutrasaga.ui.screens.GurukulScriptsRepository
+import com.ankh.sutrasaga.ui.screens.SutraLesson
+import com.ankh.sutrasaga.ui.screens.SutraLessonsRepository
+import com.ankh.sutrasaga.ui.screens.SutraModule
+import com.ankh.sutrasaga.ui.screens.buildSutraModules
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -67,6 +78,7 @@ enum class UpaSutraQuestStage {
 }
 
 data class GameUiState(
+    val currentRoute: VedicAppRoute = VedicAppRoute.HOME,
     val currentScreen: GameScreen = GameScreen.WORLD_SELECT,
     val selectedWorldId: Int = 1,
     val isWorld1Completed: Boolean = false,
@@ -101,6 +113,7 @@ data class GameUiState(
     val world15BestScore: Int = 0,
     val isWorld16Completed: Boolean = false,
     val world16BestScore: Int = 0,
+    val sutraModules: List<SutraModule> = CanonicalSutraModules,
     val currentProblemIndex: Int = 0,
     val totalProblemsInMode: Int = 5,
     val problemList: List<SutraProblem> = emptyList(),
@@ -116,8 +129,41 @@ data class GameUiState(
     val questStage: UpaSutraQuestStage = UpaSutraQuestStage.STORY_BEAT,
     val upaSutraProgressMap: Map<UpaSutraId, UpaSutraProgress> = emptyMap(),
     val questPracticeCorrectCount: Int = 0,
-    val questChallengeCorrectCount: Int = 0
-)
+    val questChallengeCorrectCount: Int = 0,
+    val currentStreak: Int = 0,
+    val lastPracticeDate: String? = null
+) {
+    val selectedModule: SutraModule
+        get() = sutraModules.firstOrNull { it.worldNumber == selectedWorldId } ?: sutraModules.first()
+
+    val selectedLesson: SutraLesson
+        get() = SutraLessonsRepository.getLessonForModule(selectedModule)
+
+    val selectedScript: GurukulScript
+        get() = GurukulScriptsRepository.getScriptForModule(selectedModule)
+
+    val selectedLessonProblem: SutraProblem
+        get() = GurukulScriptsRepository.getProblemForModule(selectedModule)
+    fun isWorldCompleted(worldId: Int): Boolean = when (worldId) {
+        1 -> isWorld1Completed
+        2 -> isWorld2Completed
+        3 -> isWorld3Completed
+        4 -> isWorld4Completed
+        5 -> isWorld5Completed
+        6 -> isWorld6Completed
+        7 -> isWorld7Completed
+        8 -> isWorld8Completed
+        9 -> isWorld9Completed
+        10 -> isWorld10Completed
+        11 -> isWorld11Completed
+        12 -> isWorld12Completed
+        13 -> isWorld13Completed
+        14 -> isWorld14Completed
+        15 -> isWorld15Completed
+        16 -> isWorld16Completed
+        else -> false
+    }
+}
 
 class GameViewModel : ViewModel() {
 
@@ -163,30 +209,45 @@ class GameViewModel : ViewModel() {
                 AppDatabase::class.java,
                 "ankh_game_db"
             ).fallbackToDestructiveMigration().build()
-            repository = GameRepository(db.userProgressDao(), db.upaSutraProgressDao())
-            observeProgress()
+            initRepository(
+                GameRepository(
+                    userDao = db.userProgressDao(),
+                    upaDao = db.upaSutraProgressDao(),
+                    streakDao = db.practiceStreakDao()
+                )
+            )
         }
+    }
+
+    fun initRepository(repository: GameRepository) {
+        this.repository = repository
+        observeProgress()
     }
 
     private fun observeProgress() {
         viewModelScope.launch {
             repository?.getAllProgress()?.collect { list ->
-                val w1 = list.find { it.worldId == 1 }
-                val w2 = list.find { it.worldId == 2 }
-                val w3 = list.find { it.worldId == 3 }
-                val w4 = list.find { it.worldId == 4 }
-                val w5 = list.find { it.worldId == 5 }
-                val w6 = list.find { it.worldId == 6 }
-                val w7 = list.find { it.worldId == 7 }
-                val w8 = list.find { it.worldId == 8 }
-                val w9 = list.find { it.worldId == 9 }
-                val w10 = list.find { it.worldId == 10 }
-                val w11 = list.find { it.worldId == 11 }
-                val w12 = list.find { it.worldId == 12 }
-                val w13 = list.find { it.worldId == 13 }
-                val w14 = list.find { it.worldId == 14 }
-                val w15 = list.find { it.worldId == 15 }
-                val w16 = list.find { it.worldId == 16 }
+                val progressByWorld = list.associateBy { it.worldId }
+                val w1 = progressByWorld[1]
+                val w2 = progressByWorld[2]
+                val w3 = progressByWorld[3]
+                val w4 = progressByWorld[4]
+                val w5 = progressByWorld[5]
+                val w6 = progressByWorld[6]
+                val w7 = progressByWorld[7]
+                val w8 = progressByWorld[8]
+                val w9 = progressByWorld[9]
+                val w10 = progressByWorld[10]
+                val w11 = progressByWorld[11]
+                val w12 = progressByWorld[12]
+                val w13 = progressByWorld[13]
+                val w14 = progressByWorld[14]
+                val w15 = progressByWorld[15]
+                val w16 = progressByWorld[16]
+
+                val updatedModules = buildSutraModules { worldId ->
+                    progressByWorld[worldId]?.isCompleted == true
+                }
 
                 _uiState.value = _uiState.value.copy(
                     isWorld1Completed = w1?.isCompleted ?: false,
@@ -220,7 +281,8 @@ class GameViewModel : ViewModel() {
                     isWorld15Completed = w15?.isCompleted ?: false,
                     world15BestScore = w15?.bestScore ?: 0,
                     isWorld16Completed = w16?.isCompleted ?: false,
-                    world16BestScore = w16?.bestScore ?: 0
+                    world16BestScore = w16?.bestScore ?: 0,
+                    sutraModules = updatedModules
                 )
             }
         }
@@ -230,6 +292,15 @@ class GameViewModel : ViewModel() {
                 val progressMap = progressList.associateBy { it.id }
                 _uiState.value = _uiState.value.copy(
                     upaSutraProgressMap = progressMap
+                )
+            }
+        }
+
+        viewModelScope.launch {
+            repository?.getPracticeStreak()?.collect { streak ->
+                _uiState.value = _uiState.value.copy(
+                    currentStreak = streak.currentStreak,
+                    lastPracticeDate = streak.lastPracticeDate
                 )
             }
         }
@@ -279,20 +350,29 @@ class GameViewModel : ViewModel() {
         if (worldId in 1..16) {
             _uiState.value = _uiState.value.copy(
                 selectedWorldId = worldId,
-                currentScreen = GameScreen.STORY_BEAT
+                score = 0,
+                revealedStepsCount = 0,
+                currentScreen = GameScreen.STORY_BEAT,
+                currentRoute = VedicAppRoute.GURUKUL_TUTORIAL
             )
         }
     }
 
+    fun selectSutra(worldId: Int) {
+        selectWorld(worldId)
+    }
+
     fun openTreasury() {
         _uiState.value = _uiState.value.copy(
-            currentScreen = GameScreen.UPA_SUTRA_TREASURY
+            currentScreen = GameScreen.UPA_SUTRA_TREASURY,
+            currentRoute = VedicAppRoute.UPA_SUTRA_TREASURY
         )
     }
 
     fun openCodex() {
         _uiState.value = _uiState.value.copy(
-            currentScreen = GameScreen.UPA_SUTRA_CODEX
+            currentScreen = GameScreen.UPA_SUTRA_CODEX,
+            currentRoute = VedicAppRoute.UPA_SUTRA_CODEX
         )
     }
 
@@ -301,6 +381,7 @@ class GameViewModel : ViewModel() {
             selectedUpaSutraId = id,
             questStage = UpaSutraQuestStage.STORY_BEAT,
             currentScreen = GameScreen.UPA_SUTRA_QUEST,
+            currentRoute = VedicAppRoute.UPA_SUTRA_QUEST,
             score = 0,
             questPracticeCorrectCount = 0,
             questChallengeCorrectCount = 0
@@ -383,13 +464,21 @@ class GameViewModel : ViewModel() {
                         lastAttemptTimestamp = System.currentTimeMillis()
                     )
                 )
+                repo.recordPracticeDay()
             }
         }
     }
 
     fun navigateToTutorial() {
         _uiState.value = _uiState.value.copy(
-            currentScreen = GameScreen.TUTORIAL
+            currentScreen = GameScreen.TUTORIAL,
+            currentRoute = VedicAppRoute.GURUKUL_TUTORIAL
+        )
+    }
+
+    fun navigateToSolver() {
+        _uiState.value = _uiState.value.copy(
+            currentRoute = VedicAppRoute.SUTRA_SOLVER
         )
     }
 
@@ -398,6 +487,7 @@ class GameViewModel : ViewModel() {
         val problems = generator.generateProblemSet(5, DifficultyTier.TIER_1_EASY)
         _uiState.value = _uiState.value.copy(
             currentScreen = GameScreen.PRACTICE_ARENA,
+            currentRoute = VedicAppRoute.PRACTICE_ARENA,
             problemList = problems,
             currentProblemIndex = 0,
             totalProblemsInMode = 5,
@@ -411,7 +501,11 @@ class GameViewModel : ViewModel() {
         )
     }
 
-    fun startBossBattle() {
+    fun startPracticeArena() {
+        startPractice()
+    }
+
+    fun startBossBattle(preserveScore: Boolean = false) {
         val generator = getGeneratorForWorld(_uiState.value.selectedWorldId)
         val problems = generator.generateProblemSet(5, DifficultyTier.TIER_2_HARD)
         _uiState.value = _uiState.value.copy(
@@ -422,7 +516,7 @@ class GameViewModel : ViewModel() {
             currentProblem = problems.firstOrNull(),
             revealedStepsCount = 0,
             userInput = "",
-            score = 0,
+            score = if (preserveScore) _uiState.value.score else 0,
             isAnswerSubmitted = false,
             isAnswerCorrect = null,
             feedbackMessage = ""
@@ -562,7 +656,7 @@ class GameViewModel : ViewModel() {
         } else {
             // Mode finished
             if (state.currentScreen == GameScreen.PRACTICE_ARENA) {
-                startBossBattle()
+                startBossBattle(preserveScore = true)
             } else if (state.currentScreen == GameScreen.BOSS_BATTLE) {
                 completeCurrentWorld()
             } else if (state.currentScreen == GameScreen.UPA_SUTRA_QUEST) {
@@ -571,37 +665,114 @@ class GameViewModel : ViewModel() {
         }
     }
 
-    fun completeWorld(worldId: Int, score: Int = 100) {
+    /**
+     * Records an answer attempt for the current step in SutraSolverScreen.
+     * Applies existing scoring formula: 100 points reduced by 15 per hint/mistake (minimum 40), or 0 for incorrect.
+     */
+    fun recordSolverStepAnswer(isCorrect: Boolean) {
+        val state = _uiState.value
+        if (isCorrect) {
+            val addedPoints = (100 - state.revealedStepsCount * 15).coerceAtLeast(40)
+            _uiState.value = state.copy(
+                score = state.score + addedPoints,
+                revealedStepsCount = 0
+            )
+        } else {
+            _uiState.value = state.copy(
+                revealedStepsCount = state.revealedStepsCount + 1
+            )
+        }
+    }
+
+    /**
+     * Authoritative lesson completion method.
+     * Completes the lesson using the user's actual gameplay score stored in GameUiState.
+     */
+    fun completeLesson(worldId: Int = _uiState.value.selectedWorldId) {
+        val actualScore = _uiState.value.score
+        completeWorld(worldId = worldId, score = actualScore)
+    }
+
+    fun completeWorld(worldId: Int, score: Int) {
+        val validatedScore = score.coerceAtLeast(0)
         if (worldId in 1..16) {
             val currentState = _uiState.value
-            _uiState.value = when (worldId) {
-                1 -> currentState.copy(isWorld1Completed = true, world1BestScore = maxOf(currentState.world1BestScore, score))
-                2 -> currentState.copy(isWorld2Completed = true, world2BestScore = maxOf(currentState.world2BestScore, score))
-                3 -> currentState.copy(isWorld3Completed = true, world3BestScore = maxOf(currentState.world3BestScore, score))
-                4 -> currentState.copy(isWorld4Completed = true, world4BestScore = maxOf(currentState.world4BestScore, score))
-                5 -> currentState.copy(isWorld5Completed = true, world5BestScore = maxOf(currentState.world5BestScore, score))
-                6 -> currentState.copy(isWorld6Completed = true, world6BestScore = maxOf(currentState.world6BestScore, score))
-                7 -> currentState.copy(isWorld7Completed = true, world7BestScore = maxOf(currentState.world7BestScore, score))
-                8 -> currentState.copy(isWorld8Completed = true, world8BestScore = maxOf(currentState.world8BestScore, score))
-                9 -> currentState.copy(isWorld9Completed = true, world9BestScore = maxOf(currentState.world9BestScore, score))
-                10 -> currentState.copy(isWorld10Completed = true, world10BestScore = maxOf(currentState.world10BestScore, score))
-                11 -> currentState.copy(isWorld11Completed = true, world11BestScore = maxOf(currentState.world11BestScore, score))
-                12 -> currentState.copy(isWorld12Completed = true, world12BestScore = maxOf(currentState.world12BestScore, score))
-                13 -> currentState.copy(isWorld13Completed = true, world13BestScore = maxOf(currentState.world13BestScore, score))
-                14 -> currentState.copy(isWorld14Completed = true, world14BestScore = maxOf(currentState.world14BestScore, score))
-                15 -> currentState.copy(isWorld15Completed = true, world15BestScore = maxOf(currentState.world15BestScore, score))
-                16 -> currentState.copy(isWorld16Completed = true, world16BestScore = maxOf(currentState.world16BestScore, score))
+            val baseUpdatedState = when (worldId) {
+                1 -> currentState.copy(isWorld1Completed = true, world1BestScore = maxOf(currentState.world1BestScore, validatedScore))
+                2 -> currentState.copy(isWorld2Completed = true, world2BestScore = maxOf(currentState.world2BestScore, validatedScore))
+                3 -> currentState.copy(isWorld3Completed = true, world3BestScore = maxOf(currentState.world3BestScore, validatedScore))
+                4 -> currentState.copy(isWorld4Completed = true, world4BestScore = maxOf(currentState.world4BestScore, validatedScore))
+                5 -> currentState.copy(isWorld5Completed = true, world5BestScore = maxOf(currentState.world5BestScore, validatedScore))
+                6 -> currentState.copy(isWorld6Completed = true, world6BestScore = maxOf(currentState.world6BestScore, validatedScore))
+                7 -> currentState.copy(isWorld7Completed = true, world7BestScore = maxOf(currentState.world7BestScore, validatedScore))
+                8 -> currentState.copy(isWorld8Completed = true, world8BestScore = maxOf(currentState.world8BestScore, validatedScore))
+                9 -> currentState.copy(isWorld9Completed = true, world9BestScore = maxOf(currentState.world9BestScore, validatedScore))
+                10 -> currentState.copy(isWorld10Completed = true, world10BestScore = maxOf(currentState.world10BestScore, validatedScore))
+                11 -> currentState.copy(isWorld11Completed = true, world11BestScore = maxOf(currentState.world11BestScore, validatedScore))
+                12 -> currentState.copy(isWorld12Completed = true, world12BestScore = maxOf(currentState.world12BestScore, validatedScore))
+                13 -> currentState.copy(isWorld13Completed = true, world13BestScore = maxOf(currentState.world13BestScore, validatedScore))
+                14 -> currentState.copy(isWorld14Completed = true, world14BestScore = maxOf(currentState.world14BestScore, validatedScore))
+                15 -> currentState.copy(isWorld15Completed = true, world15BestScore = maxOf(currentState.world15BestScore, validatedScore))
+                16 -> currentState.copy(isWorld16Completed = true, world16BestScore = maxOf(currentState.world16BestScore, validatedScore))
                 else -> currentState
             }
-            repository?.let { repo ->
+            val updatedModules = buildSutraModules { worldNumber ->
+                baseUpdatedState.isWorldCompleted(worldNumber)
+            }
+            val finalUpdatedState = baseUpdatedState.copy(
+                sutraModules = updatedModules,
+                currentRoute = VedicAppRoute.HOME,
+                currentScreen = GameScreen.WORLD_SELECT
+            )
+            _uiState.value = finalUpdatedState
+            val repo = repository
+            if (repo != null) {
                 viewModelScope.launch {
-                    repo.saveWorldCompletion(worldId, score)
+                    repo.saveWorldCompletion(worldId, validatedScore)
+                    repo.recordPracticeDay()
                 }
+            } else {
+                val (newStreak, newDateStr) = StreakCalculator.calculateNewStreak(
+                    currentStreak = _uiState.value.currentStreak,
+                    lastPracticeDateStr = _uiState.value.lastPracticeDate,
+                    today = SystemPracticeDateProvider().getTodayDate()
+                )
+                _uiState.value = _uiState.value.copy(
+                    currentStreak = newStreak,
+                    lastPracticeDate = newDateStr
+                )
             }
         }
     }
 
-    private fun completeCurrentWorld() {
+    /**
+     * Records meaningful practice for the given date (or today in local timezone).
+     * Authoritative single streak update operation.
+     */
+    fun recordPracticeDay(today: PracticeDate? = null) {
+        val repo = repository
+        if (repo != null) {
+            viewModelScope.launch {
+                if (today != null) {
+                    repo.recordPracticeDay(today)
+                } else {
+                    repo.recordPracticeDay()
+                }
+            }
+        } else {
+            val (newStreak, newDateStr) = StreakCalculator.calculateNewStreak(
+                currentStreak = _uiState.value.currentStreak,
+                lastPracticeDateStr = _uiState.value.lastPracticeDate,
+                today = today ?: SystemPracticeDateProvider().getTodayDate()
+            )
+            _uiState.value = _uiState.value.copy(
+                currentStreak = newStreak,
+                lastPracticeDate = newDateStr
+            )
+        }
+    }
+
+    fun completeCurrentWorld() {
         val worldId = _uiState.value.selectedWorldId
         val finalScore = _uiState.value.score
         _uiState.value = _uiState.value.copy(
@@ -611,8 +782,46 @@ class GameViewModel : ViewModel() {
     }
 
     fun returnToWorldSelect() {
+        returnToHome()
+    }
+
+    fun returnToHome() {
         _uiState.value = _uiState.value.copy(
-            currentScreen = GameScreen.WORLD_SELECT
+            currentScreen = GameScreen.WORLD_SELECT,
+            currentRoute = VedicAppRoute.HOME
         )
+    }
+
+    fun navigateToRoute(route: VedicAppRoute) {
+        when (route) {
+            VedicAppRoute.HOME -> returnToHome()
+            VedicAppRoute.GURUKUL_TUTORIAL -> navigateToTutorial()
+            VedicAppRoute.SUTRA_SOLVER -> navigateToSolver()
+            VedicAppRoute.PRACTICE_ARENA -> startPractice()
+            VedicAppRoute.UPA_SUTRA_TREASURY -> openTreasury()
+            VedicAppRoute.UPA_SUTRA_CODEX -> openCodex()
+            VedicAppRoute.UPA_SUTRA_QUEST -> {
+                val id = _uiState.value.selectedUpaSutraId ?: UpaSutraId.ANTYAYORDASHAKEPI
+                startUpaSutraQuest(id)
+            }
+        }
+    }
+
+    fun navigateBack() {
+        when (_uiState.value.currentRoute) {
+            VedicAppRoute.GURUKUL_TUTORIAL,
+            VedicAppRoute.SUTRA_SOLVER,
+            VedicAppRoute.PRACTICE_ARENA,
+            VedicAppRoute.UPA_SUTRA_TREASURY -> {
+                returnToHome()
+            }
+            VedicAppRoute.UPA_SUTRA_CODEX,
+            VedicAppRoute.UPA_SUTRA_QUEST -> {
+                openTreasury()
+            }
+            VedicAppRoute.HOME -> {
+                // At Home - top level back handled by system
+            }
+        }
     }
 }

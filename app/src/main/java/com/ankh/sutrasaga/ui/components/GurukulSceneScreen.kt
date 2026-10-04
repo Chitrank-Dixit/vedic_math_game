@@ -87,7 +87,7 @@ fun GurukulSceneScreen(
     if (activeTree == null) {
         LegacyGurukulSceneScreen(
             script = script ?: com.ankh.sutrasaga.ui.screens.GurukulScriptsRepository.allScripts.values.first(),
-            problem = problem ?: com.ankh.sutrasaga.ui.screens.GurukulScriptsRepository.getProblemForModule(com.ankh.sutrasaga.ui.screens.SampleSutraModules.first()),
+            problem = problem ?: com.ankh.sutrasaga.ui.screens.GurukulScriptsRepository.getProblemForModule(com.ankh.sutrasaga.ui.screens.CanonicalSutraModules.first()),
             onComplete = onComplete,
             onBack = onBack,
             modifier = modifier

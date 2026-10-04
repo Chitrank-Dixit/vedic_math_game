@@ -52,6 +52,182 @@ data class SutraModule(
     val worldNumber: Int
 )
 
+/**
+ * Canonical production metadata for all 16 Vedic Sutras with initial 0.0f progress.
+ * Production Home state starts with this baseline and reactively maps real persistent progress.
+ */
+val CanonicalSutraModules = listOf(
+    // 1. Multiplication Shortcuts
+    SutraModule(
+        id = "urdhva",
+        sanskritTitle = "ऊर्ध्व तिर्यग्भ्याम्",
+        englishTitle = "Vertically and Crosswise (2x2 Multiplication)",
+        category = "Multiplication Shortcuts",
+        estMinutes = 8,
+        progress = 0.0f,
+        worldNumber = 5
+    ),
+    SutraModule(
+        id = "ekadhikena",
+        sanskritTitle = "एकाधिकेन पूर्वेण",
+        englishTitle = "By One More than the Previous One (Squaring 5s)",
+        category = "Multiplication Shortcuts",
+        estMinutes = 5,
+        progress = 0.0f,
+        worldNumber = 1
+    ),
+    SutraModule(
+        id = "nikhilam",
+        sanskritTitle = "निखिलं नवतश्चरमं दशतः",
+        englishTitle = "All from 9 and Last from 10 (Base Subtraction)",
+        category = "Multiplication Shortcuts",
+        estMinutes = 6,
+        progress = 0.0f,
+        worldNumber = 2
+    ),
+    SutraModule(
+        id = "ekanyunena",
+        sanskritTitle = "एकन्यूनेन पूर्वेण",
+        englishTitle = "By One Less than the Previous One (Multiplication by 9s)",
+        category = "Multiplication Shortcuts",
+        estMinutes = 5,
+        progress = 0.0f,
+        worldNumber = 3
+    ),
+
+    // 2. Squaring & Cubing
+    SutraModule(
+        id = "yavadunam",
+        sanskritTitle = "यावदूनम्",
+        englishTitle = "Lessen by Deficiency (Deficiency Squaring near base)",
+        category = "Squaring & Cubing",
+        estMinutes = 7,
+        progress = 0.0f,
+        worldNumber = 4
+    ),
+    SutraModule(
+        id = "anurupyena_square",
+        sanskritTitle = "आनुरूप्येण शून्यमन्यत्",
+        englishTitle = "Proportionately (Working Sub-Base Squaring & Ratios)",
+        category = "Squaring & Cubing",
+        estMinutes = 6,
+        progress = 0.0f,
+        worldNumber = 7
+    ),
+    SutraModule(
+        id = "puranapuranabhyam",
+        sanskritTitle = "पूरणापूरणाभ्याम्",
+        englishTitle = "By the Completion or Non-Completion",
+        category = "Squaring & Cubing",
+        estMinutes = 8,
+        progress = 0.0f,
+        worldNumber = 10
+    ),
+
+    // 3. Division & Reciprocals
+    SutraModule(
+        id = "paravartya",
+        sanskritTitle = "परावर्त्य योजयेत्",
+        englishTitle = "Transpose and Apply (Synthetic Polynomial Division)",
+        category = "Division & Reciprocals",
+        estMinutes = 9,
+        progress = 0.0f,
+        worldNumber = 6
+    ),
+    SutraModule(
+        id = "shesanyankena",
+        sanskritTitle = "शेषाण्यङ्केन चरमेण",
+        englishTitle = "The Remainders by the Last Digit (Decimal Expansions)",
+        category = "Division & Reciprocals",
+        estMinutes = 7,
+        progress = 0.0f,
+        worldNumber = 12
+    ),
+    SutraModule(
+        id = "chalana",
+        sanskritTitle = "चलनकलनाभ्याम्",
+        englishTitle = "Differential Calculus & Residue Operations",
+        category = "Division & Reciprocals",
+        estMinutes = 10,
+        progress = 0.0f,
+        worldNumber = 16
+    ),
+
+    // 4. Algebra & Linear Systems
+    SutraModule(
+        id = "sankalana",
+        sanskritTitle = "संकलनव्यवकलनाभ्याम्",
+        englishTitle = "By Addition and by Subtraction (Simultaneous Equations)",
+        category = "Algebra & Linear Systems",
+        estMinutes = 8,
+        progress = 0.0f,
+        worldNumber = 8
+    ),
+    SutraModule(
+        id = "shunyam",
+        sanskritTitle = "शून्यं साम्यसमुच्चये",
+        englishTitle = "When the Collection is Equal, it is Zero",
+        category = "Algebra & Linear Systems",
+        estMinutes = 7,
+        progress = 0.0f,
+        worldNumber = 9
+    ),
+    SutraModule(
+        id = "sopantyadvayamantyam",
+        sanskritTitle = "सोपान्त्यद्वयमन्त्यम्",
+        englishTitle = "The Ultimate and Twice the Penultimate",
+        category = "Algebra & Linear Systems",
+        estMinutes = 6,
+        progress = 0.0f,
+        worldNumber = 13
+    ),
+
+    // 5. Factorization & Verification
+    SutraModule(
+        id = "vyashtisamashtih",
+        sanskritTitle = "व्यष्टिसमष्टिः",
+        englishTitle = "Specific and General (Biquadratic Factorization)",
+        category = "Factorization & Verification",
+        estMinutes = 8,
+        progress = 0.0f,
+        worldNumber = 11
+    ),
+    SutraModule(
+        id = "gunitasamuccayah",
+        sanskritTitle = "गुणितसमुच्चयः",
+        englishTitle = "Product of the Sum is the Sum of the Products",
+        category = "Factorization & Verification",
+        estMinutes = 7,
+        progress = 0.0f,
+        worldNumber = 14
+    ),
+    SutraModule(
+        id = "gunakasamuccayah",
+        sanskritTitle = "गुणकसमुच्चयः",
+        englishTitle = "The Factor of the Sum is the Sum of the Factors",
+        category = "Factorization & Verification",
+        estMinutes = 7,
+        progress = 0.0f,
+        worldNumber = 15
+    )
+)
+
+/**
+ * Constructs the active list of [SutraModule]s by mapping real progress per world.
+ * Each module's progress is deterministically determined by stable [SutraModule.worldNumber] ID:
+ * 1.0f (100%) if completed, 0.0f (0%) if not completed.
+ */
+fun buildSutraModules(isWorldCompleted: (worldId: Int) -> Boolean): List<SutraModule> {
+    return CanonicalSutraModules.map { module ->
+        val completed = isWorldCompleted(module.worldNumber)
+        module.copy(progress = if (completed) 1.0f else 0.0f)
+    }
+}
+
+/**
+ * Isolated sample progress data strictly for Compose previews and legacy visual tests.
+ * Production code must NEVER depend on this dataset.
+ */
 val SampleSutraModules = listOf(
     // 1. Multiplication Shortcuts
     SutraModule(
@@ -213,8 +389,8 @@ val SampleSutraModules = listOf(
  */
 @Composable
 fun HomeScreen(
-    streakDays: Int = 7,
-    modules: List<SutraModule> = SampleSutraModules,
+    streakDays: Int = 0,
+    modules: List<SutraModule> = CanonicalSutraModules,
     onSelectSutra: (SutraModule) -> Unit,
     onStartPracticeArena: () -> Unit,
     onOpenTreasury: () -> Unit = {}

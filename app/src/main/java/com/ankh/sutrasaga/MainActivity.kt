@@ -44,13 +44,21 @@ fun MainGameContent(viewModel: GameViewModel) {
 
     VedicAppNavigator(
         uiState = uiState,
+        onNavigate = { route ->
+            viewModel.navigateToRoute(route)
+        },
+        onSelectSutra = { worldId ->
+            viewModel.selectSutra(worldId)
+        },
         onCompleteLesson = { worldId ->
-            viewModel.completeWorld(worldId)
+            viewModel.completeLesson(worldId)
+        },
+        onSolverStepAnswered = { isCorrect ->
+            viewModel.recordSolverStepAnswer(isCorrect)
         },
         onStartQuest = { questId ->
             viewModel.startUpaSutraQuest(questId)
         },
-
         onAdvanceQuestStage = {
             viewModel.advanceQuestStage()
         },
@@ -74,6 +82,9 @@ fun MainGameContent(viewModel: GameViewModel) {
         },
         onReturnToTreasury = {
             viewModel.openTreasury()
+        },
+        onBack = {
+            viewModel.navigateBack()
         }
     )
 }

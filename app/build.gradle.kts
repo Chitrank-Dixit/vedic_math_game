@@ -5,6 +5,13 @@ plugins {
     id("com.google.devtools.ksp")
 }
 
+fun getSigningProperty(name: String, androidPrefixName: String): String? {
+    return project.findProperty(name)?.toString()
+        ?: System.getenv(name)
+        ?: project.findProperty(androidPrefixName)?.toString()
+        ?: System.getenv(androidPrefixName)
+}
+
 android {
     namespace = "com.ankh.sutrasaga"
     compileSdk = 36
@@ -24,12 +31,19 @@ android {
 
     signingConfigs {
         create("release") {
-            val keystorePath = project.findProperty("KEYSTORE_PATH")?.toString() ?: System.getenv("KEYSTORE_PATH")
-            if (keystorePath != null && file(keystorePath).exists()) {
-                storeFile = file(keystorePath)
-                storePassword = project.findProperty("KEYSTORE_PASSWORD")?.toString() ?: System.getenv("KEYSTORE_PASSWORD") ?: ""
-                keyAlias = project.findProperty("KEY_ALIAS")?.toString() ?: System.getenv("KEY_ALIAS") ?: ""
-                keyPassword = project.findProperty("KEY_PASSWORD")?.toString() ?: System.getenv("KEY_PASSWORD") ?: ""
+            val keystorePath = getSigningProperty("KEYSTORE_PATH", "ANDROID_KEYSTORE_PATH")
+            val keystorePassword = getSigningProperty("KEYSTORE_PASSWORD", "ANDROID_KEYSTORE_PASSWORD")
+            val keyAliasVal = getSigningProperty("KEY_ALIAS", "ANDROID_KEY_ALIAS")
+            val keyPasswordVal = getSigningProperty("KEY_PASSWORD", "ANDROID_KEY_PASSWORD")
+
+            if (!keystorePath.isNullOrBlank()) {
+                val keystoreFile = file(keystorePath)
+                if (keystoreFile.exists() && keystoreFile.isFile && keystoreFile.canRead()) {
+                    storeFile = keystoreFile
+                    storePassword = keystorePassword ?: ""
+                    keyAlias = keyAliasVal ?: ""
+                    keyPassword = keyPasswordVal ?: ""
+                }
             }
         }
     }
@@ -42,15 +56,14 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            // Use release signing config if keystore is configured, otherwise fallback to debug signing for local test bundles
-            val hasReleaseKeystore = (project.findProperty("KEYSTORE_PATH")?.toString() ?: System.getenv("KEYSTORE_PATH")) != null
-            if (hasReleaseKeystore) {
-                signingConfig = signingConfigs.getByName("release")
-            }
+            // Authoritative: release builds ALWAYS require and use release signing.
+            // Under no circumstances may a release artifact fall back to debug signing.
+            signingConfig = signingConfigs.getByName("release")
         }
         debug {
             isMinifyEnabled = false
             isDebuggable = true
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 
@@ -79,6 +92,61 @@ android {
         abortOnError = true
         checkReleaseBuilds = true
         warningsAsErrors = false
+    }
+}
+
+gradle.taskGraph.whenReady {
+    val releaseArtifactTaskNames = setOf(
+        "bundleRelease",
+        "assembleRelease",
+        "packageReleaseBundle",
+        "signReleaseBundle",
+        "validateSigningRelease"
+    )
+    val hasReleaseArtifactTask = allTasks.any { task ->
+        releaseArtifactTaskNames.contains(task.name)
+    }
+    if (hasReleaseArtifactTask) {
+        val keystorePath = getSigningProperty("KEYSTORE_PATH", "ANDROID_KEYSTORE_PATH")
+        val keystorePassword = getSigningProperty("KEYSTORE_PASSWORD", "ANDROID_KEYSTORE_PASSWORD")
+        val keyAliasVal = getSigningProperty("KEY_ALIAS", "ANDROID_KEY_ALIAS")
+        val keyPasswordVal = getSigningProperty("KEY_PASSWORD", "ANDROID_KEY_PASSWORD")
+
+        val missing = mutableListOf<String>()
+        if (keystorePath.isNullOrBlank()) missing.add("KEYSTORE_PATH / ANDROID_KEYSTORE_PATH")
+        if (keystorePassword.isNullOrBlank()) missing.add("KEYSTORE_PASSWORD / ANDROID_KEYSTORE_PASSWORD")
+        if (keyAliasVal.isNullOrBlank()) missing.add("KEY_ALIAS / ANDROID_KEY_ALIAS")
+        if (keyPasswordVal.isNullOrBlank()) missing.add("KEY_PASSWORD / ANDROID_KEY_PASSWORD")
+
+        if (missing.isNotEmpty()) {
+            val missingList = missing.joinToString("\n") { "|  - $it" }
+            throw GradleException(
+                """
+                |================================================================================
+                |RELEASE SIGNING ERROR:
+                |Release signing configuration is required to build a release artifact.
+                |Silent fallback to debug signing is strictly disallowed for production safety.
+                |
+                |Missing signing parameter(s):
+                $missingList
+                |
+                |Please configure the required environment variables or Gradle properties:
+                |  - KEYSTORE_PATH (or ANDROID_KEYSTORE_PATH): Path to upload/release keystore (.jks/.keystore)
+                |  - KEYSTORE_PASSWORD (or ANDROID_KEYSTORE_PASSWORD): Keystore password
+                |  - KEY_ALIAS (or ANDROID_KEY_ALIAS): Key alias
+                |  - KEY_PASSWORD (or ANDROID_KEY_PASSWORD): Key password
+                |================================================================================
+                """.trimMargin()
+            )
+        }
+
+        val keystoreFile = file(keystorePath!!)
+        if (!keystoreFile.exists()) {
+            throw GradleException("Release signing keystore file does not exist: ${keystoreFile.absolutePath}")
+        }
+        if (!keystoreFile.isFile || !keystoreFile.canRead()) {
+            throw GradleException("Release signing keystore file is not readable: ${keystoreFile.absolutePath}")
+        }
     }
 }
 

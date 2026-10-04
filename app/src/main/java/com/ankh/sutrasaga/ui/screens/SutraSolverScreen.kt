@@ -166,7 +166,9 @@ fun validateSolverStep(
 @Composable
 fun SutraSolverScreen(
     lesson: SutraLesson = SampleUrdhvaLesson,
+    score: Int = 0,
     onBackClick: () -> Unit,
+    onStepAnswered: ((isCorrect: Boolean) -> Unit)? = null,
     onLessonComplete: () -> Unit,
     onReplayTutorial: (() -> Unit)? = null
 ) {
@@ -180,6 +182,7 @@ fun SutraSolverScreen(
     var userInput by remember { mutableStateOf("") }
     var isCompleted by remember { mutableStateOf(false) }
     var showCompletionDialog by remember { mutableStateOf(false) }
+    var hasTriggeredCompletion by remember { mutableStateOf(false) }
 
     // Error shake animation
     val shakeOffset = remember { Animatable(0f) }
@@ -189,6 +192,7 @@ fun SutraSolverScreen(
         userInput = ""
         isCompleted = false
         showCompletionDialog = false
+        hasTriggeredCompletion = false
         isBlueprintOpen = false
     }
 
@@ -220,7 +224,9 @@ fun SutraSolverScreen(
     fun handleSubmit() {
         if (isCompleted) return
 
-        if (validateSolverStep(lesson, activeStepIndex, userInput)) {
+        val isCorrect = validateSolverStep(lesson, activeStepIndex, userInput)
+        if (isCorrect) {
+            onStepAnswered?.invoke(true)
             if (activeStepIndex + 1 < lesson.steps.size) {
                 activeStepIndex++
                 userInput = ""
@@ -229,6 +235,7 @@ fun SutraSolverScreen(
                 showCompletionDialog = true
             }
         } else {
+            onStepAnswered?.invoke(false)
             // Trigger error shake animation
             scope.launch {
                 shakeOffset.animateTo(12f, tween(50))
@@ -442,11 +449,20 @@ fun SutraSolverScreen(
                         textAlign = TextAlign.Center,
                         color = colors.textSecondary
                     )
-                    Spacer(modifier = Modifier.height(20.dp))
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Text(
+                        text = "FINAL SCORE: $score PTS",
+                        style = typography.subtitle.copy(fontSize = 16.sp, fontWeight = FontWeight.ExtraBold),
+                        color = colors.primarySaffron
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
                     Button(
                         onClick = {
-                            showCompletionDialog = false
-                            onLessonComplete()
+                            if (!hasTriggeredCompletion) {
+                                hasTriggeredCompletion = true
+                                showCompletionDialog = false
+                                onLessonComplete()
+                            }
                         },
                         modifier = Modifier
                             .fillMaxWidth()
