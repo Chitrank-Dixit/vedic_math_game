@@ -164,25 +164,7 @@ fun UpaSutraTreasuryScreen(
 }
 
 private fun isWorldCompleted(state: GameUiState, worldId: Int): Boolean {
-    return when (worldId) {
-        1 -> state.isWorld1Completed
-        2 -> state.isWorld2Completed
-        3 -> state.isWorld3Completed
-        4 -> state.isWorld4Completed
-        5 -> state.isWorld5Completed
-        6 -> state.isWorld6Completed
-        7 -> state.isWorld7Completed
-        8 -> state.isWorld8Completed
-        9 -> state.isWorld9Completed
-        10 -> state.isWorld10Completed
-        11 -> state.isWorld11Completed
-        12 -> state.isWorld12Completed
-        13 -> state.isWorld13Completed
-        14 -> state.isWorld14Completed
-        15 -> state.isWorld15Completed
-        16 -> state.isWorld16Completed
-        else -> false
-    }
+    return state.isWorldCompleted(worldId)
 }
 
 @Composable

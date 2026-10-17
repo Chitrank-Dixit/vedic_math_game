@@ -6,6 +6,18 @@ import com.ankh.sutrasaga.domain.models.SutraProblem
 import java.util.UUID
 import kotlin.random.Random
 
+/**
+ * UrdhvaTiryagbhyamGenerator — "Vertically and Crosswise" (ऊर्ध्वतिर्यग्भ्याम्)
+ *
+ * Mathematical Shortcut Rule:
+ * For 2-digit multiplication (ab × cd):
+ * - Step 1 (Units × Units): b × d
+ * - Step 2 (Crosswise sum + carry): (a × d) + (b × c) + carry
+ * - Step 3 (Tens × Tens + carry): (a × c) + carry
+ *
+ * Example:
+ * 23 × 14 → 3×4=12 (carry 1) → 2(4)+3(1)+1 = 12 (carry 1) → 2(1)+1 = 3 → 322
+ */
 class UrdhvaTiryagbhyamGenerator(
     private val random: Random = Random.Default
 ) : SutraProblemGenerator {

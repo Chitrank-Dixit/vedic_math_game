@@ -232,8 +232,8 @@ fun WorldSelectScreen(
             }
             item {
                 WorldCard(
-                    title = "World 9: Puranapuranabhyam",
-                    subtitle = "By the Completion or Non-Completion (Completing the Square)",
+                    title = "World 9: Shunyam Samyasamuccaye",
+                    subtitle = "When the Collection is Equal, it is Zero (Equated Sums)",
                     isUnlocked = true,
                     isCompleted = state.isWorld9Completed,
                     bestScore = state.world9BestScore,
@@ -242,8 +242,8 @@ fun WorldSelectScreen(
             }
             item {
                 WorldCard(
-                    title = "World 10: Calana-Kalanabhyam",
-                    subtitle = "Sequential Difference & Factoring Quadratics",
+                    title = "World 10: Puranapuranabhyam",
+                    subtitle = "By the Completion or Non-Completion (Completing the Square)",
                     isUnlocked = true,
                     isCompleted = state.isWorld10Completed,
                     bestScore = state.world10BestScore,
@@ -252,8 +252,8 @@ fun WorldSelectScreen(
             }
             item {
                 WorldCard(
-                    title = "World 11: Yavadunam Tavadunam",
-                    subtitle = "Multi-Digit Deficiency Squaring & Base Cubing",
+                    title = "World 11: Vyashtisamashtih",
+                    subtitle = "Specific and General (Part & Whole Midpoint Decomposition)",
                     isUnlocked = true,
                     isCompleted = state.isWorld11Completed,
                     bestScore = state.world11BestScore,
@@ -262,8 +262,8 @@ fun WorldSelectScreen(
             }
             item {
                 WorldCard(
-                    title = "World 12: Vyashtisamashtih",
-                    subtitle = "Part and Whole: Average & Weighted Sum Decomposition",
+                    title = "World 12: Sheshanyankena Charamena",
+                    subtitle = "The Remainders by the Last Digit (Decimal Cycles)",
                     isUnlocked = true,
                     isCompleted = state.isWorld12Completed,
                     bestScore = state.world12BestScore,
@@ -272,8 +272,8 @@ fun WorldSelectScreen(
             }
             item {
                 WorldCard(
-                    title = "World 13: Sheshanyankena Charamena",
-                    subtitle = "The Remainders by the Last Digit (Single-Line Division)",
+                    title = "World 13: Sopantyadvayamantyam",
+                    subtitle = "The Ultimate and Twice the Penultimate (Symmetric 3-Var Systems)",
                     isUnlocked = true,
                     isCompleted = state.isWorld13Completed,
                     bestScore = state.world13BestScore,
@@ -282,8 +282,8 @@ fun WorldSelectScreen(
             }
             item {
                 WorldCard(
-                    title = "World 14: Sopantyadvayamantyam",
-                    subtitle = "The Ultimate and Twice the Penultimate (3-Var Determinants)",
+                    title = "World 14: Gunitasamuccayah",
+                    subtitle = "The Product of the Sum is the Sum of the Products (Polynomial Verification)",
                     isUnlocked = true,
                     isCompleted = state.isWorld14Completed,
                     bestScore = state.world14BestScore,
@@ -292,8 +292,8 @@ fun WorldSelectScreen(
             }
             item {
                 WorldCard(
-                    title = "World 15: Ekanyunena Charamena",
-                    subtitle = "One Less Than the Previous for Repeating Decimals (1/19, 1/29)",
+                    title = "World 15: Gunakasamuccayah",
+                    subtitle = "The Factors of the Sum (Quadratic Decomposition)",
                     isUnlocked = true,
                     isCompleted = state.isWorld15Completed,
                     bestScore = state.world15BestScore,
@@ -302,8 +302,8 @@ fun WorldSelectScreen(
             }
             item {
                 WorldCard(
-                    title = "World 16: Gunitasamuccayah",
-                    subtitle = "The Product of the Sum is the Sum of the Products (Factor Check)",
+                    title = "World 16: Chalana-Kalanabhyam",
+                    subtitle = "Differential Calculus & Critical Turning Point Roots",
                     isUnlocked = true,
                     isCompleted = state.isWorld16Completed,
                     bestScore = state.world16BestScore,
