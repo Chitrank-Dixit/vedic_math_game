@@ -44,7 +44,7 @@ jobs:
 
       - name: Upload Test Reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: test-reports
           path: app/build/reports/tests/testDebugUnitTest/
@@ -52,7 +52,7 @@ jobs:
 
       - name: Upload Debug APK
         if: success()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: app-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
@@ -185,7 +185,7 @@ jobs:
 
       - name: Upload Release Bundle (AAB)
         if: success()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: sutrasaga-release-aab
           path: app/build/outputs/bundle/release/app-release.aab
@@ -193,7 +193,7 @@ jobs:
 
       - name: Upload Release ProGuard Mapping
         if: success()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: sutrasaga-release-mapping
           path: app/build/outputs/mapping/release/
