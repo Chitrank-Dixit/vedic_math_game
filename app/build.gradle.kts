@@ -160,7 +160,7 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.8.2")
 
     // Compose BOM & UI
-    implementation(platform("androidx.compose:compose-bom:2024.02.00"))
+    implementation(platform("androidx.compose:compose-bom:2026.09.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
@@ -185,13 +185,13 @@ dependencies {
     testImplementation("androidx.test:core-ktx:1.5.0")
     testImplementation("androidx.test.ext:junit-ktx:1.1.5")
     testImplementation("org.robolectric:robolectric:4.11.1")
-    testImplementation(platform("androidx.compose:compose-bom:2024.02.00"))
+    testImplementation(platform("androidx.compose:compose-bom:2026.09.00"))
     testImplementation("androidx.compose.ui:ui-test-junit4")
 
     // Android Instrumentation & UI Testing
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2024.02.00"))
+    androidTestImplementation(platform("androidx.compose:compose-bom:2026.09.00"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     androidTestImplementation("androidx.room:room-testing:2.6.1")
 
