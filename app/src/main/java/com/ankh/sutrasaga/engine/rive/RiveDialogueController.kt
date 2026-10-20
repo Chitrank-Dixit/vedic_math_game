@@ -137,9 +137,24 @@ class RiveDialogueController(
     }
 
     /**
-     * Skips directly to quiz completion.
+     * Checks if there is a pending, unresolved interactive handshake in this dialogue tree.
      */
-    fun skip() {
+    fun hasUnresolvedHandshake(): Boolean {
+        return tree.dialogueNodes.any { it.interactiveHandshake.requiresUserTap } && !_isCompleted.value
+    }
+
+    /**
+     * Skips dialogue to completion.
+     * By default, progression is blocked while a required interactive handshake is unresolved.
+     * To explicitly bypass an unresolved handshake, [allowBypassHandshake] must be set to true.
+     *
+     * @return true if dialogue was marked completed, false if blocked by an unresolved handshake.
+     */
+    fun skip(allowBypassHandshake: Boolean = false): Boolean {
+        if (hasUnresolvedHandshake() && !allowBypassHandshake) {
+            return false
+        }
         _isCompleted.value = true
+        return true
     }
 }

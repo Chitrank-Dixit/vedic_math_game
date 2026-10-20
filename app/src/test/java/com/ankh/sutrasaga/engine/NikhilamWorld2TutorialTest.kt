@@ -224,11 +224,20 @@ class NikhilamWorld2TutorialTest {
     }
 
     @Test
-    fun testDemonstrationNodeDoesNotRevealHandshakeAnswer3() {
+    fun testDemonstrationNodeDoesNotRevealHandshakeOperand427() {
         val demo = world2Tree.dialogueNodes[2]
         assertFalse(
             "Demonstration node must not reveal handshake operand 427",
             demo.text.contains("427") || demo.mathOverlay.expression.contains("427")
+        )
+    }
+
+    @Test
+    fun testDemonstrationNodeDoesNotRevealHandshakeAnswer3() {
+        val demo = world2Tree.dialogueNodes[2]
+        assertFalse(
+            "Demonstration node must not reveal handshake answer '3'",
+            demo.text.contains("10 - 7 = 3") || demo.mathOverlay.expression.contains("= 3")
         )
     }
 
@@ -401,6 +410,40 @@ class NikhilamWorld2TutorialTest {
         }
     }
 
+    @Test
+    fun testProgressionPolicy_SkipBlockedWhenHandshakeUnresolved() {
+        val controller = RiveDialogueController(world2Tree, DefaultRiveAdapter())
+        assertTrue("Tree has unresolved handshake", controller.hasUnresolvedHandshake())
+
+        // Attempting to skip without explicit opt-out must fail closed
+        val skipped = controller.skip(allowBypassHandshake = false)
+        assertFalse("skip() must return false when handshake is unresolved", skipped)
+        assertFalse("isCompleted must remain false", controller.isCompleted.value)
+    }
+
+    @Test
+    fun testProgressionPolicy_ExplicitOptOutBypassesHandshake() {
+        val controller = RiveDialogueController(world2Tree, DefaultRiveAdapter())
+        val skipped = controller.skip(allowBypassHandshake = true)
+        assertTrue("Explicit skip opt-out must succeed", skipped)
+        assertTrue("isCompleted must be true", controller.isCompleted.value)
+    }
+
+    @Test
+    fun testProgressionPolicy_SkipAllowedAfterHandshakeResolved() {
+        val controller = RiveDialogueController(world2Tree, DefaultRiveAdapter())
+        controller.advanceNode() // 1
+        controller.advanceNode() // 2
+        controller.advanceNode() // 3 (handshake)
+        assertTrue(controller.submitHandshake("3"))
+        assertTrue(controller.isCompleted.value)
+        assertFalse(controller.hasUnresolvedHandshake())
+
+        // Calling skip when already completed succeeds
+        assertTrue(controller.skip())
+        assertTrue(controller.isCompleted.value)
+    }
+
     // ── 9. Isolation: other generators & World 1 unaffected ─────────────────────
 
     @Test
@@ -439,7 +482,9 @@ class NikhilamWorld2TutorialTest {
         assertTrue("Node 1 overlay must contain 1000 - 364", node1.mathOverlay.expression.contains("1000 - 364"))
 
         val node2 = world2Tree.dialogueNodes[1]
-        assertTrue("Node 2 text must explain sutra meaning", node2.text.contains("All from 9", ignoreCase = true))
+        assertFalse("Node 2 must not use absolute statement 'Never borrow across zeros!'", node2.text.contains("Never borrow"))
+        assertTrue("Node 2 text must explain Nikhilam as alternative to tedious borrowing", node2.text.contains("tedious borrowing", ignoreCase = true))
+        assertTrue("Node 2 text must preserve sutra rule", node2.text.contains("All from 9", ignoreCase = true))
         assertTrue("Node 2 overlay must show complement formula", node2.mathOverlay.expression.contains("(9-3)(9-6)(10-4)"))
 
         val node3 = world2Tree.dialogueNodes[2]

@@ -80,7 +80,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "Your turn, Shishya! What is 45²? First, calculate 4 × (4 + 1). Then append 25 to obtain the square!",
+        "text": "Your turn, Shishya! For 45², apply the sutra to the prefix: what is 4 × (4 + 1)?",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -92,7 +92,7 @@
           "highlight_tokens": ["4", "4 + 1", "?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Your turn, Shishya! What is 45 squared? First calculate 4 times open-parenthesis 4 plus 1 close-parenthesis, then append 25 to obtain the square.</speak>",
+          "ssml_text": "<speak>Your turn, Shishya! For 45 squared, apply the sutra to the prefix: what is 4 times open-parenthesis 4 plus 1 close-parenthesis?</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
@@ -137,7 +137,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Never borrow across zeros! Use Nikhilam: All from 9, and the Last from 10.",
+        "text": "Instead of tedious borrowing across zeros, use Nikhilam: All from 9, and the Last from 10.",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -149,7 +149,7 @@
           "highlight_tokens": ["9-3", "9-6", "10-4"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Never borrow across zeros! Use Nikhilam: All from 9, and the Last from 10.</speak>",
+          "ssml_text": "<speak>Instead of tedious borrowing across zeros, use Nikhilam: All from 9, and the Last from 10.</speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {

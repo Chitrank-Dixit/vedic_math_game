@@ -455,9 +455,60 @@ class EkadhikenaPurvenaWorld1TutorialTest {
         assertTrue("Node 3 overlay must produce 1225", node3.mathOverlay.expression.contains("1225"))
 
         val node4 = world1Tree.dialogueNodes[3]
-        assertTrue("Node 4 text must ask for 45²", node4.text.contains("45²"))
+        assertTrue("Node 4 text must reference 45²", node4.text.contains("45²"))
+        assertTrue("Node 4 text must ask for prefix product 4 × (4 + 1)", node4.text.contains("4 × (4 + 1)"))
+        assertTrue("Node 4 prompt must ask for prefix product 4 × (4 + 1)", node4.interactiveHandshake.promptText!!.contains("4 × (4 + 1)"))
+        assertEquals("20", node4.interactiveHandshake.expectedAnswer)
         assertTrue("Node 4 overlay must contain missing step '?'", node4.mathOverlay.expression.contains("?"))
         assertFalse("Node 4 overlay must not reveal 2025", node4.mathOverlay.expression.contains("2025"))
+    }
+
+    @Test
+    fun testHandshakeSemanticAgreementBetweenVisibleQuestionAndExpectedResponse() {
+        val node4 = world1Tree.dialogueNodes.last()
+        // Text, SSML, overlay, and prompt must all consistently ask for 4 × (4 + 1)
+        assertTrue("Visible text asks for 4 × (4 + 1)", node4.text.contains("4 × (4 + 1)"))
+        assertTrue("SSML asks for 4 times open-parenthesis 4 plus 1 close-parenthesis", node4.audioCues.ssmlText.contains("4 times open-parenthesis 4 plus 1 close-parenthesis"))
+        assertTrue("Math overlay contains 4 × (4 + 1)", node4.mathOverlay.expression.contains("4 × (4 + 1)"))
+        assertTrue("Prompt asks for 4 × (4 + 1)", node4.interactiveHandshake.promptText!!.contains("4 × (4 + 1)"))
+        // Authoritative expected answer must remain 20 (4 * 5 = 20), not 2025
+        assertEquals("20", node4.interactiveHandshake.expectedAnswer)
+        // Mathematical truth check
+        assertEquals(20L, 4L * (4L + 1L))
+    }
+
+    @Test
+    fun testProgressionPolicy_SkipBlockedWhenHandshakeUnresolved() {
+        val controller = RiveDialogueController(world1Tree, DefaultRiveAdapter())
+        assertTrue("Tree has unresolved handshake", controller.hasUnresolvedHandshake())
+
+        // Attempting to skip without explicit opt-out must fail closed
+        val skipped = controller.skip(allowBypassHandshake = false)
+        assertFalse("skip() must return false when handshake is unresolved", skipped)
+        assertFalse("isCompleted must remain false", controller.isCompleted.value)
+    }
+
+    @Test
+    fun testProgressionPolicy_ExplicitOptOutBypassesHandshake() {
+        val controller = RiveDialogueController(world1Tree, DefaultRiveAdapter())
+        val skipped = controller.skip(allowBypassHandshake = true)
+        assertTrue("Explicit skip opt-out must succeed", skipped)
+        assertTrue("isCompleted must be true", controller.isCompleted.value)
+    }
+
+    @Test
+    fun testProgressionPolicy_SkipAllowedAfterHandshakeResolved() {
+        val controller = RiveDialogueController(world1Tree, DefaultRiveAdapter())
+        controller.advanceNode() // 1
+        controller.advanceNode() // 2
+        controller.advanceNode() // 3 (handshake)
+        assertTrue(controller.submitHandshake("20"))
+        assertTrue(controller.isCompleted.value)
+        assertFalse(controller.hasUnresolvedHandshake())
+
+        // Calling skip when already completed succeeds
+        assertTrue(controller.skip())
+        assertTrue(controller.isCompleted.value)
     }
 
     @Test
