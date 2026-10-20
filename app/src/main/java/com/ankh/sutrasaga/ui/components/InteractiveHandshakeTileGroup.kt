@@ -174,16 +174,16 @@ fun InteractiveHandshakeTileGroup(
                                 val success = onAnswerSelected(option)
                                 isAnswerCorrect = success
                                 if (success) {
-                                    feedbackMessage = if (expectedAnswer == "20") {
-                                        "✦ Splendid, Shishya! 👏 ✦\n4 × 5 = 20. Append 25 to get 45² = 2025! You are ready for the arena."
-                                    } else {
-                                        "✦ Excellent! You found it! 👏 ✦\nGreat job, my child! You understood the pattern beautifully."
+                                    feedbackMessage = when (expectedAnswer) {
+                                        "20" -> "✦ Splendid, Shishya! 👏 ✦\n4 × 5 = 20. Append 25 to get 45² = 2025! You are ready for the arena."
+                                        "3" -> "✦ Splendid, Shishya! 👏 ✦\n10 − 7 = 3. Together with 5 and 7, 1000 − 427 = 573! Zero borrowing conquered!"
+                                        else -> "✦ Excellent! You found it! 👏 ✦\nGreat job, my child! You understood the pattern beautifully."
                                     }
                                 } else {
-                                    feedbackMessage = if (expectedAnswer == "20") {
-                                        "Almost! Remember: multiply the preceding part 4 by one more than itself (4 × 5). Try again!"
-                                    } else {
-                                        "Almost! Give it another try."
+                                    feedbackMessage = when (expectedAnswer) {
+                                        "20" -> "Almost! Remember: multiply the preceding part 4 by one more than itself (4 × 5). Try again!"
+                                        "3" -> "Almost! Remember: subtract the final units digit from 10 (10 − 7). Try again!"
+                                        else -> "Almost! Give it another try."
                                     }
                                 }
                             },

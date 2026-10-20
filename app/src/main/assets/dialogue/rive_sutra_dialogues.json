@@ -113,19 +113,19 @@
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "Multiplying 96 × 92 requires pen, paper, and too many steps!",
+        "text": "Guru-ji, subtracting 1000 - 364 by borrowing across zeros is slow and confusing!",
         "rive_state": {
           "character": "SHISHYA",
-          "animation": "shishya_puzzled",
+          "animation": "shishya_curious",
           "emotion": "thinking",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "96 × 92 = ?",
-          "highlight_tokens": ["96", "92"]
+          "expression": "1000 - 364 = ?",
+          "highlight_tokens": ["1000 - 364"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Multiplying 96 times 92 requires pen, paper, and too many steps!</speak>",
+          "ssml_text": "<speak>Guru-ji, subtracting 1000 minus 364 by borrowing across zeros is slow and confusing!</speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -137,7 +137,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Anchor to Base 100! Their deficiencies are -4 and -8. Cross-subtract: 96 - 8 = 88!",
+        "text": "Never borrow across zeros! Use Nikhilam: All from 9, and the Last from 10.",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -145,11 +145,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(96 - 8) | (-4 × -8)",
-          "highlight_tokens": ["96 - 8 = 88", "-4 × -8 = 32"]
+          "expression": "1000 - 364 = (9-3)(9-6)(10-4)",
+          "highlight_tokens": ["9-3", "9-6", "10-4"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Anchor to Base 100! Their deficiencies are minus 4 and minus 8. Cross-subtract: 96 minus 8 is 88!</speak>",
+          "ssml_text": "<speak>Never borrow across zeros! Use Nikhilam: All from 9, and the Last from 10.</speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -160,20 +160,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "And the product of deficiencies (-4 × -8) is 32... making 8832!",
+        "speaker": "GURU",
+        "text": "Observe: 9 - 3 = 6, 9 - 6 = 3, and the last digit 10 - 4 = 6. Put them together: 636!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
-          "emotion": "surprised",
+          "character": "GURU",
+          "animation": "guru_nod",
+          "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "96 × 92 = 8832",
-          "highlight_tokens": ["88", "32"]
+          "expression": "1000 - 364 = 636",
+          "highlight_tokens": ["636"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>And the product of deficiencies minus 4 times minus 8 is 32... making 8832!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Observe: 9 minus 3 is 6, 9 minus 6 is 3, and the last digit 10 minus 4 is 6. Put them together: 636!</prosody></speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -185,7 +185,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "Masterful! For 98 × 97 with base deficiencies -2 and -3, tap the product: (-2 × -3)!",
+        "text": "Your turn, Shishya! For 1000 - 427: all from 9 gives 5 and 7. What is 10 - 7 for the last digit?",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -193,18 +193,18 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "98 × 97 = 95 | [ ? ] = 9506",
-          "highlight_tokens": ["?", "9506"]
+          "expression": "1000 - 427 = 57[ ? ]",
+          "highlight_tokens": ["57", "?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Masterful! For 98 times 97 with deficiencies minus 2 and minus 3, tap the product of minus 2 and minus 3!</speak>",
+          "ssml_text": "<speak>Your turn, Shishya! For 1000 minus 427: all from 9 gives 5 and 7. What is 10 minus 7 for the last digit?</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_6",
-          "prompt_text": "Tap 6 for the two-digit suffix 06!",
-          "expected_answer": "6"
+          "target_element_id": "numpad_key_3",
+          "prompt_text": "What is 10 - 7? Enter the final digit.",
+          "expected_answer": "3"
         }
       }
     ]
