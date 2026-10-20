@@ -312,6 +312,41 @@ fun GurukulSceneScreen(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
+                        // ← Back step button (hidden on first step)
+                        if (currentNodeIndex > 0) {
+                            Button(
+                                onClick = {
+                                    isHandshakeSuccessful = false
+                                    controller.previousNode()
+                                },
+                                shape = RoundedCornerShape(10.dp),
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = Color(0xFFF3E8D6)
+                                ),
+                                border = CardDefaults.outlinedCardBorder().copy(
+                                    brush = androidx.compose.ui.graphics.SolidColor(Color(0xFFD4C3A3)),
+                                    width = 1.dp
+                                ),
+                                contentPadding = ButtonDefaults.TextButtonContentPadding
+                            ) {
+                                Icon(
+                                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                    contentDescription = "Previous Step",
+                                    tint = VedicParchmentTokens.InkDark,
+                                    modifier = Modifier.size(13.dp)
+                                )
+                                Spacer(modifier = Modifier.width(3.dp))
+                                Text(
+                                    text = "Back",
+                                    color = VedicParchmentTokens.InkDark,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            }
+                        } else {
+                            Spacer(modifier = Modifier.width(1.dp))
+                        }
+
                         Text(
                             text = "Tap anywhere to continue ▹",
                             fontSize = 12.sp,

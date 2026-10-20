@@ -114,6 +114,21 @@ class RiveDialogueController(
     }
 
     /**
+     * Moves back to the previous dialogue node.
+     * Returns true if navigation succeeded, false if already on the first node.
+     */
+    fun previousNode(): Boolean {
+        val prevIndex = _currentNodeIndex.value - 1
+        return if (prevIndex >= 0) {
+            _isCompleted.value = false
+            syncNodeState(prevIndex)
+            true
+        } else {
+            false
+        }
+    }
+
+    /**
      * Restarts dialogue from node 1.
      */
     fun restart() {

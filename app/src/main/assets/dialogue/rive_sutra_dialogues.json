@@ -8,19 +8,19 @@
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "Calculating 95² in my head in under two seconds is impossible, Guru-ji!",
+        "text": "Guru-ji, how can we calculate 35 × 35 quickly without performing long multiplication?",
         "rive_state": {
           "character": "SHISHYA",
-          "animation": "shishya_puzzled",
+          "animation": "shishya_curious",
           "emotion": "thinking",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "95² = ?",
-          "highlight_tokens": ["95", "²"]
+          "expression": "35 × 35 = ?",
+          "highlight_tokens": ["35 × 35"]
         },
         "audio_cues": {
-          "ssml_text": "<speak><prosody pitch='+2st'>Calculating 95 squared in under two seconds is impossible, Guru-ji!</prosody></speak>",
+          "ssml_text": "<speak><prosody pitch='+2st'>Guru-ji, how can we calculate 35 times 35 quickly without performing long multiplication?</prosody></speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -32,7 +32,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Observe closely! By Ekādhikena Pūrveṇa—one more than 9 is 10. Simply multiply 9 × 10!",
+        "text": "Long multiplication? Not in our Gurukul! With Ekādhikena Pūrveṇa — 'By One More Than the Previous One' — we do it in seconds! Take the part before the final 5, multiply it by one more than itself, and place 25 at the end.",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -40,11 +40,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(9 × 10) | (5²)",
-          "highlight_tokens": ["9 × 10 = 90", "5² = 25"]
+          "expression": "35² → 3 × (3 + 1 = 4) → 3 × 4 = 12 | 25",
+          "highlight_tokens": ["3", "3 + 1 = 4", "3 × 4 = 12", "25"]
         },
         "audio_cues": {
-          "ssml_text": "<speak><prosody rate='95%'>Observe closely! By Ekadhikena Purvena—one more than 9 is 10. Simply multiply 9 times 10!</prosody></speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Long multiplication? Not in our Gurukul! With Ekadhikena Purvena — By One More Than the Previous One — we do it in seconds! Take the part before the final five, multiply it by one more than itself, and place 25 at the end.</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -55,20 +55,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "9 × 10 is 90, and 5² is 25... so the answer is 9025?!",
+        "speaker": "GURU",
+        "text": "Watch! For 35²: the part before 5 is 3. One more than 3 is 4. Multiply: 3 × 4 = 12. Place 25 after it — and you have 1225!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
-          "emotion": "surprised",
+          "character": "GURU",
+          "animation": "guru_nod",
+          "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "95² = 9025",
-          "highlight_tokens": ["90", "25"]
+          "expression": "35² → 3 × 4 = 12 → 1225",
+          "highlight_tokens": ["3 × 4 = 12", "1225"]
         },
         "audio_cues": {
-          "ssml_text": "<speak><prosody pitch='+4st'>9 times 10 is 90, and 5 squared is 25... so 9025?!</prosody></speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Watch! For 35 squared: the part before 5 is 3. One more than 3 is 4. Multiply: 3 times 4 equals 12. Place 25 after it — and you have 1225!</prosody></speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -80,7 +80,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "Precisely! Now prove your understanding for 45²: tap the number that is one more than 4!",
+        "text": "Your turn, Shishya! What is 45²? First, calculate 4 × (4 + 1). Then append 25 to obtain the square!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -88,18 +88,18 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "45² = (4 × [ ? ]) | 25 = 2025",
-          "highlight_tokens": ["?", "2025"]
+          "expression": "4 × (4 + 1) = [ ? ]",
+          "highlight_tokens": ["4", "4 + 1", "?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Precisely! Now prove your understanding for 45 squared: tap the number that is one more than 4!</speak>",
+          "ssml_text": "<speak>Your turn, Shishya! What is 45 squared? First calculate 4 times open-parenthesis 4 plus 1 close-parenthesis, then append 25 to obtain the square.</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_5",
-          "prompt_text": "Tap 5 to compute 4 × 5 = 20!",
-          "expected_answer": "5"
+          "target_element_id": "numpad_key_20",
+          "prompt_text": "What is 4 × (4 + 1)? Enter the product.",
+          "expected_answer": "20"
         }
       }
     ]

@@ -61,6 +61,11 @@ class EkadhikenaPurvenaGenerator(
         }
     }
 
+    /**
+     * Generates the canonical tutorial problem (35²) used in the World 1 guided demonstration.
+     */
+    fun generateCanonicalTutorialProblem(): SutraProblem = generateSpecificProblem(35L)
+
     private fun buildProblem(operand: Long, tier: DifficultyTier): SutraProblem {
         val prefixPart = operand / 10
         val incrementedPrefix = prefixPart + 1
@@ -70,29 +75,29 @@ class EkadhikenaPurvenaGenerator(
         val steps = listOf(
             DecompositionStep(
                 stepNumber = 1,
-                label = "Extract Tens/Prefix Part",
-                formulaDisplay = "Prefix n of $operand",
+                label = "Extract Preceding Part",
+                formulaDisplay = "Preceding part of $operand",
                 stepResult = "$prefixPart",
-                explanation = "Remove the units digit (5) to extract the remaining prefix part n = $prefixPart."
+                explanation = "Remove the units digit (5) to extract the preceding part: $prefixPart."
             ),
             DecompositionStep(
                 stepNumber = 2,
-                label = "Ekadhikena (One More Than)",
-                formulaDisplay = "$prefixPart + 1",
+                label = "Ekadhikena ('By One More')",
+                formulaDisplay = "$prefixPart + 1 = $incrementedPrefix",
                 stepResult = "$incrementedPrefix",
-                explanation = "Apply Ekadhikena Purvena rule: Add 1 to the prefix part ($prefixPart + 1 = $incrementedPrefix)."
+                explanation = "Apply Ekadhikena Purvena rule: Add 1 to the preceding part ($prefixPart + 1 = $incrementedPrefix)."
             ),
             DecompositionStep(
                 stepNumber = 3,
-                label = "Multiply Prefixes",
-                formulaDisplay = "$prefixPart × $incrementedPrefix",
+                label = "Multiply by One More",
+                formulaDisplay = "$prefixPart × $incrementedPrefix = $prefixProduct",
                 stepResult = "$prefixProduct",
-                explanation = "Multiply the original prefix by one more than itself ($prefixPart × $incrementedPrefix = $prefixProduct)."
+                explanation = "Multiply the preceding part by one more than itself ($prefixPart × $incrementedPrefix = $prefixProduct)."
             ),
             DecompositionStep(
                 stepNumber = 4,
                 label = "Append 25 (Units Square)",
-                formulaDisplay = "$prefixProduct || 25",
+                formulaDisplay = "$prefixProduct || 25 = $correctAnswer",
                 stepResult = "$correctAnswer",
                 explanation = "Append 25 (the square of 5) to the prefix product: $prefixProduct || 25 = $correctAnswer."
             )

@@ -174,9 +174,17 @@ fun InteractiveHandshakeTileGroup(
                                 val success = onAnswerSelected(option)
                                 isAnswerCorrect = success
                                 if (success) {
-                                    feedbackMessage = "✦ Excellent! You found it! 👏 ✦\nGreat job, my child! You understood the pattern beautifully."
+                                    feedbackMessage = if (expectedAnswer == "20") {
+                                        "✦ Splendid, Shishya! 👏 ✦\n4 × 5 = 20. Append 25 to get 45² = 2025! You are ready for the arena."
+                                    } else {
+                                        "✦ Excellent! You found it! 👏 ✦\nGreat job, my child! You understood the pattern beautifully."
+                                    }
                                 } else {
-                                    feedbackMessage = "Almost! Give it another try."
+                                    feedbackMessage = if (expectedAnswer == "20") {
+                                        "Almost! Remember: multiply the preceding part 4 by one more than itself (4 × 5). Try again!"
+                                    } else {
+                                        "Almost! Give it another try."
+                                    }
                                 }
                             },
                         contentAlignment = Alignment.Center

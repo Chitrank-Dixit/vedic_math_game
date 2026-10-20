@@ -42,7 +42,7 @@ fun StoryBeatScreen(
 }
 
 internal fun canonicalOnboardingProblem(worldId: Int): SutraProblem = when (worldId) {
-    1 -> EkadhikenaPurvenaGenerator().generateSpecificProblem(65L)
+    1 -> EkadhikenaPurvenaGenerator().generateCanonicalTutorialProblem()
     2 -> NikhilamGenerator().generateSpecificProblem(37L)
     3 -> EkanyunenaGenerator().generateSpecificProblem(47L)
     4 -> YavadunamGenerator().generateSpecificProblem(94L)
