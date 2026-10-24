@@ -179,6 +179,7 @@ fun InteractiveHandshakeTileGroup(
                                         "3" -> "✦ Splendid, Shishya! 👏 ✦\n10 − 7 = 3. Together with 5 and 7, 1000 − 427 = 573! Zero borrowing conquered!"
                                         "52" -> "✦ Splendid, Shishya! 👏 ✦\n53 − 1 = 52 for the left part! Coupled with 47 (99 − 52), 53 × 99 = 5247! Lightning fast!"
                                         "94" -> "✦ Splendid, Shishya! 👏 ✦\n97 − 3 = 94 for the left part! Coupled with 3² = 09, 97² = 9409! Flawless precision!"
+                                        "5" -> "✦ Splendid, Shishya! 👏 ✦\n(3 × 1) + (1 × 2) = 5 for the middle digit! Combined: 6 | 5 | 1 = 651! Universal multiplication unlocked!"
                                         else -> "✦ Excellent! You found it! 👏 ✦\nGreat job, my child! You understood the pattern beautifully."
                                     }
                                 } else {
@@ -187,6 +188,7 @@ fun InteractiveHandshakeTileGroup(
                                         "3" -> "Almost! Remember: subtract the final units digit from 10 (10 − 7). Try again!"
                                         "52" -> "Almost! Remember: apply Ekanyunena by subtracting 1 from 53 (53 − 1). Try again!"
                                         "94" -> "Almost! Remember: lessen the number by its deficiency from 100 (97 − 3). Try again!"
+                                        "5" -> "Almost! Cross-multiply and sum: (3 × 1) + (1 × 2). Try again!"
                                         else -> "Almost! Give it another try."
                                     }
                                 }

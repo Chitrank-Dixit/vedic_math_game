@@ -46,7 +46,7 @@ internal fun canonicalOnboardingProblem(worldId: Int): SutraProblem = when (worl
     2 -> NikhilamGenerator().generateCanonicalTutorialProblem()
     3 -> EkanyunenaGenerator().generateCanonicalTutorialProblem()
     4 -> YavadunamGenerator().generateCanonicalTutorialProblem()
-    5 -> UrdhvaTiryagbhyamGenerator().generateSpecificProblemPair(23L, 41L)
+    5 -> UrdhvaTiryagbhyamGenerator().generateCanonicalTutorialProblem()
     6 -> ParavartyaYojayetGenerator().generateSpecificProblem(1225L)
     7 -> AnurupyeShunyamanyatGenerator().generateSpecificProblem(0L)
     8 -> SankalanaVyavakalanabhyamGenerator().generateSpecificProblem(0L)

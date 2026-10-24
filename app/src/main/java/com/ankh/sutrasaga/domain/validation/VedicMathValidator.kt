@@ -38,6 +38,32 @@ object VedicMathValidator {
     }
 
     /**
+     * Verifies 2-digit by 2-digit Urdhva-Tiryagbhyam multiplication with expected product.
+     * Vertical Right: a0 * b0
+     * Crosswise Middle: (a1 * b0) + (a0 * b1) + carry
+     * Vertical Left: (a1 * b1) + carry
+     */
+    fun verifyUrdhva2x2(a: Long, b: Long, expected: Long): Boolean {
+        val a1 = a / 10L
+        val a0 = a % 10L
+        val b1 = b / 10L
+        val b0 = b % 10L
+
+        val rawUnits = a0 * b0
+        val d0 = rawUnits % 10L
+        val c1 = rawUnits / 10L
+
+        val rawCross = (a1 * b0) + (a0 * b1) + c1
+        val d1 = rawCross % 10L
+        val c2 = rawCross / 10L
+
+        val rawTens = (a1 * b1) + c2
+
+        val computed = (rawTens * 100L) + (d1 * 10L) + d0
+        return computed == expected && (a * b) == expected
+    }
+
+    /**
      * Verifies base subtraction: Base - Sub = Expected.
      */
     fun verifyBaseSubtraction(base: Long, sub: Long, expected: Long): Boolean {

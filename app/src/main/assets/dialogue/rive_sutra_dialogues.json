@@ -420,15 +420,15 @@
     ]
   },
   {
-    "sutra_id": "shunyam_samyasamuccaye",
-    "sutra_name": "Śūnyaṁ Sāmyasamuccaye",
-    "english_meaning": "When the Collection is the Same, it is Zero",
+    "sutra_id": "urdhva_tiryagbhyam",
+    "sutra_name": "Ūrdhva-Tiryagbhyām",
+    "english_meaning": "Vertically and Crosswise",
     "world_number": 5,
     "dialogue_nodes": [
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "Solving (x + 2) + (x + 3) = (x + 1) + (x + 4) looks like a multi-step equation.",
+        "text": "Guru-ji, how can we multiply arbitrary numbers like 23 × 41 without a long multiplication grid?",
         "rive_state": {
           "character": "SHISHYA",
           "animation": "shishya_curious",
@@ -436,11 +436,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(x + 2) + (x + 3) = (x + 1) + (x + 4)",
-          "highlight_tokens": ["LHS: 2 + 3 = 5", "RHS: 1 + 4 = 5"]
+          "expression": "23 × 41 = ?",
+          "highlight_tokens": ["23 × 41"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Solving this equation looks like a multi-step algebraic expansion.</speak>",
+          "ssml_text": "<speak><prosody pitch='+2st'>Guru-ji, how can we multiply arbitrary numbers like 23 times 41 without a long multiplication grid?</prosody></speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -452,7 +452,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Inspect the sums: LHS constant sum is 2 + 3 = 5. RHS constant sum is 1 + 4 = 5. Both sums match!",
+        "text": "Welcome to the universal key! Invoke Ūrdhva-Tiryagbhyām — 'Vertically and Crosswise'! We cast three rays: right vertical for units, crosswise sum for tens, and left vertical for hundreds.",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -460,11 +460,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "SL = 5, SR = 5 ⟹ Sums Match!",
-          "highlight_tokens": ["5"]
+          "expression": "23 × 41 → (2×4) | (2×1 + 3×4) | (3×1)",
+          "highlight_tokens": ["2×4", "2×1 + 3×4", "3×1"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Inspect the sums! Both LHS and RHS constant sums equal 5!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Welcome to the universal key! Invoke Urdhva-Tiryagbhyam — Vertically and Crosswise! Three simple rays give the entire product in a single line.</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -475,20 +475,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "When the collection is the same, x equates directly to 0!",
+        "speaker": "GURU",
+        "text": "Watch: right vertical is 3 × 1 = 3. Crosswise is (2 × 1) + (3 × 4) = 14: write 4, carry 1. Left vertical is (2 × 4) + 1 = 9. Combine them: 943!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
+          "character": "GURU",
+          "animation": "guru_nod",
           "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x = 0",
-          "highlight_tokens": ["0"]
+          "expression": "23 × 41 = 9 | 4 | 3 = 943",
+          "highlight_tokens": ["9", "4", "3", "943"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>When the collection is the same, x equates directly to 0!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Watch: right vertical is 3 times 1 equals 3. Crosswise is 2 plus 12 equals 14: write 4, carry 1. Left vertical is 8 plus 1 equals 9. Combine them: 943!</prosody></speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -500,26 +500,26 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "Immediate insight! Tap the zero key to confirm Śūnyaṁ!",
+        "text": "Your turn, Shishya! For 31 × 21, apply the crosswise step: what is (3 × 1) + (1 × 2) for the middle digit?",
         "rive_state": {
           "character": "GURU",
-          "animation": "guru_bless",
+          "animation": "guru_magic_fx",
           "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x = [ ? ]",
-          "highlight_tokens": ["?"]
+          "expression": "(3 × 1) + (1 × 2) = [ ? ]",
+          "highlight_tokens": ["(3 × 1) + (1 × 2)", "?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Immediate insight! Tap the zero key to confirm Shunyam!</speak>",
+          "ssml_text": "<speak>Your turn, Shishya! For 31 times 21, apply the crosswise step: what is 3 times 1 plus 1 times 2?</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_0",
-          "prompt_text": "Tap 0 to confirm x = 0!",
-          "expected_answer": "0"
+          "target_element_id": "numpad_key_5",
+          "prompt_text": "What is (3 × 1) + (1 × 2)? Enter the middle digit.",
+          "expected_answer": "5"
         }
       }
     ]
@@ -1365,15 +1365,15 @@
     ]
   },
   {
-    "sutra_id": "urdhva_tiryagbhyam",
-    "sutra_name": "Ūrdhva-Tiryagbhyām",
-    "english_meaning": "Vertically and Crosswise",
+    "sutra_id": "shunyam_samyasamuccaye",
+    "sutra_name": "Śūnyaṁ Sāmyasamuccaye",
+    "english_meaning": "When the Collection is the Same, it is Zero",
     "world_number": 14,
     "dialogue_nodes": [
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "How do we multiply arbitrary numbers like 23 × 12 without a standard long multiplication grid?",
+        "text": "Solving (x + 2) + (x + 3) = (x + 1) + (x + 4) looks like a multi-step equation.",
         "rive_state": {
           "character": "SHISHYA",
           "animation": "shishya_curious",
@@ -1381,11 +1381,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "23 × 12 = ?",
-          "highlight_tokens": ["23", "12"]
+          "expression": "(x + 2) + (x + 3) = (x + 1) + (x + 4)",
+          "highlight_tokens": ["LHS: 2 + 3 = 5", "RHS: 1 + 4 = 5"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>How do we multiply arbitrary numbers like 23 times 12 without a standard long grid?</speak>",
+          "ssml_text": "<speak>Solving this equation looks like a multi-step algebraic expansion.</speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -1397,7 +1397,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "We cast three spatial rays: Right Vertical (3×2=6), Crosswise (2×2 + 3×1=7), Left Vertical (2×1=2)!",
+        "text": "Inspect the sums: LHS constant sum is 2 + 3 = 5. RHS constant sum is 1 + 4 = 5. Both sums match!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -1405,11 +1405,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(2×1) | (2×2 + 3×1) | (3×2)",
-          "highlight_tokens": ["2×1 = 2", "Cross = 7", "3×2 = 6"]
+          "expression": "SL = 5, SR = 5 ⟹ Sums Match!",
+          "highlight_tokens": ["5"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>We cast three spatial rays: Right Vertical, Crosswise, and Left Vertical!</speak>",
+          "ssml_text": "<speak>Inspect the sums! Both LHS and RHS constant sums equal 5!</speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -1421,19 +1421,19 @@
       {
         "node_id": 3,
         "speaker": "SHISHYA",
-        "text": "2 | 7 | 6 combined gives 276 in a single line!",
+        "text": "When the collection is the same, x equates directly to 0!",
         "rive_state": {
           "character": "SHISHYA",
-          "animation": "shishya_celebrate",
+          "animation": "shishya_aha",
           "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "23 × 12 = 276",
-          "highlight_tokens": ["2", "7", "6"]
+          "expression": "x = 0",
+          "highlight_tokens": ["0"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>2, 7, 6 combined gives 276 in a single line!</speak>",
+          "ssml_text": "<speak>When the collection is the same, x equates directly to 0!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -1445,26 +1445,26 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "Now compute the crosswise middle term for 31 × 21: (3×1 + 1×2)!",
+        "text": "Immediate insight! Tap the zero key to confirm Śūnyaṁ!",
         "rive_state": {
           "character": "GURU",
-          "animation": "guru_magic_fx",
+          "animation": "guru_bless",
           "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "31 × 21 = 6 | [ ? ] | 1 = 651",
-          "highlight_tokens": ["?", "651"]
+          "expression": "x = [ ? ]",
+          "highlight_tokens": ["?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Now compute the crosswise middle term for 31 times 21!</speak>",
+          "ssml_text": "<speak>Immediate insight! Tap the zero key to confirm Shunyam!</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_5",
-          "prompt_text": "Tap 5 for 3 + 2 = 5!",
-          "expected_answer": "5"
+          "target_element_id": "numpad_key_0",
+          "prompt_text": "Tap 0 to confirm x = 0!",
+          "expected_answer": "0"
         }
       }
     ]
