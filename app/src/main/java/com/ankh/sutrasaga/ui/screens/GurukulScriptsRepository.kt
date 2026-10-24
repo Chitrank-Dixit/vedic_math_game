@@ -22,53 +22,49 @@ object GurukulScriptsRepository {
             title = "एकाधिकेन पूर्वेण",
             subtitle = "World 1 • By One More than the Previous One",
             beats = listOf(
+                // Beat 1 — The Hook
                 GurukulDialogueBeat(
-                    guruText = "प्रणाम शिष्य! Welcome to the sacred grove of mathematical insight. Today we unveil our first key: 'एकाधिकेन पूर्वेण' — By One More Than The Previous One.",
-                    discipleText = "Guru-ji, does this ancient sutra help us square numbers like 65 in our heads?",
+                    guruText = "प्रणाम शिष्य! Can you calculate 35 × 35 in your head — right now?",
+                    discipleText = "Guru-ji, is that even possible without pen and paper?",
                     guruPose = GuruPose.BASE,
                     guruMouth = GuruMouth.TALKING,
-                    discipleState = DiscipleState.NEUTRAL,
-                    discipleEyes = DiscipleEyes.NEUTRAL,
+                    discipleState = DiscipleState.CONFUSED,
+                    discipleEyes = DiscipleEyes.CONFUSED,
                     slateStepIndex = 0
                 ),
+                // Beat 2 — Sutra Reveal
                 GurukulDialogueBeat(
-                    guruText = "Indeed! Look at the prefix of 65, which is 6. The sutra commands us: take one more than 6, which is 7.",
-                    discipleText = "Ah! 6 + 1 = 7!",
+                    guruText = "With Ekadhikena Purvena — 'By One More Than the Previous One' — yes! For numbers ending in 5: multiply the prefix by one more than itself, then place 25 at the end.",
+                    discipleText = "So for 35, I take 3 and multiply it by... 4?",
                     guruPose = GuruPose.EXPLAINING,
                     guruMouth = GuruMouth.TALKING,
                     discipleState = DiscipleState.UNDERSTANDING,
-                    discipleEyes = DiscipleEyes.HAPPY,
+                    discipleEyes = DiscipleEyes.NEUTRAL,
                     slateStepIndex = 1
                 ),
+                // Beat 3 — Guided Demonstration
                 GurukulDialogueBeat(
-                    guruText = "Now multiply the prefix by its increment: 6 × 7 = 42. This forms the left hemisphere of your answer.",
-                    discipleText = "6 × 7 gives 42 for the left side!",
-                    guruPose = GuruPose.TALKING,
-                    guruMouth = GuruMouth.TALKING,
-                    discipleState = DiscipleState.UNDERSTANDING,
-                    discipleEyes = DiscipleEyes.HAPPY,
-                    slateStepIndex = 2
-                ),
-                GurukulDialogueBeat(
-                    guruText = "For the right hemisphere, simply square the units digit 5: 5² = 25. Now combine: 42 and 25.",
-                    discipleText = "4225! That is lightning fast, Guru-ji!",
+                    guruText = "Exactly! 35²: prefix is 3, one more is 4. So 3 × 4 = 12. Append 25 — and you get 1225. All in your head!",
+                    discipleText = "1225! I can follow every step. This feels like a superpower!",
                     guruPose = GuruPose.TALKING,
                     guruMouth = GuruMouth.SMILE,
                     discipleState = DiscipleState.UNDERSTANDING,
                     discipleEyes = DiscipleEyes.HAPPY,
-                    slateStepIndex = 3
+                    slateStepIndex = 2
                 ),
+                // Beat 4 — Transition to Quiz
                 GurukulDialogueBeat(
-                    guruText = "उत्तमम्! 65² is 4225. Now step up to the slate and prove your mastery across the realm!",
+                    guruText = "उत्तमम्! 35² = 1225. Now enter the arena and prove your mastery — I know you are ready!",
                     discipleText = "I am ready, Guru-ji!",
                     guruPose = GuruPose.BASE,
                     guruMouth = GuruMouth.SMILE,
                     discipleState = DiscipleState.UNDERSTANDING,
                     discipleEyes = DiscipleEyes.HAPPY,
-                    slateStepIndex = 5
+                    slateStepIndex = 3
                 )
             )
         ),
+
 
         // World 2: Nikhilam Navatashcaramam Dashatah
         GurukulScript(

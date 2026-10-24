@@ -45,6 +45,11 @@ class NikhilamGenerator(
         return problemPairs.map { (base, subtrahend) -> buildProblem(base, subtrahend, difficultyTier) }
     }
 
+    /**
+     * Generates the canonical tutorial problem (1000 - 364 = 636) used in the World 2 guided demonstration.
+     */
+    fun generateCanonicalTutorialProblem(): SutraProblem = generateSpecificProblem(364L)
+
     private fun generateBaseAndSubtrahend(difficultyTier: DifficultyTier): Pair<Long, Long> {
         return when (difficultyTier) {
             DifficultyTier.TIER_1_EASY -> {

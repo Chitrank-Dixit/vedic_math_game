@@ -31,6 +31,12 @@ class ShesanyankenaCharamenaGenerator(
         return convertToSutraProblem(sProblem)
     }
 
+    /**
+     * Generates the canonical tutorial problem (1/7 = 0.(142857))
+     * used in the World 12 guided demonstration.
+     */
+    fun generateCanonicalTutorialProblem(): SutraProblem = generateSpecificProblem(0L)
+
     override fun generateProblemSet(count: Int, difficultyTier: DifficultyTier): List<SutraProblem> {
         val list = mutableListOf<SutraProblem>()
         repeat(count) {

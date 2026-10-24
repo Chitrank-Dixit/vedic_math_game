@@ -36,6 +36,11 @@ class EkanyunenaGenerator(
         return problemPairs.map { (multiplicand, nines) -> buildProblem(multiplicand, nines, difficultyTier) }
     }
 
+    /**
+     * Generates the canonical tutorial problem (47 × 99 = 4653) used in the World 3 guided demonstration.
+     */
+    fun generateCanonicalTutorialProblem(): SutraProblem = generateSpecificProblem(47L)
+
     private fun generateOperands(difficultyTier: DifficultyTier): Pair<Long, Long> {
         return when (difficultyTier) {
             DifficultyTier.TIER_1_EASY -> {

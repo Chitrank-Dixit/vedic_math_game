@@ -36,6 +36,11 @@ class YavadunamGenerator(
         return buildProblem(operand, tier)
     }
 
+    /**
+     * Generates the canonical tutorial problem (94² = 8836) used in the World 4 guided demonstration.
+     */
+    fun generateCanonicalTutorialProblem(): SutraProblem = generateSpecificProblem(94L)
+
     override fun generateProblemSet(count: Int, difficultyTier: DifficultyTier): List<SutraProblem> {
         val operands = mutableSetOf<Long>()
         val maxAttempts = count * 10

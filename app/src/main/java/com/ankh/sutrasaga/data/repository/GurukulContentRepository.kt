@@ -16,9 +16,10 @@ object GurukulContentRepository {
                 title = "World 1: The Gurukul of Fives",
                 subtitle = "Master Purva's Sacred Grove",
                 beats = listOf(
+                    // Beat 1 — The Hook
                     GurukulDialogueBeat(
-                        guruText = "Welcome to my Gurukul! Here, numbers ending in 5 reveal their secrets.",
-                        discipleText = "Wait, we're doing math under a tree without battery power?!",
+                        guruText = "Welcome, Shishya! Today I will show you how to square any number ending in 5 — instantly, in your mind.",
+                        discipleText = "Can we really calculate 35 × 35 without writing anything down?",
                         isTeachingStep = false,
                         guruPose = GuruPose.BASE,
                         guruMouth = GuruMouth.TALKING,
@@ -26,9 +27,10 @@ object GurukulContentRepository {
                         discipleEyes = DiscipleEyes.CONFUSED,
                         slateStepIndex = 0
                     ),
+                    // Beat 2 — Sutra Reveal
                     GurukulDialogueBeat(
-                        guruText = "Observe! To square any number ending in 5, you don't do tedious long multiplication.",
-                        discipleText = "No long multiplication?! My floating-point processor is intrigued!",
+                        guruText = "With Ekadhikena Purvena! For 35²: take the 3, multiply by one more — that is 4. So 3 × 4 = 12. Then place 25 at the end.",
+                        discipleText = "3 × 4 = 12, and then... append 25?",
                         isTeachingStep = true,
                         guruPose = GuruPose.EXPLAINING,
                         guruMouth = GuruMouth.TALKING,
@@ -36,9 +38,10 @@ object GurukulContentRepository {
                         discipleEyes = DiscipleEyes.HAPPY,
                         slateStepIndex = 0
                     ),
+                    // Beat 3 — Demonstration + Transition
                     GurukulDialogueBeat(
-                        guruText = "I will show you Ekadhikena Purvena — 'By One More Than the Previous One'!",
-                        discipleText = "Show me the secret, Master!",
+                        guruText = "Exactly — 1225! That is 35². Now step forward to the quiz and show me your mastery!",
+                        discipleText = "I am ready, Guru-ji!",
                         isTeachingStep = false,
                         guruPose = GuruPose.TALKING,
                         guruMouth = GuruMouth.SMILE,
@@ -48,6 +51,7 @@ object GurukulContentRepository {
                     )
                 )
             )
+
             2 -> GurukulScript(
                 worldId = 2,
                 title = "World 2: Realm of Complements",

@@ -32,6 +32,12 @@ class SankalanaVyavakalanabhyamGenerator(
         return convertToSutraProblem(sProblem)
     }
 
+    /**
+     * Generates the canonical tutorial problem (45x - 23y = 113 and 23x - 45y = 91 -> x = 2, y = -1)
+     * used in the World 8 guided demonstration.
+     */
+    fun generateCanonicalTutorialProblem(): SutraProblem = generateSpecificProblem(0L)
+
     override fun generateProblemSet(count: Int, difficultyTier: DifficultyTier): List<SutraProblem> {
         val list = mutableListOf<SutraProblem>()
         repeat(count) {

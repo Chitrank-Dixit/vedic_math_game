@@ -71,7 +71,7 @@ fun GurukulCharacterStage(
         ) {
             // 1. Shishya Avatar (Left)
             val shishyaImageRes = when {
-                isHandshakeSuccessful || animName == "shishya_aha" || animName == "shishya_celebrate" -> R.drawable.shishya_avatar_eureka
+                isHandshakeSuccessful || animName == "shishya_aha" || animName == "shishya_celebrate" || currentNode.nodeId >= 3 -> R.drawable.shishya_avatar_eureka
                 else -> R.drawable.shishya_avatar_puzzled
             }
 

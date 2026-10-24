@@ -8,19 +8,19 @@
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "Calculating 95² in my head in under two seconds is impossible, Guru-ji!",
+        "text": "Guru-ji, how can we calculate 35 × 35 quickly without performing long multiplication?",
         "rive_state": {
           "character": "SHISHYA",
-          "animation": "shishya_puzzled",
+          "animation": "shishya_curious",
           "emotion": "thinking",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "95² = ?",
-          "highlight_tokens": ["95", "²"]
+          "expression": "35 × 35 = ?",
+          "highlight_tokens": ["35 × 35"]
         },
         "audio_cues": {
-          "ssml_text": "<speak><prosody pitch='+2st'>Calculating 95 squared in under two seconds is impossible, Guru-ji!</prosody></speak>",
+          "ssml_text": "<speak><prosody pitch='+2st'>Guru-ji, how can we calculate 35 times 35 quickly without performing long multiplication?</prosody></speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -32,7 +32,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Observe closely! By Ekādhikena Pūrveṇa—one more than 9 is 10. Simply multiply 9 × 10!",
+        "text": "Long multiplication? Not in our Gurukul! With Ekādhikena Pūrveṇa — 'By One More Than the Previous One' — we do it in seconds! Take the part before the final 5, multiply it by one more than itself, and place 25 at the end.",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -40,11 +40,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(9 × 10) | (5²)",
-          "highlight_tokens": ["9 × 10 = 90", "5² = 25"]
+          "expression": "35² → 3 × (3 + 1 = 4) → 3 × 4 = 12 | 25",
+          "highlight_tokens": ["3", "3 + 1 = 4", "3 × 4 = 12", "25"]
         },
         "audio_cues": {
-          "ssml_text": "<speak><prosody rate='95%'>Observe closely! By Ekadhikena Purvena—one more than 9 is 10. Simply multiply 9 times 10!</prosody></speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Long multiplication? Not in our Gurukul! With Ekadhikena Purvena — By One More Than the Previous One — we do it in seconds! Take the part before the final five, multiply it by one more than itself, and place 25 at the end.</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -55,20 +55,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "9 × 10 is 90, and 5² is 25... so the answer is 9025?!",
+        "speaker": "GURU",
+        "text": "Watch! For 35²: the part before 5 is 3. One more than 3 is 4. Multiply: 3 × 4 = 12. Place 25 after it — and you have 1225!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
-          "emotion": "surprised",
+          "character": "GURU",
+          "animation": "guru_nod",
+          "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "95² = 9025",
-          "highlight_tokens": ["90", "25"]
+          "expression": "35² → 3 × 4 = 12 → 1225",
+          "highlight_tokens": ["3 × 4 = 12", "1225"]
         },
         "audio_cues": {
-          "ssml_text": "<speak><prosody pitch='+4st'>9 times 10 is 90, and 5 squared is 25... so 9025?!</prosody></speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Watch! For 35 squared: the part before 5 is 3. One more than 3 is 4. Multiply: 3 times 4 equals 12. Place 25 after it — and you have 1225!</prosody></speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -80,7 +80,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "Precisely! Now prove your understanding for 45²: tap the number that is one more than 4!",
+        "text": "Your turn, Shishya! For 45², apply the sutra to the prefix: what is 4 × (4 + 1)?",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -88,18 +88,18 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "45² = (4 × [ ? ]) | 25 = 2025",
-          "highlight_tokens": ["?", "2025"]
+          "expression": "4 × (4 + 1) = [ ? ]",
+          "highlight_tokens": ["4", "4 + 1", "?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Precisely! Now prove your understanding for 45 squared: tap the number that is one more than 4!</speak>",
+          "ssml_text": "<speak>Your turn, Shishya! For 45 squared, apply the sutra to the prefix: what is 4 times open-parenthesis 4 plus 1 close-parenthesis?</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_5",
-          "prompt_text": "Tap 5 to compute 4 × 5 = 20!",
-          "expected_answer": "5"
+          "target_element_id": "numpad_key_20",
+          "prompt_text": "What is 4 × (4 + 1)? Enter the product.",
+          "expected_answer": "20"
         }
       }
     ]
@@ -113,19 +113,19 @@
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "Multiplying 96 × 92 requires pen, paper, and too many steps!",
+        "text": "Guru-ji, subtracting 1000 - 364 by borrowing across zeros is slow and confusing!",
         "rive_state": {
           "character": "SHISHYA",
-          "animation": "shishya_puzzled",
+          "animation": "shishya_curious",
           "emotion": "thinking",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "96 × 92 = ?",
-          "highlight_tokens": ["96", "92"]
+          "expression": "1000 - 364 = ?",
+          "highlight_tokens": ["1000 - 364"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Multiplying 96 times 92 requires pen, paper, and too many steps!</speak>",
+          "ssml_text": "<speak>Guru-ji, subtracting 1000 minus 364 by borrowing across zeros is slow and confusing!</speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -137,7 +137,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Anchor to Base 100! Their deficiencies are -4 and -8. Cross-subtract: 96 - 8 = 88!",
+        "text": "Instead of tedious borrowing across zeros, use Nikhilam: All from 9, and the Last from 10.",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -145,11 +145,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(96 - 8) | (-4 × -8)",
-          "highlight_tokens": ["96 - 8 = 88", "-4 × -8 = 32"]
+          "expression": "1000 - 364 = (9-3)(9-6)(10-4)",
+          "highlight_tokens": ["9-3", "9-6", "10-4"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Anchor to Base 100! Their deficiencies are minus 4 and minus 8. Cross-subtract: 96 minus 8 is 88!</speak>",
+          "ssml_text": "<speak>Instead of tedious borrowing across zeros, use Nikhilam: All from 9, and the Last from 10.</speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -160,20 +160,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "And the product of deficiencies (-4 × -8) is 32... making 8832!",
+        "speaker": "GURU",
+        "text": "Observe: 9 - 3 = 6, 9 - 6 = 3, and the last digit 10 - 4 = 6. Put them together: 636!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
-          "emotion": "surprised",
+          "character": "GURU",
+          "animation": "guru_nod",
+          "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "96 × 92 = 8832",
-          "highlight_tokens": ["88", "32"]
+          "expression": "1000 - 364 = 636",
+          "highlight_tokens": ["636"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>And the product of deficiencies minus 4 times minus 8 is 32... making 8832!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Observe: 9 minus 3 is 6, 9 minus 6 is 3, and the last digit 10 minus 4 is 6. Put them together: 636!</prosody></speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -185,7 +185,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "Masterful! For 98 × 97 with base deficiencies -2 and -3, tap the product: (-2 × -3)!",
+        "text": "Your turn, Shishya! For 1000 - 427: all from 9 gives 5 and 7. What is 10 - 7 for the last digit?",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -193,18 +193,228 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "98 × 97 = 95 | [ ? ] = 9506",
-          "highlight_tokens": ["?", "9506"]
+          "expression": "1000 - 427 = 57[ ? ]",
+          "highlight_tokens": ["57", "?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Masterful! For 98 times 97 with deficiencies minus 2 and minus 3, tap the product of minus 2 and minus 3!</speak>",
+          "ssml_text": "<speak>Your turn, Shishya! For 1000 minus 427: all from 9 gives 5 and 7. What is 10 minus 7 for the last digit?</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_6",
-          "prompt_text": "Tap 6 for the two-digit suffix 06!",
-          "expected_answer": "6"
+          "target_element_id": "numpad_key_3",
+          "prompt_text": "What is 10 - 7? Enter the final digit.",
+          "expected_answer": "3"
+        }
+      }
+    ]
+  },
+  {
+    "sutra_id": "ekanyunena_purvena",
+    "sutra_name": "Ekanyūnena Pūrveṇa",
+    "english_meaning": "By One Less Than the Previous One",
+    "world_number": 3,
+    "dialogue_nodes": [
+      {
+        "node_id": 1,
+        "speaker": "SHISHYA",
+        "text": "Guru-ji, how can we calculate 47 × 99 quickly without performing long multiplication?",
+        "rive_state": {
+          "character": "SHISHYA",
+          "animation": "shishya_curious",
+          "emotion": "thinking",
+          "is_speaking": true
+        },
+        "math_overlay": {
+          "expression": "47 × 99 = ?",
+          "highlight_tokens": ["47 × 99"]
+        },
+        "audio_cues": {
+          "ssml_text": "<speak><prosody pitch='+2st'>Guru-ji, how can we calculate 47 times 99 quickly without performing long multiplication?</prosody></speak>",
+          "sfx": "sfx_question_curiosity"
+        },
+        "interactive_handshake": {
+          "requires_user_tap": false,
+          "target_element_id": null,
+          "prompt_text": null
+        }
+      },
+      {
+        "node_id": 2,
+        "speaker": "GURU",
+        "text": "When multiplying by nines, invoke Ekanyūnena Pūrveṇa — 'By One Less than the Previous One'! Lessen the multiplicand by 1 for the left part, then subtract that from the nines for the right part.",
+        "rive_state": {
+          "character": "GURU",
+          "animation": "guru_explain",
+          "emotion": "happy",
+          "is_speaking": true
+        },
+        "math_overlay": {
+          "expression": "47 × 99 = (47 − 1) | (99 − 46)",
+          "highlight_tokens": ["47 − 1", "99 − 46"]
+        },
+        "audio_cues": {
+          "ssml_text": "<speak><prosody rate='90%'>When multiplying by nines, invoke Ekanyunena Purvena — By One Less than the Previous One! Lessen the multiplicand by 1 for the left part, then subtract that from the nines for the right part.</prosody></speak>",
+          "sfx": "sfx_sutra_reveal_chime"
+        },
+        "interactive_handshake": {
+          "requires_user_tap": false,
+          "target_element_id": null,
+          "prompt_text": null
+        }
+      },
+      {
+        "node_id": 3,
+        "speaker": "GURU",
+        "text": "Watch closely! For 47 × 99: lessen 47 by 1 to get 46 on the left. Then subtract from nines: 99 − 46 gives 53 on the right. Put them together: 4653!",
+        "rive_state": {
+          "character": "GURU",
+          "animation": "guru_nod",
+          "emotion": "happy",
+          "is_speaking": true
+        },
+        "math_overlay": {
+          "expression": "47 × 99 = 46 | 53 = 4653",
+          "highlight_tokens": ["46", "53", "4653"]
+        },
+        "audio_cues": {
+          "ssml_text": "<speak><prosody rate='90%'>Watch closely! For 47 times 99: lessen 47 by 1 to get 46 on the left. Then 99 minus 46 gives 53 on the right. Put them together: 4653!</prosody></speak>",
+          "sfx": "sfx_eureka_spark"
+        },
+        "interactive_handshake": {
+          "requires_user_tap": false,
+          "target_element_id": null,
+          "prompt_text": null
+        }
+      },
+      {
+        "node_id": 4,
+        "speaker": "GURU",
+        "text": "Your turn, Shishya! For 53 × 99, apply Ekanyunena to the multiplicand: what is 53 − 1?",
+        "rive_state": {
+          "character": "GURU",
+          "animation": "guru_magic_fx",
+          "emotion": "happy",
+          "is_speaking": true
+        },
+        "math_overlay": {
+          "expression": "53 − 1 = [ ? ]",
+          "highlight_tokens": ["53 − 1", "?"]
+        },
+        "audio_cues": {
+          "ssml_text": "<speak>Your turn, Shishya! For 53 times 99, apply Ekanyunena to the multiplicand: what is 53 minus 1?</speak>",
+          "sfx": "sfx_interactive_pulse"
+        },
+        "interactive_handshake": {
+          "requires_user_tap": true,
+          "target_element_id": "numpad_key_52",
+          "prompt_text": "What is 53 − 1? Enter the left part.",
+          "expected_answer": "52"
+        }
+      }
+    ]
+  },
+  {
+    "sutra_id": "yavadunam",
+    "sutra_name": "Yāvadūnam",
+    "english_meaning": "By the Deficiency",
+    "world_number": 4,
+    "dialogue_nodes": [
+      {
+        "node_id": 1,
+        "speaker": "SHISHYA",
+        "text": "Guru-ji, calculating 94² in my head sounds daunting without multiplying 94 × 94 on paper!",
+        "rive_state": {
+          "character": "SHISHYA",
+          "animation": "shishya_curious",
+          "emotion": "thinking",
+          "is_speaking": true
+        },
+        "math_overlay": {
+          "expression": "94² = ?",
+          "highlight_tokens": ["94²"]
+        },
+        "audio_cues": {
+          "ssml_text": "<speak><prosody pitch='+2st'>Guru-ji, how can we calculate 94 squared in our head without long multiplication?</prosody></speak>",
+          "sfx": "sfx_question_curiosity"
+        },
+        "interactive_handshake": {
+          "requires_user_tap": false,
+          "target_element_id": null,
+          "prompt_text": null
+        }
+      },
+      {
+        "node_id": 2,
+        "speaker": "GURU",
+        "text": "Near a base like 100, invoke Yāvadūnam — 'By the Deficiency'! Lessen the number by its deficiency from 100 for the left part, then square the deficiency for the right part.",
+        "rive_state": {
+          "character": "GURU",
+          "animation": "guru_explain",
+          "emotion": "happy",
+          "is_speaking": true
+        },
+        "math_overlay": {
+          "expression": "94² = (94 − 6) | (6²)",
+          "highlight_tokens": ["94 − 6", "6²"]
+        },
+        "audio_cues": {
+          "ssml_text": "<speak><prosody rate='90%'>Near a base like 100, invoke Yavadunam — By the Deficiency! Lessen the number by its deficiency for the left part, then square the deficiency for the right part.</prosody></speak>",
+          "sfx": "sfx_sutra_reveal_chime"
+        },
+        "interactive_handshake": {
+          "requires_user_tap": false,
+          "target_element_id": null,
+          "prompt_text": null
+        }
+      },
+      {
+        "node_id": 3,
+        "speaker": "GURU",
+        "text": "Observe: 94 is 6 below 100. Lessen 94 by 6 to get 88 on the left. Then square the deficiency: 6² = 36 on the right. Put them together: 8836!",
+        "rive_state": {
+          "character": "GURU",
+          "animation": "guru_nod",
+          "emotion": "happy",
+          "is_speaking": true
+        },
+        "math_overlay": {
+          "expression": "94² = 88 | 36 = 8836",
+          "highlight_tokens": ["88", "36", "8836"]
+        },
+        "audio_cues": {
+          "ssml_text": "<speak><prosody rate='90%'>Observe: 94 is 6 below 100. Lessen 94 by 6 to get 88 on the left. Then square 6 to get 36 on the right. Put them together: 8836!</prosody></speak>",
+          "sfx": "sfx_eureka_spark"
+        },
+        "interactive_handshake": {
+          "requires_user_tap": false,
+          "target_element_id": null,
+          "prompt_text": null
+        }
+      },
+      {
+        "node_id": 4,
+        "speaker": "GURU",
+        "text": "Your turn, Shishya! For 97², the deficiency from 100 is 3. Apply Yāvadūnam to find the left part: what is 97 − 3?",
+        "rive_state": {
+          "character": "GURU",
+          "animation": "guru_magic_fx",
+          "emotion": "happy",
+          "is_speaking": true
+        },
+        "math_overlay": {
+          "expression": "97 − 3 = [ ? ]",
+          "highlight_tokens": ["97 − 3", "?"]
+        },
+        "audio_cues": {
+          "ssml_text": "<speak>Your turn, Shishya! For 97 squared, the deficiency from 100 is 3. What is 97 minus 3 for the left part?</speak>",
+          "sfx": "sfx_interactive_pulse"
+        },
+        "interactive_handshake": {
+          "requires_user_tap": true,
+          "target_element_id": "numpad_key_94",
+          "prompt_text": "What is 97 − 3? Enter the left part.",
+          "expected_answer": "94"
         }
       }
     ]
@@ -213,12 +423,12 @@
     "sutra_id": "urdhva_tiryagbhyam",
     "sutra_name": "Ūrdhva-Tiryagbhyām",
     "english_meaning": "Vertically and Crosswise",
-    "world_number": 3,
+    "world_number": 5,
     "dialogue_nodes": [
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "How do we multiply arbitrary numbers like 23 × 12 without a standard long multiplication grid?",
+        "text": "Guru-ji, how can we multiply arbitrary numbers like 23 × 41 without a long multiplication grid?",
         "rive_state": {
           "character": "SHISHYA",
           "animation": "shishya_curious",
@@ -226,11 +436,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "23 × 12 = ?",
-          "highlight_tokens": ["23", "12"]
+          "expression": "23 × 41 = ?",
+          "highlight_tokens": ["23 × 41"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>How do we multiply arbitrary numbers like 23 times 12 without a standard long grid?</speak>",
+          "ssml_text": "<speak><prosody pitch='+2st'>Guru-ji, how can we multiply arbitrary numbers like 23 times 41 without a long multiplication grid?</prosody></speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -242,7 +452,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "We cast three spatial rays: Right Vertical (3×2=6), Crosswise (2×2 + 3×1=7), Left Vertical (2×1=2)!",
+        "text": "Welcome to the universal key! Invoke Ūrdhva-Tiryagbhyām — 'Vertically and Crosswise'! We cast three rays: right vertical for units, crosswise sum for tens, and left vertical for hundreds.",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -250,11 +460,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(2×1) | (2×2 + 3×1) | (3×2)",
-          "highlight_tokens": ["2×1 = 2", "Cross = 7", "3×2 = 6"]
+          "expression": "23 × 41 → (2×4) | (2×1 + 3×4) | (3×1)",
+          "highlight_tokens": ["2×4", "2×1 + 3×4", "3×1"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>We cast three spatial rays: Right Vertical, Crosswise, and Left Vertical!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Welcome to the universal key! Invoke Urdhva-Tiryagbhyam — Vertically and Crosswise! Three simple rays give the entire product in a single line.</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -265,20 +475,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "2 | 7 | 6 combined gives 276 in a single line!",
+        "speaker": "GURU",
+        "text": "Watch: right vertical is 3 × 1 = 3. Crosswise is (2 × 1) + (3 × 4) = 14: write 4, carry 1. Left vertical is (2 × 4) + 1 = 9. Combine them: 943!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_celebrate",
+          "character": "GURU",
+          "animation": "guru_nod",
           "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "23 × 12 = 276",
-          "highlight_tokens": ["2", "7", "6"]
+          "expression": "23 × 41 = 9 | 4 | 3 = 943",
+          "highlight_tokens": ["9", "4", "3", "943"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>2, 7, 6 combined gives 276 in a single line!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Watch: right vertical is 3 times 1 equals 3. Crosswise is 2 plus 12 equals 14: write 4, carry 1. Left vertical is 8 plus 1 equals 9. Combine them: 943!</prosody></speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -290,7 +500,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "Now compute the crosswise middle term for 31 × 21: (3×1 + 1×2)!",
+        "text": "Your turn, Shishya! For 31 × 21, apply the crosswise step: what is (3 × 1) + (1 × 2) for the middle digit?",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -298,17 +508,17 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "31 × 21 = 6 | [ ? ] | 1 = 651",
-          "highlight_tokens": ["?", "651"]
+          "expression": "(3 × 1) + (1 × 2) = [ ? ]",
+          "highlight_tokens": ["(3 × 1) + (1 × 2)", "?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Now compute the crosswise middle term for 31 times 21!</speak>",
+          "ssml_text": "<speak>Your turn, Shishya! For 31 times 21, apply the crosswise step: what is 3 times 1 plus 1 times 2?</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
           "target_element_id": "numpad_key_5",
-          "prompt_text": "Tap 5 for 3 + 2 = 5!",
+          "prompt_text": "What is (3 × 1) + (1 × 2)? Enter the middle digit.",
           "expected_answer": "5"
         }
       }
@@ -318,117 +528,12 @@
     "sutra_id": "paravartya_yojayet",
     "sutra_name": "Parāvartya Yojayet",
     "english_meaning": "Transpose and Apply",
-    "world_number": 4,
+    "world_number": 6,
     "dialogue_nodes": [
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "Dividing polynomials like (x² + 7x + 12) ÷ (x + 3) seems like tedious algebra!",
-        "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_puzzled",
-          "emotion": "thinking",
-          "is_speaking": true
-        },
-        "math_overlay": {
-          "expression": "(x² + 7x + 12) ÷ (x + 3) = ?",
-          "highlight_tokens": ["x² + 7x + 12", "x + 3"]
-        },
-        "audio_cues": {
-          "ssml_text": "<speak>Dividing polynomials like x squared plus 7x plus 12 divided by x plus 3 seems tedious!</speak>",
-          "sfx": "sfx_question_curiosity"
-        },
-        "interactive_handshake": {
-          "requires_user_tap": false,
-          "target_element_id": null,
-          "prompt_text": null
-        }
-      },
-      {
-        "node_id": 2,
-        "speaker": "GURU",
-        "text": "Transpose the divisor root: +3 becomes -3. Multiply and add down coefficients: 7 + (-3) = 4!",
-        "rive_state": {
-          "character": "GURU",
-          "animation": "guru_explain",
-          "emotion": "happy",
-          "is_speaking": true
-        },
-        "math_overlay": {
-          "expression": "Root: -3 ⟹ 1 | (7 - 3) = 4 | (12 - 12) = 0",
-          "highlight_tokens": ["-3", "4", "0"]
-        },
-        "audio_cues": {
-          "ssml_text": "<speak>Transpose the divisor root: plus 3 becomes minus 3. Multiply and add down!</speak>",
-          "sfx": "sfx_sutra_reveal_chime"
-        },
-        "interactive_handshake": {
-          "requires_user_tap": false,
-          "target_element_id": null,
-          "prompt_text": null
-        }
-      },
-      {
-        "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "The quotient is directly (x + 4) with zero remainder!",
-        "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
-          "emotion": "surprised",
-          "is_speaking": true
-        },
-        "math_overlay": {
-          "expression": "Quotient = x + 4, Remainder = 0",
-          "highlight_tokens": ["x + 4"]
-        },
-        "audio_cues": {
-          "ssml_text": "<speak>The quotient is directly x plus 4 with zero remainder!</speak>",
-          "sfx": "sfx_eureka_spark"
-        },
-        "interactive_handshake": {
-          "requires_user_tap": false,
-          "target_element_id": null,
-          "prompt_text": null
-        }
-      },
-      {
-        "node_id": 4,
-        "speaker": "GURU",
-        "text": "Transpose to solve 3x + 12 = 0: x = -12 ÷ 3. Tap the solution magnitude!",
-        "rive_state": {
-          "character": "GURU",
-          "animation": "guru_magic_fx",
-          "emotion": "happy",
-          "is_speaking": true
-        },
-        "math_overlay": {
-          "expression": "3x = -12 ⟹ x = -[ ? ]",
-          "highlight_tokens": ["?", "-4"]
-        },
-        "audio_cues": {
-          "ssml_text": "<speak>Transpose to solve 3x plus 12 equals 0: tap the magnitude of x!</speak>",
-          "sfx": "sfx_interactive_pulse"
-        },
-        "interactive_handshake": {
-          "requires_user_tap": true,
-          "target_element_id": "numpad_key_4",
-          "prompt_text": "Tap 4 for magnitude |-4| = 4!",
-          "expected_answer": "4"
-        }
-      }
-    ]
-  },
-  {
-    "sutra_id": "shunyam_samyasamuccaye",
-    "sutra_name": "Śūnyaṁ Sāmyasamuccaye",
-    "english_meaning": "When the Collection is the Same, it is Zero",
-    "world_number": 5,
-    "dialogue_nodes": [
-      {
-        "node_id": 1,
-        "speaker": "SHISHYA",
-        "text": "Solving (x + 2) + (x + 3) = (x + 1) + (x + 4) looks like a multi-step equation.",
+        "text": "Guru-ji, dividing numbers like 1225 ÷ 12 always forces me into tedious long division with guesses and subtractions!",
         "rive_state": {
           "character": "SHISHYA",
           "animation": "shishya_curious",
@@ -436,11 +541,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(x + 2) + (x + 3) = (x + 1) + (x + 4)",
-          "highlight_tokens": ["LHS: 2 + 3 = 5", "RHS: 1 + 4 = 5"]
+          "expression": "1225 ÷ 12 = ?",
+          "highlight_tokens": ["1225 ÷ 12"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Solving this equation looks like a multi-step algebraic expansion.</speak>",
+          "ssml_text": "<speak><prosody pitch='+2st'>Guru-ji, dividing numbers like 1225 by 12 always forces me into tedious long division!</prosody></speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -452,7 +557,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Inspect the sums: LHS constant sum is 2 + 3 = 5. RHS constant sum is 1 + 4 = 5. Both sums match!",
+        "text": "Transform division into simple addition! Invoke Parāvartya Yojayet — 'Transpose and Apply'! For divisor 12 near base 10, transpose deviation +2 into −2. Multiply each quotient digit by −2 and add across columns!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -460,11 +565,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "SL = 5, SR = 5 ⟹ Sums Match!",
-          "highlight_tokens": ["5"]
+          "expression": "Divisor 12 (Base 10) ⟹ Transposed: −2",
+          "highlight_tokens": ["12", "Base 10", "−2"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Inspect the sums! Both LHS and RHS constant sums equal 5!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Transform division into addition! Invoke Paravartya Yojayet — Transpose and Apply! Transpose plus 2 into minus 2, then multiply and add across columns.</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -475,20 +580,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "When the collection is the same, x equates directly to 0!",
+        "speaker": "GURU",
+        "text": "Watch 1225 ÷ 12: split 122 | 5. Drop 1 (1×(−2) = −2). Next: 2 + (−2) = 0 (0×(−2) = 0). Next: 2 + 0 = 2 (2×(−2) = −4). Remainder: 5 + (−4) = 1. Quotient is 102, Remainder 1!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
+          "character": "GURU",
+          "animation": "guru_explain",
           "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x = 0",
-          "highlight_tokens": ["0"]
+          "expression": "1225 ÷ 12 = 102  R  1",
+          "highlight_tokens": ["102", "1"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>When the collection is the same, x equates directly to 0!</speak>",
+          "ssml_text": "<speak>Watch 1225 divided by 12: drop 1, add down to get 0, then 2. The remainder is 5 plus minus 4, which is 1! Quotient is 102, remainder 1!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -500,26 +605,26 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "Immediate insight! Tap the zero key to confirm Śūnyaṁ!",
+        "text": "Your turn, Shishya! For 144 ÷ 12, drop 1 as the first quotient digit. What is the next quotient digit: 4 + (1 × −2)?",
         "rive_state": {
           "character": "GURU",
-          "animation": "guru_bless",
+          "animation": "guru_magic_fx",
           "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x = [ ? ]",
-          "highlight_tokens": ["?"]
+          "expression": "4 + (1 × −2) = [ ? ]",
+          "highlight_tokens": ["4 + (1 × −2)", "?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Immediate insight! Tap the zero key to confirm Shunyam!</speak>",
+          "ssml_text": "<speak>Your turn, Shishya! For 144 divided by 12, drop 1 as the first quotient digit. What is 4 plus 1 times minus 2?</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_0",
-          "prompt_text": "Tap 0 to confirm x = 0!",
-          "expected_answer": "0"
+          "target_element_id": "numpad_key_2",
+          "prompt_text": "Calculate the next quotient digit: 4 + (1 × −2) = ?",
+          "expected_answer": "2"
         }
       }
     ]
@@ -528,24 +633,24 @@
     "sutra_id": "anurupye_shunyamanyat",
     "sutra_name": "Ānurūpye Śūnyamanyat",
     "english_meaning": "If One is in Ratio, the Other is Zero",
-    "world_number": 6,
+    "world_number": 7,
     "dialogue_nodes": [
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "For 2x + 3y = 6 and 4x + 6y = 12, elimination requires multiplying across!",
+        "text": "Guru-ji, solving systems like 3x + 2y = 12 and 6x + 5y = 24 with elimination takes so many algebraic steps!",
         "rive_state": {
           "character": "SHISHYA",
-          "animation": "shishya_puzzled",
+          "animation": "shishya_curious",
           "emotion": "thinking",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "2x + 3y = 6,  4x + 9y = 12",
-          "highlight_tokens": ["2/4 = 6/12 = 1/2"]
+          "expression": "3x + 2y = 12  &  6x + 5y = 24",
+          "highlight_tokens": ["3x + 2y = 12", "6x + 5y = 24"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>For simultaneous equations, standard elimination takes multiple steps!</speak>",
+          "ssml_text": "<speak><prosody pitch='+2st'>Guru-ji, solving simultaneous equations with elimination takes so many algebraic steps!</prosody></speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -557,7 +662,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Notice the x-coefficients (2:4 = 1:2) match the constant ratio (6:12 = 1:2). Therefore, y is 0!",
+        "text": "Spot the symmetry! Invoke Ānurūpye Śūnyamanyat — 'If One is in Ratio, the Other is Zero'! If the ratio of x-coefficients matches the constant ratio, the other variable y vanishes to zero!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -565,11 +670,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "Ratio x = Ratio Constant = 1/2 ⟹ y = 0",
-          "highlight_tokens": ["y = 0"]
+          "expression": "Ratio x = 3/6 = 1/2, Ratio C = 12/24 = 1/2 ⟹ y = 0",
+          "highlight_tokens": ["3/6 = 1/2", "12/24 = 1/2", "y = 0"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>The x-ratio matches the constant ratio! Therefore, y is directly zero!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Spot the symmetry! Invoke Anurupye Shunyamanyat — If One is in Ratio, the Other is Zero! When the x-ratio matches the constant ratio, y vanishes directly to zero.</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -580,20 +685,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "If y = 0, then 2x = 6, which makes x = 3 instantly!",
+        "speaker": "GURU",
+        "text": "Look closely: 3/6 = 12/24 = 1/2, so y = 0 immediately! Substitute y = 0 into 3x + 2(0) = 12: 3x = 12, so x = 4! The solution is x = 4, y = 0 without any elimination!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
-          "emotion": "surprised",
+          "character": "GURU",
+          "animation": "guru_explain",
+          "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "2x = 6 ⟹ x = 3, y = 0",
-          "highlight_tokens": ["3", "0"]
+          "expression": "3x = 12 ⟹ x = 4, y = 0",
+          "highlight_tokens": ["4", "0"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>If y equals 0, then 2x equals 6, which makes x equals 3 instantly!</speak>",
+          "ssml_text": "<speak>Look closely: 3 over 6 equals 12 over 24, so y is zero immediately! Then 3x equals 12, giving x equals 4 in one step!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -605,7 +710,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "Confirm the value of x when 2x = 6!",
+        "text": "Now your turn, Shishya! In 2x + 3y = 8 and 4x + 7y = 16, the x-ratio (2/4) matches the constants (8/16), so y = 0. Solve for x: 2x = 8.",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -613,18 +718,18 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x = [ ? ]",
-          "highlight_tokens": ["?"]
+          "expression": "2x = 8 ⟹ x = [ ? ]",
+          "highlight_tokens": ["2x = 8", "?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Confirm the value of x when 2x equals 6!</speak>",
+          "ssml_text": "<speak>Now your turn, Shishya! The x-ratio matches the constants, so y is zero. Solve for x: 2x equals 8!</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_3",
-          "prompt_text": "Tap 3 to complete x = 3!",
-          "expected_answer": "3"
+          "target_element_id": "numpad_key_4",
+          "prompt_text": "Solve for x: 2x = 8. Tap the value of x.",
+          "expected_answer": "4"
         }
       }
     ]
@@ -633,24 +738,24 @@
     "sutra_id": "sankalana_vyavakalanabhyam",
     "sutra_name": "Saṅkalana-Vyavakalanābhyām",
     "english_meaning": "By Addition and by Subtraction",
-    "world_number": 7,
+    "world_number": 8,
     "dialogue_nodes": [
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "For 45x - 23y = 113 and 23x - 45y = 91, large coefficients make substitution difficult.",
+        "text": "Guru-ji, for 45x - 23y = 113 and 23x - 45y = 91, the numbers are huge! Cross-multiplying by 45 and 23 will take pages of messy algebra!",
         "rive_state": {
           "character": "SHISHYA",
-          "animation": "shishya_puzzled",
+          "animation": "shishya_curious",
           "emotion": "thinking",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "45x - 23y = 113,  23x - 45y = 91",
-          "highlight_tokens": ["45x", "-23y"]
+          "expression": "45x - 23y = 113  &  23x - 45y = 91",
+          "highlight_tokens": ["45x - 23y = 113", "23x - 45y = 91"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>For cross-symmetric equations, large coefficients make substitution difficult.</speak>",
+          "ssml_text": "<speak><prosody pitch='+2st'>Guru-ji, for 45x minus 23y equals 113 and 23x minus 45y equals 91, the numbers are huge! Cross-multiplying will take pages of messy algebra!</prosody></speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -662,7 +767,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Add them: 68x - 68y = 204 $\\implies$ x - y = 3. Subtract them: 22x + 22y = 22 $\\implies$ x + y = 1!",
+        "text": "Observe the cross-symmetry: the coefficients 45 and -23 interchange! Invoke Saṅkalana-Vyavakalanābhyām — 'By Addition and by Subtraction'! Simply add the equations once, and subtract them once, to reduce them to simple mental arithmetic!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -670,11 +775,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "Add: x - y = 3,  Sub: x + y = 1",
-          "highlight_tokens": ["x - y = 3", "x + y = 1"]
+          "expression": "Add: 68(x - y) = 204  |  Subtract: 22(x + y) = 22",
+          "highlight_tokens": ["68(x - y) = 204", "22(x + y) = 22"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Add them to get x minus y equals 3! Subtract them to get x plus y equals 1!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Observe the cross-symmetry! The coefficients interchange. Invoke Sankalana-Vyavakalanabhyam — By Addition and by Subtraction! Simply add the equations once, and subtract them once, to reduce them to simple mental arithmetic.</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -685,20 +790,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "Adding (x - y = 3) and (x + y = 1) gives 2x = 4 $\\implies$ x = 2, y = -1!",
+        "speaker": "GURU",
+        "text": "Step 1 (Addition): Adding both equations gives 68x - 68y = 204. Divide by 68 to get x - y = 3! Step 2 (Subtraction): Subtracting Eq 2 from Eq 1 gives 22x + 22y = 22. Divide by 22 to get x + y = 1!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
+          "character": "GURU",
+          "animation": "guru_explain",
           "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "2x = 4 ⟹ x = 2, y = -1",
-          "highlight_tokens": ["2", "-1"]
+          "expression": "x - y = 3  &  x + y = 1 ⟹ 2x = 4 ⟹ x = 2, y = -1",
+          "highlight_tokens": ["x - y = 3", "x + y = 1", "x = 2, y = -1"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Adding both reduced equations gives 2x equals 4, so x is 2 and y is minus 1!</speak>",
+          "ssml_text": "<speak>Step 1: Adding gives 68x minus 68y equals 204, so x minus y is 3! Step 2: Subtracting gives 22x plus 22y equals 22, so x plus y is 1!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -710,7 +815,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "Tap the value of x (2x = 4) to cement the method!",
+        "text": "Now verify the subtraction step, Shishya! From 22x + 22y = 22, dividing both sides by 22 gives x + y. What is 22 ÷ 22?",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -718,18 +823,123 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x = [ ? ]",
-          "highlight_tokens": ["?"]
+          "expression": "22(x + y) = 22 ⟹ x + y = [ ? ]",
+          "highlight_tokens": ["22(x + y) = 22", "?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Tap the value of x to cement the method!</speak>",
+          "ssml_text": "<speak>Now verify the subtraction step, Shishya! Dividing 22x plus 22y equals 22 by 22 gives x plus y. What is 22 divided by 22?</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_2",
-          "prompt_text": "Tap 2 for x = 2!",
-          "expected_answer": "2"
+          "target_element_id": "numpad_key_1",
+          "prompt_text": "Find x + y: 22 ÷ 22 = ?",
+          "expected_answer": "1"
+        }
+      }
+    ]
+  },
+  {
+    "sutra_id": "shunyam_samyasamuccaye",
+    "sutra_name": "Śūnyaṁ Sāmyasamuccaye",
+    "english_meaning": "When the Collection is the Same, it is Zero",
+    "world_number": 9,
+    "dialogue_nodes": [
+      {
+        "node_id": 1,
+        "speaker": "SHISHYA",
+        "text": "Guru-ji, expanding 7(x + 1) = 8(x + 1) gives 7x + 7 = 8x + 8. Moving terms across the equals sign feels tedious when both sides share the exact same factor (x + 1)!",
+        "rive_state": {
+          "character": "SHISHYA",
+          "animation": "shishya_curious",
+          "emotion": "thinking",
+          "is_speaking": true
+        },
+        "math_overlay": {
+          "expression": "7(x + 1) = 8(x + 1)",
+          "highlight_tokens": ["7(x + 1)", "8(x + 1)"]
+        },
+        "audio_cues": {
+          "ssml_text": "<speak><prosody pitch='+2st'>Guru-ji, expanding 7 times x plus 1 equals 8 times x plus 1 feels tedious when both sides share the exact same factor!</prosody></speak>",
+          "sfx": "sfx_question_curiosity"
+        },
+        "interactive_handshake": {
+          "requires_user_tap": false,
+          "target_element_id": null,
+          "prompt_text": null
+        }
+      },
+      {
+        "node_id": 2,
+        "speaker": "GURU",
+        "text": "Spot the common factor! Invoke Śūnyaṁ Sāmyasamuccaye — 'When the Collection is the Same, it is Zero'! When a shared factor appears on both sides with unequal multipliers, that common expression must vanish to zero!",
+        "rive_state": {
+          "character": "GURU",
+          "animation": "guru_explain",
+          "emotion": "happy",
+          "is_speaking": true
+        },
+        "math_overlay": {
+          "expression": "(k1 - k2) · (ax + b) = 0  ⟹  ax + b = 0",
+          "highlight_tokens": ["ax + b = 0"]
+        },
+        "audio_cues": {
+          "ssml_text": "<speak><prosody rate='90%'>Spot the common factor! Invoke Shunyam Samyasamuccaye — When the Collection is the Same, it is Zero! When a shared factor appears on both sides with unequal multipliers, that common expression must vanish to zero.</prosody></speak>",
+          "sfx": "sfx_sutra_reveal_chime"
+        },
+        "interactive_handshake": {
+          "requires_user_tap": false,
+          "target_element_id": null,
+          "prompt_text": null
+        }
+      },
+      {
+        "node_id": 3,
+        "speaker": "GURU",
+        "text": "Subtract both sides: (7 - 8)(x + 1) = 0, giving -1(x + 1) = 0! Since -1 cannot be zero, the common factor must be zero: x + 1 = 0! Subtracting 1 yields x = -1 instantly, without expanding any brackets!",
+        "rive_state": {
+          "character": "GURU",
+          "animation": "guru_explain",
+          "emotion": "happy",
+          "is_speaking": true
+        },
+        "math_overlay": {
+          "expression": "-1(x + 1) = 0  ⟹  x + 1 = 0  ⟹  x = -1",
+          "highlight_tokens": ["x + 1 = 0", "-1"]
+        },
+        "audio_cues": {
+          "ssml_text": "<speak>Subtracting both sides gives minus 1 times x plus 1 equals 0. Since minus 1 cannot be zero, x plus 1 must be zero, giving x equals minus 1 instantly!</speak>",
+          "sfx": "sfx_eureka_spark"
+        },
+        "interactive_handshake": {
+          "requires_user_tap": false,
+          "target_element_id": null,
+          "prompt_text": null
+        }
+      },
+      {
+        "node_id": 4,
+        "speaker": "GURU",
+        "text": "Now test your understanding, Shishya! In 7(x + 1) = 8(x + 1), since 7 ≠ 8, the common factor must equal zero: x + 1 = 0. Solve for x!",
+        "rive_state": {
+          "character": "GURU",
+          "animation": "guru_magic_fx",
+          "emotion": "happy",
+          "is_speaking": true
+        },
+        "math_overlay": {
+          "expression": "x + 1 = 0 ⟹ x = [ ? ]",
+          "highlight_tokens": ["x + 1 = 0", "?"]
+        },
+        "audio_cues": {
+          "ssml_text": "<speak>Now test your understanding, Shishya! Since 7 does not equal 8, the common factor must equal zero: x plus 1 equals 0. Solve for x!</speak>",
+          "sfx": "sfx_interactive_pulse"
+        },
+        "interactive_handshake": {
+          "requires_user_tap": true,
+          "target_element_id": "numpad_key_neg1",
+          "prompt_text": "Solve for x: x + 1 = 0. Tap the value of x.",
+          "expected_answer": "-1"
         }
       }
     ]
@@ -738,222 +948,12 @@
     "sutra_id": "puranapuranabhyam",
     "sutra_name": "Pūraṇāpūraṇābhyām",
     "english_meaning": "By the Completion or Non-Completion",
-    "world_number": 8,
-    "dialogue_nodes": [
-      {
-        "node_id": 1,
-        "speaker": "SHISHYA",
-        "text": "Factoring x² + 6x - 16 by trial and error is tricky.",
-        "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_curious",
-          "emotion": "thinking",
-          "is_speaking": true
-        },
-        "math_overlay": {
-          "expression": "x² + 6x = 16",
-          "highlight_tokens": ["x² + 6x"]
-        },
-        "audio_cues": {
-          "ssml_text": "<speak>Factoring quadratic expressions by trial and error is tricky.</speak>",
-          "sfx": "sfx_question_curiosity"
-        },
-        "interactive_handshake": {
-          "requires_user_tap": false,
-          "target_element_id": null,
-          "prompt_text": null
-        }
-      },
-      {
-        "node_id": 2,
-        "speaker": "GURU",
-        "text": "Complete the square! Half of 6 is 3, and 3² is 9. Add 9 to both sides: (x + 3)² = 25!",
-        "rive_state": {
-          "character": "GURU",
-          "animation": "guru_explain",
-          "emotion": "happy",
-          "is_speaking": true
-        },
-        "math_overlay": {
-          "expression": "(x + 3)² = 16 + 9 = 25",
-          "highlight_tokens": ["(x + 3)²", "25"]
-        },
-        "audio_cues": {
-          "ssml_text": "<speak>Complete the square! Add 9 to both sides: x plus 3 squared equals 25!</speak>",
-          "sfx": "sfx_sutra_reveal_chime"
-        },
-        "interactive_handshake": {
-          "requires_user_tap": false,
-          "target_element_id": null,
-          "prompt_text": null
-        }
-      },
-      {
-        "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "Taking the square root gives x + 3 = 5 $\\implies$ x = 2!",
-        "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
-          "emotion": "surprised",
-          "is_speaking": true
-        },
-        "math_overlay": {
-          "expression": "x + 3 = 5 ⟹ x = 2",
-          "highlight_tokens": ["2"]
-        },
-        "audio_cues": {
-          "ssml_text": "<speak>Taking the square root gives x plus 3 equals 5, so x is 2!</speak>",
-          "sfx": "sfx_eureka_spark"
-        },
-        "interactive_handshake": {
-          "requires_user_tap": false,
-          "target_element_id": null,
-          "prompt_text": null
-        }
-      },
-      {
-        "node_id": 4,
-        "speaker": "GURU",
-        "text": "What is the square root of 25? Tap the answer!",
-        "rive_state": {
-          "character": "GURU",
-          "animation": "guru_magic_fx",
-          "emotion": "happy",
-          "is_speaking": true
-        },
-        "math_overlay": {
-          "expression": "√25 = [ ? ]",
-          "highlight_tokens": ["?"]
-        },
-        "audio_cues": {
-          "ssml_text": "<speak>What is the square root of 25? Tap the answer!</speak>",
-          "sfx": "sfx_interactive_pulse"
-        },
-        "interactive_handshake": {
-          "requires_user_tap": true,
-          "target_element_id": "numpad_key_5",
-          "prompt_text": "Tap 5 for √25 = 5!",
-          "expected_answer": "5"
-        }
-      }
-    ]
-  },
-  {
-    "sutra_id": "chalana_kalanabhyam",
-    "sutra_name": "Calana-Kalanābhyām",
-    "english_meaning": "Differential Calculus / Movement and Measure",
-    "world_number": 9,
-    "dialogue_nodes": [
-      {
-        "node_id": 1,
-        "speaker": "SHISHYA",
-        "text": "Finding the vertex turning point of 2x² - 8x + 5 usually takes full derivative formulas!",
-        "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_puzzled",
-          "emotion": "thinking",
-          "is_speaking": true
-        },
-        "math_overlay": {
-          "expression": "f(x) = 2x² - 8x + 5",
-          "highlight_tokens": ["2x² - 8x"]
-        },
-        "audio_cues": {
-          "ssml_text": "<speak>Finding the vertex turning point of quadratics usually takes full formulas!</speak>",
-          "sfx": "sfx_question_curiosity"
-        },
-        "interactive_handshake": {
-          "requires_user_tap": false,
-          "target_element_id": null,
-          "prompt_text": null
-        }
-      },
-      {
-        "node_id": 2,
-        "speaker": "GURU",
-        "text": "Apply Calana-Kalanābhyām! Differentiate mentally: 2(2x) - 8 = 0 $\\implies$ 4x = 8.",
-        "rive_state": {
-          "character": "GURU",
-          "animation": "guru_explain",
-          "emotion": "happy",
-          "is_speaking": true
-        },
-        "math_overlay": {
-          "expression": "f'(x) = 4x - 8 = 0",
-          "highlight_tokens": ["4x - 8 = 0"]
-        },
-        "audio_cues": {
-          "ssml_text": "<speak>Apply the differential sutra! 4x minus 8 equals 0!</speak>",
-          "sfx": "sfx_sutra_reveal_chime"
-        },
-        "interactive_handshake": {
-          "requires_user_tap": false,
-          "target_element_id": null,
-          "prompt_text": null
-        }
-      },
-      {
-        "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "4x = 8 $\\implies$ x = 2! That gives the critical point in two seconds!",
-        "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
-          "emotion": "surprised",
-          "is_speaking": true
-        },
-        "math_overlay": {
-          "expression": "x(turning) = 2",
-          "highlight_tokens": ["2"]
-        },
-        "audio_cues": {
-          "ssml_text": "<speak>4x equals 8, so x is 2! That gives the critical point in two seconds!</speak>",
-          "sfx": "sfx_eureka_spark"
-        },
-        "interactive_handshake": {
-          "requires_user_tap": false,
-          "target_element_id": null,
-          "prompt_text": null
-        }
-      },
-      {
-        "node_id": 4,
-        "speaker": "GURU",
-        "text": "Solve for the turning point x: 4x = 8. Tap the root!",
-        "rive_state": {
-          "character": "GURU",
-          "animation": "guru_magic_fx",
-          "emotion": "happy",
-          "is_speaking": true
-        },
-        "math_overlay": {
-          "expression": "x = [ ? ]",
-          "highlight_tokens": ["?"]
-        },
-        "audio_cues": {
-          "ssml_text": "<speak>Solve for the turning point x: 4x equals 8. Tap the root!</speak>",
-          "sfx": "sfx_interactive_pulse"
-        },
-        "interactive_handshake": {
-          "requires_user_tap": true,
-          "target_element_id": "numpad_key_2",
-          "prompt_text": "Tap 2 for x = 2!",
-          "expected_answer": "2"
-        }
-      }
-    ]
-  },
-  {
-    "sutra_id": "yavadunam",
-    "sutra_name": "Yāvadūnam",
-    "english_meaning": "By the Deficiency",
     "world_number": 10,
     "dialogue_nodes": [
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "Squaring near-base numbers like 94² in my head seems prone to errors.",
+        "text": "Guru-ji! In x² + 6x + 8 = 0, trial-and-error factoring is slow when numbers get large. How does Vedic math solve quadratics directly?",
         "rive_state": {
           "character": "SHISHYA",
           "animation": "shishya_curious",
@@ -961,11 +961,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "94² = ?",
-          "highlight_tokens": ["94"]
+          "expression": "x² + 6x + 8 = 0",
+          "highlight_tokens": ["x² + 6x + 8"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Squaring near-base numbers like 94 squared in my head seems difficult.</speak>",
+          "ssml_text": "<speak>Guru-ji! In x squared plus 6x plus 8 equals 0, trial and error factoring is slow. How do we solve quadratics directly?</speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -977,7 +977,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Deficiency from 100 is 6. Lessen by deficiency: 94 - 6 = 88. Square the deficiency: 6² = 36!",
+        "text": "Invoke Pūraṇāpūraṇābhyām — By Completion or Non-Completion! Move the constant to the right: x² + 6x = -8. Now complete the imperfect square on the left into a perfect square!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -985,11 +985,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(94 - 6) | (6²) = 8836",
-          "highlight_tokens": ["94 - 6 = 88", "6² = 36"]
+          "expression": "x² + 6x = -8 ⟹ Complete the Square",
+          "highlight_tokens": ["x² + 6x = -8", "Complete the Square"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Deficiency from 100 is 6. Lessen 94 by 6 to get 88, and square 6 to get 36!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Invoke Puranapuranabhyam — By Completion or Non-Completion! Move constant 8 to the right: x squared plus 6x equals minus 8. Now complete the imperfect square on the left into a perfect square!</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -1000,20 +1000,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "88 and 36 combine into 8836 immediately!",
+        "speaker": "GURU",
+        "text": "To complete x² + 6x, take half of the x-coefficient: 6 ÷ 2 = 3, and square it: 3² = 9! Add 9 to both sides: x² + 6x + 9 = -8 + 9 ⟹ (x + 3)² = 1! Taking square roots yields x + 3 = ±1, giving roots x = -2 or x = -4!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_celebrate",
+          "character": "GURU",
+          "animation": "guru_explain",
           "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "94² = 8836",
-          "highlight_tokens": ["8836"]
+          "expression": "(x + 3)² = -8 + 9 = 1 ⟹ x = -2, -4",
+          "highlight_tokens": ["(x + 3)² = 1", "-2", "-4"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>88 and 36 combine into 8836 immediately!</speak>",
+          "ssml_text": "<speak>Take half of 6, which is 3, and square it: 3 squared is 9! Adding 9 to both sides yields x plus 3 squared equals 1, giving roots minus 2 and minus 4!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -1025,7 +1025,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "For 97² (deficiency 3): 97 - 3 = 94. What is 3²?",
+        "text": "Now test your understanding, Shishya! In x² + 6x = -8, what completion term must you add to both sides to complete (x + 3)²? Calculate (6 ÷ 2)²!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -1033,17 +1033,17 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "97² = 94 | 0[ ? ] = 9409",
-          "highlight_tokens": ["?", "9409"]
+          "expression": "T_comp = (6 / 2)² = 3² = [ ? ]",
+          "highlight_tokens": ["?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>For 97 squared with deficiency 3: 97 minus 3 is 94. What is 3 squared?</speak>",
+          "ssml_text": "<speak>Now test your understanding, Shishya! To complete the square for x squared plus 6x, calculate 6 divided by 2 quantity squared!</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
           "target_element_id": "numpad_key_9",
-          "prompt_text": "Tap 9 for 3² = 09!",
+          "prompt_text": "Calculate (6 / 2)² to find the completion term.",
           "expected_answer": "9"
         }
       }
@@ -1058,19 +1058,19 @@
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "Factoring biquadratic expressions like x⁴ - 10x² + 9 feels overwhelming.",
+        "text": "Guru-ji! Multiplying numbers like 58 × 62 requires full column calculation. Is there a way to solve it in our heads using symmetry?",
         "rive_state": {
           "character": "SHISHYA",
-          "animation": "shishya_puzzled",
+          "animation": "shishya_curious",
           "emotion": "thinking",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x⁴ - 10x² + 9 = ?",
-          "highlight_tokens": ["x⁴", "x²"]
+          "expression": "58 × 62 = ?",
+          "highlight_tokens": ["58 × 62"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Factoring biquadratics like x to the fourth minus 10x squared plus 9 feels overwhelming.</speak>",
+          "ssml_text": "<speak>Guru-ji! Multiplying numbers like 58 times 62 requires full column calculation. Can we solve it using symmetry?</speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -1082,7 +1082,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Break the whole into parts! Let u = x². The equation reduces to u² - 10u + 9 = (u - 1)(u - 9)!",
+        "text": "Invoke Vyaṣṭisamaṣṭiḥ — Part and Whole! 58 and 62 are symmetrically placed around their central whole average 60, with equal parts deviation of 2!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -1090,11 +1090,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(x² - 1)(x² - 9) = (x-1)(x+1)(x-3)(x+3)",
-          "highlight_tokens": ["x² - 1", "x² - 9"]
+          "expression": "(60 - 2)(60 + 2) = 60² - 2²",
+          "highlight_tokens": ["60", "2"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Break the whole into parts! Substitute u equals x squared to factor easily!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Invoke Vyashtisamashtih — Part and Whole! 58 and 62 are symmetrically placed around their whole average 60, with equal parts deviation of 2!</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -1105,20 +1105,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "The roots are ±1 and ±3 without any cubic or quartic formulas!",
+        "speaker": "GURU",
+        "text": "Apply the difference of squares: (A - d)(A + d) = A² - d²! The whole square is 60² = 3600. The parts square is 2² = 4. Subtract them: 3600 - 4 = 3596! Direct mental multiplication!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
-          "emotion": "surprised",
+          "character": "GURU",
+          "animation": "guru_explain",
+          "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x ∈ {1, -1, 3, -3}",
-          "highlight_tokens": ["±1", "±3"]
+          "expression": "60² - 2² = 3600 - 4 = 3596",
+          "highlight_tokens": ["3600 - 4", "3596"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>The roots are plus-or-minus 1 and plus-or-minus 3!</speak>",
+          "ssml_text": "<speak>Square the whole: 60 squared is 3600. Square the parts deviation: 2 squared is 4. Subtract them: 3600 minus 4 equals 3596!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -1130,7 +1130,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "Tap the positive root corresponding to x² = 9!",
+        "text": "Now test your understanding, Shishya! In 58 × 62, what is the central midpoint average of the two numbers: (58 + 62) ÷ 2?",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -1138,18 +1138,18 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x = √9 = [ ? ]",
+          "expression": "A = (58 + 62) / 2 = [ ? ]",
           "highlight_tokens": ["?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Tap the positive root corresponding to x squared equals 9!</speak>",
+          "ssml_text": "<speak>Now test your understanding, Shishya! In 58 times 62, what is the central midpoint average of the two numbers?</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_3",
-          "prompt_text": "Tap 3 for √9 = 3!",
-          "expected_answer": "3"
+          "target_element_id": "numpad_key_60",
+          "prompt_text": "Find the central midpoint average: (58 + 62) / 2.",
+          "expected_answer": "60"
         }
       }
     ]
@@ -1163,7 +1163,7 @@
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "Converting fractions like 1/7 into exact repeating decimals takes forever by long division.",
+        "text": "Guru-ji! Converting fractions like 1/7 into exact repeating decimals takes long division with endless subtraction. Is there a faster Vedic shortcut?",
         "rive_state": {
           "character": "SHISHYA",
           "animation": "shishya_curious",
@@ -1171,11 +1171,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "1/7 = 0.142857...",
+          "expression": "1/7 = 0.?",
           "highlight_tokens": ["1/7"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Converting fractions like 1 over 7 into repeating decimals takes forever.</speak>",
+          "ssml_text": "<speak>Guru-ji! Converting fractions like 1 over 7 into repeating decimals takes long division. Is there a faster Vedic shortcut?</speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -1187,7 +1187,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Track the remainders! 10÷7=1 (R3), 30÷7=4 (R2), 20÷7=2 (R6), 60÷7=8 (R4), 40÷7=5 (R5), 50÷7=7 (R1)!",
+        "text": "Invoke Śeṣāṇyaṅkena Carameṇa — The Remainders by the Last Digit! Instead of long division, track only the remainder chain! Each remainder times 10 gives the next quotient digit and remainder.",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -1195,11 +1195,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "Remainders: 3 → 2 → 6 → 4 → 5 → 1",
-          "highlight_tokens": ["3", "2", "6", "4", "5", "1"]
+          "expression": "rₖ = (10 · rₖ₋₁) mod 7 ⟹ Remainder Chain",
+          "highlight_tokens": ["Remainder Chain"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Track the remainders! Each remainder generates the next decimal digit immediately!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Invoke Sheshanyankena Caramena — The Remainders by the Last Digit! Track the remainder chain: each remainder times 10 reveals the next digit and remainder!</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -1210,20 +1210,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "The digits 1, 4, 2, 8, 5, 7 form the cyclic pattern instantly!",
+        "speaker": "GURU",
+        "text": "Start with remainder 1: 10 ÷ 7 = 1 (R 3). Then 30 ÷ 7 = 4 (R 2). Then 20 ÷ 7 = 2 (R 6). The remainders 3 → 2 → 6 → 4 → 5 → 1 cycle back to 1, producing the 6-digit repetend 0.(142857)!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
+          "character": "GURU",
+          "animation": "guru_explain",
           "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "1/7 = 0.142857...",
-          "highlight_tokens": ["142857"]
+          "expression": "Remainders: 3 → 2 → 6 → 4 → 5 → 1 ⟹ 0.(142857)",
+          "highlight_tokens": ["3 → 2 → 6 → 4 → 5 → 1", "0.(142857)"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>The digits form the cyclic pattern 142857 instantly!</speak>",
+          "ssml_text": "<speak>Track the remainders: 3, 2, 6, 4, 5, 1, repeating in 6 steps to give 0 point 1 4 2 8 5 7 repeating!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -1235,7 +1235,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "What is the remainder when 10 is divided by 7? Tap the remainder!",
+        "text": "Now test your understanding, Shishya! In step 3 with incoming remainder 2: 10 × 2 = 20. What is the new remainder: 20 mod 7?",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -1243,18 +1243,18 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "10 mod 7 = [ ? ]",
+          "expression": "20 mod 7 = [ ? ]",
           "highlight_tokens": ["?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>What is the remainder when 10 is divided by 7? Tap the remainder!</speak>",
+          "ssml_text": "<speak>Now test your understanding, Shishya! In step 3, 10 times 2 is 20. What is the new remainder: 20 mod 7?</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_3",
-          "prompt_text": "Tap 3 for remainder 3!",
-          "expected_answer": "3"
+          "target_element_id": "numpad_key_6",
+          "prompt_text": "Calculate the remainder: 20 mod 7.",
+          "expected_answer": "6"
         }
       }
     ]
@@ -1268,112 +1268,7 @@
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "Rational equations like 1/(x+2) + 1/(x+3) = 1/(x+1) + 1/(x+4) take messy cross-multiplications.",
-        "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_puzzled",
-          "emotion": "thinking",
-          "is_speaking": true
-        },
-        "math_overlay": {
-          "expression": "1/(x+2) + 1/(x+3) = 1/(x+1) + 1/(x+4)",
-          "highlight_tokens": ["x+2", "x+3", "x+1", "x+4"]
-        },
-        "audio_cues": {
-          "ssml_text": "<speak>Rational equations like this take messy cross-multiplications.</speak>",
-          "sfx": "sfx_question_curiosity"
-        },
-        "interactive_handshake": {
-          "requires_user_tap": false,
-          "target_element_id": null,
-          "prompt_text": null
-        }
-      },
-      {
-        "node_id": 2,
-        "speaker": "GURU",
-        "text": "Penultimate sum is (2+3)=5, Ultimate sum is (1+4)=5. When equal, set the numerator sum to 0: 2x + 5 = 0!",
-        "rive_state": {
-          "character": "GURU",
-          "animation": "guru_explain",
-          "emotion": "happy",
-          "is_speaking": true
-        },
-        "math_overlay": {
-          "expression": "2x + 5 = 0 ⟹ x = -5/2 = -2.5",
-          "highlight_tokens": ["2x + 5 = 0"]
-        },
-        "audio_cues": {
-          "ssml_text": "<speak>Penultimate and ultimate sums match! Simply set 2x plus 5 equals 0!</speak>",
-          "sfx": "sfx_sutra_reveal_chime"
-        },
-        "interactive_handshake": {
-          "requires_user_tap": false,
-          "target_element_id": null,
-          "prompt_text": null
-        }
-      },
-      {
-        "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "2x = -5 gives x = -2.5 without expanding quadratic denominators!",
-        "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
-          "emotion": "happy",
-          "is_speaking": true
-        },
-        "math_overlay": {
-          "expression": "x = -2.5",
-          "highlight_tokens": ["-2.5"]
-        },
-        "audio_cues": {
-          "ssml_text": "<speak>2x equals minus 5 gives x equals minus 2.5 in one step!</speak>",
-          "sfx": "sfx_eureka_spark"
-        },
-        "interactive_handshake": {
-          "requires_user_tap": false,
-          "target_element_id": null,
-          "prompt_text": null
-        }
-      },
-      {
-        "node_id": 4,
-        "speaker": "GURU",
-        "text": "For 2x + 6 = 0, tap the magnitude of x (|-3| = 3)!",
-        "rive_state": {
-          "character": "GURU",
-          "animation": "guru_magic_fx",
-          "emotion": "happy",
-          "is_speaking": true
-        },
-        "math_overlay": {
-          "expression": "x = -[ ? ]",
-          "highlight_tokens": ["?"]
-        },
-        "audio_cues": {
-          "ssml_text": "<speak>For 2x plus 6 equals 0, tap the magnitude of x!</speak>",
-          "sfx": "sfx_interactive_pulse"
-        },
-        "interactive_handshake": {
-          "requires_user_tap": true,
-          "target_element_id": "numpad_key_3",
-          "prompt_text": "Tap 3 for |-3| = 3!",
-          "expected_answer": "3"
-        }
-      }
-    ]
-  },
-  {
-    "sutra_id": "ekanyunena_purvena",
-    "sutra_name": "Ekanyūnena Pūrveṇa",
-    "english_meaning": "By One Less Than the Previous One",
-    "world_number": 14,
-    "dialogue_nodes": [
-      {
-        "node_id": 1,
-        "speaker": "SHISHYA",
-        "text": "Multiplying 46 × 99 mentally sounds difficult without a calculator.",
+        "text": "Guru-ji! Multiplying numbers like 143 by 12 takes tedious multi-line multiplication and endless adding. Is there a faster one-line Vedic secret?",
         "rive_state": {
           "character": "SHISHYA",
           "animation": "shishya_curious",
@@ -1381,11 +1276,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "46 × 99 = ?",
-          "highlight_tokens": ["46", "99"]
+          "expression": "143 × 12 = ?",
+          "highlight_tokens": ["143 × 12"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Multiplying 46 times 99 mentally sounds difficult without a calculator.</speak>",
+          "ssml_text": "<speak>Guru-ji! Multiplying numbers like 143 by 12 takes tedious multi-line steps. Is there a faster one-line Vedic secret?</speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -1397,7 +1292,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Reduce 46 by one: 46 - 1 = 45. Then subtract 45 from 99: 99 - 45 = 54!",
+        "text": "Invoke Sopāntyadvayamantyam — 'The Ultimate and Twice the Penultimate'! For multiplier 12, N = 2. Sandwich 143 with zero guards: 0 1 4 3 0. Pair each digit with N times its neighbor!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -1405,11 +1300,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(46 - 1) | (99 - 45) = 4554",
-          "highlight_tokens": ["46 - 1 = 45", "99 - 45 = 54"]
+          "expression": "143 ⟹ 0 1 4 3 0 (N = 2)",
+          "highlight_tokens": ["0 1 4 3 0", "N = 2"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Reduce 46 by one to get 45. Then subtract 45 from 99 to get 54!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Invoke Sopantyadvayamantyam — The Ultimate and Twice the Penultimate! For multiplier 12, N is 2. Sandwich 143 with zero guards, then pair each digit with N times its neighbor!</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -1420,20 +1315,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "45 and 54 together make 4554 instantly!",
+        "speaker": "GURU",
+        "text": "Compute raw values from left to right: 1+2(0)=1, 4+2(1)=6, 3+2(4)=11, and 0+2(3)=6. Resolving carries from the right: 6, then 1 (carry 1), 6+1=7, and 1. The product is 1716!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_celebrate",
+          "character": "GURU",
+          "animation": "guru_explain",
           "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "46 × 99 = 4554",
-          "highlight_tokens": ["4554"]
+          "expression": "Raw: [1, 6, 11, 6] ⟹ 1716",
+          "highlight_tokens": ["[1, 6, 11, 6]", "1716"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>45 and 54 together make 4554 instantly!</speak>",
+          "ssml_text": "<speak>Compute raw values: 1, 6, 11, and 6. Resolving carries from right to left yields 1716!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -1445,7 +1340,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "For 73 × 99, reduce 73 by one. Tap the units digit of 72!",
+        "text": "Now test the core step, Shishya! In 143 × 12, pair digit 3 with twice its neighbor 4. What is the raw value: 3 + (2 × 4)?",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -1453,18 +1348,18 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "73 - 1 = 7[ ? ]",
-          "highlight_tokens": ["?"]
+          "expression": "3 + (2 × 4) = [ ? ]",
+          "highlight_tokens": ["3 + (2 × 4)", "?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>For 73 times 99, reduce 73 by one. Tap the units digit of 72!</speak>",
+          "ssml_text": "<speak>Now test the core step, Shishya! In 143 times 12, pair digit 3 with twice its neighbor 4. What is 3 plus 2 times 4?</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_2",
-          "prompt_text": "Tap 2 for 73 - 1 = 72!",
-          "expected_answer": "2"
+          "target_element_id": "numpad_key_11",
+          "prompt_text": "Calculate the raw value: 3 + (2 × 4) = ?",
+          "expected_answer": "11"
         }
       }
     ]
@@ -1473,12 +1368,12 @@
     "sutra_id": "gunitasamuccayah",
     "sutra_name": "Guṇitasamuccayaḥ",
     "english_meaning": "The Product of the Sum is the Sum of the Products",
-    "world_number": 15,
+    "world_number": 14,
     "dialogue_nodes": [
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "How do I verify if (x + 2)(x + 3) = x² + 5x + 6 without recalculating every term?",
+        "text": "Guru-ji! When factoring polynomials like (x + 3)(x + 2) = x² + 5x + 6, how can I quickly verify my answer without expanding every single term by hand?",
         "rive_state": {
           "character": "SHISHYA",
           "animation": "shishya_curious",
@@ -1486,11 +1381,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(x + 2)(x + 3) ≟ x² + 5x + 6",
-          "highlight_tokens": ["(x+2)(x+3)", "x² + 5x + 6"]
+          "expression": "(x + 3)(x + 2) ≟ x² + 5x + 6",
+          "highlight_tokens": ["(x + 3)(x + 2)", "x² + 5x + 6"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>How do I verify polynomial factor expansions without recalculating every term?</speak>",
+          "ssml_text": "<speak>Guru-ji! How can I quickly verify polynomial factoring without expanding every single term by hand?</speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -1502,7 +1397,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Set x = 1! Factor sum product: (1+2)(1+3) = 3 × 4 = 12. Expansion sum: 1 + 5 + 6 = 12. They match!",
+        "text": "Invoke Guṇitasamuccayaḥ — 'The Product of the Sum is the Sum of the Products'! Evaluate at x = 1: the product of the factor coefficient sums must equal the sum of the polynomial's coefficients!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -1510,11 +1405,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "Sc(factors) = 3 × 4 = 12 = Sc(product) = 1 + 5 + 6",
-          "highlight_tokens": ["12"]
+          "expression": "Sc(Factors) = Sc(Product) at x = 1",
+          "highlight_tokens": ["Sc(Factors)", "Sc(Product)", "x = 1"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Set x equals 1! Both the factor sum product and expansion sum equal 12!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Invoke Gunitasamuccayah — The Product of the Sum is the Sum of the Products! Evaluate at x equals 1: the product of the factor sums must equal the sum of the product coefficients!</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -1525,20 +1420,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "12 equals 12 proves the expansion is 100% accurate in one check!",
+        "speaker": "GURU",
+        "text": "Watch (x + 3)(x + 2) = x² + 5x + 6: for factors, (1 + 3)(1 + 2) = 4 × 3 = 12. For the polynomial, 1 + 5 + 6 = 12. Because 12 = 12 and the term-by-term expansion matches, the factorization is validated!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
+          "character": "GURU",
+          "animation": "guru_explain",
           "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "12 = 12 ⟹ Verified Valid",
-          "highlight_tokens": ["Verified Valid"]
+          "expression": "Sc: 4 × 3 = 12  =  1 + 5 + 6",
+          "highlight_tokens": ["4 × 3 = 12", "1 + 5 + 6"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>12 equals 12 proves the expansion is completely accurate!</speak>",
+          "ssml_text": "<speak>Watch (x + 3)(x + 2): factor sums give 4 times 3 which is 12. The polynomial sum is 1 plus 5 plus 6, also 12! Both sums match 12, validating the factorization!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -1550,7 +1445,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "For (x + 1)(x + 2), what is the factor sum product at x = 1: (2 × 3)?",
+        "text": "Now test your understanding, Shishya! For (x + 3)(x + 2) at x = 1, what is the product of the factor coefficient sums: 4 × 3?",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -1558,18 +1453,18 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "Sc = 2 × 3 = [ ? ]",
-          "highlight_tokens": ["?"]
+          "expression": "Sc = 4 × 3 = [ ? ]",
+          "highlight_tokens": ["4 × 3", "?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>What is the factor sum product at x equals 1 for x plus 1 times x plus 2?</speak>",
+          "ssml_text": "<speak>Now test your understanding, Shishya! For x plus 3 times x plus 2 at x equals 1, what is 4 times 3?</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_6",
-          "prompt_text": "Tap 6 for 2 × 3 = 6!",
-          "expected_answer": "6"
+          "target_element_id": "numpad_key_12",
+          "prompt_text": "Calculate the product of factor sums: 4 × 3 = ?",
+          "expected_answer": "12"
         }
       }
     ]
@@ -1578,12 +1473,12 @@
     "sutra_id": "gunakasamuccayah",
     "sutra_name": "Guṇakasamuccayaḥ",
     "english_meaning": "The Factors of the Sum is the Sum of the Factors",
-    "world_number": 16,
+    "world_number": 15,
     "dialogue_nodes": [
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "Factorizing 2x² + 5x + 2 requires checking multiple product pairs.",
+        "text": "Guru-ji! When factoring quadratics like x² + 7x + 10 = 0, how do I find the correct pair of numbers that multiply to 10 and add to 7?",
         "rive_state": {
           "character": "SHISHYA",
           "animation": "shishya_curious",
@@ -1591,11 +1486,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "2x² + 5x + 2 = ?",
-          "highlight_tokens": ["2x² + 5x + 2"]
+          "expression": "x² + 7x + 10 = 0",
+          "highlight_tokens": ["x² + 7x + 10 = 0"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Factorizing 2x squared plus 5x plus 2 requires checking multiple product pairs.</speak>",
+          "ssml_text": "<speak>Guru-ji! When factoring quadratics like x squared plus 7x plus 10, how do I find the correct pair of numbers?</speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -1607,7 +1502,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Evaluate Sc(expression): 2 + 5 + 2 = 9. Sc(factors) must multiply to 9: (2(1)+1)(1+2) = 3 × 3 = 9!",
+        "text": "Invoke Guṇakasamuccayaḥ — 'The Factors of the Sum is the Sum of the Factors'! For x² + Bx + C = 0, seek factor pair (p, q) of constant C whose sum equals middle coefficient B: p · q = C and p + q = B!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -1615,11 +1510,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(2x + 1)(x + 2) ⟹ (3)(3) = 9",
-          "highlight_tokens": ["(2x + 1)(x + 2)", "9"]
+          "expression": "p · q = C  and  p + q = B",
+          "highlight_tokens": ["p · q = C", "p + q = B"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Expression coefficient sum is 9. Factor sums multiply to 3 times 3 equals 9!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Invoke Gunakasamuccayah — The Factors of the Sum is the Sum of the Factors! Find a factor pair of C whose sum equals B: p times q equals C and p plus q equals B!</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -1630,20 +1525,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "(2x + 1)(x + 2) is verified as the true factor pair!",
+        "speaker": "GURU",
+        "text": "For x² + 7x + 10 = 0, C = 10 and B = 7. Pairs of 10 are (1, 10) and (2, 5). Check sums: 1 + 10 = 11, but 2 + 5 = 7! So the factors are (x + 2)(x + 5) = 0, yielding roots x = −2 and x = −5!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_celebrate",
+          "character": "GURU",
+          "animation": "guru_explain",
           "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "2x² + 5x + 2 = (2x + 1)(x + 2)",
-          "highlight_tokens": ["(2x + 1)(x + 2)"]
+          "expression": "(x + 2)(x + 5) = 0 ⟹ x = −2, −5",
+          "highlight_tokens": ["(x + 2)(x + 5) = 0", "−2", "−5"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>2x plus 1 times x plus 2 is verified as the true factor pair!</speak>",
+          "ssml_text": "<speak>For x squared plus 7x plus 10: factor pairs of 10 are 1 and 10, and 2 and 5. Notice 2 plus 5 equals 7! Thus the factors are x plus 2 times x plus 5 equals 0, giving roots minus 2 and minus 5!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -1655,26 +1550,131 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "You have mastered all 16 Vedic Sutras, Shishya! Tap 9 to begin your grand master trial!",
+        "text": "Now find the root, Shishya! Setting the first linear factor to zero: x + 2 = 0. What is the root x?",
         "rive_state": {
           "character": "GURU",
-          "animation": "guru_bless",
+          "animation": "guru_magic_fx",
           "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "Sc = [ ? ]",
-          "highlight_tokens": ["?"]
+          "expression": "x + 2 = 0 ⟹ x = [ ? ]",
+          "highlight_tokens": ["x + 2 = 0", "?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>You have mastered all 16 Vedic Sutras, Shishya! Tap 9 to begin your trial!</speak>",
-          "sfx": "sfx_mastery_fanfare"
+          "ssml_text": "<speak>Now find the root, Shishya! Setting the first factor to zero, x plus 2 equals 0. What is the root x?</speak>",
+          "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_9",
-          "prompt_text": "Tap 9 to enter World 16 Arena!",
-          "expected_answer": "9"
+          "target_element_id": "numpad_key_minus_2",
+          "prompt_text": "Solve the linear factor for x: x + 2 = 0 ⟹ x = ?",
+          "expected_answer": "-2"
+        }
+      }
+    ]
+  },
+  {
+    "sutra_id": "chalana_kalanabhyam",
+    "sutra_name": "Calana-Kalanābhyām",
+    "english_meaning": "Differential Calculus / Movement and Measure",
+    "world_number": 16,
+    "dialogue_nodes": [
+      {
+        "node_id": 1,
+        "speaker": "SHISHYA",
+        "text": "Guru-ji! When solving quadratic equations like x² - 8x + 7 = 0, the standard formula is long and tedious. Can the calculus of movement solve it directly?",
+        "rive_state": {
+          "character": "SHISHYA",
+          "animation": "shishya_curious",
+          "emotion": "thinking",
+          "is_speaking": true
+        },
+        "math_overlay": {
+          "expression": "x² - 8x + 7 = 0",
+          "highlight_tokens": ["x² - 8x + 7 = 0"]
+        },
+        "audio_cues": {
+          "ssml_text": "<speak>Guru-ji! When solving quadratic equations like x squared minus 8x plus 7, can the calculus of movement solve it directly?</speak>",
+          "sfx": "sfx_question_curiosity"
+        },
+        "interactive_handshake": {
+          "requires_user_tap": false,
+          "target_element_id": null,
+          "prompt_text": null
+        }
+      },
+      {
+        "node_id": 2,
+        "speaker": "GURU",
+        "text": "Invoke Calana-Kalanābhyām — 'Differential Calculus / By Movement and Measure'! Differentiate the quadratic to get f'(x) = 2Ax + B, and equate it to ±√D, where D = B² - 4AC: f'(x) = ±√D!",
+        "rive_state": {
+          "character": "GURU",
+          "animation": "guru_explain",
+          "emotion": "happy",
+          "is_speaking": true
+        },
+        "math_overlay": {
+          "expression": "f'(x) = 2Ax + B = ±√D  (D = B² - 4AC)",
+          "highlight_tokens": ["f'(x) = 2Ax + B", "±√D", "D = B² - 4AC"]
+        },
+        "audio_cues": {
+          "ssml_text": "<speak><prosody rate='90%'>Invoke Calana-Kalanabhyam — Differential Calculus! Differentiate the quadratic to get f prime of x equals 2Ax plus B, and equate it to plus or minus square root of D!</prosody></speak>",
+          "sfx": "sfx_sutra_reveal_chime"
+        },
+        "interactive_handshake": {
+          "requires_user_tap": false,
+          "target_element_id": null,
+          "prompt_text": null
+        }
+      },
+      {
+        "node_id": 3,
+        "speaker": "GURU",
+        "text": "For x² - 8x + 7 = 0: f'(x) = 2x - 8. Discriminant D = (-8)² - 4(1)(7) = 64 - 28 = 36, so √D = 6! The minus branch gives 2x - 8 = -6 ⟹ 2x = 2 ⟹ x = 1!",
+        "rive_state": {
+          "character": "GURU",
+          "animation": "guru_explain",
+          "emotion": "happy",
+          "is_speaking": true
+        },
+        "math_overlay": {
+          "expression": "2x - 8 = ±6  |  2x - 8 = -6 ⟹ x = 1",
+          "highlight_tokens": ["2x - 8 = ±6", "x = 1"]
+        },
+        "audio_cues": {
+          "ssml_text": "<speak>For x squared minus 8x plus 7: the derivative is 2x minus 8, and D is 36, giving square root of D as 6. The minus branch gives 2x minus 8 equals minus 6, yielding root x equals 1!</speak>",
+          "sfx": "sfx_eureka_spark"
+        },
+        "interactive_handshake": {
+          "requires_user_tap": false,
+          "target_element_id": null,
+          "prompt_text": null
+        }
+      },
+      {
+        "node_id": 4,
+        "speaker": "GURU",
+        "text": "Now solve the positive branch, Shishya! Setting 2x - 8 = +6, adding 8 gives 2x = 14. What is the root x?",
+        "rive_state": {
+          "character": "GURU",
+          "animation": "guru_magic_fx",
+          "emotion": "happy",
+          "is_speaking": true
+        },
+        "math_overlay": {
+          "expression": "2x = 14 ⟹ x = [ ? ]",
+          "highlight_tokens": ["2x = 14", "?"]
+        },
+        "audio_cues": {
+          "ssml_text": "<speak>Now solve the positive branch, Shishya! 2x equals 14. What is the root x?</speak>",
+          "sfx": "sfx_interactive_pulse"
+        },
+        "interactive_handshake": {
+          "requires_user_tap": true,
+          "target_element_id": "numpad_key_7",
+          "prompt_text": "Solve for root x: 2x = 14 ⟹ x = ?",
+          "expected_answer": "7"
         }
       }
     ]
