@@ -182,6 +182,7 @@ fun InteractiveHandshakeTileGroup(
                                         "5" -> "✦ Splendid, Shishya! 👏 ✦\n(3 × 1) + (1 × 2) = 5 for the middle digit! Combined: 6 | 5 | 1 = 651! Universal multiplication unlocked!"
                                         "2" -> "✦ Splendid, Shishya! 👏 ✦\n4 + (−2) = 2 for the second quotient digit! Combined with remainder 4 + (−4) = 0, 144 ÷ 12 = 12! Synthetic division mastered!"
                                         "4" -> "✦ Splendid, Shishya! 👏 ✦\nSince x-ratio matches the constants (1/2), y = 0! Then 2x = 8 gives x = 4. Simultaneous equations solved in seconds!"
+                                        "1" -> "✦ Splendid, Shishya! 👏 ✦\n22 ÷ 22 = 1, so x + y = 1! Combined with x − y = 3, adding gives 2x = 4 (x = 2, y = −1)! Simultaneous equations conquered!"
                                         else -> "✦ Excellent! You found it! 👏 ✦\nGreat job, my child! You understood the pattern beautifully."
                                     }
                                 } else {
@@ -193,6 +194,7 @@ fun InteractiveHandshakeTileGroup(
                                         "5" -> "Almost! Cross-multiply and sum: (3 × 1) + (1 × 2). Try again!"
                                         "2" -> "Almost! Multiply the previous quotient digit by −2 and add: 4 + (1 × −2). Try again!"
                                         "4" -> "Almost! With y = 0, solve 2x = 8 by dividing 8 by 2. Try again!"
+                                        "1" -> "Almost! Divide 22 by 22 to find the sum (x + y). Try again!"
                                         else -> "Almost! Give it another try."
                                     }
                                 }

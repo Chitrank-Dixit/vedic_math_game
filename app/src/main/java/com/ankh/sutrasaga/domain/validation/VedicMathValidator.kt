@@ -134,6 +134,40 @@ object VedicMathValidator {
     }
 
     /**
+     * Verifies Saṅkalana-Vyavakalanābhyām solution for symmetric 2x2 linear systems:
+     * a1*x + b1*y = c1
+     * a2*x + b2*y = c2
+     * where |a1| == |b2| and |b1| == |a2|.
+     * Adding equations yields (a1+a2)x + (b1+b2)y = c1+c2.
+     * Subtracting equations yields (a1-a2)x + (b1-b2)y = c1-c2.
+     */
+    fun verifySankalanaSystem(
+        a1: Long, b1: Long, c1: Long,
+        a2: Long, b2: Long, c2: Long,
+        expectedX: Long, expectedY: Long
+    ): Boolean {
+        if (kotlin.math.abs(a1) != kotlin.math.abs(b2) || kotlin.math.abs(b1) != kotlin.math.abs(a2)) return false
+        val det = (a1 * b2) - (a2 * b1)
+        if (det == 0L) return false
+
+        val eq1Valid = (a1 * expectedX + b1 * expectedY) == c1
+        val eq2Valid = (a2 * expectedX + b2 * expectedY) == c2
+        if (!eq1Valid || !eq2Valid) return false
+
+        val addSum = a1 + a2
+        val addYSum = b1 + b2
+        val subDiff = a1 - a2
+        val subYDiff = b1 - b2
+
+        val addValid = (addSum != 0L && addSum == addYSum && (c1 + c2) == addSum * (expectedX + expectedY)) ||
+                (addSum != 0L && addSum == -addYSum && (c1 + c2) == addSum * (expectedX - expectedY))
+        val subValid = (subDiff != 0L && subDiff == subYDiff && (c1 - c2) == subDiff * (expectedX + expectedY)) ||
+                (subDiff != 0L && subDiff == -subYDiff && (c1 - c2) == subDiff * (expectedX - expectedY))
+
+        return addValid && subValid
+    }
+
+    /**
      * Validates a student's answer against the interactive handshake requirements.
      * Enforces that mathematical truth is solely determined by the authoritative [InteractiveHandshake.expectedAnswer].
      * Fail-closed invariant: UNKNOWN / MISSING / BLANK EXPECTED ANSWER = FAILURE.

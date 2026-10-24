@@ -735,15 +735,15 @@
     ]
   },
   {
-    "sutra_id": "puranapuranabhyam",
-    "sutra_name": "Pūraṇāpūraṇābhyām",
-    "english_meaning": "By the Completion or Non-Completion",
+    "sutra_id": "sankalana_vyavakalanabhyam",
+    "sutra_name": "Saṅkalana-Vyavakalanābhyām",
+    "english_meaning": "By Addition and by Subtraction",
     "world_number": 8,
     "dialogue_nodes": [
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "Factoring x² + 6x - 16 by trial and error is tricky.",
+        "text": "Guru-ji, for 45x - 23y = 113 and 23x - 45y = 91, the numbers are huge! Cross-multiplying by 45 and 23 will take pages of messy algebra!",
         "rive_state": {
           "character": "SHISHYA",
           "animation": "shishya_curious",
@@ -751,11 +751,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x² + 6x = 16",
-          "highlight_tokens": ["x² + 6x"]
+          "expression": "45x - 23y = 113  &  23x - 45y = 91",
+          "highlight_tokens": ["45x - 23y = 113", "23x - 45y = 91"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Factoring quadratic expressions by trial and error is tricky.</speak>",
+          "ssml_text": "<speak><prosody pitch='+2st'>Guru-ji, for 45x minus 23y equals 113 and 23x minus 45y equals 91, the numbers are huge! Cross-multiplying will take pages of messy algebra!</prosody></speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -767,7 +767,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Complete the square! Half of 6 is 3, and 3² is 9. Add 9 to both sides: (x + 3)² = 25!",
+        "text": "Observe the cross-symmetry: the coefficients 45 and -23 interchange! Invoke Saṅkalana-Vyavakalanābhyām — 'By Addition and by Subtraction'! Simply add the equations once, and subtract them once, to reduce them to simple mental arithmetic!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -775,11 +775,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(x + 3)² = 16 + 9 = 25",
-          "highlight_tokens": ["(x + 3)²", "25"]
+          "expression": "Add: 68(x - y) = 204  |  Subtract: 22(x + y) = 22",
+          "highlight_tokens": ["68(x - y) = 204", "22(x + y) = 22"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Complete the square! Add 9 to both sides: x plus 3 squared equals 25!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Observe the cross-symmetry! The coefficients interchange. Invoke Sankalana-Vyavakalanabhyam — By Addition and by Subtraction! Simply add the equations once, and subtract them once, to reduce them to simple mental arithmetic.</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -790,20 +790,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "Taking the square root gives x + 3 = 5 $\\implies$ x = 2!",
+        "speaker": "GURU",
+        "text": "Step 1 (Addition): Adding both equations gives 68x - 68y = 204. Divide by 68 to get x - y = 3! Step 2 (Subtraction): Subtracting Eq 2 from Eq 1 gives 22x + 22y = 22. Divide by 22 to get x + y = 1!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
-          "emotion": "surprised",
+          "character": "GURU",
+          "animation": "guru_explain",
+          "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x + 3 = 5 ⟹ x = 2",
-          "highlight_tokens": ["2"]
+          "expression": "x - y = 3  &  x + y = 1 ⟹ 2x = 4 ⟹ x = 2, y = -1",
+          "highlight_tokens": ["x - y = 3", "x + y = 1", "x = 2, y = -1"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Taking the square root gives x plus 3 equals 5, so x is 2!</speak>",
+          "ssml_text": "<speak>Step 1: Adding gives 68x minus 68y equals 204, so x minus y is 3! Step 2: Subtracting gives 22x plus 22y equals 22, so x plus y is 1!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -815,7 +815,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "What is the square root of 25? Tap the answer!",
+        "text": "Now verify the subtraction step, Shishya! From 22x + 22y = 22, dividing both sides by 22 gives x + y. What is 22 ÷ 22?",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -823,18 +823,18 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "√25 = [ ? ]",
-          "highlight_tokens": ["?"]
+          "expression": "22(x + y) = 22 ⟹ x + y = [ ? ]",
+          "highlight_tokens": ["22(x + y) = 22", "?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>What is the square root of 25? Tap the answer!</speak>",
+          "ssml_text": "<speak>Now verify the subtraction step, Shishya! Dividing 22x plus 22y equals 22 by 22 gives x plus y. What is 22 divided by 22?</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_5",
-          "prompt_text": "Tap 5 for √25 = 5!",
-          "expected_answer": "5"
+          "target_element_id": "numpad_key_1",
+          "prompt_text": "Find x + y: 22 ÷ 22 = ?",
+          "expected_answer": "1"
         }
       }
     ]
@@ -945,27 +945,27 @@
     ]
   },
   {
-    "sutra_id": "sankalana_vyavakalanabhyam",
-    "sutra_name": "Saṅkalana-Vyavakalanābhyām",
-    "english_meaning": "By Addition and by Subtraction",
+    "sutra_id": "puranapuranabhyam",
+    "sutra_name": "Pūraṇāpūraṇābhyām",
+    "english_meaning": "By the Completion or Non-Completion",
     "world_number": 10,
     "dialogue_nodes": [
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "For 45x - 23y = 113 and 23x - 45y = 91, large coefficients make substitution difficult.",
+        "text": "Factoring x² + 6x - 16 by trial and error is tricky.",
         "rive_state": {
           "character": "SHISHYA",
-          "animation": "shishya_puzzled",
+          "animation": "shishya_curious",
           "emotion": "thinking",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "45x - 23y = 113,  23x - 45y = 91",
-          "highlight_tokens": ["45x", "-23y"]
+          "expression": "x² + 6x = 16",
+          "highlight_tokens": ["x² + 6x"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>For cross-symmetric equations, large coefficients make substitution difficult.</speak>",
+          "ssml_text": "<speak>Factoring quadratic expressions by trial and error is tricky.</speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -977,7 +977,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Add them: 68x - 68y = 204 $\\implies$ x - y = 3. Subtract them: 22x + 22y = 22 $\\implies$ x + y = 1!",
+        "text": "Complete the square! Half of 6 is 3, and 3² is 9. Add 9 to both sides: (x + 3)² = 25!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -985,11 +985,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "Add: x - y = 3,  Sub: x + y = 1",
-          "highlight_tokens": ["x - y = 3", "x + y = 1"]
+          "expression": "(x + 3)² = 16 + 9 = 25",
+          "highlight_tokens": ["(x + 3)²", "25"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Add them to get x minus y equals 3! Subtract them to get x plus y equals 1!</speak>",
+          "ssml_text": "<speak>Complete the square! Add 9 to both sides: x plus 3 squared equals 25!</speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -1001,19 +1001,19 @@
       {
         "node_id": 3,
         "speaker": "SHISHYA",
-        "text": "Adding (x - y = 3) and (x + y = 1) gives 2x = 4 $\\implies$ x = 2, y = -1!",
+        "text": "Taking the square root gives x + 3 = 5 $\\implies$ x = 2!",
         "rive_state": {
           "character": "SHISHYA",
           "animation": "shishya_aha",
-          "emotion": "happy",
+          "emotion": "surprised",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "2x = 4 ⟹ x = 2, y = -1",
-          "highlight_tokens": ["2", "-1"]
+          "expression": "x + 3 = 5 ⟹ x = 2",
+          "highlight_tokens": ["2"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Adding both reduced equations gives 2x equals 4, so x is 2 and y is minus 1!</speak>",
+          "ssml_text": "<speak>Taking the square root gives x plus 3 equals 5, so x is 2!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -1025,7 +1025,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "Tap the value of x (2x = 4) to cement the method!",
+        "text": "What is the square root of 25? Tap the answer!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -1033,18 +1033,18 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x = [ ? ]",
+          "expression": "√25 = [ ? ]",
           "highlight_tokens": ["?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Tap the value of x to cement the method!</speak>",
+          "ssml_text": "<speak>What is the square root of 25? Tap the answer!</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_2",
-          "prompt_text": "Tap 2 for x = 2!",
-          "expected_answer": "2"
+          "target_element_id": "numpad_key_5",
+          "prompt_text": "Tap 5 for √25 = 5!",
+          "expected_answer": "5"
         }
       }
     ]
