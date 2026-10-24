@@ -327,6 +327,28 @@ object VedicMathValidator {
     }
 
     /**
+     * Verifies Guṇakasamuccayaḥ monic quadratic factorization:
+     * For x^2 + Bx + C = 0:
+     * Verifies that factor pair (p, q) satisfies p * q == C and p + q == B,
+     * and that roots r1 = -p, r2 = -q satisfy (-p)^2 + B(-p) + C == 0 and (-q)^2 + B(-q) + C == 0.
+     */
+    fun verifyGunakasamuccayah(
+        b: Long,
+        c: Long,
+        expectedP: Long,
+        expectedQ: Long,
+        expectedRoot1: Long,
+        expectedRoot2: Long
+    ): Boolean {
+        if (expectedP * expectedQ != c || expectedP + expectedQ != b) return false
+        if (expectedRoot1 != -expectedP || expectedRoot2 != -expectedQ) return false
+
+        val eval1 = expectedRoot1 * expectedRoot1 + b * expectedRoot1 + c
+        val eval2 = expectedRoot2 * expectedRoot2 + b * expectedRoot2 + c
+        return eval1 == 0L && eval2 == 0L
+    }
+
+    /**
      * Validates a student's answer against the interactive handshake requirements.
      * Enforces that mathematical truth is solely determined by the authoritative [InteractiveHandshake.expectedAnswer].
      * Fail-closed invariant: UNKNOWN / MISSING / BLANK EXPECTED ANSWER = FAILURE.

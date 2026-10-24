@@ -1478,7 +1478,7 @@
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "Factorizing 2x² + 5x + 2 requires checking multiple product pairs.",
+        "text": "Guru-ji! When factoring quadratics like x² + 7x + 10 = 0, how do I find the correct pair of numbers that multiply to 10 and add to 7?",
         "rive_state": {
           "character": "SHISHYA",
           "animation": "shishya_curious",
@@ -1486,11 +1486,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "2x² + 5x + 2 = ?",
-          "highlight_tokens": ["2x² + 5x + 2"]
+          "expression": "x² + 7x + 10 = 0",
+          "highlight_tokens": ["x² + 7x + 10 = 0"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Factorizing 2x squared plus 5x plus 2 requires checking multiple product pairs.</speak>",
+          "ssml_text": "<speak>Guru-ji! When factoring quadratics like x squared plus 7x plus 10, how do I find the correct pair of numbers?</speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -1502,7 +1502,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Evaluate Sc(expression): 2 + 5 + 2 = 9. Sc(factors) must multiply to 9: (2(1)+1)(1+2) = 3 × 3 = 9!",
+        "text": "Invoke Guṇakasamuccayaḥ — 'The Factors of the Sum is the Sum of the Factors'! For x² + Bx + C = 0, seek factor pair (p, q) of constant C whose sum equals middle coefficient B: p · q = C and p + q = B!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -1510,11 +1510,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(2x + 1)(x + 2) ⟹ (3)(3) = 9",
-          "highlight_tokens": ["(2x + 1)(x + 2)", "9"]
+          "expression": "p · q = C  and  p + q = B",
+          "highlight_tokens": ["p · q = C", "p + q = B"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Expression coefficient sum is 9. Factor sums multiply to 3 times 3 equals 9!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Invoke Gunakasamuccayah — The Factors of the Sum is the Sum of the Factors! Find a factor pair of C whose sum equals B: p times q equals C and p plus q equals B!</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -1525,20 +1525,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "(2x + 1)(x + 2) is verified as the true factor pair!",
+        "speaker": "GURU",
+        "text": "For x² + 7x + 10 = 0, C = 10 and B = 7. Pairs of 10 are (1, 10) and (2, 5). Check sums: 1 + 10 = 11, but 2 + 5 = 7! So the factors are (x + 2)(x + 5) = 0, yielding roots x = −2 and x = −5!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_celebrate",
+          "character": "GURU",
+          "animation": "guru_explain",
           "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "2x² + 5x + 2 = (2x + 1)(x + 2)",
-          "highlight_tokens": ["(2x + 1)(x + 2)"]
+          "expression": "(x + 2)(x + 5) = 0 ⟹ x = −2, −5",
+          "highlight_tokens": ["(x + 2)(x + 5) = 0", "−2", "−5"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>2x plus 1 times x plus 2 is verified as the true factor pair!</speak>",
+          "ssml_text": "<speak>For x squared plus 7x plus 10: factor pairs of 10 are 1 and 10, and 2 and 5. Notice 2 plus 5 equals 7! Thus the factors are x plus 2 times x plus 5 equals 0, giving roots minus 2 and minus 5!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -1550,26 +1550,26 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "You have mastered all 16 Vedic Sutras, Shishya! Tap 9 to begin your grand master trial!",
+        "text": "Now find the root, Shishya! Setting the first linear factor to zero: x + 2 = 0. What is the root x?",
         "rive_state": {
           "character": "GURU",
-          "animation": "guru_bless",
+          "animation": "guru_magic_fx",
           "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "Sc = [ ? ]",
-          "highlight_tokens": ["?"]
+          "expression": "x + 2 = 0 ⟹ x = [ ? ]",
+          "highlight_tokens": ["x + 2 = 0", "?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>You have mastered all 16 Vedic Sutras, Shishya! Tap 9 to begin your trial!</speak>",
-          "sfx": "sfx_mastery_fanfare"
+          "ssml_text": "<speak>Now find the root, Shishya! Setting the first factor to zero, x plus 2 equals 0. What is the root x?</speak>",
+          "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_9",
-          "prompt_text": "Tap 9 to enter World 16 Arena!",
-          "expected_answer": "9"
+          "target_element_id": "numpad_key_minus_2",
+          "prompt_text": "Solve the linear factor for x: x + 2 = 0 ⟹ x = ?",
+          "expected_answer": "-2"
         }
       }
     ]
