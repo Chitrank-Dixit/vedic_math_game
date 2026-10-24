@@ -210,15 +210,15 @@
     ]
   },
   {
-    "sutra_id": "urdhva_tiryagbhyam",
-    "sutra_name": "Ūrdhva-Tiryagbhyām",
-    "english_meaning": "Vertically and Crosswise",
+    "sutra_id": "ekanyunena_purvena",
+    "sutra_name": "Ekanyūnena Pūrveṇa",
+    "english_meaning": "By One Less Than the Previous One",
     "world_number": 3,
     "dialogue_nodes": [
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "How do we multiply arbitrary numbers like 23 × 12 without a standard long multiplication grid?",
+        "text": "Guru-ji, how can we calculate 47 × 99 quickly without performing long multiplication?",
         "rive_state": {
           "character": "SHISHYA",
           "animation": "shishya_curious",
@@ -226,11 +226,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "23 × 12 = ?",
-          "highlight_tokens": ["23", "12"]
+          "expression": "47 × 99 = ?",
+          "highlight_tokens": ["47 × 99"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>How do we multiply arbitrary numbers like 23 times 12 without a standard long grid?</speak>",
+          "ssml_text": "<speak><prosody pitch='+2st'>Guru-ji, how can we calculate 47 times 99 quickly without performing long multiplication?</prosody></speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -242,7 +242,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "We cast three spatial rays: Right Vertical (3×2=6), Crosswise (2×2 + 3×1=7), Left Vertical (2×1=2)!",
+        "text": "When multiplying by nines, invoke Ekanyūnena Pūrveṇa — 'By One Less than the Previous One'! Lessen the multiplicand by 1 for the left part, then subtract that from the nines for the right part.",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -250,11 +250,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(2×1) | (2×2 + 3×1) | (3×2)",
-          "highlight_tokens": ["2×1 = 2", "Cross = 7", "3×2 = 6"]
+          "expression": "47 × 99 = (47 − 1) | (99 − 46)",
+          "highlight_tokens": ["47 − 1", "99 − 46"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>We cast three spatial rays: Right Vertical, Crosswise, and Left Vertical!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>When multiplying by nines, invoke Ekanyunena Purvena — By One Less than the Previous One! Lessen the multiplicand by 1 for the left part, then subtract that from the nines for the right part.</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -265,20 +265,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "2 | 7 | 6 combined gives 276 in a single line!",
+        "speaker": "GURU",
+        "text": "Watch closely! For 47 × 99: lessen 47 by 1 to get 46 on the left. Then subtract from nines: 99 − 46 gives 53 on the right. Put them together: 4653!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_celebrate",
+          "character": "GURU",
+          "animation": "guru_nod",
           "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "23 × 12 = 276",
-          "highlight_tokens": ["2", "7", "6"]
+          "expression": "47 × 99 = 46 | 53 = 4653",
+          "highlight_tokens": ["46", "53", "4653"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>2, 7, 6 combined gives 276 in a single line!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Watch closely! For 47 times 99: lessen 47 by 1 to get 46 on the left. Then 99 minus 46 gives 53 on the right. Put them together: 4653!</prosody></speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -290,7 +290,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "Now compute the crosswise middle term for 31 × 21: (3×1 + 1×2)!",
+        "text": "Your turn, Shishya! For 53 × 99, apply Ekanyunena to the multiplicand: what is 53 − 1?",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -298,18 +298,18 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "31 × 21 = 6 | [ ? ] | 1 = 651",
-          "highlight_tokens": ["?", "651"]
+          "expression": "53 − 1 = [ ? ]",
+          "highlight_tokens": ["53 − 1", "?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Now compute the crosswise middle term for 31 times 21!</speak>",
+          "ssml_text": "<speak>Your turn, Shishya! For 53 times 99, apply Ekanyunena to the multiplicand: what is 53 minus 1?</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_5",
-          "prompt_text": "Tap 5 for 3 + 2 = 5!",
-          "expected_answer": "5"
+          "target_element_id": "numpad_key_52",
+          "prompt_text": "What is 53 − 1? Enter the left part.",
+          "expected_answer": "52"
         }
       }
     ]
@@ -1365,15 +1365,15 @@
     ]
   },
   {
-    "sutra_id": "ekanyunena_purvena",
-    "sutra_name": "Ekanyūnena Pūrveṇa",
-    "english_meaning": "By One Less Than the Previous One",
+    "sutra_id": "urdhva_tiryagbhyam",
+    "sutra_name": "Ūrdhva-Tiryagbhyām",
+    "english_meaning": "Vertically and Crosswise",
     "world_number": 14,
     "dialogue_nodes": [
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "Multiplying 46 × 99 mentally sounds difficult without a calculator.",
+        "text": "How do we multiply arbitrary numbers like 23 × 12 without a standard long multiplication grid?",
         "rive_state": {
           "character": "SHISHYA",
           "animation": "shishya_curious",
@@ -1381,11 +1381,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "46 × 99 = ?",
-          "highlight_tokens": ["46", "99"]
+          "expression": "23 × 12 = ?",
+          "highlight_tokens": ["23", "12"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Multiplying 46 times 99 mentally sounds difficult without a calculator.</speak>",
+          "ssml_text": "<speak>How do we multiply arbitrary numbers like 23 times 12 without a standard long grid?</speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -1397,7 +1397,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Reduce 46 by one: 46 - 1 = 45. Then subtract 45 from 99: 99 - 45 = 54!",
+        "text": "We cast three spatial rays: Right Vertical (3×2=6), Crosswise (2×2 + 3×1=7), Left Vertical (2×1=2)!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -1405,11 +1405,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(46 - 1) | (99 - 45) = 4554",
-          "highlight_tokens": ["46 - 1 = 45", "99 - 45 = 54"]
+          "expression": "(2×1) | (2×2 + 3×1) | (3×2)",
+          "highlight_tokens": ["2×1 = 2", "Cross = 7", "3×2 = 6"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Reduce 46 by one to get 45. Then subtract 45 from 99 to get 54!</speak>",
+          "ssml_text": "<speak>We cast three spatial rays: Right Vertical, Crosswise, and Left Vertical!</speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -1421,7 +1421,7 @@
       {
         "node_id": 3,
         "speaker": "SHISHYA",
-        "text": "45 and 54 together make 4554 instantly!",
+        "text": "2 | 7 | 6 combined gives 276 in a single line!",
         "rive_state": {
           "character": "SHISHYA",
           "animation": "shishya_celebrate",
@@ -1429,11 +1429,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "46 × 99 = 4554",
-          "highlight_tokens": ["4554"]
+          "expression": "23 × 12 = 276",
+          "highlight_tokens": ["2", "7", "6"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>45 and 54 together make 4554 instantly!</speak>",
+          "ssml_text": "<speak>2, 7, 6 combined gives 276 in a single line!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -1445,7 +1445,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "For 73 × 99, reduce 73 by one. Tap the units digit of 72!",
+        "text": "Now compute the crosswise middle term for 31 × 21: (3×1 + 1×2)!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -1453,18 +1453,18 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "73 - 1 = 7[ ? ]",
-          "highlight_tokens": ["?"]
+          "expression": "31 × 21 = 6 | [ ? ] | 1 = 651",
+          "highlight_tokens": ["?", "651"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>For 73 times 99, reduce 73 by one. Tap the units digit of 72!</speak>",
+          "ssml_text": "<speak>Now compute the crosswise middle term for 31 times 21!</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_2",
-          "prompt_text": "Tap 2 for 73 - 1 = 72!",
-          "expected_answer": "2"
+          "target_element_id": "numpad_key_5",
+          "prompt_text": "Tap 5 for 3 + 2 = 5!",
+          "expected_answer": "5"
         }
       }
     ]

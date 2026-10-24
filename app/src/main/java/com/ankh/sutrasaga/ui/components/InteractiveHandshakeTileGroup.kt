@@ -177,12 +177,14 @@ fun InteractiveHandshakeTileGroup(
                                     feedbackMessage = when (expectedAnswer) {
                                         "20" -> "✦ Splendid, Shishya! 👏 ✦\n4 × 5 = 20. Append 25 to get 45² = 2025! You are ready for the arena."
                                         "3" -> "✦ Splendid, Shishya! 👏 ✦\n10 − 7 = 3. Together with 5 and 7, 1000 − 427 = 573! Zero borrowing conquered!"
+                                        "52" -> "✦ Splendid, Shishya! 👏 ✦\n53 − 1 = 52 for the left part! Coupled with 47 (99 − 52), 53 × 99 = 5247! Lightning fast!"
                                         else -> "✦ Excellent! You found it! 👏 ✦\nGreat job, my child! You understood the pattern beautifully."
                                     }
                                 } else {
                                     feedbackMessage = when (expectedAnswer) {
                                         "20" -> "Almost! Remember: multiply the preceding part 4 by one more than itself (4 × 5). Try again!"
                                         "3" -> "Almost! Remember: subtract the final units digit from 10 (10 − 7). Try again!"
+                                        "52" -> "Almost! Remember: apply Ekanyunena by subtracting 1 from 53 (53 − 1). Try again!"
                                         else -> "Almost! Give it another try."
                                     }
                                 }

@@ -45,6 +45,17 @@ object VedicMathValidator {
     }
 
     /**
+     * Verifies Ekanyunena multiplication: multiplicand * (10^k - 1) = (multiplicand - 1) * 10^k + ((10^k - 1) - (multiplicand - 1)).
+     */
+    fun verifyEkanyunenaMultiplication(multiplicand: Long, nines: Long, expected: Long): Boolean {
+        val lhs = multiplicand - 1L
+        val rhs = nines - lhs
+        val multiplier = nines + 1L
+        val computed = lhs * multiplier + rhs
+        return computed == expected && (multiplicand * nines) == expected
+    }
+
+    /**
      * Validates a student's answer against the interactive handshake requirements.
      * Enforces that mathematical truth is solely determined by the authoritative [InteractiveHandshake.expectedAnswer].
      * Fail-closed invariant: UNKNOWN / MISSING / BLANK EXPECTED ANSWER = FAILURE.
