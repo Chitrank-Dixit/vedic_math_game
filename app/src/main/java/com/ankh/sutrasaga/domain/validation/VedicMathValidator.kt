@@ -211,6 +211,26 @@ object VedicMathValidator {
     }
 
     /**
+     * Verifies Vyashtisamashtih symmetric product around an average:
+     * p * q = (A - d)(A + d) = A² - d²
+     * where A = (p + q) / 2 and d = |q - p| / 2.
+     */
+    fun verifyVyashtisamashtih(
+        p: Long,
+        q: Long,
+        expectedAverage: Long,
+        expectedDeviation: Long,
+        expectedProduct: Long
+    ): Boolean {
+        if ((p + q) % 2L != 0L) return false
+        val avg = (p + q) / 2L
+        val dev = kotlin.math.abs(q - p) / 2L
+        if (avg != expectedAverage || dev != expectedDeviation) return false
+        val diffOfSquares = (avg * avg) - (dev * dev)
+        return diffOfSquares == expectedProduct && (p * q) == expectedProduct
+    }
+
+    /**
      * Validates a student's answer against the interactive handshake requirements.
      * Enforces that mathematical truth is solely determined by the authoritative [InteractiveHandshake.expectedAnswer].
      * Fail-closed invariant: UNKNOWN / MISSING / BLANK EXPECTED ANSWER = FAILURE.

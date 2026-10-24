@@ -1058,19 +1058,19 @@
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "Factoring biquadratic expressions like x⁴ - 10x² + 9 feels overwhelming.",
+        "text": "Guru-ji! Multiplying numbers like 58 × 62 requires full column calculation. Is there a way to solve it in our heads using symmetry?",
         "rive_state": {
           "character": "SHISHYA",
-          "animation": "shishya_puzzled",
+          "animation": "shishya_curious",
           "emotion": "thinking",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x⁴ - 10x² + 9 = ?",
-          "highlight_tokens": ["x⁴", "x²"]
+          "expression": "58 × 62 = ?",
+          "highlight_tokens": ["58 × 62"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Factoring biquadratics like x to the fourth minus 10x squared plus 9 feels overwhelming.</speak>",
+          "ssml_text": "<speak>Guru-ji! Multiplying numbers like 58 times 62 requires full column calculation. Can we solve it using symmetry?</speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -1082,7 +1082,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Break the whole into parts! Let u = x². The equation reduces to u² - 10u + 9 = (u - 1)(u - 9)!",
+        "text": "Invoke Vyaṣṭisamaṣṭiḥ — Part and Whole! 58 and 62 are symmetrically placed around their central whole average 60, with equal parts deviation of 2!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -1090,11 +1090,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(x² - 1)(x² - 9) = (x-1)(x+1)(x-3)(x+3)",
-          "highlight_tokens": ["x² - 1", "x² - 9"]
+          "expression": "(60 - 2)(60 + 2) = 60² - 2²",
+          "highlight_tokens": ["60", "2"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Break the whole into parts! Substitute u equals x squared to factor easily!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Invoke Vyashtisamashtih — Part and Whole! 58 and 62 are symmetrically placed around their whole average 60, with equal parts deviation of 2!</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -1105,20 +1105,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "The roots are ±1 and ±3 without any cubic or quartic formulas!",
+        "speaker": "GURU",
+        "text": "Apply the difference of squares: (A - d)(A + d) = A² - d²! The whole square is 60² = 3600. The parts square is 2² = 4. Subtract them: 3600 - 4 = 3596! Direct mental multiplication!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
-          "emotion": "surprised",
+          "character": "GURU",
+          "animation": "guru_explain",
+          "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x ∈ {1, -1, 3, -3}",
-          "highlight_tokens": ["±1", "±3"]
+          "expression": "60² - 2² = 3600 - 4 = 3596",
+          "highlight_tokens": ["3600 - 4", "3596"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>The roots are plus-or-minus 1 and plus-or-minus 3!</speak>",
+          "ssml_text": "<speak>Square the whole: 60 squared is 3600. Square the parts deviation: 2 squared is 4. Subtract them: 3600 minus 4 equals 3596!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -1130,7 +1130,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "Tap the positive root corresponding to x² = 9!",
+        "text": "Now test your understanding, Shishya! In 58 × 62, what is the central midpoint average of the two numbers: (58 + 62) ÷ 2?",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -1138,18 +1138,18 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x = √9 = [ ? ]",
+          "expression": "A = (58 + 62) / 2 = [ ? ]",
           "highlight_tokens": ["?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Tap the positive root corresponding to x squared equals 9!</speak>",
+          "ssml_text": "<speak>Now test your understanding, Shishya! In 58 times 62, what is the central midpoint average of the two numbers?</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_3",
-          "prompt_text": "Tap 3 for √9 = 3!",
-          "expected_answer": "3"
+          "target_element_id": "numpad_key_60",
+          "prompt_text": "Find the central midpoint average: (58 + 62) / 2.",
+          "expected_answer": "60"
         }
       }
     ]

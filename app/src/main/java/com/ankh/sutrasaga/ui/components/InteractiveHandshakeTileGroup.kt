@@ -185,6 +185,7 @@ fun InteractiveHandshakeTileGroup(
                                         "1" -> "✦ Splendid, Shishya! 👏 ✦\n22 ÷ 22 = 1, so x + y = 1! Combined with x − y = 3, adding gives 2x = 4 (x = 2, y = −1)! Simultaneous equations conquered!"
                                         "-1" -> "✦ Splendid, Shishya! 👏 ✦\nx + 1 = 0 yields x = −1! Since 7 ≠ 8, the shared factor vanishes to zero. Shunyam Samyasamuccaye mastered!"
                                         "9" -> "✦ Splendid, Shishya! 👏 ✦\n(6 ÷ 2)² = 3² = 9! Adding 9 to both sides gives (x + 3)² = 1 (roots −2 and −4)! Pūraṇāpūraṇābhyām mastered!"
+                                        "60" -> "✦ Splendid, Shishya! 👏 ✦\n(58 + 62) ÷ 2 = 60! With deviation d = 2, 58 × 62 = 60² − 2² = 3600 − 4 = 3596! Vyaṣṭisamaṣṭiḥ mastered!"
                                         else -> "✦ Excellent! You found it! 👏 ✦\nGreat job, my child! You understood the pattern beautifully."
                                     }
                                 } else {
@@ -199,6 +200,7 @@ fun InteractiveHandshakeTileGroup(
                                         "1" -> "Almost! Divide 22 by 22 to find the sum (x + y). Try again!"
                                         "-1" -> "Almost! Solve x + 1 = 0 by subtracting 1 from both sides. Try again!"
                                         "9" -> "Almost! Take half the coefficient of x (6 ÷ 2 = 3) and square it (3²). Try again!"
+                                        "60" -> "Almost! Find the central midpoint by calculating (58 + 62) ÷ 2. Try again!"
                                         else -> "Almost! Give it another try."
                                     }
                                 }
