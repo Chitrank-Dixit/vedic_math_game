@@ -265,6 +265,44 @@ object VedicMathValidator {
     }
 
     /**
+     * Verifies Sopāntyadvayamantyam digit-pairing multiplication for multipliers 12..19:
+     * Multiplicand M, Multiplier 10 + N.
+     * Verifies raw values R[i] = d[i+1] + N * d[i] and carry-resolved product.
+     */
+    fun verifySopantyadvayamantyam(
+        multiplicand: Long,
+        multiplier: Int,
+        expectedRawValues: List<Int>,
+        expectedProduct: Long
+    ): Boolean {
+        if (multiplicand <= 0L || multiplier !in 12..19) return false
+        val n = multiplier - 10
+        val origDigits = multiplicand.toString().map { it.digitToInt() }
+        val sandwiched = listOf(0) + origDigits + listOf(0)
+
+        val rawValues = mutableListOf<Int>()
+        for (i in 0 until origDigits.size + 1) {
+            val d = sandwiched[i + 1]
+            val prev = sandwiched[i]
+            rawValues.add(d + n * prev)
+        }
+
+        if (rawValues != expectedRawValues) return false
+
+        var currentCarry = 0
+        val finalDigitsReversed = mutableListOf<Int>()
+        for (i in rawValues.indices.reversed()) {
+            val total = rawValues[i] + currentCarry
+            finalDigitsReversed.add(total % 10)
+            currentCarry = total / 10
+        }
+        if (currentCarry > 0) finalDigitsReversed.add(currentCarry)
+
+        val computedProduct = finalDigitsReversed.reversed().joinToString("").toLong()
+        return computedProduct == expectedProduct && (multiplicand * multiplier.toLong()) == expectedProduct
+    }
+
+    /**
      * Validates a student's answer against the interactive handshake requirements.
      * Enforces that mathematical truth is solely determined by the authoritative [InteractiveHandshake.expectedAnswer].
      * Fail-closed invariant: UNKNOWN / MISSING / BLANK EXPECTED ANSWER = FAILURE.

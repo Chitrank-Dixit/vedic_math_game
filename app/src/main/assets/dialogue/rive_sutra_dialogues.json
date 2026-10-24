@@ -1268,19 +1268,19 @@
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "Rational equations like 1/(x+2) + 1/(x+3) = 1/(x+1) + 1/(x+4) take messy cross-multiplications.",
+        "text": "Guru-ji! Multiplying numbers like 143 by 12 takes tedious multi-line multiplication and endless adding. Is there a faster one-line Vedic secret?",
         "rive_state": {
           "character": "SHISHYA",
-          "animation": "shishya_puzzled",
+          "animation": "shishya_curious",
           "emotion": "thinking",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "1/(x+2) + 1/(x+3) = 1/(x+1) + 1/(x+4)",
-          "highlight_tokens": ["x+2", "x+3", "x+1", "x+4"]
+          "expression": "143 × 12 = ?",
+          "highlight_tokens": ["143 × 12"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Rational equations like this take messy cross-multiplications.</speak>",
+          "ssml_text": "<speak>Guru-ji! Multiplying numbers like 143 by 12 takes tedious multi-line steps. Is there a faster one-line Vedic secret?</speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -1292,7 +1292,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Penultimate sum is (2+3)=5, Ultimate sum is (1+4)=5. When equal, set the numerator sum to 0: 2x + 5 = 0!",
+        "text": "Invoke Sopāntyadvayamantyam — 'The Ultimate and Twice the Penultimate'! For multiplier 12, N = 2. Sandwich 143 with zero guards: 0 1 4 3 0. Pair each digit with N times its neighbor!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -1300,11 +1300,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "2x + 5 = 0 ⟹ x = -5/2 = -2.5",
-          "highlight_tokens": ["2x + 5 = 0"]
+          "expression": "143 ⟹ 0 1 4 3 0 (N = 2)",
+          "highlight_tokens": ["0 1 4 3 0", "N = 2"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Penultimate and ultimate sums match! Simply set 2x plus 5 equals 0!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Invoke Sopantyadvayamantyam — The Ultimate and Twice the Penultimate! For multiplier 12, N is 2. Sandwich 143 with zero guards, then pair each digit with N times its neighbor!</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -1315,20 +1315,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "2x = -5 gives x = -2.5 without expanding quadratic denominators!",
+        "speaker": "GURU",
+        "text": "Compute raw values from left to right: 1+2(0)=1, 4+2(1)=6, 3+2(4)=11, and 0+2(3)=6. Resolving carries from the right: 6, then 1 (carry 1), 6+1=7, and 1. The product is 1716!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
+          "character": "GURU",
+          "animation": "guru_explain",
           "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x = -2.5",
-          "highlight_tokens": ["-2.5"]
+          "expression": "Raw: [1, 6, 11, 6] ⟹ 1716",
+          "highlight_tokens": ["[1, 6, 11, 6]", "1716"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>2x equals minus 5 gives x equals minus 2.5 in one step!</speak>",
+          "ssml_text": "<speak>Compute raw values: 1, 6, 11, and 6. Resolving carries from right to left yields 1716!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -1340,7 +1340,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "For 2x + 6 = 0, tap the magnitude of x (|-3| = 3)!",
+        "text": "Now test the core step, Shishya! In 143 × 12, pair digit 3 with twice its neighbor 4. What is the raw value: 3 + (2 × 4)?",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -1348,18 +1348,18 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x = -[ ? ]",
-          "highlight_tokens": ["?"]
+          "expression": "3 + (2 × 4) = [ ? ]",
+          "highlight_tokens": ["3 + (2 × 4)", "?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>For 2x plus 6 equals 0, tap the magnitude of x!</speak>",
+          "ssml_text": "<speak>Now test the core step, Shishya! In 143 times 12, pair digit 3 with twice its neighbor 4. What is 3 plus 2 times 4?</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_3",
-          "prompt_text": "Tap 3 for |-3| = 3!",
-          "expected_answer": "3"
+          "target_element_id": "numpad_key_11",
+          "prompt_text": "Calculate the raw value: 3 + (2 × 4) = ?",
+          "expected_answer": "11"
         }
       }
     ]
