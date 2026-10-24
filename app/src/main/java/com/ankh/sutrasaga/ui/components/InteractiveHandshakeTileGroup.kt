@@ -186,6 +186,7 @@ fun InteractiveHandshakeTileGroup(
                                         "-1" -> "✦ Splendid, Shishya! 👏 ✦\nx + 1 = 0 yields x = −1! Since 7 ≠ 8, the shared factor vanishes to zero. Shunyam Samyasamuccaye mastered!"
                                         "9" -> "✦ Splendid, Shishya! 👏 ✦\n(6 ÷ 2)² = 3² = 9! Adding 9 to both sides gives (x + 3)² = 1 (roots −2 and −4)! Pūraṇāpūraṇābhyām mastered!"
                                         "60" -> "✦ Splendid, Shishya! 👏 ✦\n(58 + 62) ÷ 2 = 60! With deviation d = 2, 58 × 62 = 60² − 2² = 3600 − 4 = 3596! Vyaṣṭisamaṣṭiḥ mastered!"
+                                        "6" -> "✦ Splendid, Shishya! 👏 ✦\n20 = (2 × 7) + 6, so the next remainder is 6! Tracking remainders reveals 0.(142857) with cycle length 6! Śeṣāṇyaṅkena Carameṇa mastered!"
                                         else -> "✦ Excellent! You found it! 👏 ✦\nGreat job, my child! You understood the pattern beautifully."
                                     }
                                 } else {
@@ -201,6 +202,7 @@ fun InteractiveHandshakeTileGroup(
                                         "-1" -> "Almost! Solve x + 1 = 0 by subtracting 1 from both sides. Try again!"
                                         "9" -> "Almost! Take half the coefficient of x (6 ÷ 2 = 3) and square it (3²). Try again!"
                                         "60" -> "Almost! Find the central midpoint by calculating (58 + 62) ÷ 2. Try again!"
+                                        "6" -> "Almost! Divide 20 by 7: 20 = (2 × 7) + remainder. Find the remainder. Try again!"
                                         else -> "Almost! Give it another try."
                                     }
                                 }

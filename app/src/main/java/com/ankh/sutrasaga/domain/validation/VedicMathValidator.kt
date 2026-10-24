@@ -231,6 +231,40 @@ object VedicMathValidator {
     }
 
     /**
+     * Verifies Shesanyankena Charamena remainder tracking and recurring decimal expansion:
+     * For fraction p / q:
+     * Verifies remainder sequence and repetend digits.
+     */
+    fun verifyShesanyankenaExpansion(
+        p: Long,
+        q: Long,
+        expectedPeriodLength: Int,
+        expectedRepetend: String
+    ): Boolean {
+        if (q <= 0L || p <= 0L) return false
+        val remainders = mutableListOf<Long>()
+        val digits = StringBuilder()
+        var rem = p % q
+        val seen = mutableMapOf<Long, Int>()
+
+        while (rem != 0L && rem !in seen) {
+            seen[rem] = remainders.size
+            remainders.add(rem)
+            val v = rem * 10L
+            val digit = v / q
+            digits.append(digit)
+            rem = v % q
+        }
+
+        if (rem == 0L) return false // not recurring
+        val cycleStart = seen[rem] ?: return false
+        val cycleLength = remainders.size - cycleStart
+        val cycleDigits = digits.substring(cycleStart)
+
+        return cycleLength == expectedPeriodLength && cycleDigits == expectedRepetend
+    }
+
+    /**
      * Validates a student's answer against the interactive handshake requirements.
      * Enforces that mathematical truth is solely determined by the authoritative [InteractiveHandshake.expectedAnswer].
      * Fail-closed invariant: UNKNOWN / MISSING / BLANK EXPECTED ANSWER = FAILURE.

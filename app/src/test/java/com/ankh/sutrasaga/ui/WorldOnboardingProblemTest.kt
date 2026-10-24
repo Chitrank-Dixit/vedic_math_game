@@ -39,7 +39,7 @@ class WorldOnboardingProblemTest {
     }
 
     @Test
-    fun worldsFourThroughElevenUseTheirOwnCanonicalProblems() {
+    fun worldsFourThroughTwelveUseTheirOwnCanonicalProblems() {
         val world4 = canonicalOnboardingProblem(4)
         val world5 = canonicalOnboardingProblem(5)
         val world6 = canonicalOnboardingProblem(6)
@@ -48,6 +48,7 @@ class WorldOnboardingProblemTest {
         val world9 = canonicalOnboardingProblem(9)
         val world10 = canonicalOnboardingProblem(10)
         val world11 = canonicalOnboardingProblem(11)
+        val world12 = canonicalOnboardingProblem(12)
 
         assertEquals("Yavadunam", world4.sutraName)
         assertEquals(8836L, world4.correctAnswer)
@@ -67,5 +68,9 @@ class WorldOnboardingProblemTest {
         assertEquals(-4L, world10.expectedSecondaryAnswer)
         assertEquals("Vyashtisamashtih", world11.sutraName)
         assertEquals(3596L, world11.correctAnswer)
+        assertEquals("Shesanyankena Charamena", world12.sutraName)
+        assertEquals(1L, world12.correctAnswer)
+        assertEquals(6L, world12.prefixProduct)
+        assertEquals("0.(142857)", world12.appendedSuffix)
     }
 }

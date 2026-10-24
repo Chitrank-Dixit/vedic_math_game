@@ -1163,7 +1163,7 @@
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "Converting fractions like 1/7 into exact repeating decimals takes forever by long division.",
+        "text": "Guru-ji! Converting fractions like 1/7 into exact repeating decimals takes long division with endless subtraction. Is there a faster Vedic shortcut?",
         "rive_state": {
           "character": "SHISHYA",
           "animation": "shishya_curious",
@@ -1171,11 +1171,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "1/7 = 0.142857...",
+          "expression": "1/7 = 0.?",
           "highlight_tokens": ["1/7"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Converting fractions like 1 over 7 into repeating decimals takes forever.</speak>",
+          "ssml_text": "<speak>Guru-ji! Converting fractions like 1 over 7 into repeating decimals takes long division. Is there a faster Vedic shortcut?</speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -1187,7 +1187,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Track the remainders! 10÷7=1 (R3), 30÷7=4 (R2), 20÷7=2 (R6), 60÷7=8 (R4), 40÷7=5 (R5), 50÷7=7 (R1)!",
+        "text": "Invoke Śeṣāṇyaṅkena Carameṇa — The Remainders by the Last Digit! Instead of long division, track only the remainder chain! Each remainder times 10 gives the next quotient digit and remainder.",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -1195,11 +1195,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "Remainders: 3 → 2 → 6 → 4 → 5 → 1",
-          "highlight_tokens": ["3", "2", "6", "4", "5", "1"]
+          "expression": "rₖ = (10 · rₖ₋₁) mod 7 ⟹ Remainder Chain",
+          "highlight_tokens": ["Remainder Chain"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Track the remainders! Each remainder generates the next decimal digit immediately!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Invoke Sheshanyankena Caramena — The Remainders by the Last Digit! Track the remainder chain: each remainder times 10 reveals the next digit and remainder!</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -1210,20 +1210,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "The digits 1, 4, 2, 8, 5, 7 form the cyclic pattern instantly!",
+        "speaker": "GURU",
+        "text": "Start with remainder 1: 10 ÷ 7 = 1 (R 3). Then 30 ÷ 7 = 4 (R 2). Then 20 ÷ 7 = 2 (R 6). The remainders 3 → 2 → 6 → 4 → 5 → 1 cycle back to 1, producing the 6-digit repetend 0.(142857)!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
+          "character": "GURU",
+          "animation": "guru_explain",
           "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "1/7 = 0.142857...",
-          "highlight_tokens": ["142857"]
+          "expression": "Remainders: 3 → 2 → 6 → 4 → 5 → 1 ⟹ 0.(142857)",
+          "highlight_tokens": ["3 → 2 → 6 → 4 → 5 → 1", "0.(142857)"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>The digits form the cyclic pattern 142857 instantly!</speak>",
+          "ssml_text": "<speak>Track the remainders: 3, 2, 6, 4, 5, 1, repeating in 6 steps to give 0 point 1 4 2 8 5 7 repeating!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -1235,7 +1235,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "What is the remainder when 10 is divided by 7? Tap the remainder!",
+        "text": "Now test your understanding, Shishya! In step 3 with incoming remainder 2: 10 × 2 = 20. What is the new remainder: 20 mod 7?",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -1243,18 +1243,18 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "10 mod 7 = [ ? ]",
+          "expression": "20 mod 7 = [ ? ]",
           "highlight_tokens": ["?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>What is the remainder when 10 is divided by 7? Tap the remainder!</speak>",
+          "ssml_text": "<speak>Now test your understanding, Shishya! In step 3, 10 times 2 is 20. What is the new remainder: 20 mod 7?</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_3",
-          "prompt_text": "Tap 3 for remainder 3!",
-          "expected_answer": "3"
+          "target_element_id": "numpad_key_6",
+          "prompt_text": "Calculate the remainder: 20 mod 7.",
+          "expected_answer": "6"
         }
       }
     ]
