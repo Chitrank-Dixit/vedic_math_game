@@ -1583,19 +1583,19 @@
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "Finding the vertex turning point of 2x² - 8x + 5 usually takes full derivative formulas!",
+        "text": "Guru-ji! When solving quadratic equations like x² - 8x + 7 = 0, the standard formula is long and tedious. Can the calculus of movement solve it directly?",
         "rive_state": {
           "character": "SHISHYA",
-          "animation": "shishya_puzzled",
+          "animation": "shishya_curious",
           "emotion": "thinking",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "f(x) = 2x² - 8x + 5",
-          "highlight_tokens": ["2x² - 8x"]
+          "expression": "x² - 8x + 7 = 0",
+          "highlight_tokens": ["x² - 8x + 7 = 0"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Finding the vertex turning point of quadratics usually takes full formulas!</speak>",
+          "ssml_text": "<speak>Guru-ji! When solving quadratic equations like x squared minus 8x plus 7, can the calculus of movement solve it directly?</speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -1607,7 +1607,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Apply Calana-Kalanābhyām! Differentiate mentally: 2(2x) - 8 = 0 $\\implies$ 4x = 8.",
+        "text": "Invoke Calana-Kalanābhyām — 'Differential Calculus / By Movement and Measure'! Differentiate the quadratic to get f'(x) = 2Ax + B, and equate it to ±√D, where D = B² - 4AC: f'(x) = ±√D!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -1615,11 +1615,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "f'(x) = 4x - 8 = 0",
-          "highlight_tokens": ["4x - 8 = 0"]
+          "expression": "f'(x) = 2Ax + B = ±√D  (D = B² - 4AC)",
+          "highlight_tokens": ["f'(x) = 2Ax + B", "±√D", "D = B² - 4AC"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Apply the differential sutra! 4x minus 8 equals 0!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Invoke Calana-Kalanabhyam — Differential Calculus! Differentiate the quadratic to get f prime of x equals 2Ax plus B, and equate it to plus or minus square root of D!</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -1630,20 +1630,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "4x = 8 $\\implies$ x = 2! That gives the critical point in two seconds!",
+        "speaker": "GURU",
+        "text": "For x² - 8x + 7 = 0: f'(x) = 2x - 8. Discriminant D = (-8)² - 4(1)(7) = 64 - 28 = 36, so √D = 6! The minus branch gives 2x - 8 = -6 ⟹ 2x = 2 ⟹ x = 1!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
-          "emotion": "surprised",
+          "character": "GURU",
+          "animation": "guru_explain",
+          "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x(turning) = 2",
-          "highlight_tokens": ["2"]
+          "expression": "2x - 8 = ±6  |  2x - 8 = -6 ⟹ x = 1",
+          "highlight_tokens": ["2x - 8 = ±6", "x = 1"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>4x equals 8, so x is 2! That gives the critical point in two seconds!</speak>",
+          "ssml_text": "<speak>For x squared minus 8x plus 7: the derivative is 2x minus 8, and D is 36, giving square root of D as 6. The minus branch gives 2x minus 8 equals minus 6, yielding root x equals 1!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -1655,7 +1655,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "Solve for the turning point x: 4x = 8. Tap the root!",
+        "text": "Now solve the positive branch, Shishya! Setting 2x - 8 = +6, adding 8 gives 2x = 14. What is the root x?",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -1663,18 +1663,18 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x = [ ? ]",
-          "highlight_tokens": ["?"]
+          "expression": "2x = 14 ⟹ x = [ ? ]",
+          "highlight_tokens": ["2x = 14", "?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Solve for the turning point x: 4x equals 8. Tap the root!</speak>",
+          "ssml_text": "<speak>Now solve the positive branch, Shishya! 2x equals 14. What is the root x?</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_2",
-          "prompt_text": "Tap 2 for x = 2!",
-          "expected_answer": "2"
+          "target_element_id": "numpad_key_7",
+          "prompt_text": "Solve for root x: 2x = 14 ⟹ x = ?",
+          "expected_answer": "7"
         }
       }
     ]

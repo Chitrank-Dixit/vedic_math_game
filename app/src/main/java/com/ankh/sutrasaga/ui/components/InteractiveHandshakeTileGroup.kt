@@ -190,6 +190,7 @@ fun InteractiveHandshakeTileGroup(
                                         "11" -> "✦ Splendid, Shishya! 👏 ✦\n3 + (2 × 4) = 11! Resolving carry with 6 gives 716, and leading 1 gives 143 × 12 = 1716! Sopāntyadvayamantyam mastered!"
                                         "12" -> "✦ Splendid, Shishya! 👏 ✦\n4 × 3 = 12! Both the factor sums (4 × 3) and polynomial sum (1 + 5 + 6) equal 12! Guṇitasamuccayaḥ mastered!"
                                         "-2" -> "✦ Splendid, Shishya! 👏 ✦\nx + 2 = 0 yields x = −2! Together with x + 5 = 0 (x = −5), the roots are −2 and −5! Guṇakasamuccayaḥ mastered!"
+                                        "7" -> "✦ Splendid, Shishya! 👏 ✦\n2x = 14 yields x = 7! Combined with the minus branch 2x = 2 (x = 1), the roots are 7 and 1! Calana-Kalanābhyām mastered!"
                                         else -> "✦ Excellent! You found it! 👏 ✦\nGreat job, my child! You understood the pattern beautifully."
                                     }
                                 } else {
@@ -209,6 +210,7 @@ fun InteractiveHandshakeTileGroup(
                                         "11" -> "Almost! Multiply the previous neighbor 4 by 2 (2 × 4 = 8) and add 3 (3 + 8). Try again!"
                                         "12" -> "Almost! Multiply the sum of the first factor (1 + 3 = 4) by the second factor (1 + 2 = 3): 4 × 3. Try again!"
                                         "-2" -> "Almost! Subtract 2 from both sides of x + 2 = 0 to isolate x. Try again!"
+                                        "7" -> "Almost! Divide 14 by 2 in 2x = 14 to isolate root x. Try again!"
                                         else -> "Almost! Give it another try."
                                     }
                                 }

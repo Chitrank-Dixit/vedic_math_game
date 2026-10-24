@@ -349,6 +349,41 @@ object VedicMathValidator {
     }
 
     /**
+     * Verifies Calana-Kalanābhyām quadratic solution via derivative-discriminant relation:
+     * For Ax^2 + Bx + C = 0:
+     * First derivative f'(x) = 2Ax + B.
+     * Discriminant D = B^2 - 4AC.
+     * Roots r1 and r2 satisfy 2A*r1 + B = +sqrt(D) and 2A*r2 + B = -sqrt(D).
+     * Invariants: f'(r1)^2 == D, f'(r2)^2 == D, f(r1) == 0, f(r2) == 0.
+     */
+    fun verifyChalanaKalanabhyam(
+        a: Long,
+        b: Long,
+        c: Long,
+        claimedD: Long,
+        claimedSqrtD: Long,
+        expectedRoot1: Long,
+        expectedRoot2: Long
+    ): Boolean {
+        if (a == 0L) return false
+        val d = b * b - 4 * a * c
+        if (d != claimedD || d < 0L) return false
+        if (claimedSqrtD * claimedSqrtD != d) return false
+
+        val derivR1 = 2 * a * expectedRoot1 + b
+        val derivR2 = 2 * a * expectedRoot2 + b
+
+        val branchMatches = (derivR1 == claimedSqrtD && derivR2 == -claimedSqrtD) ||
+                (derivR1 == -claimedSqrtD && derivR2 == claimedSqrtD)
+        if (!branchMatches) return false
+
+        val eval1 = a * expectedRoot1 * expectedRoot1 + b * expectedRoot1 + c
+        val eval2 = a * expectedRoot2 * expectedRoot2 + b * expectedRoot2 + c
+
+        return eval1 == 0L && eval2 == 0L && (derivR1 * derivR1 == d) && (derivR2 * derivR2 == d)
+    }
+
+    /**
      * Validates a student's answer against the interactive handshake requirements.
      * Enforces that mathematical truth is solely determined by the authoritative [InteractiveHandshake.expectedAnswer].
      * Fail-closed invariant: UNKNOWN / MISSING / BLANK EXPECTED ANSWER = FAILURE.

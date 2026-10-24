@@ -27,9 +27,17 @@ class ChalanaKalanabhyamGenerator(
         return convertToSutraProblem(problem)
     }
 
-    override fun generateSpecificProblem(operand: Long): SutraProblem {
-        val problem = buildValidProblem(1, -5, 6, DifficultyTier.TIER_1_EASY)
+    /**
+     * Generates the canonical tutorial problem (x² - 8x + 7 = 0)
+     * used in the World 16 guided demonstration.
+     */
+    fun generateCanonicalTutorialProblem(): SutraProblem {
+        val problem = buildValidProblem(1, -8, 7, DifficultyTier.TIER_1_EASY)
         return convertToSutraProblem(problem)
+    }
+
+    override fun generateSpecificProblem(operand: Long): SutraProblem {
+        return generateCanonicalTutorialProblem()
     }
 
     override fun generateProblemSet(count: Int, difficultyTier: DifficultyTier): List<SutraProblem> {
