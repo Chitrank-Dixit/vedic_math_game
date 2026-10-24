@@ -840,27 +840,27 @@
     ]
   },
   {
-    "sutra_id": "chalana_kalanabhyam",
-    "sutra_name": "Calana-Kalanābhyām",
-    "english_meaning": "Differential Calculus / Movement and Measure",
+    "sutra_id": "shunyam_samyasamuccaye",
+    "sutra_name": "Śūnyaṁ Sāmyasamuccaye",
+    "english_meaning": "When the Collection is the Same, it is Zero",
     "world_number": 9,
     "dialogue_nodes": [
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "Finding the vertex turning point of 2x² - 8x + 5 usually takes full derivative formulas!",
+        "text": "Guru-ji, expanding 7(x + 1) = 8(x + 1) gives 7x + 7 = 8x + 8. Moving terms across the equals sign feels tedious when both sides share the exact same factor (x + 1)!",
         "rive_state": {
           "character": "SHISHYA",
-          "animation": "shishya_puzzled",
+          "animation": "shishya_curious",
           "emotion": "thinking",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "f(x) = 2x² - 8x + 5",
-          "highlight_tokens": ["2x² - 8x"]
+          "expression": "7(x + 1) = 8(x + 1)",
+          "highlight_tokens": ["7(x + 1)", "8(x + 1)"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Finding the vertex turning point of quadratics usually takes full formulas!</speak>",
+          "ssml_text": "<speak><prosody pitch='+2st'>Guru-ji, expanding 7 times x plus 1 equals 8 times x plus 1 feels tedious when both sides share the exact same factor!</prosody></speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -872,7 +872,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Apply Calana-Kalanābhyām! Differentiate mentally: 2(2x) - 8 = 0 $\\implies$ 4x = 8.",
+        "text": "Spot the common factor! Invoke Śūnyaṁ Sāmyasamuccaye — 'When the Collection is the Same, it is Zero'! When a shared factor appears on both sides with unequal multipliers, that common expression must vanish to zero!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -880,11 +880,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "f'(x) = 4x - 8 = 0",
-          "highlight_tokens": ["4x - 8 = 0"]
+          "expression": "(k1 - k2) · (ax + b) = 0  ⟹  ax + b = 0",
+          "highlight_tokens": ["ax + b = 0"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Apply the differential sutra! 4x minus 8 equals 0!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Spot the common factor! Invoke Shunyam Samyasamuccaye — When the Collection is the Same, it is Zero! When a shared factor appears on both sides with unequal multipliers, that common expression must vanish to zero.</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -895,20 +895,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "4x = 8 $\\implies$ x = 2! That gives the critical point in two seconds!",
+        "speaker": "GURU",
+        "text": "Subtract both sides: (7 - 8)(x + 1) = 0, giving -1(x + 1) = 0! Since -1 cannot be zero, the common factor must be zero: x + 1 = 0! Subtracting 1 yields x = -1 instantly, without expanding any brackets!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
-          "emotion": "surprised",
+          "character": "GURU",
+          "animation": "guru_explain",
+          "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x(turning) = 2",
-          "highlight_tokens": ["2"]
+          "expression": "-1(x + 1) = 0  ⟹  x + 1 = 0  ⟹  x = -1",
+          "highlight_tokens": ["x + 1 = 0", "-1"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>4x equals 8, so x is 2! That gives the critical point in two seconds!</speak>",
+          "ssml_text": "<speak>Subtracting both sides gives minus 1 times x plus 1 equals 0. Since minus 1 cannot be zero, x plus 1 must be zero, giving x equals minus 1 instantly!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -920,7 +920,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "Solve for the turning point x: 4x = 8. Tap the root!",
+        "text": "Now test your understanding, Shishya! In 7(x + 1) = 8(x + 1), since 7 ≠ 8, the common factor must equal zero: x + 1 = 0. Solve for x!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -928,18 +928,18 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x = [ ? ]",
-          "highlight_tokens": ["?"]
+          "expression": "x + 1 = 0 ⟹ x = [ ? ]",
+          "highlight_tokens": ["x + 1 = 0", "?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Solve for the turning point x: 4x equals 8. Tap the root!</speak>",
+          "ssml_text": "<speak>Now test your understanding, Shishya! Since 7 does not equal 8, the common factor must equal zero: x plus 1 equals 0. Solve for x!</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_2",
-          "prompt_text": "Tap 2 for x = 2!",
-          "expected_answer": "2"
+          "target_element_id": "numpad_key_neg1",
+          "prompt_text": "Solve for x: x + 1 = 0. Tap the value of x.",
+          "expected_answer": "-1"
         }
       }
     ]
@@ -1365,115 +1365,10 @@
     ]
   },
   {
-    "sutra_id": "shunyam_samyasamuccaye",
-    "sutra_name": "Śūnyaṁ Sāmyasamuccaye",
-    "english_meaning": "When the Collection is the Same, it is Zero",
-    "world_number": 14,
-    "dialogue_nodes": [
-      {
-        "node_id": 1,
-        "speaker": "SHISHYA",
-        "text": "Solving (x + 2) + (x + 3) = (x + 1) + (x + 4) looks like a multi-step equation.",
-        "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_curious",
-          "emotion": "thinking",
-          "is_speaking": true
-        },
-        "math_overlay": {
-          "expression": "(x + 2) + (x + 3) = (x + 1) + (x + 4)",
-          "highlight_tokens": ["LHS: 2 + 3 = 5", "RHS: 1 + 4 = 5"]
-        },
-        "audio_cues": {
-          "ssml_text": "<speak>Solving this equation looks like a multi-step algebraic expansion.</speak>",
-          "sfx": "sfx_question_curiosity"
-        },
-        "interactive_handshake": {
-          "requires_user_tap": false,
-          "target_element_id": null,
-          "prompt_text": null
-        }
-      },
-      {
-        "node_id": 2,
-        "speaker": "GURU",
-        "text": "Inspect the sums: LHS constant sum is 2 + 3 = 5. RHS constant sum is 1 + 4 = 5. Both sums match!",
-        "rive_state": {
-          "character": "GURU",
-          "animation": "guru_explain",
-          "emotion": "happy",
-          "is_speaking": true
-        },
-        "math_overlay": {
-          "expression": "SL = 5, SR = 5 ⟹ Sums Match!",
-          "highlight_tokens": ["5"]
-        },
-        "audio_cues": {
-          "ssml_text": "<speak>Inspect the sums! Both LHS and RHS constant sums equal 5!</speak>",
-          "sfx": "sfx_sutra_reveal_chime"
-        },
-        "interactive_handshake": {
-          "requires_user_tap": false,
-          "target_element_id": null,
-          "prompt_text": null
-        }
-      },
-      {
-        "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "When the collection is the same, x equates directly to 0!",
-        "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
-          "emotion": "happy",
-          "is_speaking": true
-        },
-        "math_overlay": {
-          "expression": "x = 0",
-          "highlight_tokens": ["0"]
-        },
-        "audio_cues": {
-          "ssml_text": "<speak>When the collection is the same, x equates directly to 0!</speak>",
-          "sfx": "sfx_eureka_spark"
-        },
-        "interactive_handshake": {
-          "requires_user_tap": false,
-          "target_element_id": null,
-          "prompt_text": null
-        }
-      },
-      {
-        "node_id": 4,
-        "speaker": "GURU",
-        "text": "Immediate insight! Tap the zero key to confirm Śūnyaṁ!",
-        "rive_state": {
-          "character": "GURU",
-          "animation": "guru_bless",
-          "emotion": "happy",
-          "is_speaking": true
-        },
-        "math_overlay": {
-          "expression": "x = [ ? ]",
-          "highlight_tokens": ["?"]
-        },
-        "audio_cues": {
-          "ssml_text": "<speak>Immediate insight! Tap the zero key to confirm Shunyam!</speak>",
-          "sfx": "sfx_interactive_pulse"
-        },
-        "interactive_handshake": {
-          "requires_user_tap": true,
-          "target_element_id": "numpad_key_0",
-          "prompt_text": "Tap 0 to confirm x = 0!",
-          "expected_answer": "0"
-        }
-      }
-    ]
-  },
-  {
     "sutra_id": "gunitasamuccayah",
     "sutra_name": "Guṇitasamuccayaḥ",
     "english_meaning": "The Product of the Sum is the Sum of the Products",
-    "world_number": 15,
+    "world_number": 14,
     "dialogue_nodes": [
       {
         "node_id": 1,
@@ -1578,7 +1473,7 @@
     "sutra_id": "gunakasamuccayah",
     "sutra_name": "Guṇakasamuccayaḥ",
     "english_meaning": "The Factors of the Sum is the Sum of the Factors",
-    "world_number": 16,
+    "world_number": 15,
     "dialogue_nodes": [
       {
         "node_id": 1,
@@ -1675,6 +1570,111 @@
           "target_element_id": "numpad_key_9",
           "prompt_text": "Tap 9 to enter World 16 Arena!",
           "expected_answer": "9"
+        }
+      }
+    ]
+  },
+  {
+    "sutra_id": "chalana_kalanabhyam",
+    "sutra_name": "Calana-Kalanābhyām",
+    "english_meaning": "Differential Calculus / Movement and Measure",
+    "world_number": 16,
+    "dialogue_nodes": [
+      {
+        "node_id": 1,
+        "speaker": "SHISHYA",
+        "text": "Finding the vertex turning point of 2x² - 8x + 5 usually takes full derivative formulas!",
+        "rive_state": {
+          "character": "SHISHYA",
+          "animation": "shishya_puzzled",
+          "emotion": "thinking",
+          "is_speaking": true
+        },
+        "math_overlay": {
+          "expression": "f(x) = 2x² - 8x + 5",
+          "highlight_tokens": ["2x² - 8x"]
+        },
+        "audio_cues": {
+          "ssml_text": "<speak>Finding the vertex turning point of quadratics usually takes full formulas!</speak>",
+          "sfx": "sfx_question_curiosity"
+        },
+        "interactive_handshake": {
+          "requires_user_tap": false,
+          "target_element_id": null,
+          "prompt_text": null
+        }
+      },
+      {
+        "node_id": 2,
+        "speaker": "GURU",
+        "text": "Apply Calana-Kalanābhyām! Differentiate mentally: 2(2x) - 8 = 0 $\\implies$ 4x = 8.",
+        "rive_state": {
+          "character": "GURU",
+          "animation": "guru_explain",
+          "emotion": "happy",
+          "is_speaking": true
+        },
+        "math_overlay": {
+          "expression": "f'(x) = 4x - 8 = 0",
+          "highlight_tokens": ["4x - 8 = 0"]
+        },
+        "audio_cues": {
+          "ssml_text": "<speak>Apply the differential sutra! 4x minus 8 equals 0!</speak>",
+          "sfx": "sfx_sutra_reveal_chime"
+        },
+        "interactive_handshake": {
+          "requires_user_tap": false,
+          "target_element_id": null,
+          "prompt_text": null
+        }
+      },
+      {
+        "node_id": 3,
+        "speaker": "SHISHYA",
+        "text": "4x = 8 $\\implies$ x = 2! That gives the critical point in two seconds!",
+        "rive_state": {
+          "character": "SHISHYA",
+          "animation": "shishya_aha",
+          "emotion": "surprised",
+          "is_speaking": true
+        },
+        "math_overlay": {
+          "expression": "x(turning) = 2",
+          "highlight_tokens": ["2"]
+        },
+        "audio_cues": {
+          "ssml_text": "<speak>4x equals 8, so x is 2! That gives the critical point in two seconds!</speak>",
+          "sfx": "sfx_eureka_spark"
+        },
+        "interactive_handshake": {
+          "requires_user_tap": false,
+          "target_element_id": null,
+          "prompt_text": null
+        }
+      },
+      {
+        "node_id": 4,
+        "speaker": "GURU",
+        "text": "Solve for the turning point x: 4x = 8. Tap the root!",
+        "rive_state": {
+          "character": "GURU",
+          "animation": "guru_magic_fx",
+          "emotion": "happy",
+          "is_speaking": true
+        },
+        "math_overlay": {
+          "expression": "x = [ ? ]",
+          "highlight_tokens": ["?"]
+        },
+        "audio_cues": {
+          "ssml_text": "<speak>Solve for the turning point x: 4x equals 8. Tap the root!</speak>",
+          "sfx": "sfx_interactive_pulse"
+        },
+        "interactive_handshake": {
+          "requires_user_tap": true,
+          "target_element_id": "numpad_key_2",
+          "prompt_text": "Tap 2 for x = 2!",
+          "expected_answer": "2"
         }
       }
     ]

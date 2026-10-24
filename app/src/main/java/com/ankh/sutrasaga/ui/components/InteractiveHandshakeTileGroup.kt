@@ -183,6 +183,7 @@ fun InteractiveHandshakeTileGroup(
                                         "2" -> "✦ Splendid, Shishya! 👏 ✦\n4 + (−2) = 2 for the second quotient digit! Combined with remainder 4 + (−4) = 0, 144 ÷ 12 = 12! Synthetic division mastered!"
                                         "4" -> "✦ Splendid, Shishya! 👏 ✦\nSince x-ratio matches the constants (1/2), y = 0! Then 2x = 8 gives x = 4. Simultaneous equations solved in seconds!"
                                         "1" -> "✦ Splendid, Shishya! 👏 ✦\n22 ÷ 22 = 1, so x + y = 1! Combined with x − y = 3, adding gives 2x = 4 (x = 2, y = −1)! Simultaneous equations conquered!"
+                                        "-1" -> "✦ Splendid, Shishya! 👏 ✦\nx + 1 = 0 yields x = −1! Since 7 ≠ 8, the shared factor vanishes to zero. Shunyam Samyasamuccaye mastered!"
                                         else -> "✦ Excellent! You found it! 👏 ✦\nGreat job, my child! You understood the pattern beautifully."
                                     }
                                 } else {
@@ -195,6 +196,7 @@ fun InteractiveHandshakeTileGroup(
                                         "2" -> "Almost! Multiply the previous quotient digit by −2 and add: 4 + (1 × −2). Try again!"
                                         "4" -> "Almost! With y = 0, solve 2x = 8 by dividing 8 by 2. Try again!"
                                         "1" -> "Almost! Divide 22 by 22 to find the sum (x + y). Try again!"
+                                        "-1" -> "Almost! Solve x + 1 = 0 by subtracting 1 from both sides. Try again!"
                                         else -> "Almost! Give it another try."
                                     }
                                 }

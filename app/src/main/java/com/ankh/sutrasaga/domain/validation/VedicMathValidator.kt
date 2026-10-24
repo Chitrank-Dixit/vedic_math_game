@@ -168,6 +168,19 @@ object VedicMathValidator {
     }
 
     /**
+     * Verifies Shunyam Samyasamuccaye common factor solution (Family A):
+     * k1 * (a*x + b) = k2 * (a*x + b) with k1 != k2.
+     * Since k1 != k2, (a*x + b) must equal 0, so x = -b / a.
+     */
+    fun verifyShunyamCommonFactor(k1: Long, a: Long, b: Long, k2: Long, expectedX: Long): Boolean {
+        if (k1 == k2 || a == 0L) return false
+        if (a * expectedX + b != 0L) return false
+        val lhs = k1 * (a * expectedX + b)
+        val rhs = k2 * (a * expectedX + b)
+        return lhs == rhs && lhs == 0L
+    }
+
+    /**
      * Validates a student's answer against the interactive handshake requirements.
      * Enforces that mathematical truth is solely determined by the authoritative [InteractiveHandshake.expectedAnswer].
      * Fail-closed invariant: UNKNOWN / MISSING / BLANK EXPECTED ANSWER = FAILURE.
