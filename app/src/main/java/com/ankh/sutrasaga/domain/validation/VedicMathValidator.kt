@@ -56,6 +56,17 @@ object VedicMathValidator {
     }
 
     /**
+     * Verifies Yavadunam near-base squaring: (Base - d)² = (Base - 2d) * Base + d².
+     */
+    fun verifyYavadunamSquaring(n: Long, base: Long, expected: Long): Boolean {
+        val diff = kotlin.math.abs(base - n)
+        val lhs = if (n < base) n - diff else n + diff
+        val rhs = diff * diff
+        val computed = lhs * base + rhs
+        return computed == expected && (n * n) == expected
+    }
+
+    /**
      * Validates a student's answer against the interactive handshake requirements.
      * Enforces that mathematical truth is solely determined by the authoritative [InteractiveHandshake.expectedAnswer].
      * Fail-closed invariant: UNKNOWN / MISSING / BLANK EXPECTED ANSWER = FAILURE.

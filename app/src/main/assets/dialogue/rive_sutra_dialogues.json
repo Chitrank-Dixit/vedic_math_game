@@ -315,27 +315,27 @@
     ]
   },
   {
-    "sutra_id": "paravartya_yojayet",
-    "sutra_name": "Parāvartya Yojayet",
-    "english_meaning": "Transpose and Apply",
+    "sutra_id": "yavadunam",
+    "sutra_name": "Yāvadūnam",
+    "english_meaning": "By the Deficiency",
     "world_number": 4,
     "dialogue_nodes": [
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "Dividing polynomials like (x² + 7x + 12) ÷ (x + 3) seems like tedious algebra!",
+        "text": "Guru-ji, calculating 94² in my head sounds daunting without multiplying 94 × 94 on paper!",
         "rive_state": {
           "character": "SHISHYA",
-          "animation": "shishya_puzzled",
+          "animation": "shishya_curious",
           "emotion": "thinking",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(x² + 7x + 12) ÷ (x + 3) = ?",
-          "highlight_tokens": ["x² + 7x + 12", "x + 3"]
+          "expression": "94² = ?",
+          "highlight_tokens": ["94²"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Dividing polynomials like x squared plus 7x plus 12 divided by x plus 3 seems tedious!</speak>",
+          "ssml_text": "<speak><prosody pitch='+2st'>Guru-ji, how can we calculate 94 squared in our head without long multiplication?</prosody></speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -347,7 +347,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Transpose the divisor root: +3 becomes -3. Multiply and add down coefficients: 7 + (-3) = 4!",
+        "text": "Near a base like 100, invoke Yāvadūnam — 'By the Deficiency'! Lessen the number by its deficiency from 100 for the left part, then square the deficiency for the right part.",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -355,11 +355,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "Root: -3 ⟹ 1 | (7 - 3) = 4 | (12 - 12) = 0",
-          "highlight_tokens": ["-3", "4", "0"]
+          "expression": "94² = (94 − 6) | (6²)",
+          "highlight_tokens": ["94 − 6", "6²"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Transpose the divisor root: plus 3 becomes minus 3. Multiply and add down!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Near a base like 100, invoke Yavadunam — By the Deficiency! Lessen the number by its deficiency for the left part, then square the deficiency for the right part.</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -370,20 +370,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "The quotient is directly (x + 4) with zero remainder!",
+        "speaker": "GURU",
+        "text": "Observe: 94 is 6 below 100. Lessen 94 by 6 to get 88 on the left. Then square the deficiency: 6² = 36 on the right. Put them together: 8836!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
-          "emotion": "surprised",
+          "character": "GURU",
+          "animation": "guru_nod",
+          "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "Quotient = x + 4, Remainder = 0",
-          "highlight_tokens": ["x + 4"]
+          "expression": "94² = 88 | 36 = 8836",
+          "highlight_tokens": ["88", "36", "8836"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>The quotient is directly x plus 4 with zero remainder!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Observe: 94 is 6 below 100. Lessen 94 by 6 to get 88 on the left. Then square 6 to get 36 on the right. Put them together: 8836!</prosody></speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -395,7 +395,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "Transpose to solve 3x + 12 = 0: x = -12 ÷ 3. Tap the solution magnitude!",
+        "text": "Your turn, Shishya! For 97², the deficiency from 100 is 3. Apply Yāvadūnam to find the left part: what is 97 − 3?",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -403,18 +403,18 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "3x = -12 ⟹ x = -[ ? ]",
-          "highlight_tokens": ["?", "-4"]
+          "expression": "97 − 3 = [ ? ]",
+          "highlight_tokens": ["97 − 3", "?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Transpose to solve 3x plus 12 equals 0: tap the magnitude of x!</speak>",
+          "ssml_text": "<speak>Your turn, Shishya! For 97 squared, the deficiency from 100 is 3. What is 97 minus 3 for the left part?</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_4",
-          "prompt_text": "Tap 4 for magnitude |-4| = 4!",
-          "expected_answer": "4"
+          "target_element_id": "numpad_key_94",
+          "prompt_text": "What is 97 − 3? Enter the left part.",
+          "expected_answer": "94"
         }
       }
     ]
@@ -945,27 +945,27 @@
     ]
   },
   {
-    "sutra_id": "yavadunam",
-    "sutra_name": "Yāvadūnam",
-    "english_meaning": "By the Deficiency",
+    "sutra_id": "paravartya_yojayet",
+    "sutra_name": "Parāvartya Yojayet",
+    "english_meaning": "Transpose and Apply",
     "world_number": 10,
     "dialogue_nodes": [
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "Squaring near-base numbers like 94² in my head seems prone to errors.",
+        "text": "Dividing polynomials like (x² + 7x + 12) ÷ (x + 3) seems like tedious algebra!",
         "rive_state": {
           "character": "SHISHYA",
-          "animation": "shishya_curious",
+          "animation": "shishya_puzzled",
           "emotion": "thinking",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "94² = ?",
-          "highlight_tokens": ["94"]
+          "expression": "(x² + 7x + 12) ÷ (x + 3) = ?",
+          "highlight_tokens": ["x² + 7x + 12", "x + 3"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Squaring near-base numbers like 94 squared in my head seems difficult.</speak>",
+          "ssml_text": "<speak>Dividing polynomials like x squared plus 7x plus 12 divided by x plus 3 seems tedious!</speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -977,7 +977,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Deficiency from 100 is 6. Lessen by deficiency: 94 - 6 = 88. Square the deficiency: 6² = 36!",
+        "text": "Transpose the divisor root: +3 becomes -3. Multiply and add down coefficients: 7 + (-3) = 4!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -985,11 +985,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(94 - 6) | (6²) = 8836",
-          "highlight_tokens": ["94 - 6 = 88", "6² = 36"]
+          "expression": "Root: -3 ⟹ 1 | (7 - 3) = 4 | (12 - 12) = 0",
+          "highlight_tokens": ["-3", "4", "0"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Deficiency from 100 is 6. Lessen 94 by 6 to get 88, and square 6 to get 36!</speak>",
+          "ssml_text": "<speak>Transpose the divisor root: plus 3 becomes minus 3. Multiply and add down!</speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -1001,19 +1001,19 @@
       {
         "node_id": 3,
         "speaker": "SHISHYA",
-        "text": "88 and 36 combine into 8836 immediately!",
+        "text": "The quotient is directly (x + 4) with zero remainder!",
         "rive_state": {
           "character": "SHISHYA",
-          "animation": "shishya_celebrate",
-          "emotion": "happy",
+          "animation": "shishya_aha",
+          "emotion": "surprised",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "94² = 8836",
-          "highlight_tokens": ["8836"]
+          "expression": "Quotient = x + 4, Remainder = 0",
+          "highlight_tokens": ["x + 4"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>88 and 36 combine into 8836 immediately!</speak>",
+          "ssml_text": "<speak>The quotient is directly x plus 4 with zero remainder!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -1025,7 +1025,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "For 97² (deficiency 3): 97 - 3 = 94. What is 3²?",
+        "text": "Transpose to solve 3x + 12 = 0: x = -12 ÷ 3. Tap the solution magnitude!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -1033,18 +1033,18 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "97² = 94 | 0[ ? ] = 9409",
-          "highlight_tokens": ["?", "9409"]
+          "expression": "3x = -12 ⟹ x = -[ ? ]",
+          "highlight_tokens": ["?", "-4"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>For 97 squared with deficiency 3: 97 minus 3 is 94. What is 3 squared?</speak>",
+          "ssml_text": "<speak>Transpose to solve 3x plus 12 equals 0: tap the magnitude of x!</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_9",
-          "prompt_text": "Tap 9 for 3² = 09!",
-          "expected_answer": "9"
+          "target_element_id": "numpad_key_4",
+          "prompt_text": "Tap 4 for magnitude |-4| = 4!",
+          "expected_answer": "4"
         }
       }
     ]
