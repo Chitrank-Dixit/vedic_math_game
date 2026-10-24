@@ -1373,7 +1373,7 @@
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "How do I verify if (x + 2)(x + 3) = x² + 5x + 6 without recalculating every term?",
+        "text": "Guru-ji! When factoring polynomials like (x + 3)(x + 2) = x² + 5x + 6, how can I quickly verify my answer without expanding every single term by hand?",
         "rive_state": {
           "character": "SHISHYA",
           "animation": "shishya_curious",
@@ -1381,11 +1381,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(x + 2)(x + 3) ≟ x² + 5x + 6",
-          "highlight_tokens": ["(x+2)(x+3)", "x² + 5x + 6"]
+          "expression": "(x + 3)(x + 2) ≟ x² + 5x + 6",
+          "highlight_tokens": ["(x + 3)(x + 2)", "x² + 5x + 6"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>How do I verify polynomial factor expansions without recalculating every term?</speak>",
+          "ssml_text": "<speak>Guru-ji! How can I quickly verify polynomial factoring without expanding every single term by hand?</speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -1397,7 +1397,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Set x = 1! Factor sum product: (1+2)(1+3) = 3 × 4 = 12. Expansion sum: 1 + 5 + 6 = 12. They match!",
+        "text": "Invoke Guṇitasamuccayaḥ — 'The Product of the Sum is the Sum of the Products'! Evaluate at x = 1: the product of the factor coefficient sums must equal the sum of the polynomial's coefficients!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -1405,11 +1405,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "Sc(factors) = 3 × 4 = 12 = Sc(product) = 1 + 5 + 6",
-          "highlight_tokens": ["12"]
+          "expression": "Sc(Factors) = Sc(Product) at x = 1",
+          "highlight_tokens": ["Sc(Factors)", "Sc(Product)", "x = 1"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Set x equals 1! Both the factor sum product and expansion sum equal 12!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Invoke Gunitasamuccayah — The Product of the Sum is the Sum of the Products! Evaluate at x equals 1: the product of the factor sums must equal the sum of the product coefficients!</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -1420,20 +1420,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "12 equals 12 proves the expansion is 100% accurate in one check!",
+        "speaker": "GURU",
+        "text": "Watch (x + 3)(x + 2) = x² + 5x + 6: for factors, (1 + 3)(1 + 2) = 4 × 3 = 12. For the polynomial, 1 + 5 + 6 = 12. Because 12 = 12 and the term-by-term expansion matches, the factorization is validated!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
+          "character": "GURU",
+          "animation": "guru_explain",
           "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "12 = 12 ⟹ Verified Valid",
-          "highlight_tokens": ["Verified Valid"]
+          "expression": "Sc: 4 × 3 = 12  =  1 + 5 + 6",
+          "highlight_tokens": ["4 × 3 = 12", "1 + 5 + 6"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>12 equals 12 proves the expansion is completely accurate!</speak>",
+          "ssml_text": "<speak>Watch (x + 3)(x + 2): factor sums give 4 times 3 which is 12. The polynomial sum is 1 plus 5 plus 6, also 12! Both sums match 12, validating the factorization!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -1445,7 +1445,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "For (x + 1)(x + 2), what is the factor sum product at x = 1: (2 × 3)?",
+        "text": "Now test your understanding, Shishya! For (x + 3)(x + 2) at x = 1, what is the product of the factor coefficient sums: 4 × 3?",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -1453,18 +1453,18 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "Sc = 2 × 3 = [ ? ]",
-          "highlight_tokens": ["?"]
+          "expression": "Sc = 4 × 3 = [ ? ]",
+          "highlight_tokens": ["4 × 3", "?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>What is the factor sum product at x equals 1 for x plus 1 times x plus 2?</speak>",
+          "ssml_text": "<speak>Now test your understanding, Shishya! For x plus 3 times x plus 2 at x equals 1, what is 4 times 3?</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_6",
-          "prompt_text": "Tap 6 for 2 × 3 = 6!",
-          "expected_answer": "6"
+          "target_element_id": "numpad_key_12",
+          "prompt_text": "Calculate the product of factor sums: 4 × 3 = ?",
+          "expected_answer": "12"
         }
       }
     ]

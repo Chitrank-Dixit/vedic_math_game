@@ -31,6 +31,12 @@ class GunitasamuccayahGenerator(
         return convertToSutraProblem(gProblem)
     }
 
+    /**
+     * Generates the canonical tutorial problem ((x+3)(x+2) = x^2+5x+6)
+     * used in the World 14 guided demonstration.
+     */
+    fun generateCanonicalTutorialProblem(): SutraProblem = generateSpecificProblem(0L)
+
     override fun generateProblemSet(count: Int, difficultyTier: DifficultyTier): List<SutraProblem> {
         val list = mutableListOf<SutraProblem>()
         repeat(count) {

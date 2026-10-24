@@ -188,6 +188,7 @@ fun InteractiveHandshakeTileGroup(
                                         "60" -> "✦ Splendid, Shishya! 👏 ✦\n(58 + 62) ÷ 2 = 60! With deviation d = 2, 58 × 62 = 60² − 2² = 3600 − 4 = 3596! Vyaṣṭisamaṣṭiḥ mastered!"
                                         "6" -> "✦ Splendid, Shishya! 👏 ✦\n20 = (2 × 7) + 6, so the next remainder is 6! Tracking remainders reveals 0.(142857) with cycle length 6! Śeṣāṇyaṅkena Carameṇa mastered!"
                                         "11" -> "✦ Splendid, Shishya! 👏 ✦\n3 + (2 × 4) = 11! Resolving carry with 6 gives 716, and leading 1 gives 143 × 12 = 1716! Sopāntyadvayamantyam mastered!"
+                                        "12" -> "✦ Splendid, Shishya! 👏 ✦\n4 × 3 = 12! Both the factor sums (4 × 3) and polynomial sum (1 + 5 + 6) equal 12! Guṇitasamuccayaḥ mastered!"
                                         else -> "✦ Excellent! You found it! 👏 ✦\nGreat job, my child! You understood the pattern beautifully."
                                     }
                                 } else {
@@ -205,6 +206,7 @@ fun InteractiveHandshakeTileGroup(
                                         "60" -> "Almost! Find the central midpoint by calculating (58 + 62) ÷ 2. Try again!"
                                         "6" -> "Almost! Divide 20 by 7: 20 = (2 × 7) + remainder. Find the remainder. Try again!"
                                         "11" -> "Almost! Multiply the previous neighbor 4 by 2 (2 × 4 = 8) and add 3 (3 + 8). Try again!"
+                                        "12" -> "Almost! Multiply the sum of the first factor (1 + 3 = 4) by the second factor (1 + 2 = 3): 4 × 3. Try again!"
                                         else -> "Almost! Give it another try."
                                     }
                                 }

@@ -303,6 +303,30 @@ object VedicMathValidator {
     }
 
     /**
+     * Verifies Guṇitasamuccayaḥ polynomial factorization consistency and exact expansion:
+     * Factors (a1*x + b1) and (a2*x + b2), claimed quadratic (claimedA2*x^2 + claimedA1*x + claimedA0).
+     * Verifies factor coefficient sum product, claimed polynomial sum, and exact term-by-term match.
+     */
+    fun verifyGunitasamuccayah(
+        a1: Long, b1: Long,
+        a2: Long, b2: Long,
+        claimedA2: Long, claimedA1: Long, claimedA0: Long
+    ): Boolean {
+        val scF1 = a1 + b1
+        val scF2 = a2 + b2
+        val expectedProductSum = scF1 * scF2
+        val actualProductSum = claimedA2 + claimedA1 + claimedA0
+
+        if (expectedProductSum != actualProductSum) return false
+
+        val exactA2 = a1 * a2
+        val exactA1 = a1 * b2 + b1 * a2
+        val exactA0 = b1 * b2
+
+        return exactA2 == claimedA2 && exactA1 == claimedA1 && exactA0 == claimedA0
+    }
+
+    /**
      * Validates a student's answer against the interactive handshake requirements.
      * Enforces that mathematical truth is solely determined by the authoritative [InteractiveHandshake.expectedAnswer].
      * Fail-closed invariant: UNKNOWN / MISSING / BLANK EXPECTED ANSWER = FAILURE.
