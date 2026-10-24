@@ -181,6 +181,36 @@ object VedicMathValidator {
     }
 
     /**
+     * Verifies Puranapuranabhyam completing the square:
+     * For A*x² + B*x + C = 0 with A != 0:
+     * Completion term T_comp = (B / (2*A))² = B² / (4*A²)
+     * And roots r satisfy A*r² + B*r + C = 0.
+     */
+    fun verifyPuranapuranabhyam(
+        a: Long,
+        b: Long,
+        c: Long,
+        expectedCompletionNum: Long,
+        expectedCompletionDen: Long = 1L,
+        root1: Long,
+        root2: Long
+    ): Boolean {
+        if (a == 0L || expectedCompletionDen <= 0L) return false
+        val disc = b * b - 4 * a * c
+        if (disc < 0L) return false
+
+        // Check completion term: (b / 2a)^2 = b^2 / (4a^2)
+        val compNum = b * b
+        val compDen = 4 * a * a
+        if (compNum * expectedCompletionDen != compDen * expectedCompletionNum) return false
+
+        // Check roots satisfy quadratic equation: a*r^2 + b*r + c == 0
+        val root1Valid = (a * root1 * root1 + b * root1 + c) == 0L
+        val root2Valid = (a * root2 * root2 + b * root2 + c) == 0L
+        return root1Valid && root2Valid
+    }
+
+    /**
      * Validates a student's answer against the interactive handshake requirements.
      * Enforces that mathematical truth is solely determined by the authoritative [InteractiveHandshake.expectedAnswer].
      * Fail-closed invariant: UNKNOWN / MISSING / BLANK EXPECTED ANSWER = FAILURE.

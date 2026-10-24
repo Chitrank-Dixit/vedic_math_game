@@ -953,7 +953,7 @@
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "Factoring x² + 6x - 16 by trial and error is tricky.",
+        "text": "Guru-ji! In x² + 6x + 8 = 0, trial-and-error factoring is slow when numbers get large. How does Vedic math solve quadratics directly?",
         "rive_state": {
           "character": "SHISHYA",
           "animation": "shishya_curious",
@@ -961,11 +961,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x² + 6x = 16",
-          "highlight_tokens": ["x² + 6x"]
+          "expression": "x² + 6x + 8 = 0",
+          "highlight_tokens": ["x² + 6x + 8"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Factoring quadratic expressions by trial and error is tricky.</speak>",
+          "ssml_text": "<speak>Guru-ji! In x squared plus 6x plus 8 equals 0, trial and error factoring is slow. How do we solve quadratics directly?</speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -977,7 +977,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Complete the square! Half of 6 is 3, and 3² is 9. Add 9 to both sides: (x + 3)² = 25!",
+        "text": "Invoke Pūraṇāpūraṇābhyām — By Completion or Non-Completion! Move the constant to the right: x² + 6x = -8. Now complete the imperfect square on the left into a perfect square!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -985,11 +985,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(x + 3)² = 16 + 9 = 25",
-          "highlight_tokens": ["(x + 3)²", "25"]
+          "expression": "x² + 6x = -8 ⟹ Complete the Square",
+          "highlight_tokens": ["x² + 6x = -8", "Complete the Square"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Complete the square! Add 9 to both sides: x plus 3 squared equals 25!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Invoke Puranapuranabhyam — By Completion or Non-Completion! Move constant 8 to the right: x squared plus 6x equals minus 8. Now complete the imperfect square on the left into a perfect square!</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -1000,20 +1000,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "Taking the square root gives x + 3 = 5 $\\implies$ x = 2!",
+        "speaker": "GURU",
+        "text": "To complete x² + 6x, take half of the x-coefficient: 6 ÷ 2 = 3, and square it: 3² = 9! Add 9 to both sides: x² + 6x + 9 = -8 + 9 ⟹ (x + 3)² = 1! Taking square roots yields x + 3 = ±1, giving roots x = -2 or x = -4!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
-          "emotion": "surprised",
+          "character": "GURU",
+          "animation": "guru_explain",
+          "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x + 3 = 5 ⟹ x = 2",
-          "highlight_tokens": ["2"]
+          "expression": "(x + 3)² = -8 + 9 = 1 ⟹ x = -2, -4",
+          "highlight_tokens": ["(x + 3)² = 1", "-2", "-4"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Taking the square root gives x plus 3 equals 5, so x is 2!</speak>",
+          "ssml_text": "<speak>Take half of 6, which is 3, and square it: 3 squared is 9! Adding 9 to both sides yields x plus 3 squared equals 1, giving roots minus 2 and minus 4!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -1025,7 +1025,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "What is the square root of 25? Tap the answer!",
+        "text": "Now test your understanding, Shishya! In x² + 6x = -8, what completion term must you add to both sides to complete (x + 3)²? Calculate (6 ÷ 2)²!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -1033,18 +1033,18 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "√25 = [ ? ]",
+          "expression": "T_comp = (6 / 2)² = 3² = [ ? ]",
           "highlight_tokens": ["?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>What is the square root of 25? Tap the answer!</speak>",
+          "ssml_text": "<speak>Now test your understanding, Shishya! To complete the square for x squared plus 6x, calculate 6 divided by 2 quantity squared!</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_5",
-          "prompt_text": "Tap 5 for √25 = 5!",
-          "expected_answer": "5"
+          "target_element_id": "numpad_key_9",
+          "prompt_text": "Calculate (6 / 2)² to find the completion term.",
+          "expected_answer": "9"
         }
       }
     ]

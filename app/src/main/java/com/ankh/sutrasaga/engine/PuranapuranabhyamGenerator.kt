@@ -32,6 +32,12 @@ class PuranapuranabhyamGenerator(
         return convertToSutraProblem(pProblem)
     }
 
+    /**
+     * Generates the canonical tutorial problem (x² + 6x + 8 = 0 -> roots -2, -4)
+     * used in the World 10 guided demonstration.
+     */
+    fun generateCanonicalTutorialProblem(): SutraProblem = generateSpecificProblem(0L)
+
     override fun generateProblemSet(count: Int, difficultyTier: DifficultyTier): List<SutraProblem> {
         val list = mutableListOf<SutraProblem>()
         repeat(count) {
