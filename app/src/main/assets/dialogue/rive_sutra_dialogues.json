@@ -630,27 +630,27 @@
     ]
   },
   {
-    "sutra_id": "sankalana_vyavakalanabhyam",
-    "sutra_name": "Saṅkalana-Vyavakalanābhyām",
-    "english_meaning": "By Addition and by Subtraction",
+    "sutra_id": "anurupye_shunyamanyat",
+    "sutra_name": "Ānurūpye Śūnyamanyat",
+    "english_meaning": "If One is in Ratio, the Other is Zero",
     "world_number": 7,
     "dialogue_nodes": [
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "For 45x - 23y = 113 and 23x - 45y = 91, large coefficients make substitution difficult.",
+        "text": "Guru-ji, solving systems like 3x + 2y = 12 and 6x + 5y = 24 with elimination takes so many algebraic steps!",
         "rive_state": {
           "character": "SHISHYA",
-          "animation": "shishya_puzzled",
+          "animation": "shishya_curious",
           "emotion": "thinking",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "45x - 23y = 113,  23x - 45y = 91",
-          "highlight_tokens": ["45x", "-23y"]
+          "expression": "3x + 2y = 12  &  6x + 5y = 24",
+          "highlight_tokens": ["3x + 2y = 12", "6x + 5y = 24"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>For cross-symmetric equations, large coefficients make substitution difficult.</speak>",
+          "ssml_text": "<speak><prosody pitch='+2st'>Guru-ji, solving simultaneous equations with elimination takes so many algebraic steps!</prosody></speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -662,7 +662,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Add them: 68x - 68y = 204 $\\implies$ x - y = 3. Subtract them: 22x + 22y = 22 $\\implies$ x + y = 1!",
+        "text": "Spot the symmetry! Invoke Ānurūpye Śūnyamanyat — 'If One is in Ratio, the Other is Zero'! If the ratio of x-coefficients matches the constant ratio, the other variable y vanishes to zero!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -670,11 +670,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "Add: x - y = 3,  Sub: x + y = 1",
-          "highlight_tokens": ["x - y = 3", "x + y = 1"]
+          "expression": "Ratio x = 3/6 = 1/2, Ratio C = 12/24 = 1/2 ⟹ y = 0",
+          "highlight_tokens": ["3/6 = 1/2", "12/24 = 1/2", "y = 0"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Add them to get x minus y equals 3! Subtract them to get x plus y equals 1!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Spot the symmetry! Invoke Anurupye Shunyamanyat — If One is in Ratio, the Other is Zero! When the x-ratio matches the constant ratio, y vanishes directly to zero.</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -685,20 +685,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "Adding (x - y = 3) and (x + y = 1) gives 2x = 4 $\\implies$ x = 2, y = -1!",
+        "speaker": "GURU",
+        "text": "Look closely: 3/6 = 12/24 = 1/2, so y = 0 immediately! Substitute y = 0 into 3x + 2(0) = 12: 3x = 12, so x = 4! The solution is x = 4, y = 0 without any elimination!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
+          "character": "GURU",
+          "animation": "guru_explain",
           "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "2x = 4 ⟹ x = 2, y = -1",
-          "highlight_tokens": ["2", "-1"]
+          "expression": "3x = 12 ⟹ x = 4, y = 0",
+          "highlight_tokens": ["4", "0"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Adding both reduced equations gives 2x equals 4, so x is 2 and y is minus 1!</speak>",
+          "ssml_text": "<speak>Look closely: 3 over 6 equals 12 over 24, so y is zero immediately! Then 3x equals 12, giving x equals 4 in one step!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -710,7 +710,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "Tap the value of x (2x = 4) to cement the method!",
+        "text": "Now your turn, Shishya! In 2x + 3y = 8 and 4x + 7y = 16, the x-ratio (2/4) matches the constants (8/16), so y = 0. Solve for x: 2x = 8.",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -718,18 +718,18 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x = [ ? ]",
-          "highlight_tokens": ["?"]
+          "expression": "2x = 8 ⟹ x = [ ? ]",
+          "highlight_tokens": ["2x = 8", "?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Tap the value of x to cement the method!</speak>",
+          "ssml_text": "<speak>Now your turn, Shishya! The x-ratio matches the constants, so y is zero. Solve for x: 2x equals 8!</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_2",
-          "prompt_text": "Tap 2 for x = 2!",
-          "expected_answer": "2"
+          "target_element_id": "numpad_key_4",
+          "prompt_text": "Solve for x: 2x = 8. Tap the value of x.",
+          "expected_answer": "4"
         }
       }
     ]
@@ -945,15 +945,15 @@
     ]
   },
   {
-    "sutra_id": "anurupye_shunyamanyat",
-    "sutra_name": "Ānurūpye Śūnyamanyat",
-    "english_meaning": "If One is in Ratio, the Other is Zero",
+    "sutra_id": "sankalana_vyavakalanabhyam",
+    "sutra_name": "Saṅkalana-Vyavakalanābhyām",
+    "english_meaning": "By Addition and by Subtraction",
     "world_number": 10,
     "dialogue_nodes": [
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "For 2x + 3y = 6 and 4x + 6y = 12, elimination requires multiplying across!",
+        "text": "For 45x - 23y = 113 and 23x - 45y = 91, large coefficients make substitution difficult.",
         "rive_state": {
           "character": "SHISHYA",
           "animation": "shishya_puzzled",
@@ -961,11 +961,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "2x + 3y = 6,  4x + 9y = 12",
-          "highlight_tokens": ["2/4 = 6/12 = 1/2"]
+          "expression": "45x - 23y = 113,  23x - 45y = 91",
+          "highlight_tokens": ["45x", "-23y"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>For simultaneous equations, standard elimination takes multiple steps!</speak>",
+          "ssml_text": "<speak>For cross-symmetric equations, large coefficients make substitution difficult.</speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -977,7 +977,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Notice the x-coefficients (2:4 = 1:2) match the constant ratio (6:12 = 1:2). Therefore, y is 0!",
+        "text": "Add them: 68x - 68y = 204 $\\implies$ x - y = 3. Subtract them: 22x + 22y = 22 $\\implies$ x + y = 1!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -985,11 +985,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "Ratio x = Ratio Constant = 1/2 ⟹ y = 0",
-          "highlight_tokens": ["y = 0"]
+          "expression": "Add: x - y = 3,  Sub: x + y = 1",
+          "highlight_tokens": ["x - y = 3", "x + y = 1"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>The x-ratio matches the constant ratio! Therefore, y is directly zero!</speak>",
+          "ssml_text": "<speak>Add them to get x minus y equals 3! Subtract them to get x plus y equals 1!</speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -1001,19 +1001,19 @@
       {
         "node_id": 3,
         "speaker": "SHISHYA",
-        "text": "If y = 0, then 2x = 6, which makes x = 3 instantly!",
+        "text": "Adding (x - y = 3) and (x + y = 1) gives 2x = 4 $\\implies$ x = 2, y = -1!",
         "rive_state": {
           "character": "SHISHYA",
           "animation": "shishya_aha",
-          "emotion": "surprised",
+          "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "2x = 6 ⟹ x = 3, y = 0",
-          "highlight_tokens": ["3", "0"]
+          "expression": "2x = 4 ⟹ x = 2, y = -1",
+          "highlight_tokens": ["2", "-1"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>If y equals 0, then 2x equals 6, which makes x equals 3 instantly!</speak>",
+          "ssml_text": "<speak>Adding both reduced equations gives 2x equals 4, so x is 2 and y is minus 1!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -1025,7 +1025,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "Confirm the value of x when 2x = 6!",
+        "text": "Tap the value of x (2x = 4) to cement the method!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -1037,14 +1037,14 @@
           "highlight_tokens": ["?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Confirm the value of x when 2x equals 6!</speak>",
+          "ssml_text": "<speak>Tap the value of x to cement the method!</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_3",
-          "prompt_text": "Tap 3 to complete x = 3!",
-          "expected_answer": "3"
+          "target_element_id": "numpad_key_2",
+          "prompt_text": "Tap 2 for x = 2!",
+          "expected_answer": "2"
         }
       }
     ]

@@ -181,6 +181,7 @@ fun InteractiveHandshakeTileGroup(
                                         "94" -> "✦ Splendid, Shishya! 👏 ✦\n97 − 3 = 94 for the left part! Coupled with 3² = 09, 97² = 9409! Flawless precision!"
                                         "5" -> "✦ Splendid, Shishya! 👏 ✦\n(3 × 1) + (1 × 2) = 5 for the middle digit! Combined: 6 | 5 | 1 = 651! Universal multiplication unlocked!"
                                         "2" -> "✦ Splendid, Shishya! 👏 ✦\n4 + (−2) = 2 for the second quotient digit! Combined with remainder 4 + (−4) = 0, 144 ÷ 12 = 12! Synthetic division mastered!"
+                                        "4" -> "✦ Splendid, Shishya! 👏 ✦\nSince x-ratio matches the constants (1/2), y = 0! Then 2x = 8 gives x = 4. Simultaneous equations solved in seconds!"
                                         else -> "✦ Excellent! You found it! 👏 ✦\nGreat job, my child! You understood the pattern beautifully."
                                     }
                                 } else {
@@ -191,6 +192,7 @@ fun InteractiveHandshakeTileGroup(
                                         "94" -> "Almost! Remember: lessen the number by its deficiency from 100 (97 − 3). Try again!"
                                         "5" -> "Almost! Cross-multiply and sum: (3 × 1) + (1 × 2). Try again!"
                                         "2" -> "Almost! Multiply the previous quotient digit by −2 and add: 4 + (1 × −2). Try again!"
+                                        "4" -> "Almost! With y = 0, solve 2x = 8 by dividing 8 by 2. Try again!"
                                         else -> "Almost! Give it another try."
                                     }
                                 }

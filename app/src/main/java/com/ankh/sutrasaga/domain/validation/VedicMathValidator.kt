@@ -103,6 +103,37 @@ object VedicMathValidator {
     }
 
     /**
+     * Verifies Anurupye Shunyamanyat linear system solution:
+     * If a1/a2 == c1/c2, then y = 0 and x = c1/a1.
+     * If b1/b2 == c1/c2, then x = 0 and y = c1/b1.
+     */
+    fun verifyAnurupyeSystem(
+        a1: Long, b1: Long, c1: Long,
+        a2: Long, b2: Long, c2: Long,
+        expectedX: Long, expectedY: Long
+    ): Boolean {
+        val det = (a1 * b2) - (a2 * b1)
+        if (det == 0L) return false
+
+        val xRatioMatch = (a1 * c2 == a2 * c1) && a1 != 0L && a2 != 0L
+        val yRatioMatch = (b1 * c2 == b2 * c1) && b1 != 0L && b2 != 0L
+
+        if (xRatioMatch) {
+            if (expectedY != 0L) return false
+            if (a1 * expectedX != c1) return false
+        } else if (yRatioMatch) {
+            if (expectedX != 0L) return false
+            if (b1 * expectedY != c1) return false
+        } else {
+            return false
+        }
+
+        val eq1Valid = (a1 * expectedX + b1 * expectedY) == c1
+        val eq2Valid = (a2 * expectedX + b2 * expectedY) == c2
+        return eq1Valid && eq2Valid
+    }
+
+    /**
      * Validates a student's answer against the interactive handshake requirements.
      * Enforces that mathematical truth is solely determined by the authoritative [InteractiveHandshake.expectedAnswer].
      * Fail-closed invariant: UNKNOWN / MISSING / BLANK EXPECTED ANSWER = FAILURE.
