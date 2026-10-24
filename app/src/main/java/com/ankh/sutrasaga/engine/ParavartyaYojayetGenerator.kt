@@ -37,6 +37,11 @@ class ParavartyaYojayetGenerator(
         return convertToSutraProblem(pProblem)
     }
 
+    /**
+     * Generates the canonical tutorial problem (1225 ÷ 12 = 102 R 1) used in the World 6 guided demonstration.
+     */
+    fun generateCanonicalTutorialProblem(): SutraProblem = generateSpecificProblem(1225L)
+
     override fun generateProblemSet(count: Int, difficultyTier: DifficultyTier): List<SutraProblem> {
         val set = mutableSetOf<Pair<Long, Long>>()
         val maxAttempts = count * 10

@@ -525,27 +525,27 @@
     ]
   },
   {
-    "sutra_id": "anurupye_shunyamanyat",
-    "sutra_name": "Ānurūpye Śūnyamanyat",
-    "english_meaning": "If One is in Ratio, the Other is Zero",
+    "sutra_id": "paravartya_yojayet",
+    "sutra_name": "Parāvartya Yojayet",
+    "english_meaning": "Transpose and Apply",
     "world_number": 6,
     "dialogue_nodes": [
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "For 2x + 3y = 6 and 4x + 6y = 12, elimination requires multiplying across!",
+        "text": "Guru-ji, dividing numbers like 1225 ÷ 12 always forces me into tedious long division with guesses and subtractions!",
         "rive_state": {
           "character": "SHISHYA",
-          "animation": "shishya_puzzled",
+          "animation": "shishya_curious",
           "emotion": "thinking",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "2x + 3y = 6,  4x + 9y = 12",
-          "highlight_tokens": ["2/4 = 6/12 = 1/2"]
+          "expression": "1225 ÷ 12 = ?",
+          "highlight_tokens": ["1225 ÷ 12"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>For simultaneous equations, standard elimination takes multiple steps!</speak>",
+          "ssml_text": "<speak><prosody pitch='+2st'>Guru-ji, dividing numbers like 1225 by 12 always forces me into tedious long division!</prosody></speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -557,7 +557,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Notice the x-coefficients (2:4 = 1:2) match the constant ratio (6:12 = 1:2). Therefore, y is 0!",
+        "text": "Transform division into simple addition! Invoke Parāvartya Yojayet — 'Transpose and Apply'! For divisor 12 near base 10, transpose deviation +2 into −2. Multiply each quotient digit by −2 and add across columns!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -565,11 +565,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "Ratio x = Ratio Constant = 1/2 ⟹ y = 0",
-          "highlight_tokens": ["y = 0"]
+          "expression": "Divisor 12 (Base 10) ⟹ Transposed: −2",
+          "highlight_tokens": ["12", "Base 10", "−2"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>The x-ratio matches the constant ratio! Therefore, y is directly zero!</speak>",
+          "ssml_text": "<speak><prosody rate='90%'>Transform division into addition! Invoke Paravartya Yojayet — Transpose and Apply! Transpose plus 2 into minus 2, then multiply and add across columns.</prosody></speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -580,20 +580,20 @@
       },
       {
         "node_id": 3,
-        "speaker": "SHISHYA",
-        "text": "If y = 0, then 2x = 6, which makes x = 3 instantly!",
+        "speaker": "GURU",
+        "text": "Watch 1225 ÷ 12: split 122 | 5. Drop 1 (1×(−2) = −2). Next: 2 + (−2) = 0 (0×(−2) = 0). Next: 2 + 0 = 2 (2×(−2) = −4). Remainder: 5 + (−4) = 1. Quotient is 102, Remainder 1!",
         "rive_state": {
-          "character": "SHISHYA",
-          "animation": "shishya_aha",
-          "emotion": "surprised",
+          "character": "GURU",
+          "animation": "guru_explain",
+          "emotion": "happy",
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "2x = 6 ⟹ x = 3, y = 0",
-          "highlight_tokens": ["3", "0"]
+          "expression": "1225 ÷ 12 = 102  R  1",
+          "highlight_tokens": ["102", "1"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>If y equals 0, then 2x equals 6, which makes x equals 3 instantly!</speak>",
+          "ssml_text": "<speak>Watch 1225 divided by 12: drop 1, add down to get 0, then 2. The remainder is 5 plus minus 4, which is 1! Quotient is 102, remainder 1!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -605,7 +605,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "Confirm the value of x when 2x = 6!",
+        "text": "Your turn, Shishya! For 144 ÷ 12, drop 1 as the first quotient digit. What is the next quotient digit: 4 + (1 × −2)?",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -613,18 +613,18 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "x = [ ? ]",
-          "highlight_tokens": ["?"]
+          "expression": "4 + (1 × −2) = [ ? ]",
+          "highlight_tokens": ["4 + (1 × −2)", "?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Confirm the value of x when 2x equals 6!</speak>",
+          "ssml_text": "<speak>Your turn, Shishya! For 144 divided by 12, drop 1 as the first quotient digit. What is 4 plus 1 times minus 2?</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_3",
-          "prompt_text": "Tap 3 to complete x = 3!",
-          "expected_answer": "3"
+          "target_element_id": "numpad_key_2",
+          "prompt_text": "Calculate the next quotient digit: 4 + (1 × −2) = ?",
+          "expected_answer": "2"
         }
       }
     ]
@@ -945,15 +945,15 @@
     ]
   },
   {
-    "sutra_id": "paravartya_yojayet",
-    "sutra_name": "Parāvartya Yojayet",
-    "english_meaning": "Transpose and Apply",
+    "sutra_id": "anurupye_shunyamanyat",
+    "sutra_name": "Ānurūpye Śūnyamanyat",
+    "english_meaning": "If One is in Ratio, the Other is Zero",
     "world_number": 10,
     "dialogue_nodes": [
       {
         "node_id": 1,
         "speaker": "SHISHYA",
-        "text": "Dividing polynomials like (x² + 7x + 12) ÷ (x + 3) seems like tedious algebra!",
+        "text": "For 2x + 3y = 6 and 4x + 6y = 12, elimination requires multiplying across!",
         "rive_state": {
           "character": "SHISHYA",
           "animation": "shishya_puzzled",
@@ -961,11 +961,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "(x² + 7x + 12) ÷ (x + 3) = ?",
-          "highlight_tokens": ["x² + 7x + 12", "x + 3"]
+          "expression": "2x + 3y = 6,  4x + 9y = 12",
+          "highlight_tokens": ["2/4 = 6/12 = 1/2"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Dividing polynomials like x squared plus 7x plus 12 divided by x plus 3 seems tedious!</speak>",
+          "ssml_text": "<speak>For simultaneous equations, standard elimination takes multiple steps!</speak>",
           "sfx": "sfx_question_curiosity"
         },
         "interactive_handshake": {
@@ -977,7 +977,7 @@
       {
         "node_id": 2,
         "speaker": "GURU",
-        "text": "Transpose the divisor root: +3 becomes -3. Multiply and add down coefficients: 7 + (-3) = 4!",
+        "text": "Notice the x-coefficients (2:4 = 1:2) match the constant ratio (6:12 = 1:2). Therefore, y is 0!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_explain",
@@ -985,11 +985,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "Root: -3 ⟹ 1 | (7 - 3) = 4 | (12 - 12) = 0",
-          "highlight_tokens": ["-3", "4", "0"]
+          "expression": "Ratio x = Ratio Constant = 1/2 ⟹ y = 0",
+          "highlight_tokens": ["y = 0"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Transpose the divisor root: plus 3 becomes minus 3. Multiply and add down!</speak>",
+          "ssml_text": "<speak>The x-ratio matches the constant ratio! Therefore, y is directly zero!</speak>",
           "sfx": "sfx_sutra_reveal_chime"
         },
         "interactive_handshake": {
@@ -1001,7 +1001,7 @@
       {
         "node_id": 3,
         "speaker": "SHISHYA",
-        "text": "The quotient is directly (x + 4) with zero remainder!",
+        "text": "If y = 0, then 2x = 6, which makes x = 3 instantly!",
         "rive_state": {
           "character": "SHISHYA",
           "animation": "shishya_aha",
@@ -1009,11 +1009,11 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "Quotient = x + 4, Remainder = 0",
-          "highlight_tokens": ["x + 4"]
+          "expression": "2x = 6 ⟹ x = 3, y = 0",
+          "highlight_tokens": ["3", "0"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>The quotient is directly x plus 4 with zero remainder!</speak>",
+          "ssml_text": "<speak>If y equals 0, then 2x equals 6, which makes x equals 3 instantly!</speak>",
           "sfx": "sfx_eureka_spark"
         },
         "interactive_handshake": {
@@ -1025,7 +1025,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "Transpose to solve 3x + 12 = 0: x = -12 ÷ 3. Tap the solution magnitude!",
+        "text": "Confirm the value of x when 2x = 6!",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -1033,18 +1033,18 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "3x = -12 ⟹ x = -[ ? ]",
-          "highlight_tokens": ["?", "-4"]
+          "expression": "x = [ ? ]",
+          "highlight_tokens": ["?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Transpose to solve 3x plus 12 equals 0: tap the magnitude of x!</speak>",
+          "ssml_text": "<speak>Confirm the value of x when 2x equals 6!</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
-          "target_element_id": "numpad_key_4",
-          "prompt_text": "Tap 4 for magnitude |-4| = 4!",
-          "expected_answer": "4"
+          "target_element_id": "numpad_key_3",
+          "prompt_text": "Tap 3 to complete x = 3!",
+          "expected_answer": "3"
         }
       }
     ]

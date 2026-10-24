@@ -93,6 +93,16 @@ object VedicMathValidator {
     }
 
     /**
+     * Verifies Paravartya Yojayet division: Dividend = Divisor * Quotient + Remainder,
+     * where 0 <= Remainder < Divisor.
+     */
+    fun verifyParavartyaDivision(dividend: Long, divisor: Long, expectedQuotient: Long, expectedRemainder: Long): Boolean {
+        if (divisor <= 0L || expectedRemainder < 0L || expectedRemainder >= divisor) return false
+        val computed = divisor * expectedQuotient + expectedRemainder
+        return computed == dividend && (dividend / divisor) == expectedQuotient && (dividend % divisor) == expectedRemainder
+    }
+
+    /**
      * Validates a student's answer against the interactive handshake requirements.
      * Enforces that mathematical truth is solely determined by the authoritative [InteractiveHandshake.expectedAnswer].
      * Fail-closed invariant: UNKNOWN / MISSING / BLANK EXPECTED ANSWER = FAILURE.

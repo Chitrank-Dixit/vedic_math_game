@@ -180,6 +180,7 @@ fun InteractiveHandshakeTileGroup(
                                         "52" -> "✦ Splendid, Shishya! 👏 ✦\n53 − 1 = 52 for the left part! Coupled with 47 (99 − 52), 53 × 99 = 5247! Lightning fast!"
                                         "94" -> "✦ Splendid, Shishya! 👏 ✦\n97 − 3 = 94 for the left part! Coupled with 3² = 09, 97² = 9409! Flawless precision!"
                                         "5" -> "✦ Splendid, Shishya! 👏 ✦\n(3 × 1) + (1 × 2) = 5 for the middle digit! Combined: 6 | 5 | 1 = 651! Universal multiplication unlocked!"
+                                        "2" -> "✦ Splendid, Shishya! 👏 ✦\n4 + (−2) = 2 for the second quotient digit! Combined with remainder 4 + (−4) = 0, 144 ÷ 12 = 12! Synthetic division mastered!"
                                         else -> "✦ Excellent! You found it! 👏 ✦\nGreat job, my child! You understood the pattern beautifully."
                                     }
                                 } else {
@@ -189,6 +190,7 @@ fun InteractiveHandshakeTileGroup(
                                         "52" -> "Almost! Remember: apply Ekanyunena by subtracting 1 from 53 (53 − 1). Try again!"
                                         "94" -> "Almost! Remember: lessen the number by its deficiency from 100 (97 − 3). Try again!"
                                         "5" -> "Almost! Cross-multiply and sum: (3 × 1) + (1 × 2). Try again!"
+                                        "2" -> "Almost! Multiply the previous quotient digit by −2 and add: 4 + (1 × −2). Try again!"
                                         else -> "Almost! Give it another try."
                                     }
                                 }
