@@ -21,6 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -38,10 +40,15 @@ fun WoodenMathSlate(
     highlightTokens: List<String> = emptyList(),
     modifier: Modifier = Modifier
 ) {
+    val cleanExpression = MathFormatter.format(expression)
+
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 8.dp),
+            .padding(horizontal = 8.dp)
+            .semantics(mergeDescendants = true) {
+                contentDescription = "Mathematical Slate: $cleanExpression"
+            },
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
             containerColor = VedicParchmentTokens.ChalkSlateWood
@@ -99,7 +106,6 @@ fun WoodenMathSlate(
                 Spacer(modifier = Modifier.height(10.dp))
 
                 // Formatted Chalk Math Expression
-                val cleanExpression = MathFormatter.format(expression)
                 Crossfade(
                     targetState = cleanExpression,
                     label = "WoodenSlateExpressionCrossfade"

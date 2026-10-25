@@ -159,7 +159,7 @@ object SutraLessonsRepository {
             englishTitle = "Vertically and Crosswise",
             shloka = "ऊर्ध्वतिर्यग्भ्यां गुणयेत्।",
             literalMeaning = "Vertically and crosswise multiply.",
-            shortcutRule = "Multiply vertical units -> Crosswise product sum + carry -> Vertical tens + carry.",
+            shortcutRule = "For 2-digit numbers: Multiply vertical units -> Crosswise product sum + carry -> Vertical tens + carry.",
             primaryEquation = "23 × 14",
             targetAnswer = "322",
             steps = listOf(

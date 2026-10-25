@@ -7,6 +7,26 @@ import com.ankh.sutrasaga.domain.models.GuruPose
 import com.ankh.sutrasaga.domain.models.GurukulDialogueBeat
 import com.ankh.sutrasaga.domain.models.GurukulScript
 
+/**
+ * LEGACY CONTENT STORE — NOT CONSUMED AT RUNTIME.
+ *
+ * This object is NOT the authoritative tutorial content source shown to learners.
+ *
+ * Authoritative runtime path (what learners actually see):
+ *   GameUiState.selectedScript
+ *     -> GurukulScriptsRepository.getScriptForModule(module)   [ui/screens/GurukulScriptsRepository.kt]
+ *     -> VedicAppNavigator (GURUKUL_TUTORIAL route)
+ *     -> GurukulSceneScreen(script, problem)
+ *
+ * This repository's getStoryScript() / getTutorialScript() are only invoked by
+ * StoryBeatScreen and TutorialScreen, which are composable definitions that are
+ * not wired into VedicAppNavigator and therefore never reach the learner.
+ *
+ * Kept for: (a) existing unit tests validating internal content correctness,
+ *            (b) future potential reuse or A/B testing.
+ *
+ * Do NOT add new learner-facing content here; add it to GurukulScriptsRepository instead.
+ */
 object GurukulContentRepository {
 
     fun getStoryScript(worldId: Int): GurukulScript {
@@ -16,9 +36,10 @@ object GurukulContentRepository {
                 title = "World 1: The Gurukul of Fives",
                 subtitle = "Master Purva's Sacred Grove",
                 beats = listOf(
+                    // Beat 1 — The Hook
                     GurukulDialogueBeat(
-                        guruText = "Welcome to my Gurukul! Here, numbers ending in 5 reveal their secrets.",
-                        discipleText = "Wait, we're doing math under a tree without battery power?!",
+                        guruText = "Welcome, Shishya! Today I will show you how to square any number ending in 5 — instantly, in your mind.",
+                        discipleText = "Can we really calculate 35 × 35 without writing anything down?",
                         isTeachingStep = false,
                         guruPose = GuruPose.BASE,
                         guruMouth = GuruMouth.TALKING,
@@ -26,9 +47,10 @@ object GurukulContentRepository {
                         discipleEyes = DiscipleEyes.CONFUSED,
                         slateStepIndex = 0
                     ),
+                    // Beat 2 — Sutra Reveal
                     GurukulDialogueBeat(
-                        guruText = "Observe! To square any number ending in 5, you don't do tedious long multiplication.",
-                        discipleText = "No long multiplication?! My floating-point processor is intrigued!",
+                        guruText = "With Ekadhikena Purvena! For 35²: take the 3, multiply by one more — that is 4. So 3 × 4 = 12. Then place 25 at the end.",
+                        discipleText = "3 × 4 = 12, and then... append 25?",
                         isTeachingStep = true,
                         guruPose = GuruPose.EXPLAINING,
                         guruMouth = GuruMouth.TALKING,
@@ -36,9 +58,10 @@ object GurukulContentRepository {
                         discipleEyes = DiscipleEyes.HAPPY,
                         slateStepIndex = 0
                     ),
+                    // Beat 3 — Demonstration + Transition
                     GurukulDialogueBeat(
-                        guruText = "I will show you Ekadhikena Purvena — 'By One More Than the Previous One'!",
-                        discipleText = "Show me the secret, Master!",
+                        guruText = "Exactly — 1225! That is 35². Now step forward to the quiz and show me your mastery!",
+                        discipleText = "I am ready, Guru-ji!",
                         isTeachingStep = false,
                         guruPose = GuruPose.TALKING,
                         guruMouth = GuruMouth.SMILE,
@@ -48,6 +71,7 @@ object GurukulContentRepository {
                     )
                 )
             )
+
             2 -> GurukulScript(
                 worldId = 2,
                 title = "World 2: Realm of Complements",
@@ -145,7 +169,7 @@ object GurukulContentRepository {
                         slateStepIndex = 0
                     ),
                     GurukulDialogueBeat(
-                        guruText = "Urdhva-Tiryagbhyam: 'Vertically and Crosswise'! Vertical right, crosswise middle, vertical left. Multiplies ANY numbers in 3 lightning steps!",
+                        guruText = "Urdhva-Tiryagbhyam: 'Vertically and Crosswise'! For two-digit numbers, three steps reveal the product: vertical right, crosswise middle, vertical left!",
                         discipleText = "Vertically and Crosswise! Let us conquer the final trial!",
                         isTeachingStep = true,
                         guruPose = GuruPose.EXPLAINING,
@@ -674,7 +698,7 @@ object GurukulContentRepository {
                     ),
                     GurukulDialogueBeat(
                         guruText = "Behold! 9 || 4 || 3 = 943! So 23 × 41 = 943!",
-                        discipleText = "943! Vertically and Crosswise conquers all!",
+                        discipleText = "943! The vertical-and-crosswise method solves two-digit products in three steps!",
                         isTeachingStep = false,
                         guruPose = GuruPose.TALKING,
                         guruMouth = GuruMouth.SMILE,

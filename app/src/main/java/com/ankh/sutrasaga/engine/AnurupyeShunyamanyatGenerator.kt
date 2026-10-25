@@ -31,6 +31,12 @@ class AnurupyeShunyamanyatGenerator(
         return convertToSutraProblem(pProblem)
     }
 
+    /**
+     * Generates the canonical tutorial problem (3x + 2y = 12 and 6x + 5y = 24 -> x = 4, y = 0)
+     * used in the World 7 guided demonstration.
+     */
+    fun generateCanonicalTutorialProblem(): SutraProblem = generateSpecificProblem(0L)
+
     override fun generateProblemSet(count: Int, difficultyTier: DifficultyTier): List<SutraProblem> {
         val list = mutableListOf<SutraProblem>()
         repeat(count) {

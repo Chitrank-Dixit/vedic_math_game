@@ -273,9 +273,11 @@ class RiveDialogueEngineTest {
         assertTrue("45² must be 2025", VedicMathValidator.verifySquaringEndingIn5(45, 2025))
         assertTrue("65² must be 4225", VedicMathValidator.verifySquaringEndingIn5(65, 4225))
 
-        assertTrue("96 × 92 must be 8832", VedicMathValidator.verifyNikhilamMultiplication(96, 92, 100))
-        assertTrue("98 × 97 must be 9506", VedicMathValidator.verifyNikhilamMultiplication(98, 97, 100))
-        assertTrue("99 × 96 must be 9504", VedicMathValidator.verifyNikhilamMultiplication(99, 96, 100))
+        assertTrue("96 × 92 must be 8832", VedicMathValidator.verifyNikhilamMultiplication(96, 92, 8832, 100))
+        assertTrue("98 × 97 must be 9506", VedicMathValidator.verifyNikhilamMultiplication(98, 97, 9506, 100))
+        assertTrue("99 × 96 must be 9504", VedicMathValidator.verifyNikhilamMultiplication(99, 96, 9504, 100))
+        assertFalse("96 × 92 must reject wrong answer 8830", VedicMathValidator.verifyNikhilamMultiplication(96, 92, 8830, 100))
+        assertTrue("Identity consistency check for 96 and 92", VedicMathValidator.verifyNikhilamIdentity(96, 92, 100))
 
         assertTrue("100 - 7 = 93", VedicMathValidator.verifyBaseSubtraction(100, 7, 93))
         assertTrue("1000 - 8 = 992", VedicMathValidator.verifyBaseSubtraction(1000, 8, 992))

@@ -49,6 +49,11 @@ class UrdhvaTiryagbhyamGenerator(
         return buildProblem(multiplicand, multiplier, tier)
     }
 
+    /**
+     * Generates the canonical tutorial problem (23 × 41 = 943) used in the World 5 guided demonstration.
+     */
+    fun generateCanonicalTutorialProblem(): SutraProblem = generateSpecificProblemPair(23L, 41L)
+
     override fun generateProblemSet(count: Int, difficultyTier: DifficultyTier): List<SutraProblem> {
         val pairs = mutableSetOf<Pair<Long, Long>>()
         val maxAttempts = count * 10

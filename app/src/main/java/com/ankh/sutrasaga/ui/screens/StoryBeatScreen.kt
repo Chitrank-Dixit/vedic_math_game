@@ -22,6 +22,15 @@ import com.ankh.sutrasaga.engine.VyashtisamashtihGenerator
 import com.ankh.sutrasaga.engine.YavadunamGenerator
 import com.ankh.sutrasaga.ui.components.GurukulSceneScreen
 
+/**
+ * LEGACY COMPOSABLE — NOT WIRED INTO PRODUCTION NAVIGATION.
+ *
+ * StoryBeatScreen consumes GurukulContentRepository (also legacy) and is NOT
+ * reachable via VedicAppNavigator. Learners never see this screen at runtime.
+ *
+ * Authoritative runtime tutorial composable: GurukulSceneScreen, invoked from
+ * VedicAppNavigator (GURUKUL_TUTORIAL route) with content from GurukulScriptsRepository.
+ */
 @Composable
 fun StoryBeatScreen(
     worldId: Int,
@@ -41,22 +50,33 @@ fun StoryBeatScreen(
     )
 }
 
+/**
+ * AUTHORITATIVE QUIZ PROBLEM FACTORY — shared utility used by tests and tutorial screens.
+ *
+ * Returns the canonical SutraProblem for a given worldId by delegating to each
+ * world's dedicated engine generator. This is the source of truth for expected
+ * quiz answers and decomposition steps used in tests such as WorldOnboardingProblemTest
+ * and TutorialRuntimeContentPathTest.
+ *
+ * Note: GurukulScriptsRepository.getProblemForModule() delegates to SutraLessonsRepository
+ * rather than this function. For tutorial-to-quiz cross-verification, compare both.
+ */
 internal fun canonicalOnboardingProblem(worldId: Int): SutraProblem = when (worldId) {
-    1 -> EkadhikenaPurvenaGenerator().generateSpecificProblem(65L)
-    2 -> NikhilamGenerator().generateSpecificProblem(37L)
-    3 -> EkanyunenaGenerator().generateSpecificProblem(47L)
-    4 -> YavadunamGenerator().generateSpecificProblem(94L)
-    5 -> UrdhvaTiryagbhyamGenerator().generateSpecificProblemPair(23L, 41L)
-    6 -> ParavartyaYojayetGenerator().generateSpecificProblem(1225L)
-    7 -> AnurupyeShunyamanyatGenerator().generateSpecificProblem(0L)
-    8 -> SankalanaVyavakalanabhyamGenerator().generateSpecificProblem(0L)
-    9 -> ShunyamSamyasamuccayeGenerator().generateSpecificProblem(0L)
-    10 -> PuranapuranabhyamGenerator().generateSpecificProblem(0L)
-    11 -> VyashtisamashtihGenerator().generateSpecificProblem(0L)
-    12 -> ShesanyankenaCharamenaGenerator().generateSpecificProblem(0L)
-    13 -> SopantyadvayamantyamGenerator().generateSpecificProblem(0L)
-    14 -> GunitasamuccayahGenerator().generateSpecificProblem(0L)
-    15 -> GunakasamuccayahGenerator().generateSpecificProblem(0L)
-    16 -> ChalanaKalanabhyamGenerator().generateSpecificProblem(0L)
+    1 -> EkadhikenaPurvenaGenerator().generateCanonicalTutorialProblem()
+    2 -> NikhilamGenerator().generateCanonicalTutorialProblem()
+    3 -> EkanyunenaGenerator().generateCanonicalTutorialProblem()
+    4 -> YavadunamGenerator().generateCanonicalTutorialProblem()
+    5 -> UrdhvaTiryagbhyamGenerator().generateCanonicalTutorialProblem()
+    6 -> ParavartyaYojayetGenerator().generateCanonicalTutorialProblem()
+    7 -> AnurupyeShunyamanyatGenerator().generateCanonicalTutorialProblem()
+    8 -> SankalanaVyavakalanabhyamGenerator().generateCanonicalTutorialProblem()
+    9 -> ShunyamSamyasamuccayeGenerator().generateCanonicalTutorialProblem()
+    10 -> PuranapuranabhyamGenerator().generateCanonicalTutorialProblem()
+    11 -> VyashtisamashtihGenerator().generateCanonicalTutorialProblem()
+    12 -> ShesanyankenaCharamenaGenerator().generateCanonicalTutorialProblem()
+    13 -> SopantyadvayamantyamGenerator().generateCanonicalTutorialProblem()
+    14 -> GunitasamuccayahGenerator().generateCanonicalTutorialProblem()
+    15 -> GunakasamuccayahGenerator().generateCanonicalTutorialProblem()
+    16 -> ChalanaKalanabhyamGenerator().generateCanonicalTutorialProblem()
     else -> EkadhikenaPurvenaGenerator().generateSpecificProblem(65L)
 }

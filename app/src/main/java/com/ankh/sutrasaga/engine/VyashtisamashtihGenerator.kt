@@ -31,6 +31,12 @@ class VyashtisamashtihGenerator(
         return convertToSutraProblem(vProblem)
     }
 
+    /**
+     * Generates the canonical tutorial problem (58 × 62 = 3596)
+     * used in the World 11 guided demonstration.
+     */
+    fun generateCanonicalTutorialProblem(): SutraProblem = generateSpecificProblem(0L)
+
     override fun generateProblemSet(count: Int, difficultyTier: DifficultyTier): List<SutraProblem> {
         val list = mutableListOf<SutraProblem>()
         repeat(count) {

@@ -5,6 +5,21 @@ import com.ankh.sutrasaga.domain.models.DialogueScript
 import com.ankh.sutrasaga.domain.models.Expression
 import com.ankh.sutrasaga.domain.models.Speaker
 
+/**
+ * LEGACY NARRATIVE PROTOTYPE — NOT CONSUMED AT RUNTIME.
+ *
+ * This object contains story-beat and tutorial scripts only for Worlds 1–3 and
+ * uses the now-superseded DialogueScript/DialoguePanel model.
+ *
+ * Authoritative runtime source: GurukulScriptsRepository (ui/screens/GurukulScriptsRepository.kt),
+ * which covers all 16 worlds using the GurukulScript/GurukulDialogueBeat model consumed
+ * by GurukulSceneScreen and VedicAppNavigator.
+ *
+ * Kept for: (a) SutraDialogueRepositoryTest internal integrity checks,
+ *            (b) historical reference.
+ *
+ * Do NOT use this repository for any new learner-facing content or UI routing.
+ */
 object SutraDialogueRepository {
 
     fun getStoryBeatScript(worldId: Int): DialogueScript {

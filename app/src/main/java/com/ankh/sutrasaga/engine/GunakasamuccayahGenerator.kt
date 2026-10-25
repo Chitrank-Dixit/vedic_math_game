@@ -33,6 +33,12 @@ class GunakasamuccayahGenerator(
         return convertToSutraProblem(gProblem)
     }
 
+    /**
+     * Generates the canonical tutorial problem (x² + 7x + 10 = (x+2)(x+5) = 0)
+     * used in the World 15 guided demonstration.
+     */
+    fun generateCanonicalTutorialProblem(): SutraProblem = generateSpecificProblem(0L)
+
     override fun generateProblemSet(count: Int, difficultyTier: DifficultyTier): List<SutraProblem> {
         val list = mutableListOf<SutraProblem>()
         repeat(count) {

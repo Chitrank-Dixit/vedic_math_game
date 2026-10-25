@@ -38,6 +38,12 @@ class ShunyamSamyasamuccayeGenerator(
         return convertToSutraProblem(pProblem)
     }
 
+    /**
+     * Generates the canonical tutorial problem (7(x + 1) = 8(x + 1) -> x = -1)
+     * used in the World 9 guided demonstration.
+     */
+    fun generateCanonicalTutorialProblem(): SutraProblem = generateSpecificProblem(0L)
+
     override fun generateProblemSet(count: Int, difficultyTier: DifficultyTier): List<SutraProblem> {
         val list = mutableListOf<SutraProblem>()
         repeat(count) {
