@@ -92,7 +92,7 @@
           "highlight_tokens": ["4", "4 + 1", "?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Your turn, Shishya! For 45 squared, apply the sutra to the prefix: what is 4 times open-parenthesis 4 plus 1 close-parenthesis?</speak>",
+          "ssml_text": "<speak>Your turn, Shishya! For 45 squared, apply the sutra to the prefix: what is 4 times 5?</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
@@ -1037,7 +1037,7 @@
           "highlight_tokens": ["?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Now test your understanding, Shishya! To complete the square for x squared plus 6x, calculate 6 divided by 2 quantity squared!</speak>",
+          "ssml_text": "<speak>Now test your understanding, Shishya! To complete the square for x squared plus 6x, take half of 6, which is 3, and square it: what is 3 squared?</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
@@ -1195,7 +1195,7 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "rₖ = (10 · rₖ₋₁) mod 7 ⟹ Remainder Chain",
+          "expression": "Next remainder: (10 × r) ÷ 7 ⟹ Remainder Chain",
           "highlight_tokens": ["Remainder Chain"]
         },
         "audio_cues": {
@@ -1235,7 +1235,7 @@
       {
         "node_id": 4,
         "speaker": "GURU",
-        "text": "Now test your understanding, Shishya! In step 3 with incoming remainder 2: 10 × 2 = 20. What is the new remainder: 20 mod 7?",
+        "text": "Now test your understanding, Shishya! In step 3 with incoming remainder 2: 10 × 2 = 20. What is the new remainder when 20 is divided by 7?",
         "rive_state": {
           "character": "GURU",
           "animation": "guru_magic_fx",
@@ -1243,17 +1243,17 @@
           "is_speaking": true
         },
         "math_overlay": {
-          "expression": "20 mod 7 = [ ? ]",
+          "expression": "20 ÷ 7 = 2 R [ ? ]",
           "highlight_tokens": ["?"]
         },
         "audio_cues": {
-          "ssml_text": "<speak>Now test your understanding, Shishya! In step 3, 10 times 2 is 20. What is the new remainder: 20 mod 7?</speak>",
+          "ssml_text": "<speak>Now test your understanding, Shishya! In step 3, 10 times 2 is 20. What is the remainder when 20 is divided by 7?</speak>",
           "sfx": "sfx_interactive_pulse"
         },
         "interactive_handshake": {
           "requires_user_tap": true,
           "target_element_id": "numpad_key_6",
-          "prompt_text": "Calculate the remainder: 20 mod 7.",
+          "prompt_text": "Find the remainder: 20 ÷ 7 = 2 with remainder ?",
           "expected_answer": "6"
         }
       }

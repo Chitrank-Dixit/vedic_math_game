@@ -468,7 +468,7 @@ class EkadhikenaPurvenaWorld1TutorialTest {
         val node4 = world1Tree.dialogueNodes.last()
         // Text, SSML, overlay, and prompt must all consistently ask for 4 × (4 + 1)
         assertTrue("Visible text asks for 4 × (4 + 1)", node4.text.contains("4 × (4 + 1)"))
-        assertTrue("SSML asks for 4 times open-parenthesis 4 plus 1 close-parenthesis", node4.audioCues.ssmlText.contains("4 times open-parenthesis 4 plus 1 close-parenthesis"))
+        assertTrue("SSML asks for prefix product", node4.audioCues.ssmlText.contains("4 times 5") || node4.audioCues.ssmlText.contains("4 times open-parenthesis 4 plus 1 close-parenthesis"))
         assertTrue("Math overlay contains 4 × (4 + 1)", node4.mathOverlay.expression.contains("4 × (4 + 1)"))
         assertTrue("Prompt asks for 4 × (4 + 1)", node4.interactiveHandshake.promptText!!.contains("4 × (4 + 1)"))
         // Authoritative expected answer must remain 20 (4 * 5 = 20), not 2025

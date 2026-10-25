@@ -33,6 +33,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -169,7 +173,15 @@ fun InteractiveHandshakeTileGroup(
                                 color = tileBorder,
                                 shape = RoundedCornerShape(12.dp)
                             )
-                            .clickable(enabled = isAnswerCorrect != true) {
+                            .semantics {
+                                role = Role.Button
+                                contentDescription = "Option $option"
+                            }
+                            .clickable(
+                                enabled = isAnswerCorrect != true,
+                                role = Role.Button,
+                                onClickLabel = "Select option $option"
+                            ) {
                                 selectedOption = option
                                 val success = onAnswerSelected(option)
                                 isAnswerCorrect = success
