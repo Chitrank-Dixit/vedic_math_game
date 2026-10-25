@@ -56,29 +56,50 @@ class VedicMathValidatorOverflowTest {
 
     @Test
     fun nikhilamMultiplication_canonicalAndBoundary_succeeds() {
-        assertTrue(VedicMathValidator.verifyNikhilamMultiplication(98L, 97L, 100L))
-        assertTrue(VedicMathValidator.verifyNikhilamMultiplication(996L, 994L, 1000L))
+        // Answer validation against independently computed products
+        assertTrue(VedicMathValidator.verifyNikhilamMultiplication(98L, 97L, 9506L, 100L))
+        assertTrue(VedicMathValidator.verifyNikhilamMultiplication(996L, 994L, 990024L, 1000L))
+
+        // Identity verification
+        assertTrue(VedicMathValidator.verifyNikhilamIdentity(98L, 97L, 100L))
+        assertTrue(VedicMathValidator.verifyNikhilamIdentity(996L, 994L, 1000L))
     }
 
     @Test
     fun nikhilamMultiplication_overflowGuards_failClosed() {
         // Multiplication overflow
         assertFalse(
-            "Operands near Long.MAX_VALUE must fail closed",
-            VedicMathValidator.verifyNikhilamMultiplication(Long.MAX_VALUE - 1, Long.MAX_VALUE - 2, 100L)
+            "Operands near Long.MAX_VALUE must fail closed in multiplication answer check",
+            VedicMathValidator.verifyNikhilamMultiplication(Long.MAX_VALUE - 1, Long.MAX_VALUE - 2, 100L, 100L)
+        )
+        assertFalse(
+            "Operands near Long.MAX_VALUE must fail closed in identity check",
+            VedicMathValidator.verifyNikhilamIdentity(Long.MAX_VALUE - 1, Long.MAX_VALUE - 2, 100L)
         )
         // Subtraction overflow
         assertFalse(
-            "Long.MIN_VALUE operand must fail closed",
-            VedicMathValidator.verifyNikhilamMultiplication(Long.MIN_VALUE, 97L, 100L)
+            "Long.MIN_VALUE operand must fail closed in multiplication answer check",
+            VedicMathValidator.verifyNikhilamMultiplication(Long.MIN_VALUE, 97L, 100L, 100L)
         )
         assertFalse(
-            "Zero base or negative base must fail",
-            VedicMathValidator.verifyNikhilamMultiplication(98L, 97L, 0L)
+            "Long.MIN_VALUE operand must fail closed in identity check",
+            VedicMathValidator.verifyNikhilamIdentity(Long.MIN_VALUE, 97L, 100L)
         )
         assertFalse(
-            "Zero operands must fail",
-            VedicMathValidator.verifyNikhilamMultiplication(0L, 97L, 100L)
+            "Zero base or negative base must fail in answer check",
+            VedicMathValidator.verifyNikhilamMultiplication(98L, 97L, 9506L, 0L)
+        )
+        assertFalse(
+            "Zero base or negative base must fail in identity check",
+            VedicMathValidator.verifyNikhilamIdentity(98L, 97L, 0L)
+        )
+        assertFalse(
+            "Zero operands must fail in answer check",
+            VedicMathValidator.verifyNikhilamMultiplication(0L, 97L, 0L, 100L)
+        )
+        assertFalse(
+            "Zero operands must fail in identity check",
+            VedicMathValidator.verifyNikhilamIdentity(0L, 97L, 100L)
         )
     }
 

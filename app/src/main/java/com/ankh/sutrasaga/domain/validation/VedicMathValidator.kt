@@ -25,6 +25,59 @@ data class Urdhva2x2Steps(
 )
 
 /**
+ * Mathematical breakdown of Nikhilam Navatashcaramam Dashatah near-base multiplication.
+ *
+ * Applicable for numbers close to a power-of-10 base (10, 100, 1000, ...).
+ * Mathematical formulation:
+ * For base B:
+ *   a = B + devA   (where devA = a - B)
+ *   b = B + devB   (where devB = b - B)
+ *
+ * Step 1: Deviations and Deficiencies:
+ *   devA = a - B (negative when a < B, positive when a > B)
+ *   devB = b - B
+ *   deficiencyA = B - a = -devA
+ *   deficiencyB = B - b = -devB
+ *
+ * Step 2: Cross-addition (Left Part):
+ *   crossLeft = a + devB == b + devA == a + b - B
+ *
+ * Step 3: Vertical product of deviations (Right Part):
+ *   rawRight = devA * devB
+ *
+ * Step 4: Normalization (Carry / Borrow):
+ *   - If rawRight >= base: carry = rawRight / base, adjustedRight = rawRight % base, adjustedLeft = crossLeft + carry.
+ *   - If rawRight < 0 (numbers on opposite sides of base):
+ *       borrow = (-rawRight + base - 1) / base
+ *       adjustedRight = rawRight + borrow * base
+ *       adjustedLeft = crossLeft - borrow
+ *   - Otherwise: carry = 0, borrow = 0, adjustedLeft = crossLeft, adjustedRight = rawRight.
+ *
+ * Step 5: Final Product:
+ *   finalProduct = adjustedLeft * base + adjustedRight == a * b
+ */
+data class NikhilamSteps(
+    val a: Long,
+    val b: Long,
+    val base: Long,
+    val devA: Long,
+    val devB: Long,
+    val crossLeft: Long,
+    val rawRight: Long,
+    val carry: Long,
+    val borrow: Long,
+    val adjustedLeft: Long,
+    val adjustedRight: Long,
+    val finalProduct: Long
+) {
+    /** Deficiency of a from base: base - a = -devA (positive when a < base). */
+    val deficiencyA: Long get() = -devA
+
+    /** Deficiency of b from base: base - b = -devB (positive when b < base). */
+    val deficiencyB: Long get() = -devB
+}
+
+/**
  * VedicMathValidator — Validates mathematical accuracy of demonstrated shortcuts
  * and verifies interactive student handshake answers.
  *
@@ -67,10 +120,159 @@ object VedicMathValidator {
     }
 
     /**
-     * Verifies Nikhilam base multiplication: (Base - d1)(Base - d2) = (Base - d1 - d2) * Base + (d1 * d2).
+     * Validates whether [base] is a canonical power-of-10 base (10, 100, 1000, 10000, ...).
+     * Non-powers of 10 (e.g. 50, 0, negative numbers) return false.
      */
-    fun verifyNikhilamMultiplication(a: Long, b: Long, base: Long = 100L): Boolean = safeCheck {
-        if (a <= 0L || b <= 0L || base <= 0L) return false
+    fun isValidNikhilamBase(base: Long): Boolean {
+        if (base < 10L) return false
+        var temp = base
+        while (temp % 10L == 0L) {
+            temp /= 10L
+        }
+        return temp == 1L
+    }
+
+    /**
+     * Computes the complete Nikhilam near-base multiplication decomposition for operands [a] and [b].
+     *
+     * Validates that:
+     * - Operands [a] and [b] are strictly positive (> 0).
+     * - [base] is a valid power-of-10 base (10, 100, 1000, ...).
+     * - Deviations, cross-addition, carry/borrow normalization, and product evaluate without overflow.
+     *
+     * Returns a valid [NikhilamSteps] instance, or null if inputs are invalid or arithmetic overflows.
+     */
+    fun calculateNikhilamSteps(a: Long, b: Long, base: Long = 100L): NikhilamSteps? {
+        if (a <= 0L || b <= 0L || !isValidNikhilamBase(base)) return null
+        return try {
+            val devA = Math.subtractExact(a, base)
+            val devB = Math.subtractExact(b, base)
+
+            val crossLeftA = Math.addExact(a, devB)
+            val crossLeftB = Math.addExact(b, devA)
+            if (crossLeftA != crossLeftB) return null
+
+            val crossLeft = crossLeftA
+            val rawRight = Math.multiplyExact(devA, devB)
+
+            var carry = 0L
+            var borrow = 0L
+            var adjLeft = crossLeft
+            var adjRight = rawRight
+
+            if (rawRight >= base) {
+                carry = rawRight / base
+                adjRight = rawRight % base
+                adjLeft = Math.addExact(crossLeft, carry)
+            } else if (rawRight < 0L) {
+                // When devA and devB have opposite signs (numbers on opposite sides of base),
+                // rawRight is negative. We borrow from the left side.
+                val negRight = Math.negateExact(rawRight)
+                val baseMinusOne = Math.subtractExact(base, 1L)
+                val numerator = Math.addExact(negRight, baseMinusOne)
+                borrow = numerator / base
+                val borrowScaled = Math.multiplyExact(borrow, base)
+                adjRight = Math.addExact(rawRight, borrowScaled)
+                adjLeft = Math.subtractExact(crossLeft, borrow)
+            }
+
+            val scaledLeft = Math.multiplyExact(adjLeft, base)
+            val finalProduct = Math.addExact(scaledLeft, adjRight)
+            val expectedProduct = Math.multiplyExact(a, b)
+
+            if (finalProduct != expectedProduct) return null
+
+            NikhilamSteps(
+                a = a,
+                b = b,
+                base = base,
+                devA = devA,
+                devB = devB,
+                crossLeft = crossLeft,
+                rawRight = rawRight,
+                carry = carry,
+                borrow = borrow,
+                adjustedLeft = adjLeft,
+                adjustedRight = adjRight,
+                finalProduct = finalProduct
+            )
+        } catch (_: ArithmeticException) {
+            null
+        }
+    }
+
+    /**
+     * Verifies Nikhilam base multiplication of [a] and [b] against an [expected] final product.
+     *
+     * Validates that:
+     * 1. Operands [a] and [b] are positive, and [expected] is positive.
+     * 2. [base] is a valid power-of-10 base (10, 100, 1000, ...).
+     * 3. The procedural Nikhilam near-base decomposition succeeds without overflow.
+     * 4. The procedurally computed product equals [expected].
+     * 5. An independent exact multiplication of [a] and [b] equals [expected].
+     *
+     * Fails closed on any mismatch, invalid base, negative/zero operand, or arithmetic overflow.
+     */
+    fun verifyNikhilamMultiplication(a: Long, b: Long, expected: Long, base: Long = 100L): Boolean = safeCheck {
+        if (expected <= 0L) return false
+        val steps = calculateNikhilamSteps(a, b, base) ?: return false
+        val independentProduct = Math.multiplyExact(a, b)
+        steps.finalProduct == expected && independentProduct == expected
+    }
+
+    /**
+     * Verifies a complete [NikhilamSteps] breakdown against operands [a] and [b] and [expected] product.
+     */
+    fun verifyNikhilamDecomposition(a: Long, b: Long, steps: NikhilamSteps, expected: Long): Boolean = safeCheck {
+        if (expected <= 0L) return false
+        val computedSteps = calculateNikhilamSteps(a, b, steps.base) ?: return false
+        val independentProduct = Math.multiplyExact(a, b)
+        steps == computedSteps && steps.finalProduct == expected && independentProduct == expected
+    }
+
+    /**
+     * Verifies individual learner-submitted intermediate steps of Nikhilam multiplication:
+     * - [expectedDevA]: Claimed deviation of a from base (a - base)
+     * - [expectedDevB]: Claimed deviation of b from base (b - base)
+     * - [expectedLeft]: Claimed normalized left part after carry/borrow
+     * - [expectedRight]: Claimed normalized right part after carry/borrow
+     * - [expectedProduct]: Claimed final product
+     */
+    fun verifyNikhilamDecomposition(
+        a: Long,
+        b: Long,
+        expectedDevA: Long,
+        expectedDevB: Long,
+        expectedLeft: Long,
+        expectedRight: Long,
+        expectedProduct: Long,
+        base: Long = 100L
+    ): Boolean = safeCheck {
+        if (expectedProduct <= 0L) return false
+        val steps = calculateNikhilamSteps(a, b, base) ?: return false
+        val independentProduct = Math.multiplyExact(a, b)
+        steps.devA == expectedDevA &&
+                steps.devB == expectedDevB &&
+                steps.adjustedLeft == expectedLeft &&
+                steps.adjustedRight == expectedRight &&
+                steps.finalProduct == expectedProduct &&
+                independentProduct == expectedProduct
+    }
+
+    /**
+     * Verifies the algebraic identity behind Nikhilam base multiplication:
+     *   (Base - d1)(Base - d2) ≡ (Base - d1 - d2) * Base + (d1 * d2)
+     * where d1 = Base - a and d2 = Base - b.
+     *
+     * WARNING: This method checks algebraic identity consistency only.
+     * It does NOT receive or check an expected product or learner-submitted answer!
+     * Because the identity is an algebraic tautology (always equal to a * b for positive numbers),
+     * passing this check does NOT prove that a learner's answer or tutorial explanation is correct.
+     * Callers validating final answers or learner inputs MUST use [verifyNikhilamMultiplication]
+     * or [verifyNikhilamDecomposition].
+     */
+    fun verifyNikhilamIdentity(a: Long, b: Long, base: Long = 100L): Boolean = safeCheck {
+        if (a <= 0L || b <= 0L || !isValidNikhilamBase(base)) return false
         val d1 = Math.subtractExact(base, a)
         val d2 = Math.subtractExact(base, b)
         val leftPart = Math.subtractExact(a, d2)
