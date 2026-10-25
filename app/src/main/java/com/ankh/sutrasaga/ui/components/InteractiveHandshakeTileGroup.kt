@@ -175,7 +175,12 @@ fun InteractiveHandshakeTileGroup(
                             )
                             .semantics {
                                 role = Role.Button
-                                contentDescription = "Option $option"
+                                contentDescription = when {
+                                    isThisOptionCorrect -> "Option $option, correct"
+                                    isThisOptionWrong -> "Option $option, incorrect"
+                                    isSelected -> "Option $option, selected"
+                                    else -> "Option $option"
+                                }
                             }
                             .clickable(
                                 enabled = isAnswerCorrect != true,
@@ -274,7 +279,7 @@ fun InteractiveHandshakeTileGroup(
                             elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp),
                             modifier = Modifier
                                 .fillMaxWidth(0.6f)
-                                .height(40.dp)
+                                .height(48.dp)
                         ) {
                             Text(
                                 text = "Continue →",
