@@ -3,6 +3,28 @@ package com.ankh.sutrasaga.domain.validation
 import com.ankh.sutrasaga.domain.models.InteractiveHandshake
 
 /**
+ * Mathematical breakdown of 2-digit by 2-digit Urdhva-Tiryagbhyam multiplication.
+ */
+data class Urdhva2x2Steps(
+    val a: Long,
+    val b: Long,
+    val a1: Long,
+    val a0: Long,
+    val b1: Long,
+    val b0: Long,
+    val rawUnits: Long,
+    val unitDigit: Long,
+    val carry1: Long,
+    val crosswiseSum: Long,
+    val rawCrosswise: Long,
+    val tensDigit: Long,
+    val carry2: Long,
+    val tensProduct: Long,
+    val hundredsPart: Long,
+    val finalProduct: Long
+)
+
+/**
  * VedicMathValidator — Validates mathematical accuracy of demonstrated shortcuts
  * and verifies interactive student handshake answers.
  */
@@ -31,19 +53,25 @@ object VedicMathValidator {
     }
 
     /**
-     * Verifies 2-digit by 2-digit Urdhva-Tiryagbhyam multiplication.
+     * Validates whether an integer is within the supported 2-digit range (10..99)
+     * for 2x2 Urdhva-Tiryagbhyam multiplication.
      */
-    fun verifyUrdhva2x2(a: Long, b: Long): Boolean {
-        return (a * b) > 0
-    }
+    fun isValidTwoDigitOperand(n: Long): Boolean = n in 10L..99L
 
     /**
-     * Verifies 2-digit by 2-digit Urdhva-Tiryagbhyam multiplication with expected product.
-     * Vertical Right: a0 * b0
-     * Crosswise Middle: (a1 * b0) + (a0 * b1) + carry
-     * Vertical Left: (a1 * b1) + carry
+     * Computes the complete vertical-and-crosswise decomposition for two 2-digit operands.
+     * Returns null if either operand is not a valid 2-digit number (10..99).
+     *
+     * Procedure:
+     * - Step 1: Units vertical product: a0 * b0 -> unitDigit = rawUnits % 10, carry1 = rawUnits / 10
+     * - Step 2: Crosswise sum: (a1 * b0) + (a0 * b1) -> rawCrosswise = crosswiseSum + carry1
+     *           tensDigit = rawCrosswise % 10, carry2 = rawCrosswise / 10
+     * - Step 3: Tens vertical product plus carry: (a1 * b1) + carry2 -> rawTens
+     * - Step 4: Product = rawTens * 100 + tensDigit * 10 + unitDigit == a * b
      */
-    fun verifyUrdhva2x2(a: Long, b: Long, expected: Long): Boolean {
+    fun calculateUrdhva2x2Steps(a: Long, b: Long): Urdhva2x2Steps? {
+        if (!isValidTwoDigitOperand(a) || !isValidTwoDigitOperand(b)) return null
+
         val a1 = a / 10L
         val a0 = a % 10L
         val b1 = b / 10L
@@ -53,14 +81,84 @@ object VedicMathValidator {
         val d0 = rawUnits % 10L
         val c1 = rawUnits / 10L
 
-        val rawCross = (a1 * b0) + (a0 * b1) + c1
+        val crossSum = (a1 * b0) + (a0 * b1)
+        val rawCross = crossSum + c1
         val d1 = rawCross % 10L
         val c2 = rawCross / 10L
 
         val rawTens = (a1 * b1) + c2
-
         val computed = (rawTens * 100L) + (d1 * 10L) + d0
-        return computed == expected && (a * b) == expected
+
+        return Urdhva2x2Steps(
+            a = a,
+            b = b,
+            a1 = a1,
+            a0 = a0,
+            b1 = b1,
+            b0 = b0,
+            rawUnits = rawUnits,
+            unitDigit = d0,
+            carry1 = c1,
+            crosswiseSum = crossSum,
+            rawCrosswise = rawCross,
+            tensDigit = d1,
+            carry2 = c2,
+            tensProduct = a1 * b1,
+            hundredsPart = rawTens,
+            finalProduct = computed
+        )
+    }
+
+    /**
+     * Verifies that operands a and b are valid 2-digit numbers and that the
+     * vertical-and-crosswise procedure mathematically computes their exact product.
+     *
+     * Replaces the former weak check ((a * b) > 0) with genuine procedural verification.
+     * Fails closed for zero, negative numbers, single-digit numbers, and numbers >= 100.
+     */
+    fun verifyUrdhva2x2(a: Long, b: Long): Boolean {
+        val steps = calculateUrdhva2x2Steps(a, b) ?: return false
+        return steps.finalProduct == (a * b)
+    }
+
+    /**
+     * Verifies 2-digit by 2-digit Urdhva-Tiryagbhyam multiplication against an expected product.
+     * Fails if operands are outside 10..99, or if expected != a * b, or if the procedure is inconsistent.
+     */
+    fun verifyUrdhva2x2(a: Long, b: Long, expected: Long): Boolean {
+        val steps = calculateUrdhva2x2Steps(a, b) ?: return false
+        return steps.finalProduct == expected && (a * b) == expected
+    }
+
+    /**
+     * Verifies 2-digit by 2-digit Urdhva-Tiryagbhyam multiplication with intermediate step assertions:
+     * - expectedCrosswiseSum: (a1 * b0) + (a0 * b1)
+     * - expectedCarry1: (a0 * b0) / 10
+     * - expectedCarry2: ((a1 * b0) + (a0 * b1) + expectedCarry1) / 10
+     * - expectedProduct: a * b
+     */
+    fun verifyUrdhva2x2(
+        a: Long,
+        b: Long,
+        expectedCrosswiseSum: Long,
+        expectedCarry1: Long,
+        expectedCarry2: Long,
+        expectedProduct: Long
+    ): Boolean {
+        val steps = calculateUrdhva2x2Steps(a, b) ?: return false
+        if (steps.carry1 != expectedCarry1) return false
+        if (steps.crosswiseSum != expectedCrosswiseSum) return false
+        if (steps.carry2 != expectedCarry2) return false
+        return steps.finalProduct == expectedProduct && (a * b) == expectedProduct
+    }
+
+    /**
+     * Verifies the crosswise sum step specifically (e.g. for learner handshake inputs):
+     * Crosswise sum = (a1 * b0) + (a0 * b1).
+     */
+    fun verifyUrdhvaCrosswiseSum(a: Long, b: Long, claimedCrosswiseSum: Long): Boolean {
+        val steps = calculateUrdhva2x2Steps(a, b) ?: return false
+        return steps.crosswiseSum == claimedCrosswiseSum
     }
 
     /**
