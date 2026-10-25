@@ -7,6 +7,26 @@ import com.ankh.sutrasaga.domain.models.GuruPose
 import com.ankh.sutrasaga.domain.models.GurukulDialogueBeat
 import com.ankh.sutrasaga.domain.models.GurukulScript
 
+/**
+ * LEGACY CONTENT STORE — NOT CONSUMED AT RUNTIME.
+ *
+ * This object is NOT the authoritative tutorial content source shown to learners.
+ *
+ * Authoritative runtime path (what learners actually see):
+ *   GameUiState.selectedScript
+ *     -> GurukulScriptsRepository.getScriptForModule(module)   [ui/screens/GurukulScriptsRepository.kt]
+ *     -> VedicAppNavigator (GURUKUL_TUTORIAL route)
+ *     -> GurukulSceneScreen(script, problem)
+ *
+ * This repository's getStoryScript() / getTutorialScript() are only invoked by
+ * StoryBeatScreen and TutorialScreen, which are composable definitions that are
+ * not wired into VedicAppNavigator and therefore never reach the learner.
+ *
+ * Kept for: (a) existing unit tests validating internal content correctness,
+ *            (b) future potential reuse or A/B testing.
+ *
+ * Do NOT add new learner-facing content here; add it to GurukulScriptsRepository instead.
+ */
 object GurukulContentRepository {
 
     fun getStoryScript(worldId: Int): GurukulScript {

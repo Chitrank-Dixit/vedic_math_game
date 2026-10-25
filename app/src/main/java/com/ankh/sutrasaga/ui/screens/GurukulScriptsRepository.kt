@@ -10,8 +10,17 @@ import com.ankh.sutrasaga.domain.models.GurukulScript
 import com.ankh.sutrasaga.domain.models.SutraProblem
 
 /**
- * Repository of dedicated, authentic Guru-Shishya dialogue scripts and problems
- * for all 16 Primary Vedic Sutras.
+ * AUTHORITATIVE RUNTIME TUTORIAL CONTENT SOURCE.
+ *
+ * This is the single source of truth for the Guru-Shishya dialogue shown to learners.
+ * Called by GameUiState.selectedScript via getScriptForModule(), which feeds directly into
+ * VedicAppNavigator -> GurukulSceneScreen (GURUKUL_TUTORIAL route).
+ *
+ * Contains scripts and problems for all 16 Primary Vedic Sutras.
+ *
+ * Other repositories (GurukulContentRepository, SutraDialogueRepository) exist as
+ * legacy stores and are NOT consumed by production navigation. New tutorial content
+ * must be added here, not to those repositories.
  */
 object GurukulScriptsRepository {
 
