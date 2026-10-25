@@ -73,9 +73,9 @@ fun InteractiveHandshakeTileGroup(
     onContinueClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var selectedOption by remember { mutableStateOf<String?>(null) }
-    var isAnswerCorrect by remember { mutableStateOf<Boolean?>(null) }
-    var feedbackMessage by remember { mutableStateOf<String?>(null) }
+    var selectedOption by remember(handshake, expectedAnswer) { mutableStateOf<String?>(null) }
+    var isAnswerCorrect by remember(handshake, expectedAnswer) { mutableStateOf<Boolean?>(null) }
+    var feedbackMessage by remember(handshake, expectedAnswer) { mutableStateOf<String?>(null) }
 
     // Generate dynamic selectable choices around the expected answer
     val options = remember(expectedAnswer) {

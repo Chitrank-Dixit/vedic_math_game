@@ -101,11 +101,12 @@ fun GurukulSceneScreen(
     val currentNodeIndex by controller.currentNodeIndex.collectAsState()
     val currentNode by controller.currentNode.collectAsState()
     val isCompleted by controller.isCompleted.collectAsState()
-    var isHandshakeSuccessful by remember { mutableStateOf(false) }
+    val handshakeState by controller.handshakeState.collectAsState()
+    val isHandshakeSuccessful = handshakeState == com.ankh.sutrasaga.engine.rive.HandshakeState.CORRECT
 
     val totalNodes = controller.totalNodes
     val isHandshakeStep = currentNode.interactiveHandshake.requiresUserTap
-    val hasUnresolvedHandshake = activeTree.dialogueNodes.any { it.interactiveHandshake.requiresUserTap } && !isCompleted
+    val hasUnresolvedHandshake = controller.hasUnresolvedHandshake()
     val canSkip = !hasUnresolvedHandshake || allowExplicitSkip
 
     val infiniteTransition = rememberInfiniteTransition(label = "GurukulParchmentTransition")
@@ -231,7 +232,6 @@ fun GurukulSceneScreen(
                             ) {
                                 IconButton(
                                     onClick = {
-                                        isHandshakeSuccessful = false
                                         controller.restart()
                                     },
                                     modifier = Modifier.size(32.dp)
@@ -309,9 +309,7 @@ fun GurukulSceneScreen(
                         handshake = currentNode.interactiveHandshake,
                         expectedAnswer = expectedAnswer,
                         onAnswerSelected = { userAnswer ->
-                            val success = controller.submitHandshake(userAnswer)
-                            isHandshakeSuccessful = success
-                            success
+                            controller.submitHandshake(userAnswer)
                         },
                         onContinueClick = { onComplete() }
                     )
@@ -327,7 +325,6 @@ fun GurukulSceneScreen(
                         if (currentNodeIndex > 0) {
                             Button(
                                 onClick = {
-                                    isHandshakeSuccessful = false
                                     controller.previousNode()
                                 },
                                 shape = RoundedCornerShape(10.dp),
