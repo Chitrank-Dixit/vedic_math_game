@@ -217,8 +217,8 @@ object GurukulScriptsRepository {
             subtitle = "World 5 • Vertically and Crosswise",
             beats = listOf(
                 GurukulDialogueBeat(
-                    guruText = "We arrive at the crown jewel of Vedic multiplication: 'ऊर्ध्वतिर्यग्भ्यां गुणयेत्' — Vertically and Crosswise.",
-                    discipleText = "The universal multiplication sutra! How do we apply it to 23 × 14?",
+                    guruText = "We arrive at the crown jewel of Vedic multiplication: 'ऊर्ध्वतिर्यग्भ्यां गुणयेत्' — Vertically and Crosswise. For two-digit numbers, three steps reveal the entire product!",
+                    discipleText = "The universal multiplication sutra! How do we apply this three-step pattern to 23 × 14?",
                     guruPose = GuruPose.BASE,
                     guruMouth = GuruMouth.TALKING,
                     discipleState = DiscipleState.NEUTRAL,
@@ -245,7 +245,7 @@ object GurukulScriptsRepository {
                 ),
                 GurukulDialogueBeat(
                     guruText = "Step 3: Vertical left digits: 2(1) + carry 1 = 3. Final answer: 322!",
-                    discipleText = "322! The geometric ray pattern solves any two-digit product!",
+                    discipleText = "322! The geometric ray pattern solves this two-digit product in three steps!",
                     guruPose = GuruPose.TALKING,
                     guruMouth = GuruMouth.TALKING,
                     discipleState = DiscipleState.UNDERSTANDING,
@@ -253,8 +253,8 @@ object GurukulScriptsRepository {
                     slateStepIndex = 3
                 ),
                 GurukulDialogueBeat(
-                    guruText = "Master this rhythm, for it is the foundation of all higher arithmetic.",
-                    discipleText = "Let us begin the battle!",
+                    guruText = "Master this rhythm for two-digit numbers; extending the crosswise pattern scales to any number of digits!",
+                    discipleText = "Understood! Let us begin the battle!",
                     guruPose = GuruPose.BASE,
                     guruMouth = GuruMouth.SMILE,
                     discipleState = DiscipleState.UNDERSTANDING,

@@ -1,5 +1,6 @@
 package com.ankh.sutrasaga.engine
 
+import com.ankh.sutrasaga.data.repository.GurukulContentRepository
 import com.ankh.sutrasaga.data.repository.RiveDialogueRepository
 import com.ankh.sutrasaga.domain.models.DifficultyTier
 import com.ankh.sutrasaga.domain.models.InteractiveHandshake
@@ -10,6 +11,9 @@ import com.ankh.sutrasaga.domain.validation.VedicMathValidator
 import com.ankh.sutrasaga.engine.rive.DefaultRiveAdapter
 import com.ankh.sutrasaga.engine.rive.RiveDialogueController
 import com.ankh.sutrasaga.ui.components.generateHandshakeChoices
+import com.ankh.sutrasaga.ui.screens.CanonicalSutraModules
+import com.ankh.sutrasaga.ui.screens.GurukulScriptsRepository
+import com.ankh.sutrasaga.ui.screens.SutraLessonsRepository
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
@@ -571,5 +575,149 @@ class UrdhvaWorld5TutorialTest {
             assertEquals(actualProduct, p.correctAnswer)
             assertTrue(VedicMathValidator.verifyUrdhva2x2(a, b, actualProduct))
         }
+    }
+
+    // ── 11. Tutorial Scope & Generalization Guard Tests ───────────────────────
+
+    @Test
+    fun testMisleadingAnyNumbersClaimRemovedFromAllContent() {
+        val world5Module = CanonicalSutraModules.first { it.worldNumber == 5 }
+        val runtimeScript = GurukulScriptsRepository.getScriptForModule(world5Module)
+        val legacyStory = GurukulContentRepository.getStoryScript(5)
+        val legacyTutorial = GurukulContentRepository.getTutorialScript(5)
+        val lesson = SutraLessonsRepository.getLessonForModule(world5Module)
+
+        val allBeats = runtimeScript.beats + legacyStory.beats + legacyTutorial.beats
+        for (beat in allBeats) {
+            val combinedText = "${beat.guruText} ${beat.discipleText ?: ""}"
+            assertFalse(
+                "Content must not contain overgeneralized 'ANY numbers': $combinedText",
+                combinedText.contains("ANY numbers", ignoreCase = true)
+            )
+            assertFalse(
+                "Content must not claim 'in 3 lightning steps': $combinedText",
+                combinedText.contains("lightning steps", ignoreCase = true)
+            )
+        }
+
+        for (node in world5Tree.dialogueNodes) {
+            val text = node.text
+            val ssml = node.audioCues.ssmlText
+            assertFalse("Rive dialogue must not contain 'arbitrary numbers': $text", text.contains("arbitrary numbers", ignoreCase = true))
+            assertFalse("Rive SSML must not contain 'arbitrary numbers': $ssml", ssml.contains("arbitrary numbers", ignoreCase = true))
+            assertFalse("Rive dialogue must not contain 'ANY numbers': $text", text.contains("ANY numbers", ignoreCase = true))
+        }
+
+        assertFalse(
+            "SutraLesson shortcutRule must not claim arbitrary coverage: ${lesson.shortcutRule}",
+            lesson.shortcutRule.contains("ANY numbers", ignoreCase = true)
+        )
+    }
+
+    @Test
+    fun testRevisedScopePresentInRuntimeContentSource() {
+        val world5Module = CanonicalSutraModules.first { it.worldNumber == 5 }
+        val runtimeScript = GurukulScriptsRepository.getScriptForModule(world5Module)
+
+        // Beat 0: Introduces technique and scopes it to two-digit numbers
+        val beat0 = runtimeScript.beats[0]
+        assertTrue(
+            "Runtime intro beat must specify two-digit scope: '${beat0.guruText}'",
+            beat0.guruText.contains("two-digit", ignoreCase = true)
+        )
+        assertTrue(
+            "Runtime intro beat must reference three steps: '${beat0.guruText}'",
+            beat0.guruText.contains("three steps", ignoreCase = true) || beat0.guruText.contains("3 steps", ignoreCase = true)
+        )
+
+        // Beat 3: Confirms the two-digit 3-step pattern solution
+        val beat3 = runtimeScript.beats[3]
+        assertTrue(
+            "Runtime conclusion beat must emphasize two-digit scope: '${beat3.discipleText}'",
+            beat3.discipleText?.contains("two-digit", ignoreCase = true) == true
+        )
+
+        // Beat 4: Explains that scaling to larger numbers involves extending the crosswise pattern
+        val beat4 = runtimeScript.beats[4]
+        assertTrue(
+            "Runtime wrap-up beat must explain extending crosswise pattern for larger numbers: '${beat4.guruText}'",
+            beat4.guruText.contains("two-digit", ignoreCase = true) &&
+                (beat4.guruText.contains("extending", ignoreCase = true) || beat4.guruText.contains("scales", ignoreCase = true))
+        )
+    }
+
+    @Test
+    fun testTutorialDoesNotClaimUnsupportedDigitLengthCoverage() {
+        val world5Module = CanonicalSutraModules.first { it.worldNumber == 5 }
+        val runtimeScript = GurukulScriptsRepository.getScriptForModule(world5Module)
+        val lesson = SutraLessonsRepository.getLessonForModule(world5Module)
+
+        // Verify that 3 steps are specifically tied to 2x2 multiplication
+        assertTrue(
+            "SutraLesson shortcutRule must explicitly mention 2-digit scope: '${lesson.shortcutRule}'",
+            lesson.shortcutRule.contains("2-digit", ignoreCase = true)
+        )
+
+        // For N x M digits, general Urdhva requires (N + M - 1) columns:
+        // 2x2 -> 3 columns (Units vertical, Crosswise middle, Tens vertical)
+        // 3x2 -> 4 columns (implemented in build3x2Steps)
+        // 3x3 -> 5 columns
+        // Verify generator creates 5 decomposition steps for 3x2 inputs (4 calculation columns + 1 concatenation),
+        // confirming 3 steps does NOT cover 3x2
+        val problem3x2 = generator.generateSpecificProblemPair(123L, 45L)
+        assertEquals(
+            "3x2 multiplication requires 5 decomposition steps (4 columns + 1 concatenation)",
+            5,
+            problem3x2.decompositionSteps.size
+        )
+
+        // Ensure active dialogue does NOT suggest 3 steps suffice for 3-digit operands
+        for (beat in runtimeScript.beats) {
+            val text = "${beat.guruText} ${beat.discipleText ?: ""}"
+            assertFalse(
+                "Tutorial text must not claim 3 steps work for all digit lengths: $text",
+                text.contains("any length in 3 steps", ignoreCase = true) ||
+                    text.contains("all numbers in 3 steps", ignoreCase = true)
+            )
+        }
+    }
+
+    @Test
+    fun testIndependentMathematicalVerificationOfBothWorkedExamples() {
+        // Worked Example 1: 23 × 14 = 322 (in GurukulScriptsRepository and SutraLessonsRepository)
+        val a1 = 23L
+        val b1 = 14L
+        val expected1 = 322L
+        val u1 = (a1 % 10) * (b1 % 10) // 3 * 4 = 12
+        val carry1_1 = u1 / 10 // 1
+        val unitDigit1 = u1 % 10 // 2
+        val cross1 = ((a1 / 10) * (b1 % 10)) + ((a1 % 10) * (b1 / 10)) + carry1_1 // 2*4 + 3*1 + 1 = 12
+        val carry1_2 = cross1 / 10 // 1
+        val tensDigit1 = cross1 % 10 // 2
+        val left1 = ((a1 / 10) * (b1 / 10)) + carry1_2 // 2*1 + 1 = 3
+        val calc1 = left1 * 100 + tensDigit1 * 10 + unitDigit1
+        assertEquals(expected1, calc1)
+        assertEquals(expected1, a1 * b1)
+        assertTrue(VedicMathValidator.verifyUrdhva2x2(a1, b1, expected1))
+
+        // Worked Example 2: 23 × 41 = 943 (in rive_sutra_dialogues.json and canonical quiz problem)
+        val a2 = 23L
+        val b2 = 41L
+        val expected2 = 943L
+        val u2 = (a2 % 10) * (b2 % 10) // 3 * 1 = 3
+        val carry2_1 = u2 / 10 // 0
+        val unitDigit2 = u2 % 10 // 3
+        val cross2 = ((a2 / 10) * (b2 % 10)) + ((a2 % 10) * (b2 / 10)) + carry2_1 // 2*1 + 3*4 + 0 = 14
+        val carry2_2 = cross2 / 10 // 1
+        val tensDigit2 = cross2 % 10 // 4
+        val left2 = ((a2 / 10) * (b2 / 10)) + carry2_2 // 2*4 + 1 = 9
+        val calc2 = left2 * 100 + tensDigit2 * 10 + unitDigit2
+        assertEquals(expected2, calc2)
+        assertEquals(expected2, a2 * b2)
+        assertTrue(VedicMathValidator.verifyUrdhva2x2(a2, b2, expected2))
+
+        // Handshake 31 × 21 middle crosswise step
+        val crossHandshake = (3L * 1L) + (1L * 2L)
+        assertEquals(5L, crossHandshake)
     }
 }

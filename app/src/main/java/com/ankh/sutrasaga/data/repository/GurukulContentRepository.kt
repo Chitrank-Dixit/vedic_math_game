@@ -169,7 +169,7 @@ object GurukulContentRepository {
                         slateStepIndex = 0
                     ),
                     GurukulDialogueBeat(
-                        guruText = "Urdhva-Tiryagbhyam: 'Vertically and Crosswise'! Vertical right, crosswise middle, vertical left. Multiplies ANY numbers in 3 lightning steps!",
+                        guruText = "Urdhva-Tiryagbhyam: 'Vertically and Crosswise'! For two-digit numbers, three steps reveal the product: vertical right, crosswise middle, vertical left!",
                         discipleText = "Vertically and Crosswise! Let us conquer the final trial!",
                         isTeachingStep = true,
                         guruPose = GuruPose.EXPLAINING,
@@ -698,7 +698,7 @@ object GurukulContentRepository {
                     ),
                     GurukulDialogueBeat(
                         guruText = "Behold! 9 || 4 || 3 = 943! So 23 × 41 = 943!",
-                        discipleText = "943! Vertically and Crosswise conquers all!",
+                        discipleText = "943! The vertical-and-crosswise method solves two-digit products in three steps!",
                         isTeachingStep = false,
                         guruPose = GuruPose.TALKING,
                         guruMouth = GuruMouth.SMILE,
