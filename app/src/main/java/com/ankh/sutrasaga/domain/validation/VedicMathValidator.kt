@@ -27,29 +27,58 @@ data class Urdhva2x2Steps(
 /**
  * VedicMathValidator — Validates mathematical accuracy of demonstrated shortcuts
  * and verifies interactive student handshake answers.
+ *
+ * Overflow Safety Policy:
+ * All arithmetic operations (multiplication, addition, subtraction, squaring, negation)
+ * use checked arithmetic (e.g. [Math.multiplyExact], [Math.addExact], [Math.subtractExact])
+ * wrapped in [safeCheck]. Any overflow or invalid numeric parse fails closed and immediately
+ * returns false, guaranteeing no silent wraparound or false-positive validations.
  */
 object VedicMathValidator {
 
     /**
+     * Executes mathematical validation inside an overflow-safe boundary.
+     * If any intermediate or final arithmetic operation overflows (producing [ArithmeticException])
+     * or fails numeric conversion ([NumberFormatException]), it returns false (fail-closed)
+     * rather than wrapping silently.
+     */
+    inline fun safeCheck(block: () -> Boolean): Boolean {
+        return try {
+            block()
+        } catch (_: ArithmeticException) {
+            false
+        } catch (_: NumberFormatException) {
+            false
+        }
+    }
+
+    /**
      * Verifies squaring a number ending in 5: (10a + 5)² = 100(a)(a+1) + 25.
      */
-    fun verifySquaringEndingIn5(n: Long, expected: Long): Boolean {
-        if (n % 10L != 5L) return false
+    fun verifySquaringEndingIn5(n: Long, expected: Long): Boolean = safeCheck {
+        if (n <= 0L || expected <= 0L || n % 10L != 5L) return false
         val prefix = n / 10L
-        val computed = (prefix * (prefix + 1L)) * 100L + 25L
-        return computed == expected && (n * n) == expected
+        val prefixPlusOne = Math.addExact(prefix, 1L)
+        val prefixProduct = Math.multiplyExact(prefix, prefixPlusOne)
+        val hundred = Math.multiplyExact(prefixProduct, 100L)
+        val computed = Math.addExact(hundred, 25L)
+        val nSquared = Math.multiplyExact(n, n)
+        computed == expected && nSquared == expected
     }
 
     /**
      * Verifies Nikhilam base multiplication: (Base - d1)(Base - d2) = (Base - d1 - d2) * Base + (d1 * d2).
      */
-    fun verifyNikhilamMultiplication(a: Long, b: Long, base: Long = 100L): Boolean {
-        val d1 = base - a
-        val d2 = base - b
-        val leftPart = a - d2
-        val rightPart = d1 * d2
-        val computed = leftPart * base + rightPart
-        return computed == (a * b)
+    fun verifyNikhilamMultiplication(a: Long, b: Long, base: Long = 100L): Boolean = safeCheck {
+        if (a <= 0L || b <= 0L || base <= 0L) return false
+        val d1 = Math.subtractExact(base, a)
+        val d2 = Math.subtractExact(base, b)
+        val leftPart = Math.subtractExact(a, d2)
+        val rightPart = Math.multiplyExact(d1, d2)
+        val scaledLeft = Math.multiplyExact(leftPart, base)
+        val computed = Math.addExact(scaledLeft, rightPart)
+        val actualProduct = Math.multiplyExact(a, b)
+        computed == actualProduct
     }
 
     /**
@@ -164,40 +193,56 @@ object VedicMathValidator {
     /**
      * Verifies base subtraction: Base - Sub = Expected.
      */
-    fun verifyBaseSubtraction(base: Long, sub: Long, expected: Long): Boolean {
-        return (base - sub) == expected
+    fun verifyBaseSubtraction(base: Long, sub: Long, expected: Long): Boolean = safeCheck {
+        if (base <= 0L || sub < 0L || expected < 0L) return false
+        val diff = Math.subtractExact(base, sub)
+        diff == expected
     }
 
     /**
      * Verifies Ekanyunena multiplication: multiplicand * (10^k - 1) = (multiplicand - 1) * 10^k + ((10^k - 1) - (multiplicand - 1)).
      */
-    fun verifyEkanyunenaMultiplication(multiplicand: Long, nines: Long, expected: Long): Boolean {
-        val lhs = multiplicand - 1L
-        val rhs = nines - lhs
-        val multiplier = nines + 1L
-        val computed = lhs * multiplier + rhs
-        return computed == expected && (multiplicand * nines) == expected
+    fun verifyEkanyunenaMultiplication(multiplicand: Long, nines: Long, expected: Long): Boolean = safeCheck {
+        if (multiplicand <= 0L || nines <= 0L || expected <= 0L) return false
+        val lhs = Math.subtractExact(multiplicand, 1L)
+        val rhs = Math.subtractExact(nines, lhs)
+        val multiplier = Math.addExact(nines, 1L)
+        val scaledLhs = Math.multiplyExact(lhs, multiplier)
+        val computed = Math.addExact(scaledLhs, rhs)
+        val actualProduct = Math.multiplyExact(multiplicand, nines)
+        computed == expected && actualProduct == expected
     }
 
     /**
      * Verifies Yavadunam near-base squaring: (Base - d)² = (Base - 2d) * Base + d².
      */
-    fun verifyYavadunamSquaring(n: Long, base: Long, expected: Long): Boolean {
-        val diff = kotlin.math.abs(base - n)
-        val lhs = if (n < base) n - diff else n + diff
-        val rhs = diff * diff
-        val computed = lhs * base + rhs
-        return computed == expected && (n * n) == expected
+    fun verifyYavadunamSquaring(n: Long, base: Long, expected: Long): Boolean = safeCheck {
+        if (n <= 0L || base <= 0L || expected <= 0L) return false
+        val rawDiff = Math.subtractExact(base, n)
+        val diff = if (rawDiff < 0L) Math.negateExact(rawDiff) else rawDiff
+        val lhs = if (n < base) Math.subtractExact(n, diff) else Math.addExact(n, diff)
+        val rhs = Math.multiplyExact(diff, diff)
+        val scaledLhs = Math.multiplyExact(lhs, base)
+        val computed = Math.addExact(scaledLhs, rhs)
+        val actualSquare = Math.multiplyExact(n, n)
+        computed == expected && actualSquare == expected
     }
 
     /**
      * Verifies Paravartya Yojayet division: Dividend = Divisor * Quotient + Remainder,
      * where 0 <= Remainder < Divisor.
      */
-    fun verifyParavartyaDivision(dividend: Long, divisor: Long, expectedQuotient: Long, expectedRemainder: Long): Boolean {
+    fun verifyParavartyaDivision(
+        dividend: Long,
+        divisor: Long,
+        expectedQuotient: Long,
+        expectedRemainder: Long
+    ): Boolean = safeCheck {
         if (divisor <= 0L || expectedRemainder < 0L || expectedRemainder >= divisor) return false
-        val computed = divisor * expectedQuotient + expectedRemainder
-        return computed == dividend && (dividend / divisor) == expectedQuotient && (dividend % divisor) == expectedRemainder
+        if (dividend < 0L || expectedQuotient < 0L) return false
+        val product = Math.multiplyExact(divisor, expectedQuotient)
+        val computed = Math.addExact(product, expectedRemainder)
+        computed == dividend && (dividend / divisor) == expectedQuotient && (dividend % divisor) == expectedRemainder
     }
 
     /**
@@ -209,26 +254,41 @@ object VedicMathValidator {
         a1: Long, b1: Long, c1: Long,
         a2: Long, b2: Long, c2: Long,
         expectedX: Long, expectedY: Long
-    ): Boolean {
-        val det = (a1 * b2) - (a2 * b1)
+    ): Boolean = safeCheck {
+        val a1b2 = Math.multiplyExact(a1, b2)
+        val a2b1 = Math.multiplyExact(a2, b1)
+        val det = Math.subtractExact(a1b2, a2b1)
         if (det == 0L) return false
 
-        val xRatioMatch = (a1 * c2 == a2 * c1) && a1 != 0L && a2 != 0L
-        val yRatioMatch = (b1 * c2 == b2 * c1) && b1 != 0L && b2 != 0L
+        val a1c2 = Math.multiplyExact(a1, c2)
+        val a2c1 = Math.multiplyExact(a2, c1)
+        val xRatioMatch = (a1c2 == a2c1) && a1 != 0L && a2 != 0L
+
+        val b1c2 = Math.multiplyExact(b1, c2)
+        val b2c1 = Math.multiplyExact(b2, c1)
+        val yRatioMatch = (b1c2 == b2c1) && b1 != 0L && b2 != 0L
 
         if (xRatioMatch) {
             if (expectedY != 0L) return false
-            if (a1 * expectedX != c1) return false
+            val a1x = Math.multiplyExact(a1, expectedX)
+            if (a1x != c1) return false
         } else if (yRatioMatch) {
             if (expectedX != 0L) return false
-            if (b1 * expectedY != c1) return false
+            val b1y = Math.multiplyExact(b1, expectedY)
+            if (b1y != c1) return false
         } else {
             return false
         }
 
-        val eq1Valid = (a1 * expectedX + b1 * expectedY) == c1
-        val eq2Valid = (a2 * expectedX + b2 * expectedY) == c2
-        return eq1Valid && eq2Valid
+        val eq1Term1 = Math.multiplyExact(a1, expectedX)
+        val eq1Term2 = Math.multiplyExact(b1, expectedY)
+        val eq1Sum = Math.addExact(eq1Term1, eq1Term2)
+
+        val eq2Term1 = Math.multiplyExact(a2, expectedX)
+        val eq2Term2 = Math.multiplyExact(b2, expectedY)
+        val eq2Sum = Math.addExact(eq2Term1, eq2Term2)
+
+        eq1Sum == c1 && eq2Sum == c2
     }
 
     /**
@@ -243,26 +303,43 @@ object VedicMathValidator {
         a1: Long, b1: Long, c1: Long,
         a2: Long, b2: Long, c2: Long,
         expectedX: Long, expectedY: Long
-    ): Boolean {
-        if (kotlin.math.abs(a1) != kotlin.math.abs(b2) || kotlin.math.abs(b1) != kotlin.math.abs(a2)) return false
-        val det = (a1 * b2) - (a2 * b1)
+    ): Boolean = safeCheck {
+        if (a1 == Long.MIN_VALUE || b1 == Long.MIN_VALUE || a2 == Long.MIN_VALUE || b2 == Long.MIN_VALUE) return false
+        if (c1 == Long.MIN_VALUE || c2 == Long.MIN_VALUE || expectedX == Long.MIN_VALUE || expectedY == Long.MIN_VALUE) return false
+
+        if (Math.abs(a1) != Math.abs(b2) || Math.abs(b1) != Math.abs(a2)) return false
+        val a1b2 = Math.multiplyExact(a1, b2)
+        val a2b1 = Math.multiplyExact(a2, b1)
+        val det = Math.subtractExact(a1b2, a2b1)
         if (det == 0L) return false
 
-        val eq1Valid = (a1 * expectedX + b1 * expectedY) == c1
-        val eq2Valid = (a2 * expectedX + b2 * expectedY) == c2
-        if (!eq1Valid || !eq2Valid) return false
+        val eq1Term1 = Math.multiplyExact(a1, expectedX)
+        val eq1Term2 = Math.multiplyExact(b1, expectedY)
+        val eq1Sum = Math.addExact(eq1Term1, eq1Term2)
+        if (eq1Sum != c1) return false
 
-        val addSum = a1 + a2
-        val addYSum = b1 + b2
-        val subDiff = a1 - a2
-        val subYDiff = b1 - b2
+        val eq2Term1 = Math.multiplyExact(a2, expectedX)
+        val eq2Term2 = Math.multiplyExact(b2, expectedY)
+        val eq2Sum = Math.addExact(eq2Term1, eq2Term2)
+        if (eq2Sum != c2) return false
 
-        val addValid = (addSum != 0L && addSum == addYSum && (c1 + c2) == addSum * (expectedX + expectedY)) ||
-                (addSum != 0L && addSum == -addYSum && (c1 + c2) == addSum * (expectedX - expectedY))
-        val subValid = (subDiff != 0L && subDiff == subYDiff && (c1 - c2) == subDiff * (expectedX + expectedY)) ||
-                (subDiff != 0L && subDiff == -subYDiff && (c1 - c2) == subDiff * (expectedX - expectedY))
+        val addSum = Math.addExact(a1, a2)
+        val addYSum = Math.addExact(b1, b2)
+        val subDiff = Math.subtractExact(a1, a2)
+        val subYDiff = Math.subtractExact(b1, b2)
 
-        return addValid && subValid
+        val cSum = Math.addExact(c1, c2)
+        val cDiff = Math.subtractExact(c1, c2)
+
+        val xySum = Math.addExact(expectedX, expectedY)
+        val xyDiff = Math.subtractExact(expectedX, expectedY)
+
+        val addValid = (addSum != 0L && addSum == addYSum && cSum == Math.multiplyExact(addSum, xySum)) ||
+                (addSum != 0L && addSum == -addYSum && cSum == Math.multiplyExact(addSum, xyDiff))
+        val subValid = (subDiff != 0L && subDiff == subYDiff && cDiff == Math.multiplyExact(subDiff, xySum)) ||
+                (subDiff != 0L && subDiff == -subYDiff && cDiff == Math.multiplyExact(subDiff, xyDiff))
+
+        addValid && subValid
     }
 
     /**
@@ -270,12 +347,14 @@ object VedicMathValidator {
      * k1 * (a*x + b) = k2 * (a*x + b) with k1 != k2.
      * Since k1 != k2, (a*x + b) must equal 0, so x = -b / a.
      */
-    fun verifyShunyamCommonFactor(k1: Long, a: Long, b: Long, k2: Long, expectedX: Long): Boolean {
+    fun verifyShunyamCommonFactor(k1: Long, a: Long, b: Long, k2: Long, expectedX: Long): Boolean = safeCheck {
         if (k1 == k2 || a == 0L) return false
-        if (a * expectedX + b != 0L) return false
-        val lhs = k1 * (a * expectedX + b)
-        val rhs = k2 * (a * expectedX + b)
-        return lhs == rhs && lhs == 0L
+        val ax = Math.multiplyExact(a, expectedX)
+        val inner = Math.addExact(ax, b)
+        if (inner != 0L) return false
+        val lhs = Math.multiplyExact(k1, inner)
+        val rhs = Math.multiplyExact(k2, inner)
+        lhs == rhs && lhs == 0L
     }
 
     /**
@@ -292,20 +371,38 @@ object VedicMathValidator {
         expectedCompletionDen: Long = 1L,
         root1: Long,
         root2: Long
-    ): Boolean {
+    ): Boolean = safeCheck {
         if (a == 0L || expectedCompletionDen <= 0L) return false
-        val disc = b * b - 4 * a * c
+
+        // b^2 - 4ac
+        val bSquared = Math.multiplyExact(b, b)
+        val fourA = Math.multiplyExact(4L, a)
+        val fourAC = Math.multiplyExact(fourA, c)
+        val disc = Math.subtractExact(bSquared, fourAC)
         if (disc < 0L) return false
 
-        // Check completion term: (b / 2a)^2 = b^2 / (4a^2)
-        val compNum = b * b
-        val compDen = 4 * a * a
-        if (compNum * expectedCompletionDen != compDen * expectedCompletionNum) return false
+        // (b / 2a)^2 = b^2 / (4a^2)
+        val compNum = bSquared
+        val twoA = Math.multiplyExact(2L, a)
+        val compDen = Math.multiplyExact(twoA, twoA)
 
-        // Check roots satisfy quadratic equation: a*r^2 + b*r + c == 0
-        val root1Valid = (a * root1 * root1 + b * root1 + c) == 0L
-        val root2Valid = (a * root2 * root2 + b * root2 + c) == 0L
-        return root1Valid && root2Valid
+        val leftCross = Math.multiplyExact(compNum, expectedCompletionDen)
+        val rightCross = Math.multiplyExact(compDen, expectedCompletionNum)
+        if (leftCross != rightCross) return false
+
+        // Check root 1: a * r1^2 + b * r1 + c == 0
+        val r1Sq = Math.multiplyExact(root1, root1)
+        val aR1Sq = Math.multiplyExact(a, r1Sq)
+        val bR1 = Math.multiplyExact(b, root1)
+        val root1Sum = Math.addExact(Math.addExact(aR1Sq, bR1), c)
+        if (root1Sum != 0L) return false
+
+        // Check root 2: a * r2^2 + b * r2 + c == 0
+        val r2Sq = Math.multiplyExact(root2, root2)
+        val aR2Sq = Math.multiplyExact(a, r2Sq)
+        val bR2 = Math.multiplyExact(b, root2)
+        val root2Sum = Math.addExact(Math.addExact(aR2Sq, bR2), c)
+        root2Sum == 0L
     }
 
     /**
@@ -319,13 +416,24 @@ object VedicMathValidator {
         expectedAverage: Long,
         expectedDeviation: Long,
         expectedProduct: Long
-    ): Boolean {
-        if ((p + q) % 2L != 0L) return false
-        val avg = (p + q) / 2L
-        val dev = kotlin.math.abs(q - p) / 2L
+    ): Boolean = safeCheck {
+        if (p == Long.MIN_VALUE || q == Long.MIN_VALUE) return false
+        val sum = Math.addExact(p, q)
+        if (sum % 2L != 0L) return false
+        val avg = sum / 2L
+
+        val diff = Math.subtractExact(q, p)
+        val absDiff = if (diff < 0L) Math.negateExact(diff) else diff
+        val dev = absDiff / 2L
+
         if (avg != expectedAverage || dev != expectedDeviation) return false
-        val diffOfSquares = (avg * avg) - (dev * dev)
-        return diffOfSquares == expectedProduct && (p * q) == expectedProduct
+
+        val avgSq = Math.multiplyExact(avg, avg)
+        val devSq = Math.multiplyExact(dev, dev)
+        val diffOfSquares = Math.subtractExact(avgSq, devSq)
+        val pq = Math.multiplyExact(p, q)
+
+        diffOfSquares == expectedProduct && pq == expectedProduct
     }
 
     /**
@@ -338,8 +446,8 @@ object VedicMathValidator {
         q: Long,
         expectedPeriodLength: Int,
         expectedRepetend: String
-    ): Boolean {
-        if (q <= 0L || p <= 0L) return false
+    ): Boolean = safeCheck {
+        if (q <= 0L || p <= 0L || expectedPeriodLength <= 0) return false
         val remainders = mutableListOf<Long>()
         val digits = StringBuilder()
         var rem = p % q
@@ -348,7 +456,7 @@ object VedicMathValidator {
         while (rem != 0L && rem !in seen) {
             seen[rem] = remainders.size
             remainders.add(rem)
-            val v = rem * 10L
+            val v = Math.multiplyExact(rem, 10L)
             val digit = v / q
             digits.append(digit)
             rem = v % q
@@ -359,7 +467,7 @@ object VedicMathValidator {
         val cycleLength = remainders.size - cycleStart
         val cycleDigits = digits.substring(cycleStart)
 
-        return cycleLength == expectedPeriodLength && cycleDigits == expectedRepetend
+        cycleLength == expectedPeriodLength && cycleDigits == expectedRepetend
     }
 
     /**
@@ -372,8 +480,8 @@ object VedicMathValidator {
         multiplier: Int,
         expectedRawValues: List<Int>,
         expectedProduct: Long
-    ): Boolean {
-        if (multiplicand <= 0L || multiplier !in 12..19) return false
+    ): Boolean = safeCheck {
+        if (multiplicand <= 0L || multiplier !in 12..19 || expectedProduct <= 0L) return false
         val n = multiplier - 10
         val origDigits = multiplicand.toString().map { it.digitToInt() }
         val sandwiched = listOf(0) + origDigits + listOf(0)
@@ -382,7 +490,8 @@ object VedicMathValidator {
         for (i in 0 until origDigits.size + 1) {
             val d = sandwiched[i + 1]
             val prev = sandwiched[i]
-            rawValues.add(d + n * prev)
+            val term = Math.multiplyExact(n, prev)
+            rawValues.add(Math.addExact(d, term))
         }
 
         if (rawValues != expectedRawValues) return false
@@ -390,14 +499,17 @@ object VedicMathValidator {
         var currentCarry = 0
         val finalDigitsReversed = mutableListOf<Int>()
         for (i in rawValues.indices.reversed()) {
-            val total = rawValues[i] + currentCarry
+            val total = Math.addExact(rawValues[i], currentCarry)
             finalDigitsReversed.add(total % 10)
             currentCarry = total / 10
         }
         if (currentCarry > 0) finalDigitsReversed.add(currentCarry)
 
-        val computedProduct = finalDigitsReversed.reversed().joinToString("").toLong()
-        return computedProduct == expectedProduct && (multiplicand * multiplier.toLong()) == expectedProduct
+        val computedString = finalDigitsReversed.reversed().joinToString("")
+        val computedProduct = computedString.toLongOrNull() ?: return false
+        val expectedActual = Math.multiplyExact(multiplicand, multiplier.toLong())
+
+        computedProduct == expectedProduct && expectedActual == expectedProduct
     }
 
     /**
@@ -409,19 +521,21 @@ object VedicMathValidator {
         a1: Long, b1: Long,
         a2: Long, b2: Long,
         claimedA2: Long, claimedA1: Long, claimedA0: Long
-    ): Boolean {
-        val scF1 = a1 + b1
-        val scF2 = a2 + b2
-        val expectedProductSum = scF1 * scF2
-        val actualProductSum = claimedA2 + claimedA1 + claimedA0
+    ): Boolean = safeCheck {
+        val scF1 = Math.addExact(a1, b1)
+        val scF2 = Math.addExact(a2, b2)
+        val expectedProductSum = Math.multiplyExact(scF1, scF2)
+        val actualProductSum = Math.addExact(Math.addExact(claimedA2, claimedA1), claimedA0)
 
         if (expectedProductSum != actualProductSum) return false
 
-        val exactA2 = a1 * a2
-        val exactA1 = a1 * b2 + b1 * a2
-        val exactA0 = b1 * b2
+        val exactA2 = Math.multiplyExact(a1, a2)
+        val a1b2 = Math.multiplyExact(a1, b2)
+        val b1a2 = Math.multiplyExact(b1, a2)
+        val exactA1 = Math.addExact(a1b2, b1a2)
+        val exactA0 = Math.multiplyExact(b1, b2)
 
-        return exactA2 == claimedA2 && exactA1 == claimedA1 && exactA0 == claimedA0
+        exactA2 == claimedA2 && exactA1 == claimedA1 && exactA0 == claimedA0
     }
 
     /**
@@ -437,13 +551,27 @@ object VedicMathValidator {
         expectedQ: Long,
         expectedRoot1: Long,
         expectedRoot2: Long
-    ): Boolean {
-        if (expectedP * expectedQ != c || expectedP + expectedQ != b) return false
-        if (expectedRoot1 != -expectedP || expectedRoot2 != -expectedQ) return false
+    ): Boolean = safeCheck {
+        if (expectedP == Long.MIN_VALUE || expectedQ == Long.MIN_VALUE) return false
+        val pq = Math.multiplyExact(expectedP, expectedQ)
+        val pPlusQ = Math.addExact(expectedP, expectedQ)
+        if (pq != c || pPlusQ != b) return false
 
-        val eval1 = expectedRoot1 * expectedRoot1 + b * expectedRoot1 + c
-        val eval2 = expectedRoot2 * expectedRoot2 + b * expectedRoot2 + c
-        return eval1 == 0L && eval2 == 0L
+        val negP = Math.negateExact(expectedP)
+        val negQ = Math.negateExact(expectedQ)
+        if (expectedRoot1 != negP || expectedRoot2 != negQ) return false
+
+        // root1^2 + b * root1 + c
+        val r1Sq = Math.multiplyExact(expectedRoot1, expectedRoot1)
+        val bR1 = Math.multiplyExact(b, expectedRoot1)
+        val eval1 = Math.addExact(Math.addExact(r1Sq, bR1), c)
+
+        // root2^2 + b * root2 + c
+        val r2Sq = Math.multiplyExact(expectedRoot2, expectedRoot2)
+        val bR2 = Math.multiplyExact(b, expectedRoot2)
+        val eval2 = Math.addExact(Math.addExact(r2Sq, bR2), c)
+
+        eval1 == 0L && eval2 == 0L
     }
 
     /**
@@ -462,23 +590,46 @@ object VedicMathValidator {
         claimedSqrtD: Long,
         expectedRoot1: Long,
         expectedRoot2: Long
-    ): Boolean {
-        if (a == 0L) return false
-        val d = b * b - 4 * a * c
+    ): Boolean = safeCheck {
+        if (a == 0L || claimedSqrtD < 0L) return false
+
+        val bSq = Math.multiplyExact(b, b)
+        val fourA = Math.multiplyExact(4L, a)
+        val fourAC = Math.multiplyExact(fourA, c)
+        val d = Math.subtractExact(bSq, fourAC)
+
         if (d != claimedD || d < 0L) return false
-        if (claimedSqrtD * claimedSqrtD != d) return false
+        val sqrtDSq = Math.multiplyExact(claimedSqrtD, claimedSqrtD)
+        if (sqrtDSq != d) return false
 
-        val derivR1 = 2 * a * expectedRoot1 + b
-        val derivR2 = 2 * a * expectedRoot2 + b
+        val twoA = Math.multiplyExact(2L, a)
+        val twoAR1 = Math.multiplyExact(twoA, expectedRoot1)
+        val derivR1 = Math.addExact(twoAR1, b)
 
-        val branchMatches = (derivR1 == claimedSqrtD && derivR2 == -claimedSqrtD) ||
-                (derivR1 == -claimedSqrtD && derivR2 == claimedSqrtD)
+        val twoAR2 = Math.multiplyExact(twoA, expectedRoot2)
+        val derivR2 = Math.addExact(twoAR2, b)
+
+        val negSqrtD = Math.negateExact(claimedSqrtD)
+        val branchMatches = (derivR1 == claimedSqrtD && derivR2 == negSqrtD) ||
+                (derivR1 == negSqrtD && derivR2 == claimedSqrtD)
         if (!branchMatches) return false
 
-        val eval1 = a * expectedRoot1 * expectedRoot1 + b * expectedRoot1 + c
-        val eval2 = a * expectedRoot2 * expectedRoot2 + b * expectedRoot2 + c
+        // f(r1) = a * r1^2 + b * r1 + c == 0
+        val r1Sq = Math.multiplyExact(expectedRoot1, expectedRoot1)
+        val aR1Sq = Math.multiplyExact(a, r1Sq)
+        val bR1 = Math.multiplyExact(b, expectedRoot1)
+        val eval1 = Math.addExact(Math.addExact(aR1Sq, bR1), c)
 
-        return eval1 == 0L && eval2 == 0L && (derivR1 * derivR1 == d) && (derivR2 * derivR2 == d)
+        // f(r2) = a * r2^2 + b * r2 + c == 0
+        val r2Sq = Math.multiplyExact(expectedRoot2, expectedRoot2)
+        val aR2Sq = Math.multiplyExact(a, r2Sq)
+        val bR2 = Math.multiplyExact(b, expectedRoot2)
+        val eval2 = Math.addExact(Math.addExact(aR2Sq, bR2), c)
+
+        val derivR1Sq = Math.multiplyExact(derivR1, derivR1)
+        val derivR2Sq = Math.multiplyExact(derivR2, derivR2)
+
+        eval1 == 0L && eval2 == 0L && derivR1Sq == d && derivR2Sq == d
     }
 
     /**
