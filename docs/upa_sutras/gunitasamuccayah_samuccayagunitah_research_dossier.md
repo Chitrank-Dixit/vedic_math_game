@@ -3,7 +3,7 @@
 **Document Status:** Complete Research Dossier / Phase U4 (Final Tier C Consolidation)  
 **Target Subject:** Upa-Sutra 13 (*Gunitasamuccayah Samuccayagunitah* / गुणितसमुच्चयः समुच्चयगुणितः)  
 **Classification:** Tier C (Compound Aphorism & Triple Overlap Resolution)  
-**Project:** *Ankh: The Sutra Saga* — Upa-Sutra Treasury  
+**Project:** *Ank: The Sutra Saga* — Upa-Sutra Treasury  
 
 ---
 

@@ -28,25 +28,25 @@ Phase U2 introduces **Upa-Sutra 7: Yavadunam Tavadunikrtya Varganca Yojayet** ("
 - Formal definitions for block width, raw LHS/RHS, overflow carry extraction ($C = \lfloor R / 10^k \rfloor$), and remainder padding.
 
 ### 2. Domain Models & Generator Engine
-- **Domain Models**: [YavadunamRemixModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/domain/models/YavadunamRemixModels.kt) (`YavadunamRemixStep`, `YavadunamRemixSolution`).
-- **Generator**: [YavadunamRemixGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/engine/upasutras/YavadunamRemixGenerator.kt) implementing `UpaSutraGenerator`.
+- **Domain Models**: [YavadunamRemixModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/domain/models/YavadunamRemixModels.kt) (`YavadunamRemixStep`, `YavadunamRemixSolution`).
+- **Generator**: [YavadunamRemixGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/engine/upasutras/YavadunamRemixGenerator.kt) implementing `UpaSutraGenerator`.
 - **Tiers**:
   - Tier 1: Base 100, $d \le 9$, zero-padding (e.g. $97^2 = 9409$).
   - Tier 2: Base 1000, 3-digit block width, $d \le 31$ (e.g. $994^2 = 988036$).
   - Tier 3: Base 100, carry overflow forcing, $10 \le d \le 25$ (e.g. $88^2 = 7744, 85^2 = 7225$).
 
 ### 3. Quest UI & Treasury Wiring
-- **Quest UI**: [UpaSutraQuestScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/screens/UpaSutraQuestScreen.kt)
+- **Quest UI**: [UpaSutraQuestScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/screens/UpaSutraQuestScreen.kt)
   - Story Beat: Guru tests mastery with overflow carry.
   - Guided Example: Step-by-step walkthrough of $88^2 = 7744$.
   - Practice (5 problems) and Challenge (3 problems) with badge awarding.
-- **ViewModel**: [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/viewmodel/GameViewModel.kt) wired to `YavadunamRemixGenerator`.
+- **ViewModel**: [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/viewmodel/GameViewModel.kt) wired to `YavadunamRemixGenerator`.
 
 ---
 
 ## 3. Verification & Test Results
 
-- **Unit Test Suites**: [YavadunamRemixGeneratorTest.kt](file:///d:/game_dev/VedicMathematics/app/src/test/java/com/ankh/sutrasaga/engine/upasutras/YavadunamRemixGeneratorTest.kt) and [GameViewModelTest.kt](file:///d:/game_dev/VedicMathematics/app/src/test/java/com/ankh/sutrasaga/ui/GameViewModelTest.kt).
+- **Unit Test Suites**: [YavadunamRemixGeneratorTest.kt](file:///d:/game_dev/VedicMathematics/app/src/test/java/com/ank/sutrasaga/engine/upasutras/YavadunamRemixGeneratorTest.kt) and [GameViewModelTest.kt](file:///d:/game_dev/VedicMathematics/app/src/test/java/com/ank/sutrasaga/ui/GameViewModelTest.kt).
 - **Test Scenarios**:
   - Canonical no-carry case: $97^2 = 9409$.
   - Canonical base-1000 case: $994^2 = 988036$.

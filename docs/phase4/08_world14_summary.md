@@ -1,15 +1,15 @@
 # Phase 4 — World 14 Summary: Gunitasamuccayah (Polynomial Factorization Verification)
 
 ## Overview
-World 14 introduces **Gunitasamuccayah** ("The product of the sum is equal to the sum of the products"), the eighth post-MVP world in *Ankh: The Sutra Saga*. This world teaches polynomial factorization verification via coefficient-sum checking ($x=1$) and exact term-by-term expansion comparison:
+World 14 introduces **Gunitasamuccayah** ("The product of the sum is equal to the sum of the products"), the eighth post-MVP world in *Ank: The Sutra Saga*. This world teaches polynomial factorization verification via coefficient-sum checking ($x=1$) and exact term-by-term expansion comparison:
 $$SC(P) = P(1) \quad \text{and} \quad SC(F_1) \cdot SC(F_2) = SC(P)$$
 
 ---
 
 ## 1. Mathematical Architecture & Verification
 - **Mathematical Specification Document**: [world14_math_spec.md](file:///d:/game_dev/VedicMathematics/docs/phase4/world14_math_spec.md)
-- **Engine Implementation**: [GunitasamuccayahGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/engine/GunitasamuccayahGenerator.kt)
-- **Domain Models**: [GunitasamuccayahModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/domain/models/GunitasamuccayahModels.kt)
+- **Engine Implementation**: [GunitasamuccayahGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/engine/GunitasamuccayahGenerator.kt)
+- **Domain Models**: [GunitasamuccayahModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/domain/models/GunitasamuccayahModels.kt)
   - `LinearFactor(a: Long, b: Long)`
   - `QuadraticPolynomial(a2: Long, a1: Long, a0: Long)`
   - `FactorizationProposal(factors: List<LinearFactor>, claimedProduct: QuadraticPolynomial)`
@@ -38,9 +38,9 @@ $$SC(P) = P(1) \quad \text{and} \quad SC(F_1) \cdot SC(F_2) = SC(P)$$
 ---
 
 ## 4. UI & Gurukul Integration
-- **Dialogue Script**: Story beat and tutorial script added in [GurukulContentRepository.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/data/repository/GurukulContentRepository.kt).
-- **World Select Screen**: World 14 card unlocked on [WorldSelectScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/screens/WorldSelectScreen.kt) marked as Post-MVP.
-- **Game ViewModel**: Generator mapped (`selectedWorldId == 14`) in [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/viewmodel/GameViewModel.kt).
+- **Dialogue Script**: Story beat and tutorial script added in [GurukulContentRepository.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/data/repository/GurukulContentRepository.kt).
+- **World Select Screen**: World 14 card unlocked on [WorldSelectScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/screens/WorldSelectScreen.kt) marked as Post-MVP.
+- **Game ViewModel**: Generator mapped (`selectedWorldId == 14`) in [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/viewmodel/GameViewModel.kt).
 
 ---
 

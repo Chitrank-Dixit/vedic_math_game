@@ -2,7 +2,7 @@
 
 ## 1. Executive Summary & Verdict
 
-For a mobile quiz and learning application such as **Ankh: The Sutra Saga**, **Rive** provides the optimal technical foundation over heavy 3D game engines (like Unity or Unreal).
+For a mobile quiz and learning application such as **Ank: The Sutra Saga**, **Rive** provides the optimal technical foundation over heavy 3D game engines (like Unity or Unreal).
 
 - **Duolingo Alignment**: Duolingo relies entirely on Rive for character animation (Duo, Lily, Falstaff) via 2.5D vector mesh deformation, bones, and nested state machines.
 - **Binary Footprint**: Rive `.riv` character assets range from **50 KB to 300 KB**, compared to **+30 MB to 100 MB+** added by embedding the Unity runtime.

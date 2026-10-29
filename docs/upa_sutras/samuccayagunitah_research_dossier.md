@@ -3,7 +3,7 @@
 **Document Status:** Complete Research Dossier / Phase U4 (Tier C Resolution)  
 **Target Subject:** Upa-Sutra 10 (*Samuccayagunitah* / समुच्चयगुणितः)  
 **Classification:** Tier C (Linguistic Fragment & Overlap Resolution)  
-**Project:** *Ankh: The Sutra Saga* — Upa-Sutra Treasury  
+**Project:** *Ank: The Sutra Saga* — Upa-Sutra Treasury  
 
 ---
 

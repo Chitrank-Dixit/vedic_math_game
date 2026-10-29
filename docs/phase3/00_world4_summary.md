@@ -1,6 +1,6 @@
 # Phase 3: World 4 — Yavadunam (Squaring Near a Base) — Summary Report
 
-**Project:** Ankh: The Sutra Saga  
+**Project:** Ank: The Sutra Saga  
 **Phase:** Phase 3 — World 4 (Yavadunam)  
 **Status:** Complete & 100% Verified  
 

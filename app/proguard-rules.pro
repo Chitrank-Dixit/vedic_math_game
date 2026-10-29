@@ -1,5 +1,5 @@
 # ==============================================================================
-# Ankh: The Sutra Saga — Production ProGuard & R8 Configuration
+# Ank: The Sutra Saga — Production ProGuard & R8 Configuration
 # ==============================================================================
 
 # 1. Jetpack Compose Keep Rules
@@ -15,9 +15,9 @@
 -keep @androidx.room.Dao class * { *; }
 
 # 3. Domain Models & Enums Keep Rules
--keep class com.ankh.sutrasaga.domain.models.** { *; }
--keep enum com.ankh.sutrasaga.domain.models.** { *; }
--keep class com.ankh.sutrasaga.data.db.** { *; }
+-keep class com.ank.sutrasaga.domain.models.** { *; }
+-keep enum com.ank.sutrasaga.domain.models.** { *; }
+-keep class com.ank.sutrasaga.data.db.** { *; }
 
 # 4. Lottie Animation Engine Keep Rules
 -keep class com.airbnb.lottie.** { *; }

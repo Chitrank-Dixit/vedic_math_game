@@ -13,7 +13,7 @@
 
 ### Q2. Game Title Finalization
 - **Status:** **LOCKED**  
-- **Resolution:** **Ankh: The Sutra Saga** confirmed as official title for app branding, UI headers, and documentation.
+- **Resolution:** **Ank: The Sutra Saga** confirmed as official title for app branding, UI headers, and documentation.
 
 ### Q3. Game Engine & Technology Stack Choice (Phase 1 Foundation)
 - **Status:** **LOCKED**  
@@ -58,7 +58,7 @@
 | # | Question | Selected Decision | Date Resolved | Notes |
 |---|---|---|---|---|
 | Q1 | Target Audience | **Hybrid Persona** | 2026-08-08 | High speed utility + comedic friendly lore wrapper |
-| Q2 | Title | **Ankh: The Sutra Saga** | 2026-08-08 | Locked official title |
+| Q2 | Title | **Ank: The Sutra Saga** | 2026-08-08 | Locked official title |
 | Q3 | Tech Stack | **Kotlin + Jetpack Compose** | 2026-08-08 | Native Android, lightweight APK footprint |
 | Q4 | Step Input | **Scaffolded Hybrid UI** | 2026-08-08 | Keypad + Tap/Swipe gesture tiles |
 | Q5 | Timer Balance | **Scaffolded Curve** | 2026-08-08 | World 1 untimed $\rightarrow$ World 5 active boss timer |

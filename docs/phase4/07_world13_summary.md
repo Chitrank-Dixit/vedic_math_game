@@ -1,7 +1,7 @@
 # Phase 4 — World 13 Summary: Sopantyadvayamantyam (Multiplication by 12–19)
 
 ## Overview
-World 13 introduces **Sopantyadvayamantyam** ("The ultimate and twice the penultimate"), the seventh post-MVP world in *Ankh: The Sutra Saga*. This world teaches multiplication by numbers 12 through 19 via digit sandwiching and ultimate/penultimate pairing:
+World 13 introduces **Sopantyadvayamantyam** ("The ultimate and twice the penultimate"), the seventh post-MVP world in *Ank: The Sutra Saga*. This world teaches multiplication by numbers 12 through 19 via digit sandwiching and ultimate/penultimate pairing:
 $$\text{Raw}[i] = d[i+1] + N \cdot d[i] \quad \text{where } N \in [2..9]$$
 
 ---
@@ -14,8 +14,8 @@ $$\text{Raw}[i] = d[i+1] + N \cdot d[i] \quad \text{where } N \in [2..9]$$
 
 ## 2. Mathematical Architecture & Verification
 - **Mathematical Specification Document**: [world13_math_spec.md](file:///d:/game_dev/VedicMathematics/docs/phase4/world13_math_spec.md)
-- **Engine Implementation**: [SopantyadvayamantyamGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/engine/SopantyadvayamantyamGenerator.kt)
-- **Domain Models**: [SopantyadvayamantyamModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/domain/models/SopantyadvayamantyamModels.kt)
+- **Engine Implementation**: [SopantyadvayamantyamGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/engine/SopantyadvayamantyamGenerator.kt)
+- **Domain Models**: [SopantyadvayamantyamModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/domain/models/SopantyadvayamantyamModels.kt)
   - `SandwichedDigits(original: List<Int>, sandwiched: List<Int>)`
   - `RawPositionValue(index: Int, digit: Int, previousDigit: Int, n: Int, rawValue: Int)`
   - `CarryStep(index: Int, incomingRaw: Int, incomingCarry: Int, outputDigit: Int, outgoingCarry: Int)`
@@ -33,9 +33,9 @@ $$\text{Raw}[i] = d[i+1] + N \cdot d[i] \quad \text{where } N \in [2..9]$$
 ---
 
 ## 4. UI & Gurukul Integration
-- **Dialogue Script**: Story beat and tutorial script added in [GurukulContentRepository.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/data/repository/GurukulContentRepository.kt).
-- **World Select Screen**: World 13 card unlocked on [WorldSelectScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/screens/WorldSelectScreen.kt) marked as Post-MVP.
-- **Game ViewModel**: Generator mapped (`selectedWorldId == 13`) in [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/viewmodel/GameViewModel.kt).
+- **Dialogue Script**: Story beat and tutorial script added in [GurukulContentRepository.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/data/repository/GurukulContentRepository.kt).
+- **World Select Screen**: World 13 card unlocked on [WorldSelectScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/screens/WorldSelectScreen.kt) marked as Post-MVP.
+- **Game ViewModel**: Generator mapped (`selectedWorldId == 13`) in [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/viewmodel/GameViewModel.kt).
 
 ---
 

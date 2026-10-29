@@ -1,6 +1,6 @@
 # Phase 0: Foundation & Research — Documentation Index
 
-Welcome to the **Phase 0 (Foundation & Research)** documentation hub for **"Ankh: The Sutra Saga"** (Vedic Mathematics Android Game). This directory serves as the strategic entry point and reference baseline before Phase 1 design and development.
+Welcome to the **Phase 0 (Foundation & Research)** documentation hub for **"Ank: The Sutra Saga"** (Vedic Mathematics Android Game). This directory serves as the strategic entry point and reference baseline before Phase 1 design and development.
 
 ---
 
@@ -13,7 +13,7 @@ Welcome to the **Phase 0 (Foundation & Research)** documentation hub for **"Ankh
    *Structured content audit of all 16 main Sutras and 13 Upa-sutras with Sanskrit names, English meanings, math domains, step-by-step worked examples, grade levels, and 16-world sequencing logic.*
 
 3. **[02_competitive_analysis.md](file:///d:/game_dev/VedicMathematics/docs/phase0/02_competitive_analysis.md)**  
-   *Mobile math game genre analysis, app store manual research checklist, and 5 concrete game design differentiators for Ankh.*
+   *Mobile math game genre analysis, app store manual research checklist, and 5 concrete game design differentiators for Ank.*
 
 4. **[03_mvp_scope.md](file:///d:/game_dev/VedicMathematics/docs/phase0/03_mvp_scope.md)**  
    *Explicit MVP scope definition outlining the 5 launch Sutras (Worlds 1–5), 2 side-quest Upa-sutras, IN vs. OUT feature matrix, and scope cut rationales.*

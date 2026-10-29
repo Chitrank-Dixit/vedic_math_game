@@ -33,8 +33,8 @@
 - Formal algebraic proofs and independent verification of the 3 canonical seed examples.
 
 ### 2. Domain Models & Generator Engine
-- **Domain Models**: [KevalaihModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/domain/models/KevalaihModels.kt) (`KevalaihClassification`, `KevalaihStep`, `KevalaihSolution`).
-- **Generator Engine**: [KevalaihSaptakamGunyatGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/engine/upasutras/KevalaihSaptakamGunyatGenerator.kt) implementing `UpaSutraGenerator`.
+- **Domain Models**: [KevalaihModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/domain/models/KevalaihModels.kt) (`KevalaihClassification`, `KevalaihStep`, `KevalaihSolution`).
+- **Generator Engine**: [KevalaihSaptakamGunyatGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/engine/upasutras/KevalaihSaptakamGunyatGenerator.kt) implementing `UpaSutraGenerator`.
 - **Tiers**:
   - Tier 1: Canonical $1/7 \implies 142857$ ($0.\overline{142857}$).
   - Tier 2: $2/7 \implies 285714$ and $3/7 \implies 428571$.
@@ -43,17 +43,17 @@
 
 ### 3. Quest UI & Treasury Wiring
 - **Registry & Unlock**: `KEVALAIHSAPTAKAM_GUNYAT` unlock prerequisite set to World 12 (*Shesanyankena Charamena*).
-- **Quest UI**: [UpaSutraQuestScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/screens/UpaSutraQuestScreen.kt)
+- **Quest UI**: [UpaSutraQuestScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/screens/UpaSutraQuestScreen.kt)
   - Story Beat: Guru presents the 143 wheel: $7 \times 143 = 1001 \implies 1001 \times 999 = 999999 \implies 7 \times 142857 = 999999$.
   - Guided Example: Step-by-step breakdown of $1/7 \implies 142857$ and $2/7 \implies 285714$.
   - Practice (5 problems) and Challenge (3 problems) with cyclic wheel rotation.
-- **ViewModel**: [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/viewmodel/GameViewModel.kt) wired to `KevalaihSaptakamGunyatGenerator`.
+- **ViewModel**: [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/viewmodel/GameViewModel.kt) wired to `KevalaihSaptakamGunyatGenerator`.
 
 ---
 
 ## 3. Verification & Test Results
 
-- **Unit Test Suites**: [KevalaihSaptakamGunyatGeneratorTest.kt](file:///d:/game_dev/VedicMathematics/app/src/test/java/com/ankh/sutrasaga/engine/upasutras/KevalaihSaptakamGunyatGeneratorTest.kt) and [GameViewModelTest.kt](file:///d:/game_dev/VedicMathematics/app/src/test/java/com/ankh/sutrasaga/ui/GameViewModelTest.kt).
+- **Unit Test Suites**: [KevalaihSaptakamGunyatGeneratorTest.kt](file:///d:/game_dev/VedicMathematics/app/src/test/java/com/ank/sutrasaga/engine/upasutras/KevalaihSaptakamGunyatGeneratorTest.kt) and [GameViewModelTest.kt](file:///d:/game_dev/VedicMathematics/app/src/test/java/com/ank/sutrasaga/ui/GameViewModelTest.kt).
 - **Test Scenarios**:
   - $7 \times 143 = 1001$ foundational identity.
   - $1/7 \implies 142857$, $2/7 \implies 285714$, $3/7 \implies 428571$, $4/7 \implies 571428$, $5/7 \implies 714285$, $6/7 \implies 857142$.

@@ -1,4 +1,4 @@
-# Project Charter: Ankh — The Sutra Saga
+# Project Charter: Ank — The Sutra Saga
 
 **Document Status:** Draft / Phase 0  
 **Target Platform:** Android (Mobile MVP)  
@@ -8,18 +8,18 @@
 
 ## 1. Title & Naming Options
 
-Working Title: **Ankh: The Sutra Saga**
+Working Title: **Ank: The Sutra Saga**
 
 ### Proposed Alternative Titles:
 1. **Sutra: The Vedic Calculation Quest** — Emphasizes math mechanics and adventure; clear, accessible title for educational store listings.
-2. **Ankh & The Mind Grid** — Focuses on the hero's journey and mental calculation puzzles, leaning into sci-fi / fantasy adventure vibes.
+2. **Ank & The Mind Grid** — Focuses on the hero's journey and mental calculation puzzles, leaning into sci-fi / fantasy adventure vibes.
 3. **VedaMath: Chronicles of the 16 Sutras** — Direct, descriptive, and highly searchable for users specifically seeking Vedic Mathematics tools or games.
 
 ---
 
 ## 2. Elevator Pitch
 
-*Ankh: The Sutra Saga* is a story-driven, comedic puzzle adventure for Android that transforms ancient Vedic Mathematics into thrilling mental combat mechanics. Players follow Ankh—a quirky novice mathematician equipped with an enigmatic calculating artifact—as they navigate a realm ruled by chaotic math demons. By mastering the 16 Sutras and 13 Upa-sutras through lightning-fast mental shortcuts, humorous narrative encounters, and timed tactical puzzles, players turn tedious calculations (like multiplying 996 × 994 or finding 85² in seconds) into high-powered spellcasting and puzzle-solving feats.
+*Ank: The Sutra Saga* is a story-driven, comedic puzzle adventure for Android that transforms ancient Vedic Mathematics into thrilling mental combat mechanics. Players follow Ank—a quirky novice mathematician equipped with an enigmatic calculating artifact—as they navigate a realm ruled by chaotic math demons. By mastering the 16 Sutras and 13 Upa-sutras through lightning-fast mental shortcuts, humorous narrative encounters, and timed tactical puzzles, players turn tedious calculations (like multiplying 996 × 994 or finding 85² in seconds) into high-powered spellcasting and puzzle-solving feats.
 
 ---
 

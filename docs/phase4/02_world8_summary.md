@@ -1,14 +1,14 @@
 # Phase 4 — World 8 Summary: Sankalana-Vyavakalanabhyam (Swapped Simultaneous Equations)
 
 ## Overview
-World 8 introduces **Sankalana-Vyavakalanabhyam** ("By Addition and Subtraction"), the second post-MVP world in *Ankh: The Sutra Saga*. This world teaches a specialized Vedic technique for solving 2x2 systems of simultaneous linear equations where the $x$- and $y$-coefficients are swapped between the two equations ($a_1 = b_2$ and $b_1 = a_2$, or $|a_1| = |b_2|$ and $|b_1| = |a_2|$).
+World 8 introduces **Sankalana-Vyavakalanabhyam** ("By Addition and Subtraction"), the second post-MVP world in *Ank: The Sutra Saga*. This world teaches a specialized Vedic technique for solving 2x2 systems of simultaneous linear equations where the $x$- and $y$-coefficients are swapped between the two equations ($a_1 = b_2$ and $b_1 = a_2$, or $|a_1| = |b_2|$ and $|b_1| = |a_2|$).
 
 ---
 
 ## 1. Mathematical Architecture & Verification
 - **Mathematical Specification Document**: [world8_math_spec.md](file:///d:/game_dev/VedicMathematics/docs/phase4/world8_math_spec.md)
-- **Engine Implementation**: [SankalanaVyavakalanabhyamGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/engine/SankalanaVyavakalanabhyamGenerator.kt)
-- **Domain Models**: [SankalanaModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/domain/models/SankalanaModels.kt)
+- **Engine Implementation**: [SankalanaVyavakalanabhyamGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/engine/SankalanaVyavakalanabhyamGenerator.kt)
+- **Domain Models**: [SankalanaModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/domain/models/SankalanaModels.kt)
   - `SankalanaClassification`: `UNIQUE_SOLUTION`, `INFINITE_SOLUTIONS`, `INCONSISTENT`, `NOT_APPLICABLE`
   - `SankalanaStep`, `SankalanaSolution`, `SankalanaProblem`
 - **Methodology**:
@@ -29,9 +29,9 @@ World 8 introduces **Sankalana-Vyavakalanabhyam** ("By Addition and Subtraction"
 ---
 
 ## 3. UI & Gurukul Integration
-- **Dialogue Script**: Story beat and step-by-step tutorial script added in [GurukulContentRepository.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/data/repository/GurukulContentRepository.kt).
-- **World Select Screen**: World 8 card unlocked on [WorldSelectScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/screens/WorldSelectScreen.kt) marked as Post-MVP.
-- **Game ViewModel**: Generator mapped (`selectedWorldId == 8`) with `AnswerFormat.ORDERED_PAIR` handling in [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/viewmodel/GameViewModel.kt).
+- **Dialogue Script**: Story beat and step-by-step tutorial script added in [GurukulContentRepository.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/data/repository/GurukulContentRepository.kt).
+- **World Select Screen**: World 8 card unlocked on [WorldSelectScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/screens/WorldSelectScreen.kt) marked as Post-MVP.
+- **Game ViewModel**: Generator mapped (`selectedWorldId == 8`) with `AnswerFormat.ORDERED_PAIR` handling in [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/viewmodel/GameViewModel.kt).
 
 ---
 

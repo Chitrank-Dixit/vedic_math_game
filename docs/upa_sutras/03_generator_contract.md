@@ -7,14 +7,14 @@
 
 ## 1. Engine Interface Definition
 
-All Upa-Sutra problem generators in *Ankh: The Sutra Saga* implement the common `UpaSutraGenerator` interface extending the core `SutraProblemGenerator`:
+All Upa-Sutra problem generators in *Ank: The Sutra Saga* implement the common `UpaSutraGenerator` interface extending the core `SutraProblemGenerator`:
 
 ```kotlin
-package com.ankh.sutrasaga.engine
+package com.ank.sutrasaga.engine
 
-import com.ankh.sutrasaga.domain.models.DifficultyTier
-import com.ankh.sutrasaga.domain.models.SutraProblem
-import com.ankh.sutrasaga.domain.models.UpaSutraId
+import com.ank.sutrasaga.domain.models.DifficultyTier
+import com.ank.sutrasaga.domain.models.SutraProblem
+import com.ank.sutrasaga.domain.models.UpaSutraId
 
 interface UpaSutraGenerator : SutraProblemGenerator {
     /**

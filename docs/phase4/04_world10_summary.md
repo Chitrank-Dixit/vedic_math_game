@@ -1,14 +1,14 @@
 # Phase 4 — World 10 Summary: Puranapuranabhyam (Completing the Square)
 
 ## Overview
-World 10 introduces **Puranapuranabhyam** ("By completion or non-completion"), the fourth post-MVP world in *Ankh: The Sutra Saga*. This world teaches completing the square for real-coefficient quadratic equations $A x^2 + B x + C = 0 \quad (A \ne 0)$.
+World 10 introduces **Puranapuranabhyam** ("By completion or non-completion"), the fourth post-MVP world in *Ank: The Sutra Saga*. This world teaches completing the square for real-coefficient quadratic equations $A x^2 + B x + C = 0 \quad (A \ne 0)$.
 
 ---
 
 ## 1. Mathematical Architecture & Verification
 - **Mathematical Specification Document**: [world10_math_spec.md](file:///d:/game_dev/VedicMathematics/docs/phase4/world10_math_spec.md)
-- **Engine Implementation**: [PuranapuranabhyamGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/engine/PuranapuranabhyamGenerator.kt)
-- **Domain Models**: [PuranapuranabhyamModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/domain/models/PuranapuranabhyamModels.kt)
+- **Engine Implementation**: [PuranapuranabhyamGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/engine/PuranapuranabhyamGenerator.kt)
+- **Domain Models**: [PuranapuranabhyamModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/domain/models/PuranapuranabhyamModels.kt)
   - `QuadraticEquation(a: Long, b: Long, c: Long)`
   - `CompletionOperationType`: `NORMALIZE`, `MOVE_CONSTANT`, `ADD_COMPLETION`, `FORM_SQUARE`, `SOLVE_SQUARE`, `VERIFY`
   - `QuadraticClassification`: `TWO_REAL_ROOTS`, `REPEATED_REAL_ROOT`, `NO_REAL_ROOTS`, `IRRATIONAL_REAL_ROOTS_DEFERRED`, `NOT_QUADRATIC`, `UNSUPPORTED`
@@ -34,9 +34,9 @@ World 10 introduces **Puranapuranabhyam** ("By completion or non-completion"), t
 ---
 
 ## 3. UI & Gurukul Integration
-- **Dialogue Script**: Story beat and tutorial script added in [GurukulContentRepository.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/data/repository/GurukulContentRepository.kt).
-- **World Select Screen**: World 10 card unlocked on [WorldSelectScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/screens/WorldSelectScreen.kt) marked as Post-MVP.
-- **Game ViewModel**: Generator mapped (`selectedWorldId == 10`) in [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/viewmodel/GameViewModel.kt).
+- **Dialogue Script**: Story beat and tutorial script added in [GurukulContentRepository.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/data/repository/GurukulContentRepository.kt).
+- **World Select Screen**: World 10 card unlocked on [WorldSelectScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/screens/WorldSelectScreen.kt) marked as Post-MVP.
+- **Game ViewModel**: Generator mapped (`selectedWorldId == 10`) in [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/viewmodel/GameViewModel.kt).
 
 ---
 

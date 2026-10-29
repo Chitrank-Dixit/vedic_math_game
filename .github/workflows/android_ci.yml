@@ -151,8 +151,8 @@ jobs:
             echo "Version Name:             $VERSION_NAME"
             echo "Target SDK:               $TARGET_SDK"
 
-            if [ "$APP_ID" != "com.ankh.sutrasaga" ]; then
-              echo "::error::Application ID mismatch: got '$APP_ID', expected 'com.ankh.sutrasaga'"
+            if [ "$APP_ID" != "com.ank.sutrasaga" ]; then
+              echo "::error::Application ID mismatch: got '$APP_ID', expected 'com.ank.sutrasaga'"
               exit 1
             fi
             if [ "$VERSION_CODE" != "1" ]; then

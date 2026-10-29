@@ -1,15 +1,15 @@
 # Phase 4 — World 15 Summary: Gunakasamuccayah (Monic Quadratic Factorization)
 
 ## Overview
-World 15 introduces **Gunakasamuccayah** ("The factors of the sum are equal to the sum of the factors"), the ninth post-MVP world in *Ankh: The Sutra Saga*. This world teaches structured monic quadratic factorization ($x^2 + Bx + C = 0$) by searching for constant-term factor pairs $(p, q)$ such that:
+World 15 introduces **Gunakasamuccayah** ("The factors of the sum are equal to the sum of the factors"), the ninth post-MVP world in *Ank: The Sutra Saga*. This world teaches structured monic quadratic factorization ($x^2 + Bx + C = 0$) by searching for constant-term factor pairs $(p, q)$ such that:
 $$p \cdot q = C \quad \text{and} \quad p + q = B \implies (x + p)(x + q) = 0 \implies x = -p, x = -q$$
 
 ---
 
 ## 1. Mathematical Architecture & Verification
 - **Mathematical Specification Document**: [world15_math_spec.md](file:///d:/game_dev/VedicMathematics/docs/phase4/world15_math_spec.md)
-- **Engine Implementation**: [GunakasamuccayahGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/engine/GunakasamuccayahGenerator.kt)
-- **Domain Models**: [GunakasamuccayahModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/domain/models/GunakasamuccayahModels.kt)
+- **Engine Implementation**: [GunakasamuccayahGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/engine/GunakasamuccayahGenerator.kt)
+- **Domain Models**: [GunakasamuccayahModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/domain/models/GunakasamuccayahModels.kt)
   - `MonicQuadratic(b: Long, c: Long)`
   - `FactorPair(p: Long, q: Long)`
   - `FactorizationCandidate(pair: FactorPair, productMatches: Boolean, sumMatches: Boolean)`
@@ -32,10 +32,10 @@ $$p \cdot q = C \quad \text{and} \quad p + q = B \implies (x + p)(x + q) = 0 \im
 ---
 
 ## 3. UI & Gurukul Integration
-- **Dialogue Script**: Story beat and tutorial script added in [GurukulContentRepository.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/data/repository/GurukulContentRepository.kt).
-- **Factor-Pair MathSlate Component**: Created [GunakasamuccayahMathSlate.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/components/GunakasamuccayahMathSlate.kt).
-- **World Select Screen**: World 15 card unlocked on [WorldSelectScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/screens/WorldSelectScreen.kt) marked as Post-MVP.
-- **Game ViewModel**: Generator mapped (`selectedWorldId == 15`) in [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/viewmodel/GameViewModel.kt).
+- **Dialogue Script**: Story beat and tutorial script added in [GurukulContentRepository.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/data/repository/GurukulContentRepository.kt).
+- **Factor-Pair MathSlate Component**: Created [GunakasamuccayahMathSlate.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/components/GunakasamuccayahMathSlate.kt).
+- **World Select Screen**: World 15 card unlocked on [WorldSelectScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/screens/WorldSelectScreen.kt) marked as Post-MVP.
+- **Game ViewModel**: Generator mapped (`selectedWorldId == 15`) in [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/viewmodel/GameViewModel.kt).
 
 ---
 

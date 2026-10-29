@@ -29,25 +29,25 @@ Phase U2 introduces **Upa-Sutra 3: Adyamadyenantyamantyena** ("The first by the 
 - Formal definitions for candidate pairing, cross-term evaluation, and discriminant check ($D = B^2 - 4AC$) for unfactorables.
 
 ### 2. Domain Models & Generator Engine
-- **Domain Models**: [AdyamadyaModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/domain/models/AdyamadyaModels.kt) (`NonMonicQuadratic`, `FirstLastCandidate`, `AdyamadyaClassification`, `AdyamadyaStep`, `AdyamadyaSolution`).
-- **Generator Engine**: [AdyamadyenantyamantyenaGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/engine/upasutras/AdyamadyenantyamantyenaGenerator.kt) implementing `UpaSutraGenerator`.
+- **Domain Models**: [AdyamadyaModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/domain/models/AdyamadyaModels.kt) (`NonMonicQuadratic`, `FirstLastCandidate`, `AdyamadyaClassification`, `AdyamadyaStep`, `AdyamadyaSolution`).
+- **Generator Engine**: [AdyamadyenantyamantyenaGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/engine/upasutras/AdyamadyenantyamantyenaGenerator.kt) implementing `UpaSutraGenerator`.
 - **Tiers**:
   - Tier 1: Positive $A, B, C$ with small coefficients (e.g. $2x^2 + 7x + 5 = (2x+5)(x+1)$).
   - Tier 2: Negative $B$ or $C$, requiring signed candidate permutations (e.g. $3x^2 - 5x - 2 = (3x+1)(x-2)$).
   - Tier 3: Multiple candidate permutations and unfactorable quadratics (`NO_INTEGER_FACTORIZATION`, e.g. $2x^2 + 3x + 4$).
 
 ### 3. Quest UI & Treasury Wiring
-- **Quest UI**: [UpaSutraQuestScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/screens/UpaSutraQuestScreen.kt)
+- **Quest UI**: [UpaSutraQuestScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/screens/UpaSutraQuestScreen.kt)
   - Story Beat: Guru links forward crosswise multiplication in World 5 to reverse factoring.
   - Guided Example: Step-by-step breakdown of $2x^2 + 7x + 5 = (2x+5)(x+1)$.
   - Practice (5 problems) and Challenge (3 problems) with mastery badges.
-- **ViewModel**: [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/viewmodel/GameViewModel.kt) wired to `AdyamadyenantyamantyenaGenerator`.
+- **ViewModel**: [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/viewmodel/GameViewModel.kt) wired to `AdyamadyenantyamantyenaGenerator`.
 
 ---
 
 ## 3. Verification & Test Results
 
-- **Unit Test Suites**: [AdyamadyenantyamantyenaGeneratorTest.kt](file:///d:/game_dev/VedicMathematics/app/src/test/java/com/ankh/sutrasaga/engine/upasutras/AdyamadyenantyamantyenaGeneratorTest.kt) and [GameViewModelTest.kt](file:///d:/game_dev/VedicMathematics/app/src/test/java/com/ankh/sutrasaga/ui/GameViewModelTest.kt).
+- **Unit Test Suites**: [AdyamadyenantyamantyenaGeneratorTest.kt](file:///d:/game_dev/VedicMathematics/app/src/test/java/com/ank/sutrasaga/engine/upasutras/AdyamadyenantyamantyenaGeneratorTest.kt) and [GameViewModelTest.kt](file:///d:/game_dev/VedicMathematics/app/src/test/java/com/ank/sutrasaga/ui/GameViewModelTest.kt).
 - **Test Scenarios**:
   - Canonical example: $2x^2 + 7x + 5 = (2x+5)(x+1)$.
   - Negative coefficients: $3x^2 - 5x - 2 = (3x+1)(x-2)$.

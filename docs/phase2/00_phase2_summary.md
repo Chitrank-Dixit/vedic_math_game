@@ -1,6 +1,6 @@
 # Phase 2 (Revised): Gurukul Scene UI & MathSlate — Summary Report
 
-**Project:** Ankh: The Sutra Saga  
+**Project:** Ank: The Sutra Saga  
 **Phase:** Phase 2 (Revised)  
 **Status:** Complete & 100% Verified  
 

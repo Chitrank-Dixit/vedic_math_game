@@ -1,6 +1,6 @@
 # Upa-Sutra Treasury: Master Documentation & Registry
 
-**Project:** *Ankh: The Sutra Saga*  
+**Project:** *Ank: The Sutra Saga*  
 **Scope:** The 13 Vedic Upa-Sutras (Correlative Sub-Sutras)  
 **System Status:** Phase U5 Consolidated & 100% Verified  
 

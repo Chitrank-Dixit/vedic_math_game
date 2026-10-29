@@ -24,27 +24,27 @@ Phase U2 delivers **Upa-Sutra 1: Anurupyena** ("Proportionately") as the second 
   $$196 \times 204 \implies L = 400, R = -16 \implies 40000 - 16 = 39984$$
 
 ### 2. Domain Models & Generator Engine
-- **Domain Models**: [AnurupyenaModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/domain/models/AnurupyenaModels.kt) (`AnurupyenaBaseType`, `AnurupyenaClassification`, `AnurupyenaStep`, `AnurupyenaSolution`).
-- **Engine**: [AnurupyenaGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/engine/upasutras/AnurupyenaGenerator.kt) implementing `UpaSutraGenerator`.
+- **Domain Models**: [AnurupyenaModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/domain/models/AnurupyenaModels.kt) (`AnurupyenaBaseType`, `AnurupyenaClassification`, `AnurupyenaStep`, `AnurupyenaSolution`).
+- **Engine**: [AnurupyenaGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/engine/upasutras/AnurupyenaGenerator.kt) implementing `UpaSutraGenerator`.
 - **Tiers**:
   - Tier 1: Base 50, positive deviations, even scale division.
   - Tier 2: Base 50, mixed-sign/negative deviations.
   - Tier 3: Base 200, positive/negative deviations with borrow normalization.
 
 ### 3. Quest Shell & Treasury Integration
-- **Quest UI**: [UpaSutraQuestScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/screens/UpaSutraQuestScreen.kt)
+- **Quest UI**: [UpaSutraQuestScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/screens/UpaSutraQuestScreen.kt)
   - Story Beat: Guru explains the "camp halfway to 100" and proportional halving.
   - Guided Example: Step-by-step breakdown for $48 \times 46 = 2208$.
   - Guided Practice: 5 problems with step reveal.
   - Challenge: 3 timed/focused problems.
   - Reward: Badge awarding (`MASTERED` or `PRACTICED`).
-- **ViewModel**: [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/viewmodel/GameViewModel.kt) wired to `AnurupyenaGenerator`.
+- **ViewModel**: [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/viewmodel/GameViewModel.kt) wired to `AnurupyenaGenerator`.
 
 ---
 
 ## 3. Verification & Test Suite
 
-- **Unit Test Suite**: [AnurupyenaGeneratorTest.kt](file:///d:/game_dev/VedicMathematics/app/src/test/java/com/ankh/sutrasaga/engine/upasutras/AnurupyenaGeneratorTest.kt) and [GameViewModelTest.kt](file:///d:/game_dev/VedicMathematics/app/src/test/java/com/ankh/sutrasaga/ui/GameViewModelTest.kt).
+- **Unit Test Suite**: [AnurupyenaGeneratorTest.kt](file:///d:/game_dev/VedicMathematics/app/src/test/java/com/ank/sutrasaga/engine/upasutras/AnurupyenaGeneratorTest.kt) and [GameViewModelTest.kt](file:///d:/game_dev/VedicMathematics/app/src/test/java/com/ank/sutrasaga/ui/GameViewModelTest.kt).
 - **Test Scenarios**:
   - Canonical base-50 example: $48 \times 46 = 2208$.
   - Canonical base-200 example with borrow: $196 \times 204 = 39984$.
