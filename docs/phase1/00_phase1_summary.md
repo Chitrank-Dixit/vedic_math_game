@@ -1,6 +1,6 @@
 # Phase 1: Core Systems Prototype — Summary Report
 
-**Project:** Ankh: The Sutra Saga  
+**Project:** Ank: The Sutra Saga  
 **Phase:** 1 (Core Systems Prototype)  
 **Status:** Complete & Verified  
 
@@ -12,15 +12,15 @@ Phase 1 successfully establishes the core mathematical engine and a vertical sli
 
 ### Built Components:
 - **Project Infrastructure:** Configured Gradle Android build scripts (`build.gradle.kts`, `app/build.gradle.kts`, `local.properties`) targeting API 34 (min SDK 24).
-- **Pure Kotlin Engine (`com.ankh.sutrasaga.engine`):**
+- **Pure Kotlin Engine (`com.ank.sutrasaga.engine`):**
   - `SutraProblemGenerator`: Core problem generation interface.
   - `EkadhikenaPurvenaGenerator`: Implementation for World 1 (Squaring numbers ending in 5) supporting Tier 1 (2-digit: 15–95) and Tier 2 (3-digit: 105–995) difficulty ranges. Computes canonical decomposition steps ($n \rightarrow n+1 \rightarrow n(n+1) \rightarrow n(n+1)25$) and realistic distractors.
   - `NikhilamGenerator` & `EkanyunenaGenerator`: Engine stubs for Worlds 2 and 3.
 - **Unit Test Suite (`EkadhikenaPurvenaGeneratorTest`):**
   - 6 comprehensive JUnit test cases verifying canonical worked example $65^2 = 4225$, 30+ randomized numbers against $N^2$, decomposition step values, and distractor uniqueness. **All tests passing 100%**.
-- **Room Database (`com.ankh.sutrasaga.data`):**
+- **Room Database (`com.ank.sutrasaga.data`):**
   - `AppDatabase` & `UserProgressDao` persisting world completion status and high scores locally.
-- **Jetpack Compose Vertical Slice UI (`com.ankh.sutrasaga.ui`):**
+- **Jetpack Compose Vertical Slice UI (`com.ank.sutrasaga.ui`):**
   - `WorldSelectScreen`: Displays unlocked World 1 and locked Worlds 2–5.
   - `StoryBeatScreen`: Story dialogue card with placeholder narrative text.
   - `TutorialScreen`: Worked example ($65^2$) step-by-step interactive decomposition reveal.

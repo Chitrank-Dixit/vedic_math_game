@@ -1,15 +1,15 @@
 # Phase 4 — World 16 Summary: Chalana-Kalanabhyam (Post-MVP Campaign Finale)
 
 ## Overview
-World 16 introduces **Chalana-Kalanabhyam** ("Sequential motion / By calculus"), the tenth post-MVP world and campaign finale in *Ankh: The Sutra Saga*. This world teaches the derivative-discriminant root relation for quadratic equations ($Ax^2 + Bx + C = 0$):
+World 16 introduces **Chalana-Kalanabhyam** ("Sequential motion / By calculus"), the tenth post-MVP world and campaign finale in *Ank: The Sutra Saga*. This world teaches the derivative-discriminant root relation for quadratic equations ($Ax^2 + Bx + C = 0$):
 $$f'(x) = 2Ax + B, \quad D = B^2 - 4AC \implies f'(r)^2 = D \implies 2Ax + B = \pm \sqrt{D} \implies x = \frac{-B \pm \sqrt{D}}{2A}$$
 
 ---
 
 ## 1. Mathematical Architecture & Verification
 - **Mathematical Specification Document**: [world16_math_spec.md](file:///d:/game_dev/VedicMathematics/docs/phase4/world16_math_spec.md)
-- **Engine Implementation**: [ChalanaKalanabhyamGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/engine/ChalanaKalanabhyamGenerator.kt)
-- **Domain Models**: [ChalanaModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/domain/models/ChalanaModels.kt)
+- **Engine Implementation**: [ChalanaKalanabhyamGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/engine/ChalanaKalanabhyamGenerator.kt)
+- **Domain Models**: [ChalanaModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/domain/models/ChalanaModels.kt)
   - `QuadraticForChalana(a: Long, b: Long, c: Long)`
   - `DerivativeExpression(coef: Long, const: Long)`
   - `DiscriminantValue(value: Long, isPerfectSquare: Boolean, squareRoot: Long?)`
@@ -32,10 +32,10 @@ $$f'(x) = 2Ax + B, \quad D = B^2 - 4AC \implies f'(r)^2 = D \implies 2Ax + B = \
 ---
 
 ## 3. UI & Gurukul Integration
-- **Campaign Finale Script**: Story beat and tutorial script added in [GurukulContentRepository.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/data/repository/GurukulContentRepository.kt).
-- **Calculus-Relation MathSlate Component**: Created [ChalanaKalanabhyamMathSlate.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/components/ChalanaKalanabhyamMathSlate.kt).
-- **World Select Screen**: World 16 card unlocked on [WorldSelectScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/screens/WorldSelectScreen.kt) marked as Campaign Finale (Post-MVP).
-- **Game ViewModel**: Generator mapped (`selectedWorldId == 16`) in [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/viewmodel/GameViewModel.kt).
+- **Campaign Finale Script**: Story beat and tutorial script added in [GurukulContentRepository.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/data/repository/GurukulContentRepository.kt).
+- **Calculus-Relation MathSlate Component**: Created [ChalanaKalanabhyamMathSlate.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/components/ChalanaKalanabhyamMathSlate.kt).
+- **World Select Screen**: World 16 card unlocked on [WorldSelectScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/screens/WorldSelectScreen.kt) marked as Campaign Finale (Post-MVP).
+- **Game ViewModel**: Generator mapped (`selectedWorldId == 16`) in [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/viewmodel/GameViewModel.kt).
 
 ---
 

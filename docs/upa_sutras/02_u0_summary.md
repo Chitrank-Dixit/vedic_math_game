@@ -1,7 +1,7 @@
 # Phase U0 Summary: Upa-Sutra Canonical Audit & Platform Blueprint
 
 **Document Status:** Complete / Phase U0 Summary  
-**Scope:** Architecture and audit synthesis for the 13 Upa-Sutras in *Ankh: The Sutra Saga*  
+**Scope:** Architecture and audit synthesis for the 13 Upa-Sutras in *Ank: The Sutra Saga*  
 
 ---
 

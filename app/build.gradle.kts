@@ -13,11 +13,11 @@ fun getSigningProperty(name: String, androidPrefixName: String): String? {
 }
 
 android {
-    namespace = "com.ankh.sutrasaga"
+    namespace = "com.ank.sutrasaga"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.ankh.sutrasaga"
+        applicationId = "com.ank.sutrasaga"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

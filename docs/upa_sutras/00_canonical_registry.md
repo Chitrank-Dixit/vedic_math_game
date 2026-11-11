@@ -2,7 +2,7 @@
 
 **Document Status:** Complete Canonical Registry / Phase U0  
 **Scope:** 13 Vedic Mathematics Upa-Sutras  
-**Application:** Side Quests, Treasury Map, and Codex Reference in *Ankh: The Sutra Saga*  
+**Application:** Side Quests, Treasury Map, and Codex Reference in *Ank: The Sutra Saga*  
 
 ---
 

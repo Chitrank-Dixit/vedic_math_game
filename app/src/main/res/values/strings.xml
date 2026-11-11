@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App Branding -->
-    <string name="app_name">Ankh: The Sutra Saga</string>
+    <string name="app_name">Ank: The Sutra Saga</string>
     <string name="app_subtitle">Sacred Geometry &amp; Mental Math Engine</string>
     <string name="sutra_streak_label">%1$d Day Sutra Streak</string>
 
@@ -56,7 +56,7 @@
     <string name="canonical_worked_example">CANONICAL WORKED EXAMPLE</string>
 
     <!-- Accessibility Descriptions -->
-    <string name="acc_app_logo">Ankh Sutra Saga Logo Emblem</string>
+    <string name="acc_app_logo">Ank Sutra Saga Logo Emblem</string>
     <string name="acc_progress_ring">Sutra Mastery Progress: %1$d percent</string>
     <string name="acc_numpad_key">Numpad digit %1$d</string>
     <string name="acc_mandala_timer">Mandala countdown timer: %1$d seconds remaining</string>

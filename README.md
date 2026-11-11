@@ -1,4 +1,4 @@
-# 🕉️ Ankh: The Sutra Saga
+# 🕉️ Ank: The Sutra Saga
 ### *A Sacred Geometry & Mental Arithmetic Educational Mobile Application*
 
 [![Android CI](https://github.com/Chitrank-Dixit/vedic_math_game/actions/workflows/android_ci.yml/badge.svg)](https://github.com/Chitrank-Dixit/vedic_math_game/actions/workflows/android_ci.yml)
@@ -11,7 +11,7 @@
 
 ## 📖 Overview
 
-**Ankh: The Sutra Saga** is a modern educational mobile application for mastering the ancient art of **Vedic Mathematics** through interactive gameplay, sacred geometric visualizers (*Yantras*), and step-by-step mental arithmetic drills.
+**Ank: The Sutra Saga** is a modern educational mobile application for mastering the ancient art of **Vedic Mathematics** through interactive gameplay, sacred geometric visualizers (*Yantras*), and step-by-step mental arithmetic drills.
 
 The app systematically guides learners across **16 Primary Vedic Sutras** and all **13 Upa-Sutras (Sub-Sutras)**, providing instant cognitive decomposition of complex arithmetic (e.g. crosswise multiplication, deficiency squaring, polynomial synthetic division, and base subtraction).
 
@@ -58,11 +58,11 @@ graph TD
 ```
 
 ### Module Breakdown:
-- `com.ankh.sutrasaga.domain.models`: Pure mathematical entities, decomposition steps, and classification models.
-- `com.ankh.sutrasaga.engine`: High-precision Vedic arithmetic generators (e.g. *Urdhva*, *Nikhilam*, *Adyamadya*, *Chalana-Kalana*).
-- `com.ankh.sutrasaga.data.db`: Room SQLite DAOs and Entity mappings.
-- `com.ankh.sutrasaga.ui.components`: Reusable sacred geometry components (`VedicSutraCard`, `YantraProgressRing`, `MentalMathNumpad`, `VedicAppLogo`, `MandalaBurst`, `VedicMotifs`).
-- `com.ankh.sutrasaga.ui.theme`: Dynamic design tokens (`VedicTokens`), dual-font typography with OpenType tabular numbers (`tnum`), and theme provider.
+- `com.ank.sutrasaga.domain.models`: Pure mathematical entities, decomposition steps, and classification models.
+- `com.ank.sutrasaga.engine`: High-precision Vedic arithmetic generators (e.g. *Urdhva*, *Nikhilam*, *Adyamadya*, *Chalana-Kalana*).
+- `com.ank.sutrasaga.data.db`: Room SQLite DAOs and Entity mappings.
+- `com.ank.sutrasaga.ui.components`: Reusable sacred geometry components (`VedicSutraCard`, `YantraProgressRing`, `MentalMathNumpad`, `VedicAppLogo`, `MandalaBurst`, `VedicMotifs`).
+- `com.ank.sutrasaga.ui.theme`: Dynamic design tokens (`VedicTokens`), dual-font typography with OpenType tabular numbers (`tnum`), and theme provider.
 
 ---
 
@@ -90,7 +90,7 @@ cd vedic_math_game
 ```bash
 # Install and run on connected Android emulator/device
 adb install -r app/build/outputs/apk/debug/app-debug.apk
-adb shell am start -n com.ankh.sutrasaga/.MainActivity
+adb shell am start -n com.ank.sutrasaga/.MainActivity
 ```
 
 ---

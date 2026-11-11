@@ -37,8 +37,8 @@
   - Seed 5 (Negative Control / None of the Above): $46 \times 53 \implies 2438$.
 
 ### 2. Domain Models & Generator Engine
-- **Domain Models**: [VilokanamModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/domain/models/VilokanamModels.kt) (`ObservationPatternId`, `VilokanamClassification`, `VilokanamStep`, `VilokanamSolution`).
-- **Generator Engine**: [VilokanamGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/engine/upasutras/VilokanamGenerator.kt) implementing `UpaSutraGenerator`.
+- **Domain Models**: [VilokanamModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/domain/models/VilokanamModels.kt) (`ObservationPatternId`, `VilokanamClassification`, `VilokanamStep`, `VilokanamSolution`).
+- **Generator Engine**: [VilokanamGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/engine/upasutras/VilokanamGenerator.kt) implementing `UpaSutraGenerator`.
 - **Tiers**:
   - Tier 1: Obvious single patterns (`ENDS_IN_FIVE_SQUARE`, `SAME_TENS_UNITS_SUM_TEN`).
   - Tier 2: Mixed patterns including `NEAR_BASE_SQUARE` and `SYMMETRIC_PRODUCT`.
@@ -47,17 +47,17 @@
 
 ### 3. Quest UI & Treasury Wiring
 - **Registry & Unlock**: `VILOKANAM` unlock prerequisite set to World 9 (*Shunyam Samyasamuccaye*).
-- **Quest UI**: [UpaSutraQuestScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/screens/UpaSutraQuestScreen.kt)
+- **Quest UI**: [UpaSutraQuestScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/screens/UpaSutraQuestScreen.kt)
   - Story Beat: Guru explains that observation is not staring at a number until it panics and gives up its answer — first, we notice what the numbers are telling us!
   - Guided Example: Step-by-step breakdown of the Pattern Sight Library ($85^2$, $97^2$, $43 \times 47$, $58 \times 62$).
   - Practice (5 problems) and Challenge (3 problems).
-- **ViewModel**: [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/viewmodel/GameViewModel.kt) wired to `VilokanamGenerator`.
+- **ViewModel**: [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/viewmodel/GameViewModel.kt) wired to `VilokanamGenerator`.
 
 ---
 
 ## 3. Verification & Test Results
 
-- **Unit Test Suites**: [VilokanamGeneratorTest.kt](file:///d:/game_dev/VedicMathematics/app/src/test/java/com/ankh/sutrasaga/engine/upasutras/VilokanamGeneratorTest.kt) and [GameViewModelTest.kt](file:///d:/game_dev/VedicMathematics/app/src/test/java/com/ankh/sutrasaga/ui/GameViewModelTest.kt).
+- **Unit Test Suites**: [VilokanamGeneratorTest.kt](file:///d:/game_dev/VedicMathematics/app/src/test/java/com/ank/sutrasaga/engine/upasutras/VilokanamGeneratorTest.kt) and [GameViewModelTest.kt](file:///d:/game_dev/VedicMathematics/app/src/test/java/com/ank/sutrasaga/ui/GameViewModelTest.kt).
 - **Test Scenarios**:
   - All 5 canonical seed challenges.
   - 10 hand-verified challenges per enabled pattern family.

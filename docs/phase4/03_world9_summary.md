@@ -1,14 +1,14 @@
 # Phase 4 — World 9 Summary: Shunyam Samyasamuccaye (Common Sum Factor Equations)
 
 ## Overview
-World 9 introduces **Shunyam Samyasamuccaye** ("When the sum is the same, that sum is zero"), the third post-MVP world in *Ankh: The Sutra Saga*. This world teaches special-pattern algebraic shortcuts where repeated common factors or equal denominator sums give mathematical permission to equate the sum to zero ($F(x) = 0$ or $S(x) = 0$).
+World 9 introduces **Shunyam Samyasamuccaye** ("When the sum is the same, that sum is zero"), the third post-MVP world in *Ank: The Sutra Saga*. This world teaches special-pattern algebraic shortcuts where repeated common factors or equal denominator sums give mathematical permission to equate the sum to zero ($F(x) = 0$ or $S(x) = 0$).
 
 ---
 
 ## 1. Mathematical Architecture & Verification
 - **Mathematical Specification Document**: [world9_math_spec.md](file:///d:/game_dev/VedicMathematics/docs/phase4/world9_math_spec.md)
-- **Engine Implementation**: [ShunyamSamyasamuccayeGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/engine/ShunyamSamyasamuccayeGenerator.kt)
-- **Domain Models**: [ShunyamModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/domain/models/ShunyamModels.kt)
+- **Engine Implementation**: [ShunyamSamyasamuccayeGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/engine/ShunyamSamyasamuccayeGenerator.kt)
+- **Domain Models**: [ShunyamModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/domain/models/ShunyamModels.kt)
   - `ShunyamFamily`: `FAMILY_A_COMMON_FACTOR`, `FAMILY_B_EQUAL_NUMERATOR_RECIPROCAL`
   - `ShunyamClassification`: `UNIQUE_SOLUTION`, `NO_SOLUTION`, `IDENTITY`, `INVALID_DOMAIN`, `NOT_APPLICABLE`, `UNSUPPORTED`
   - `LinearExpression`, `CommonFactorEquation`, `EqualNumeratorFractionEquation`, `ShunyamStep`, `ShunyamSolution`, `ShunyamProblem`
@@ -37,9 +37,9 @@ World 9 introduces **Shunyam Samyasamuccaye** ("When the sum is the same, that s
 ---
 
 ## 3. UI & Gurukul Integration
-- **Dialogue Script**: Story beat and tutorial script added in [GurukulContentRepository.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/data/repository/GurukulContentRepository.kt).
-- **World Select Screen**: World 9 card unlocked on [WorldSelectScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/screens/WorldSelectScreen.kt) marked as Post-MVP.
-- **Game ViewModel**: Generator mapped (`selectedWorldId == 9`) in [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/viewmodel/GameViewModel.kt).
+- **Dialogue Script**: Story beat and tutorial script added in [GurukulContentRepository.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/data/repository/GurukulContentRepository.kt).
+- **World Select Screen**: World 9 card unlocked on [WorldSelectScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/screens/WorldSelectScreen.kt) marked as Post-MVP.
+- **Game ViewModel**: Generator mapped (`selectedWorldId == 9`) in [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/viewmodel/GameViewModel.kt).
 
 ---
 

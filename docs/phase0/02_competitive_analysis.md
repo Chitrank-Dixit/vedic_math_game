@@ -52,12 +52,12 @@ Mobile math applications historically fall into three main archetypes: flashcard
 
 ---
 
-## 3. Concrete Differentiation Opportunities for "Ankh: The Sutra Saga"
+## 3. Concrete Differentiation Opportunities for "Ank: The Sutra Saga"
 
-To stand out in the crowded mobile math space, *Ankh: The Sutra Saga* leverages five core design differentiators:
+To stand out in the crowded mobile math space, *Ank: The Sutra Saga* leverages five core design differentiators:
 
 ### 1. Narrative & Comedic Lore Integration
-Instead of isolated math quizzes, every puzzle is framed as an encounter in a world governed by chaotic math spirits. Ankh's witty dialogue and humorous NPC banter turn abstract calculation methods into fun, memorable story beats.
+Instead of isolated math quizzes, every puzzle is framed as an encounter in a world governed by chaotic math spirits. Ank's witty dialogue and humorous NPC banter turn abstract calculation methods into fun, memorable story beats.
 
 ### 2. Tactical "Mental Spellcasting" Combat
 Timed mechanics are framed as magic spellcasting. Completing a Vedic breakdown step (e.g., splitting $97 \times 94$ into base deficiencies $-3$ and $-6$) charges up a spell meter, rewarding spatial thinking and speed with powerful visual spell effects.
@@ -69,4 +69,4 @@ Rather than just asking for the final answer via a numeric keypad, the game inte
 Each of the 16 Worlds culminates in a "Sutra Boss" that tests the player's mastery of the world's core Sutra under unique constraint rules (e.g., "No carryovers allowed", "Inverted base rules", "Boss shields break only on digital root matching").
 
 ### 5. 100% Offline, Ad-Free Premium Feel
-Unlike free-to-play competitors cluttered with aggressive banner ads and pop-ups, *Ankh* is designed as a self-contained, offline-first experience prioritizing smooth player flow and deep focus.
+Unlike free-to-play competitors cluttered with aggressive banner ads and pop-ups, *Ank* is designed as a self-contained, offline-first experience prioritizing smooth player flow and deep focus.

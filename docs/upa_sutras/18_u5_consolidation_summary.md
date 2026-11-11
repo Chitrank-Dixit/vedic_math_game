@@ -2,7 +2,7 @@
 
 **Document Status:** Complete & 100% Verified / Phase U5 Consolidation Review  
 **Feature:** Upa-Sutra Treasury & Codex Final Release Audit  
-**Project:** *Ankh: The Sutra Saga*  
+**Project:** *Ank: The Sutra Saga*  
 
 ---
 

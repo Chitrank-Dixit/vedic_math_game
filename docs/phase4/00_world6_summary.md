@@ -1,6 +1,6 @@
 # Phase 4: World 6 — Paravartya Yojayet — Summary Report
 
-**Project:** Ankh: The Sutra Saga  
+**Project:** Ank: The Sutra Saga  
 **Phase:** Phase 4 — World 6 (Post-MVP)  
 **Status:** Complete & 100% Verified  
 

@@ -33,8 +33,8 @@ For negative osculators ($d = 7$), $T_-(N)$ strictly preserves zero-congruence (
 - Formal algebraic proofs and independent verification of the 5 canonical seed examples.
 
 ### 2. Domain Models & Generator Engine
-- **Domain Models**: [VestanamModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/domain/models/VestanamModels.kt) (`SupportedDivisor`, `VestanamClassification`, `OsculationStep`, `OsculationSolution`).
-- **Generator Engine**: [VestanamGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/engine/upasutras/VestanamGenerator.kt) implementing `UpaSutraGenerator`.
+- **Domain Models**: [VestanamModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/domain/models/VestanamModels.kt) (`SupportedDivisor`, `VestanamClassification`, `OsculationStep`, `OsculationSolution`).
+- **Generator Engine**: [VestanamGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/engine/upasutras/VestanamGenerator.kt) implementing `UpaSutraGenerator`.
 - **Tiers**:
   - Tier 1: Divisor 19 ($m = +2$, 3-4 digit numbers).
   - Tier 2: Divisor 13 ($m = +4$, 3-4 digit numbers).
@@ -43,17 +43,17 @@ For negative osculators ($d = 7$), $T_-(N)$ strictly preserves zero-congruence (
 
 ### 3. Quest UI & Treasury Wiring
 - **Registry & Unlock**: `VESHTANAM` unlock prerequisite set to World 12 (*Shesanyankena Charamena*).
-- **Quest UI**: [UpaSutraQuestScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/screens/UpaSutraQuestScreen.kt)
+- **Quest UI**: [UpaSutraQuestScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/screens/UpaSutraQuestScreen.kt)
   - Story Beat: Guru explains osculation as "a little kiss" where the last digit kisses the rest goodbye to reveal secret divisibility.
   - Guided Example: Step-by-step breakdown of $247 \div 19 \implies 24 + 2(7) = 38 = 19 \times 2$.
   - Practice (5 problems) and Challenge (3 problems) with balanced divisible/non-divisible cases.
-- **ViewModel**: [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/viewmodel/GameViewModel.kt) wired to `VestanamGenerator`.
+- **ViewModel**: [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/viewmodel/GameViewModel.kt) wired to `VestanamGenerator`.
 
 ---
 
 ## 3. Verification & Test Results
 
-- **Unit Test Suites**: [VestanamGeneratorTest.kt](file:///d:/game_dev/VedicMathematics/app/src/test/java/com/ankh/sutrasaga/engine/upasutras/VestanamGeneratorTest.kt) and [GameViewModelTest.kt](file:///d:/game_dev/VedicMathematics/app/src/test/java/com/ankh/sutrasaga/ui/GameViewModelTest.kt).
+- **Unit Test Suites**: [VestanamGeneratorTest.kt](file:///d:/game_dev/VedicMathematics/app/src/test/java/com/ank/sutrasaga/engine/upasutras/VestanamGeneratorTest.kt) and [GameViewModelTest.kt](file:///d:/game_dev/VedicMathematics/app/src/test/java/com/ank/sutrasaga/ui/GameViewModelTest.kt).
 - **Test Scenarios**:
   - Example 1: $247 \div 19$ (divisible, step trace $24 + 14 = 38$).
   - Example 2: $143 \div 13$ (divisible, step trace $14 + 12 = 26$).

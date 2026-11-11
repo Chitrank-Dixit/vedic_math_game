@@ -1,6 +1,6 @@
 # Phase 4: World 7 — Anurupye Shunyamanyat — Summary Report
 
-**Project:** Ankh: The Sutra Saga  
+**Project:** Ank: The Sutra Saga  
 **Phase:** Phase 4 — World 7 (Post-MVP)  
 **Status:** Complete & 100% Verified  
 

@@ -1,14 +1,14 @@
 # Phase 4 — World 12 Summary: Shesanyankena Charamena (Recurring Decimal Expansions)
 
 ## Overview
-World 12 introduces **Shesanyankena Charamena** ("The remainders by the last digit"), the sixth post-MVP world in *Ankh: The Sutra Saga*. This world teaches exact decimal expansion of rational numbers $p/q$ via remainder tracking, cycle detection, and Vedic last-digit extraction.
+World 12 introduces **Shesanyankena Charamena** ("The remainders by the last digit"), the sixth post-MVP world in *Ank: The Sutra Saga*. This world teaches exact decimal expansion of rational numbers $p/q$ via remainder tracking, cycle detection, and Vedic last-digit extraction.
 
 ---
 
 ## 1. Mathematical Architecture & Verification
 - **Mathematical Specification Document**: [world12_math_spec.md](file:///d:/game_dev/VedicMathematics/docs/phase4/world12_math_spec.md)
-- **Engine Implementation**: [ShesanyankenaCharamenaGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/engine/ShesanyankenaCharamenaGenerator.kt)
-- **Domain Models**: [ShesanyankenaModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/domain/models/ShesanyankenaModels.kt)
+- **Engine Implementation**: [ShesanyankenaCharamenaGenerator.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/engine/ShesanyankenaCharamenaGenerator.kt)
+- **Domain Models**: [ShesanyankenaModels.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/domain/models/ShesanyankenaModels.kt)
   - `DecimalExpansion(integerPart: Long, nonRepeatingDigits: List<Int>, repeatingDigits: List<Int>, isTerminating: Boolean, sourceFraction: Fraction)`
   - `RemainderStep(index: Int, incomingRemainder: Long, multipliedRemainder: Long, emittedDigit: Int, nextRemainder: Long, isCycleStart: Boolean, isCycleEnd: Boolean)`
   - `ShesanyankenaStep(remainder: Long, divisorLastDigit: Int, product: Long, extractedLastDigit: Int, matchesReference: Boolean)`
@@ -28,9 +28,9 @@ World 12 introduces **Shesanyankena Charamena** ("The remainders by the last dig
 ---
 
 ## 3. UI & Gurukul Integration
-- **Dialogue Script**: Story beat and tutorial script added in [GurukulContentRepository.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/data/repository/GurukulContentRepository.kt).
-- **World Select Screen**: World 12 card unlocked on [WorldSelectScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/screens/WorldSelectScreen.kt) marked as Post-MVP.
-- **Game ViewModel**: Generator mapped (`selectedWorldId == 12`) in [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ankh/sutrasaga/ui/viewmodel/GameViewModel.kt).
+- **Dialogue Script**: Story beat and tutorial script added in [GurukulContentRepository.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/data/repository/GurukulContentRepository.kt).
+- **World Select Screen**: World 12 card unlocked on [WorldSelectScreen.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/screens/WorldSelectScreen.kt) marked as Post-MVP.
+- **Game ViewModel**: Generator mapped (`selectedWorldId == 12`) in [GameViewModel.kt](file:///d:/game_dev/VedicMathematics/app/src/main/java/com/ank/sutrasaga/ui/viewmodel/GameViewModel.kt).
 
 ---
 

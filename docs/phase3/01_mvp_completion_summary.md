@@ -1,6 +1,6 @@
 # Phase 3 — MVP Completion Summary Report
 
-**Project:** Ankh: The Sutra Saga  
+**Project:** Ank: The Sutra Saga  
 **Scope:** Worlds 1 through 5 (MVP Scope locked per `docs/phase0/03_mvp_scope.md`)  
 **Status:** 100% Complete, Tested & Verified  
 
